@@ -3,11 +3,8 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import { getProofEntries } from "@/lib/content";
 import { type FunnelStage, getRoute, servicesByStage } from "@/lib/nav";
-import MegaMenu, { type MegaMenuColumn } from "./MegaMenu";
+import HeaderNav, { type HeaderNavItem, type MegaMenuColumn } from "./HeaderNav";
 import MobileDrawer from "./MobileDrawer";
-
-const NAV_LINK_CLASSES =
-  "border-b-[1.5px] border-transparent text-sm text-[#C3CDDF] hover:text-white";
 
 function buildStageColumn(hubPath: string, stage: FunnelStage): MegaMenuColumn {
   const hub = getRoute(hubPath);
@@ -74,40 +71,40 @@ export default async function Header() {
     </div>
   );
 
+  const navItems: HeaderNavItem[] = [
+    {
+      type: "menu",
+      id: "services",
+      label: servicesRoute.label,
+      basePath: servicesRoute.path,
+      columns: stageColumns,
+      extra: attributionExtra,
+      layout: "grid",
+    },
+    { type: "link", path: howItWorks.path, label: howItWorks.label },
+    {
+      type: "menu",
+      id: "industries",
+      label: industriesRoute.label,
+      basePath: industriesRoute.path,
+      columns: [industriesColumn],
+      layout: "single",
+    },
+    { type: "link", path: pointOfView.path, label: pointOfView.label },
+    { type: "link", path: proof.path, label: proof.label },
+  ];
+
   return (
     <header className="sticky top-0 z-50 h-[76px] border-b border-[rgba(255,255,255,0.14)] bg-navy-900">
       <Container>
         <div className="flex h-[76px] items-center justify-between">
           <Link href={home.path} className="flex items-baseline gap-3">
-            <span className="font-display text-xl font-semibold text-white">SiteOptz</span>
+            <span className="font-display text-xl font-bold text-white">SiteOptz</span>
             <span className="text-2xs text-[#93A3BD]">Marketing intelligence</span>
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center gap-8 min-[900px]:flex">
-            <MegaMenu
-              id="services"
-              label={servicesRoute.label}
-              basePath={servicesRoute.path}
-              columns={stageColumns}
-              extra={attributionExtra}
-              layout="grid"
-            />
-            <Link href={howItWorks.path} className={NAV_LINK_CLASSES}>
-              {howItWorks.label}
-            </Link>
-            <MegaMenu
-              id="industries"
-              label={industriesRoute.label}
-              basePath={industriesRoute.path}
-              columns={[industriesColumn]}
-              layout="single"
-            />
-            <Link href={pointOfView.path} className={NAV_LINK_CLASSES}>
-              {pointOfView.label}
-            </Link>
-            <Link href={proof.path} className={NAV_LINK_CLASSES}>
-              {proof.label}
-            </Link>
+            <HeaderNav items={navItems} />
             <Button variant="primary" href={contact.path}>
               {contact.label}
             </Button>

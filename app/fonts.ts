@@ -1,7 +1,6 @@
 import { Inter, Inter_Tight, Source_Serif_4 } from "next/font/google";
 
 export const fontDisplay = Inter_Tight({
-  weight: "600",
   subsets: ["latin"],
   variable: "--font-display-src",
   display: "swap",

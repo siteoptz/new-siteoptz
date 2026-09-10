@@ -122,7 +122,8 @@ decorative accent; it appears only where the page marks a break in attribution.
 
 ### Typography
 
-- **Display / headings:** Inter Tight, 600, tracking -0.028em at h2, -0.033em at h1
+- **Display / headings:** Inter Tight (variable axis, no fixed weight loaded), 600 for
+  headings, 700 for the header wordmark only; tracking -0.028em at h2, -0.033em at h1
 - **Body / UI:** Inter, 400/500
 - **Editorial body:** Source Serif 4, 400 — used only in `/point-of-view` article bodies and in pull quotes. Nowhere else.
 

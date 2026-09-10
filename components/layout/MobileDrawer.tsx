@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Button from "@/components/ui/Button";
-import type { MegaMenuColumn } from "./MegaMenu";
+import type { MegaMenuColumn } from "./HeaderNav";
 
 export interface NavItem {
   href: string;

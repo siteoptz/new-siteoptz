@@ -10,17 +10,24 @@ export interface MegaMenuColumn {
   items: { href: string; label: string }[];
 }
 
-export interface MegaMenuProps {
-  id: string;
-  label: string;
-  basePath: string;
-  columns: MegaMenuColumn[];
-  extra?: React.ReactNode;
-  layout?: "grid" | "single";
+export type HeaderNavItem =
+  | { type: "link"; path: string; label: string }
+  | {
+      type: "menu";
+      id: string;
+      label: string;
+      basePath: string;
+      columns: MegaMenuColumn[];
+      extra?: React.ReactNode;
+      layout?: "grid" | "single";
+    };
+
+export interface HeaderNavProps {
+  items: HeaderNavItem[];
 }
 
 // Module-level store coordinating "only one mega menu open at a time" across
-// independent MegaMenu instances (Services, Industries), without a context
+// independent menu triggers (Services, Industries), without a context
 // provider or a new dependency.
 type Listener = () => void;
 let openMenuId: string | null = null;
@@ -58,25 +65,54 @@ const NAV_LINK_CLASSES = "border-b-[1.5px] text-sm";
 const NAV_LINK_INACTIVE = "border-transparent text-[#C3CDDF] hover:text-white";
 const NAV_LINK_ACTIVE = "border-blue-300 text-white";
 
-export default function MegaMenu({
+function isRouteActive(pathname: string, basePath: string): boolean {
+  return pathname === basePath || pathname.startsWith(`${basePath}/`);
+}
+
+function PlainNavLink({
+  path,
+  label,
+  pathname,
+}: {
+  path: string;
+  label: string;
+  pathname: string;
+}) {
+  const active = isRouteActive(pathname, path);
+  return (
+    <Link
+      href={path}
+      aria-current={active ? "page" : undefined}
+      className={`${NAV_LINK_CLASSES} ${active ? NAV_LINK_ACTIVE : NAV_LINK_INACTIVE}`}
+    >
+      {label}
+    </Link>
+  );
+}
+
+function MegaMenuTrigger({
   id,
   label,
   basePath,
   columns,
   extra,
   layout = "grid",
-}: MegaMenuProps) {
+  pathname,
+}: {
+  id: string;
+  label: string;
+  basePath: string;
+  columns: MegaMenuColumn[];
+  extra?: React.ReactNode;
+  layout?: "grid" | "single";
+  pathname: string;
+}) {
   const panelId = `${id}-panel`;
   const currentOpenId = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
   const isOpen = currentOpenId === id;
   const triggerRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
-  const pathname = usePathname();
-  const isActive = pathname === basePath || pathname.startsWith(`${basePath}/`);
-
-  useEffect(() => {
-    setOpenMenuId(null);
-  }, [pathname]);
+  const isActive = isRouteActive(pathname, basePath);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -174,5 +210,30 @@ export default function MegaMenu({
         </div>
       </div>
     </div>
+  );
+}
+
+/**
+ * The whole desktop nav row — plain links and mega-menu triggers together —
+ * as one client island, so active-route styling covers every link without a
+ * third client component.
+ */
+export default function HeaderNav({ items }: HeaderNavProps) {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setOpenMenuId(null);
+  }, [pathname]);
+
+  return (
+    <>
+      {items.map((item) =>
+        item.type === "link" ? (
+          <PlainNavLink key={item.path} path={item.path} label={item.label} pathname={pathname} />
+        ) : (
+          <MegaMenuTrigger key={item.id} {...item} pathname={pathname} />
+        )
+      )}
+    </>
   );
 }
