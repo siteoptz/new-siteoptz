@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-900: #060b16;
+  --color-navy-800: #0d1626;
+  --color-navy-700: #17243d;
+  --color-blue-600: #2563eb;
+  --color-blue-700: #1d4ed8;
+  --color-blue-300: #7fb0ff;
+  --color-paper: #ffffff;
+  --color-paper-2: #f5f7fa;
+  --color-rule: #e4e9f2;
+  --color-ink: #0d1321;
+  --color-muted: #4e5a72;
+  --color-signal: #d99a45;
+
+  --font-display: var(--font-display-src), "Inter Tight", system-ui, sans-serif;
+  --font-sans: var(--font-sans-src), "Inter", system-ui, sans-serif;
+  --font-serif: var(--font-serif-src), "Source Serif 4", Georgia, serif;
+
+  --text-2xs: 0.78rem;
+  --text-xs: 0.85rem;
+  --text-sm: 0.94rem;
+  --text-base: 1rem;
+  --text-md: 1.06rem;
+  --text-lg: 1.18rem;
+  --text-xl: 1.35rem;
+  --text-2xl: 1.6rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  --text-5xl: 3.2rem;
+  --text-6xl: 4rem;
+
+  --container-site: 85rem;
+  --spacing-gutter: clamp(1.25rem, 5vw, 4.5rem);
+  --spacing-section: 6rem;
+  --spacing-section-lg: 8rem;
+  --measure-sans: 34rem;
+  --measure-serif: 38rem;
+  --radius-default: 3px;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--color-ink);
+  background: var(--color-paper);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.12;
+}
+
+h1 {
+  letter-spacing: -0.033em;
+}
+
+h2 {
+  letter-spacing: -0.028em;
+}
+
+h3 {
+  letter-spacing: -0.015em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-blue-600);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
