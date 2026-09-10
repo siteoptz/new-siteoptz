@@ -2,8 +2,10 @@
   "name": "siteoptz-new",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node --experimental-strip-types scripts/content-check.ts",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
@@ -11,9 +13,12 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "gray-matter": "^4.0.3",
     "next": "16.3.4",
+    "next-mdx-remote": "^6.0.0",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "zod": "^4.6.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
