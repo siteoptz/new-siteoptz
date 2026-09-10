@@ -1,0 +1,178 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useSyncExternalStore } from "react";
+
+export interface MegaMenuColumn {
+  heading: string;
+  headingHref: string;
+  items: { href: string; label: string }[];
+}
+
+export interface MegaMenuProps {
+  id: string;
+  label: string;
+  basePath: string;
+  columns: MegaMenuColumn[];
+  extra?: React.ReactNode;
+  layout?: "grid" | "single";
+}
+
+// Module-level store coordinating "only one mega menu open at a time" across
+// independent MegaMenu instances (Services, Industries), without a context
+// provider or a new dependency.
+type Listener = () => void;
+let openMenuId: string | null = null;
+const listeners = new Set<Listener>();
+
+function setOpenMenuId(id: string | null) {
+  openMenuId = id;
+  listeners.forEach((listener) => listener());
+}
+
+function subscribe(listener: Listener) {
+  listeners.add(listener);
+  return () => {
+    listeners.delete(listener);
+  };
+}
+
+function getSnapshot() {
+  return openMenuId;
+}
+
+function getServerSnapshot() {
+  return null;
+}
+
+function getFocusableElements(container: HTMLElement): HTMLElement[] {
+  return Array.from(
+    container.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+  );
+}
+
+const NAV_LINK_CLASSES = "border-b-[1.5px] text-sm";
+const NAV_LINK_INACTIVE = "border-transparent text-[#C3CDDF] hover:text-white";
+const NAV_LINK_ACTIVE = "border-blue-300 text-white";
+
+export default function MegaMenu({
+  id,
+  label,
+  basePath,
+  columns,
+  extra,
+  layout = "grid",
+}: MegaMenuProps) {
+  const panelId = `${id}-panel`;
+  const currentOpenId = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const isOpen = currentOpenId === id;
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+  const isActive = pathname === basePath || pathname.startsWith(`${basePath}/`);
+
+  useEffect(() => {
+    setOpenMenuId(null);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function handlePointerDown(event: MouseEvent) {
+      const target = event.target as Node;
+      if (panelRef.current?.contains(target) || triggerRef.current?.contains(target)) {
+        return;
+      }
+      setOpenMenuId(null);
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setOpenMenuId(null);
+        triggerRef.current?.focus();
+        return;
+      }
+
+      if (event.key !== "Tab" || !panelRef.current) return;
+
+      const focusable = getFocusableElements(panelRef.current);
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    }
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
+
+  return (
+    <div className="relative" onMouseEnter={() => setOpenMenuId(id)}>
+      <button
+        ref={triggerRef}
+        type="button"
+        aria-expanded={isOpen}
+        aria-controls={panelId}
+        aria-current={isActive ? "page" : undefined}
+        onClick={() => setOpenMenuId(isOpen ? null : id)}
+        className={`${NAV_LINK_CLASSES} ${isActive ? NAV_LINK_ACTIVE : NAV_LINK_INACTIVE}`}
+      >
+        {label}
+      </button>
+
+      <div
+        id={panelId}
+        ref={panelRef}
+        inert={!isOpen}
+        className={`fixed inset-x-0 top-[76px] z-40 grid border-b border-[rgba(255,255,255,0.14)] bg-navy-800 transition-[grid-template-rows] duration-[140ms] ease-out ${
+          isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+        }`}
+      >
+        <div className="overflow-hidden">
+          <div className="mx-auto max-w-site px-gutter py-10">
+            <div className={layout === "grid" ? "grid grid-cols-4 gap-x-8" : "grid grid-cols-1"}>
+              {columns.map((column) => (
+                <div key={column.headingHref}>
+                  <Link
+                    href={column.headingHref}
+                    className="mb-3 block text-sm font-medium text-white hover:text-blue-300"
+                  >
+                    {column.heading}
+                  </Link>
+                  <ul>
+                    {column.items.map((item) => (
+                      <li key={item.href}>
+                        <Link
+                          href={item.href}
+                          className="block py-1 text-sm text-[#C3CDDF] hover:text-white"
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+              {extra ? <div>{extra}</div> : null}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
