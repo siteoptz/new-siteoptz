@@ -1,14 +1,29 @@
 /**
- * Prebuild content gate. Walks content/** /*.mdx and reports violations; when
- * VERCEL_ENV is 'production', any violation fails the build (non-zero exit).
- * Outside production the same violations are reported as warnings so content
- * can keep moving on preview branches.
+ * Prebuild content gate. Walks content/** /*.mdx and app/** /*.tsx and reports
+ * violations; when VERCEL_ENV is 'production', any violation fails the build
+ * (non-zero exit). Outside production the same violations are reported as
+ * warnings so content can keep moving on preview branches.
  *
  * Run with `node --experimental-strip-types` (wired as "prebuild" in
  * package.json) — no TS runner dependency is installed for this repo.
  *
- * Covers MDX content only. Pages built as .tsx are checked separately at the
- * pre-launch audit (docs/build-prompts.md, Prompt 6.3).
+ * As of the 6.3 pre-launch audit, .tsx routes are covered too — the audit
+ * found the gate had never touched home, about, contact, privacy, terms, or
+ * any of the three hubs, and that gap is exactly how a placeholder MetricTable
+ * shipped on the home page undetected. Dynamic `[slug]/page.tsx` templates
+ * are excluded from the .tsx link-count check (not from banned-words or
+ * placeholder checks) since their real link count comes from the MDX content
+ * they render, already covered by checkServicePageDepth/checkArticleLinks
+ * below — checking the template's own static JSX for links would just be
+ * wrong, not merely redundant.
+ *
+ * The .tsx link count is a static source-text count of <Link>/<a> elements,
+ * not a rendered-DOM count — a page whose links are emitted from a .map()
+ * over an array (industries hub, services hub's stage cards) will show one
+ * source occurrence per template, not one per rendered instance. It undercounts
+ * exactly those pages and can produce a false violation on them; it does not
+ * overcount. Read a low count on a list-rendering page with that in mind
+ * before treating it as a real gap.
  *
  * As of Instruction 2.1, the word-count floor counts prose that lives in
  * frontmatter (boundary, lead, faq answers, cta.body) alongside the MDX
@@ -125,26 +140,110 @@ function stripFencedCodeBlocks(lines: string[]): string[] {
   return result;
 }
 
-function checkMetricPlaceholder(file: string, lines: string[], violations: Violation[]): void {
+/**
+ * Matches any `[[...]]` bracket marker — `[[metric: source]]`,
+ * `[[retention-period]]`, or any future one authored the same way — not just
+ * the original metric-specific string. A page shipping with the bracket
+ * still visible is wrong regardless of which placeholder it names.
+ */
+function checkBracketPlaceholder(file: string, lines: string[], violations: Violation[]): void {
   lines.forEach((line, index) => {
-    if (line.includes("[[metric:")) {
+    const match = /\[\[[^\]]*\]\]/.exec(line);
+    if (match) {
       violations.push({
         file,
         line: index + 1,
-        reason: 'contains an unresolved "[[metric:" placeholder',
+        reason: `contains an unresolved "${match[0]}" placeholder`,
       });
     }
   });
 }
 
-function checkBannedWords(file: string, lines: string[], violations: Violation[]): void {
-  const proseLines = stripFencedCodeBlocks(lines);
+function scanBannedWords(file: string, lines: string[], violations: Violation[]): void {
   for (const word of BANNED_WORDS) {
     const pattern = new RegExp(`\\b${escapeRegExp(word)}\\b`, "i");
-    proseLines.forEach((line, index) => {
+    lines.forEach((line, index) => {
       if (pattern.test(line)) {
         violations.push({ file, line: index + 1, reason: `uses banned word "${word}"` });
       }
+    });
+  }
+}
+
+function checkBannedWords(file: string, lines: string[], violations: Violation[]): void {
+  scanBannedWords(file, stripFencedCodeBlocks(lines), violations);
+}
+
+/**
+ * Blanks out import lines, className attribute values, and JSX tag names
+ * (component identifiers) before the shared banned-words scan runs, so a
+ * class list or an import path can't produce a false positive and a
+ * component name isn't mistaken for prose. Everything else — JSX text
+ * content, other string-literal attribute values — is left intact, since
+ * those are exactly where real copy lives in a .tsx page.
+ */
+function stripNonProseJsx(lines: string[]): string[] {
+  return lines.map((line) => {
+    if (/^\s*import\s/.test(line)) return "";
+    return line
+      .replace(/className=(".*?"|\{[^}]*\})/g, "className=")
+      .replace(/<\/?[A-Z][A-Za-z0-9]*/g, (tag) => (tag.startsWith("</") ? "</" : "<"));
+  });
+}
+
+function checkBannedWordsTsx(file: string, lines: string[], violations: Violation[]): void {
+  scanBannedWords(file, stripNonProseJsx(lines), violations);
+}
+
+function checkMetricTablePlaceholderTsx(file: string, lines: string[], violations: Violation[]): void {
+  lines.forEach((line, index) => {
+    if (/source=(["'])placeholder\1/.test(line)) {
+      violations.push({
+        file,
+        line: index + 1,
+        reason: 'MetricTable has source="placeholder" — figures not yet real',
+      });
+    }
+  });
+}
+
+function checkQuoteBlockPlaceholderTsx(file: string, lines: string[], violations: Violation[]): void {
+  lines.forEach((line, index) => {
+    if (/\b(name|organization)=["'][^"']*placeholder[^"']*["']/i.test(line)) {
+      violations.push({
+        file,
+        line: index + 1,
+        reason: "QuoteBlock has a placeholder attribution — not a named, approved client",
+      });
+    }
+  });
+}
+
+/**
+ * Counts internal <Link>/<a> elements in a page.tsx's own source text. Every
+ * <Link href=...> counts regardless of whether the href is a literal string
+ * or a dynamic expression (next/link is for internal navigation only, by
+ * convention); a bare <a href="..."> only counts when the literal value
+ * starts with "/" — mailto: and external hrefs are not internal links.
+ */
+function countTsxInternalLinks(source: string): number {
+  const linkMatches = source.match(/<Link\b[^>]*\bhref=/g);
+  let count = linkMatches ? linkMatches.length : 0;
+
+  for (const match of source.matchAll(/<a\b[^>]*\bhref="([^"]*)"/g)) {
+    if (match[1]?.startsWith("/")) count++;
+  }
+
+  return count;
+}
+
+function checkTsxLinkMinimum(file: string, source: string, violations: Violation[]): void {
+  const count = countTsxInternalLinks(source);
+  if (count < 4) {
+    violations.push({
+      file,
+      line: 1,
+      reason: `page has ${count} internal link(s) in its own source, below the 4-link minimum (source-text count, not rendered — see file header)`,
     });
   }
 }
@@ -392,6 +491,16 @@ function walkCollection(collection: (typeof COLLECTIONS)[number]): string[] {
     .map((file) => path.join(dir, file));
 }
 
+const APP_ROOT = path.join(process.cwd(), "app");
+
+function walkAppTsxFiles(): string[] {
+  if (!fs.existsSync(APP_ROOT)) return [];
+  return fs
+    .readdirSync(APP_ROOT, { recursive: true })
+    .filter((entry): entry is string => typeof entry === "string" && entry.endsWith(".tsx"))
+    .map((entry) => path.join(APP_ROOT, entry));
+}
+
 function main(): void {
   const violations: Violation[] = [];
   const exemptionNotices: ExemptionNotice[] = [];
@@ -406,7 +515,7 @@ function main(): void {
       const lines = raw.split("\n");
       const relativePath = path.relative(process.cwd(), filePath);
 
-      checkMetricPlaceholder(relativePath, lines, violations);
+      checkBracketPlaceholder(relativePath, lines, violations);
       checkBannedWords(relativePath, lines, violations);
 
       if (collection === "services") {
@@ -418,6 +527,23 @@ function main(): void {
         const slug = path.basename(filePath, ".mdx");
         checkArticleLinks(relativePath, slug, body, data, articleSlugs.length, articleSlugs, violations);
       }
+    }
+  }
+
+  for (const filePath of walkAppTsxFiles()) {
+    const source = fs.readFileSync(filePath, "utf8");
+    const lines = source.split("\n");
+    const relativePath = path.relative(process.cwd(), filePath);
+    const isDynamicTemplate = filePath.includes("[");
+    const isPage = path.basename(filePath) === "page.tsx";
+
+    checkBracketPlaceholder(relativePath, lines, violations);
+    checkBannedWordsTsx(relativePath, lines, violations);
+    checkMetricTablePlaceholderTsx(relativePath, lines, violations);
+    checkQuoteBlockPlaceholderTsx(relativePath, lines, violations);
+
+    if (isPage && !isDynamicTemplate) {
+      checkTsxLinkMinimum(relativePath, source, violations);
     }
   }
 
