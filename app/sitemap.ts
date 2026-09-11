@@ -34,6 +34,30 @@ function staticPageFilePath(route: RouteEntry): string {
   return path.join(APP_ROOT, "(marketing)", segment, "page.tsx");
 }
 
+/**
+ * Individual point-of-view articles (and, later, proof case studies) have no
+ * per-entry route in lib/nav.ts's ROUTES — only their collection index does
+ * — since they are purely content-driven rather than part of the fixed site
+ * map. The ROUTES loop below can't discover them, so their dynamic detail
+ * pages are enumerated directly from content/point-of-view here instead.
+ */
+function pointOfViewArticleEntries(siteUrl: string): MetadataRoute.Sitemap {
+  const dir = path.join(CONTENT_ROOT, "point-of-view");
+  if (!fs.existsSync(dir)) return [];
+
+  return fs
+    .readdirSync(dir)
+    .filter((file) => file.endsWith(".mdx"))
+    .map((file) => {
+      const slug = file.replace(/\.mdx$/, "");
+      const filePath = path.join(dir, file);
+      return {
+        url: new URL(`/point-of-view/${slug}`, siteUrl).toString(),
+        lastModified: contentLastModified(filePath),
+      };
+    });
+}
+
 function contentLastModified(filePath: string): Date {
   try {
     const raw = fs.readFileSync(filePath, "utf8");
@@ -81,6 +105,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: statMtimeOrNow(staticPageFilePath(route)),
     });
   }
+
+  entries.push(...pointOfViewArticleEntries(siteUrl));
 
   return entries;
 }

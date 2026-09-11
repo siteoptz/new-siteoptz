@@ -142,6 +142,21 @@ export function buildArticle(input: ArticleInput) {
   };
 }
 
+export interface PersonInput {
+  name: string;
+  role: string;
+}
+
+/** A standalone Person node for an article byline, alongside (not instead of) Article's own nested author reference. */
+export function buildPerson(input: PersonInput) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: input.name,
+    jobTitle: input.role,
+  };
+}
+
 export interface BreadcrumbEntry {
   name: string;
   path: string;

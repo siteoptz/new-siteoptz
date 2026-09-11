@@ -4,8 +4,9 @@ import matter from "gray-matter";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { z } from "zod";
 import { LINK_EXEMPTION_CATEGORIES } from "./link-exemptions";
-import { servicesMdxComponents } from "./mdx-components";
+import { articleMdxComponents, servicesMdxComponents } from "./mdx-components";
 import { counterpartsOf, getRoute } from "./nav";
+import { slugifyHeading } from "./slugify";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content");
 
@@ -145,13 +146,23 @@ export const proofFrontmatterSchema = z.object({
 });
 export type ProofFrontmatter = z.infer<typeof proofFrontmatterSchema>;
 
+const articleAuthorSchema = z.object({
+  name: z.string(),
+  role: z.string(),
+});
+
 export const pointOfViewFrontmatterSchema = z.object({
   title: z.string().max(60),
   description: z.string().max(155),
   primaryKeyword: z.string(),
-  authorName: z.string(),
+  secondaryKeywords: z.array(z.string()),
+  /** One sentence, shown on the hub next to the title. */
+  dek: z.string(),
+  author: articleAuthorSchema,
   publishedAt: z.string(),
   updatedAt: z.string(),
+  /** Other article slugs to surface as "related". May be empty — the template renders nothing at all when it is. */
+  relatedSlugs: z.array(z.string()),
 });
 export type PointOfViewFrontmatter = z.infer<typeof pointOfViewFrontmatterSchema>;
 
@@ -250,16 +261,46 @@ async function loadEntry<TFrontmatter>(
     }
   }
 
-  const components = collection === "services" ? servicesMdxComponents : undefined;
-  // blockJS is off only for services MDX, which is trusted first-party
-  // content (not user-generated) and needs JS object/array literals for
-  // props like DefinitionList's `items`. blockDangerousJS stays on as a
-  // second layer, blocking eval/Function/process even so.
+  const components =
+    collection === "services"
+      ? servicesMdxComponents
+      : collection === "point-of-view"
+        ? articleMdxComponents
+        : undefined;
+  // blockJS is off for services and point-of-view MDX, both trusted
+  // first-party content (not user-generated) that needs JS object/array
+  // literals for props like DefinitionList's `items`. blockDangerousJS stays
+  // on as a second layer, blocking eval/Function/process even so.
   const options =
-    collection === "services" ? { blockJS: false, blockDangerousJS: true } : undefined;
+    collection === "services" || collection === "point-of-view"
+      ? { blockJS: false, blockDangerousJS: true }
+      : undefined;
   const { content } = await compileMDX({ source: body, components, options });
 
   return { slug, frontmatter: result.data as TFrontmatter, content };
+}
+
+export interface ArticleHeading {
+  text: string;
+  id: string;
+}
+
+/**
+ * Scans raw MDX for h2 headings ("## ...") and returns them with slugified
+ * ids, using the exact same slugify function the h2 renderer in
+ * lib/mdx-components.tsx applies to the rendered heading text — so the
+ * table of contents and the anchors it links to can never drift apart.
+ */
+function extractH2Headings(body: string): ArticleHeading[] {
+  const headings: ArticleHeading[] = [];
+  for (const line of body.split("\n")) {
+    const match = /^##\s+(.+?)\s*$/.exec(line);
+    if (match?.[1]) {
+      const text = match[1].trim();
+      headings.push({ text, id: slugifyHeading(text) });
+    }
+  }
+  return headings;
 }
 
 export function getServiceEntries(): Promise<ContentEntry<ServiceFrontmatter>[]> {
@@ -278,10 +319,18 @@ export function getProofEntries(): Promise<ContentEntry<ProofFrontmatter>[]> {
   return Promise.all(listMdxFiles("proof").map((file) => loadEntry<ProofFrontmatter>("proof", file)));
 }
 
-export function getPointOfViewEntries(): Promise<ContentEntry<PointOfViewFrontmatter>[]> {
+export interface ArticleEntry extends ContentEntry<PointOfViewFrontmatter> {
+  headings: ArticleHeading[];
+}
+
+export async function getPointOfViewEntries(): Promise<ArticleEntry[]> {
+  const files = listMdxFiles("point-of-view");
   return Promise.all(
-    listMdxFiles("point-of-view").map((file) =>
-      loadEntry<PointOfViewFrontmatter>("point-of-view", file)
-    )
+    files.map(async (file) => {
+      const entry = await loadEntry<PointOfViewFrontmatter>("point-of-view", file);
+      const raw = fs.readFileSync(path.join(CONTENT_ROOT, "point-of-view", file), "utf8");
+      const { content: body } = matter(raw);
+      return { ...entry, headings: extractH2Headings(body) };
+    })
   );
 }

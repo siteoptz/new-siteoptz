@@ -1,0 +1,62 @@
+---
+title: "Platform Conversions Measure a Different Question | SiteOptz"
+description: "The conversion numbers inside Google Ads and Meta are not wrong. They are answering a different question than the one that should decide your budget."
+primaryKeyword: "platform reported conversions"
+secondaryKeywords:
+  - "view-through conversions"
+  - "modeled conversions"
+  - "conversion attribution windows"
+dek: "Google Ads and Meta are not misreporting your conversions. They are answering a question you never asked, and the gap between the two is wide enough to misdirect a budget."
+author:
+  name: "Antonio Cardenas"
+  role: "Principal"
+publishedAt: "2026-09-11"
+updatedAt: "2026-09-11"
+relatedSlugs: []
+---
+
+Open a Google Ads or Meta dashboard and the conversion count sitting there corresponds to something real. Every number in it traces back to an actual event: an impression was served, a click landed, a form fired, a call connected. The platform is reporting honestly on the question it was built to answer. That question — did this campaign touch something the platform can count as a conversion event — is a different question from the one an operator is actually asking, which is whether this spend produced a customer. The size of the gap between those two questions is exactly what determines whether a budget decision made from that dashboard is a good one.
+
+That gap is the accumulated effect of four specific, documented mechanisms, each reasonable on its own terms, each pulling the reported number away from what an operator actually wants to know. Understanding all four is what turns a dashboard total from a finished answer into a starting point for a real one.
+
+The four are not equally visible. Two of them — view-through conversions and unfiltered inquiry volume — are things almost any advertiser has heard of, even if they have not thought through what either one actually does to a reported total. The other two — modeled conversions and the way brand search absorbs credit across a multi-touch path — are quieter, built deeper into how a platform's own systems reconcile a measurement gap or stitch a customer's session together, and correspondingly easier to miss entirely. All four point at the same underlying fact: a platform's conversion count reports faithfully on what its own systems could observe and infer about themselves, a genuinely different exercise from reporting on what a business actually earned.
+
+## View-through conversions
+
+A view-through conversion counts someone who was shown an ad, never clicked it, and converted anyway within a window the platform defines — commonly measured in days after the impression. The person may never have consciously registered the ad at all. They scrolled past it, the impression was logged, and if a conversion event fires from that same browser or device before the window closes, the platform credits the ad with having produced it, with no way to distinguish genuine influence from simple coincidence.
+
+The logic behind counting it this way is not unreasonable from the platform's side. Brand and awareness advertising is real, and a purely click-based count would systematically undercount campaigns whose entire purpose is to be seen rather than clicked. The problem is what happens once that number leaves the platform's dashboard and becomes an input to a budget conversation: a campaign heavy on video or display inventory can post a conversion count meaningfully larger than its click-based number alone would produce, and nothing in the standard report distinguishes a customer who scrolled past an ad from one who actually clicked through and converted.
+
+The mechanism becomes visible the moment the attribution window changes. Shorten the view-through window and the reported conversion count for that same campaign, run against the same spend, typically drops — not because the campaign started performing differently, but because fewer conversions now fall inside a window short enough to plausibly connect an impression to an outcome. A number that moves when a setting changes, with the underlying campaign and spend both held constant, was never a fixed fact about performance. It was a fact about the window.
+
+Advertisers who have run this experiment know the reported total is sensitive to the setting, which is why shortening the window is a common first response once someone notices the campaign's return looks unusually strong. It is a genuine improvement, and it is not a complete fix. A shorter window still counts a coincidence as a conversion; it simply requires the coincidence to land closer in time to the impression before it counts. The underlying mechanism — crediting exposure a person may never have consciously registered — is unchanged. Only the odds of a false match go down.
+
+## Modeled conversions
+
+A second, quieter mechanism sits underneath the reported total: platforms do not observe every conversion directly, and where they cannot observe one, several now estimate it instead. Consent choices, cross-device journeys, and privacy restrictions on tracking all create gaps in what a platform can actually confirm happened. Rather than report a smaller, fully observed number, the platform fills the gap with a modeled estimate — a projection built from the conversions it can see, applied to the traffic it cannot — and reports that estimate inside the same total as the conversions it directly confirmed, with no visual distinction between the two.
+
+A measurement gap this size is a relatively recent development, driven by consent requirements that let a visitor decline tracking, browser and operating-system defaults that block third-party cookies outright, and prompts on mobile devices that ask a person directly whether an app may track them across other apps and sites. Every one of these is a real, deliberate privacy protection, and every one of them removes a data point a platform used to be able to observe directly. The conversions behind that missing data point did not stop happening. They stopped being visible to the platform's own measurement.
+
+Modeling a gap this way is a defensible choice for the platform's own purpose. A bidding algorithm needs a continuous signal to optimize against, and estimating around a measurement gap keeps that algorithm working exactly where privacy restrictions are tightening fastest. That defense holds for keeping an automated bidding system fed and stops holding the moment a human being tries to use the same total to decide where to move next quarter's budget: an operator reading the number has no way to see what share of it is a modeled projection versus a directly confirmed event, and no way to independently check the model's own assumptions. A budget decision needs a number whose composition can actually be explained, and this one, as reported, cannot be.
+
+## Unfiltered inquiry volume
+
+A third mechanism sits even further from the platform's control, in what actually counts as the conversion event itself. A conversion for a call-driven or form-driven business typically means a call connected or a form submitted — a technical event the platform's pixel or API can observe directly. It says nothing about who was on the other end of that call or what was in that form. A wrong number, an existing customer calling to reschedule, a vendor cold-calling the same tracking line the ads use — every one of these fires the identical conversion event a genuine, qualified inquiry would fire, because the platform has no visibility past the moment the call connects or the form lands.
+
+Form submissions carry a parallel version of the same problem. A form fill is a single technical event — data submitted, event fired — regardless of whether the fields were filled out by a genuine prospect, a bot testing the form for a vulnerability, or the same person submitting twice because the confirmation page loaded slowly the first time. A platform tallying form-fill conversions has no mechanism for telling any of these apart from a form filled out by someone with a real reason to reach the business.
+
+This is precisely why call scoring exists as a distinct discipline rather than an optional add-on: reviewing every inbound call against a fixed rubric before it counts as qualified is the only way to separate a real inquiry from the calls that technically converted without ever representing a shot at a customer. A [non-brand paid search](/services/paid-search-ppc) campaign judged on raw call volume looks identical whether that volume is genuinely qualified or padded with noise the platform was never built to filter, and the difference between those two situations is exactly the difference a budget decision needs to see.
+
+## Brand search absorption
+
+A fourth mechanism is more structural than the first three, and it runs through the reporting itself rather than through any one campaign's own numbers. It shows up specifically in accounts running both non-brand prospecting and branded search side by side, which describes most accounts with any real non-brand budget at all. Consider a customer who sees a non-brand ad, does nothing that day, and a week later searches the business by name directly before finally converting. Somewhere in that path, a brand-specific search happened — the moment the customer had actually decided and was looking the business up directly. Whether that later, decisive touch shows up as its own line item or quietly disappears into whichever campaign the platform's own cross-session logic credits depends entirely on how that platform's attribution model happens to be configured, a setting choice with no relationship to which touch actually closed the sale.
+
+Configured one way, the earlier non-brand campaign absorbs credit for a conversion a distinct, later brand search actually closed, making the non-brand number look like it is manufacturing new customers on its own when a meaningful share of that credit belongs to demand the customer had already resolved by the time they searched the name directly. Configured another way, the brand search itself takes the credit instead, making brand spend look far more productive than reaching a customer who had already decided to buy should be credited for. Either configuration produces a confident, specific-looking number. Both numbers leave an operator equally unable to say which campaign actually created the sale, because the ambiguity lives entirely in how the platform stitches a multi-touch session together — a layer sitting above what any individual campaign report discloses.
+
+## What to measure instead
+
+None of these four mechanisms get fixed by finding a better dashboard or switching platforms. They get addressed by changing what counts as the conversion in the first place. The definition that survives contact with all four is the one that lives outside any ad platform entirely: a booked outcome recorded in the system that actually runs the business — an appointment attended in a scheduling system, a signed agreement in a CRM, a completed sale rung up at the register. That outcome cannot be inflated by a view-through window, padded by a model an operator cannot audit, confused by an unqualified call, or split ambiguously between two campaigns in a multi-touch path, because it is confirmed by the one system with no reason to over-report it.
+
+That outcome then gets imported back to the ad platform on a schedule, through the platform's own offline conversion tools, so the platform's bidding algorithm optimizes toward what actually happened rather than toward its own view-through count, its own modeled estimate, or an unfiltered call total. This is the substance of [what the attribution layer this site builds actually does](/services/marketing-attribution): a standing correction that keeps a platform's own reported number in its proper place, treated as a useful operational signal for managing bids day to day rather than the business metric a budget decision gets made against.
+
+An operator who has never reconciled what their ad platforms report against what their own business actually booked does not know their cost per customer, whatever their dashboard says with such apparent precision. The platforms are answering the question they were built to answer, faithfully and in good faith. The number sitting on that dashboard right now is simply a different thing than the one that decision requires.

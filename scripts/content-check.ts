@@ -32,6 +32,14 @@
  * satisfied, and its reason is printed on every run — regardless of whether
  * the category would otherwise pass or fail — so the exemption stays
  * visible on every build rather than living in someone's memory.
+ *
+ * As of Instruction 5.2, the word-count floor and the six-category link
+ * composition rule are services-only (checkServicePageDepth is only called
+ * for the "services" collection, below) — they would fail a point-of-view
+ * article on arrival. Articles get their own, lighter link rule instead: at
+ * least one link to the attribution pillar, and at least one to a service
+ * page. The related-article requirement only activates once a second
+ * article exists, so a single-article site does not fail on day one.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -320,6 +328,61 @@ function checkServicePageDepth(
   checkLinkComposition(file, slug, links, frontmatter, violations, exemptionNotices);
 }
 
+/**
+ * Lighter link rule for content/point-of-view: at least one link to the
+ * attribution pillar, at least one to a service page. The related-article
+ * requirement (frontmatter.relatedSlugs pointing at another real article)
+ * only activates once totalArticleCount is 2 or more, so this does not fail
+ * the build while only one article exists.
+ */
+function checkArticleLinks(
+  file: string,
+  slug: string,
+  body: string,
+  frontmatter: Record<string, unknown>,
+  totalArticleCount: number,
+  articleSlugs: readonly string[],
+  violations: Violation[]
+): void {
+  const links = collectEmittedLinks(body, frontmatter);
+  const missing: string[] = [];
+
+  if (!links.has("/services/marketing-attribution")) {
+    missing.push("a link to the attribution pillar (/services/marketing-attribution)");
+  }
+
+  const hasServiceLink = Array.from(links).some((linkPath) => {
+    if (!linkPath.startsWith("/services/") || linkPath === "/services/marketing-attribution") {
+      return false;
+    }
+    try {
+      return getRoute(linkPath).pageType === "service";
+    } catch {
+      return false;
+    }
+  });
+  if (!hasServiceLink) missing.push("at least one link to a service page");
+
+  if (totalArticleCount >= 2) {
+    const relatedSlugs = Array.isArray(frontmatter.relatedSlugs) ? frontmatter.relatedSlugs : [];
+    const validRelated = relatedSlugs.filter(
+      (candidate): candidate is string =>
+        typeof candidate === "string" && candidate !== slug && articleSlugs.includes(candidate)
+    );
+    if (validRelated.length === 0) {
+      missing.push("at least one related article, now that a second article exists");
+    }
+  }
+
+  if (missing.length > 0) {
+    violations.push({
+      file,
+      line: 1,
+      reason: `article link requirements incomplete — missing: ${missing.join("; ")}`,
+    });
+  }
+}
+
 function walkCollection(collection: (typeof COLLECTIONS)[number]): string[] {
   const dir = path.join(CONTENT_ROOT, collection);
   if (!fs.existsSync(dir)) return [];
@@ -332,6 +395,9 @@ function walkCollection(collection: (typeof COLLECTIONS)[number]): string[] {
 function main(): void {
   const violations: Violation[] = [];
   const exemptionNotices: ExemptionNotice[] = [];
+
+  const articleFiles = walkCollection("point-of-view");
+  const articleSlugs = articleFiles.map((filePath) => path.basename(filePath, ".mdx"));
 
   for (const collection of COLLECTIONS) {
     for (const filePath of walkCollection(collection)) {
@@ -346,6 +412,11 @@ function main(): void {
       if (collection === "services") {
         const slug = path.basename(filePath, ".mdx");
         checkServicePageDepth(relativePath, slug, body, data, violations, exemptionNotices);
+      }
+
+      if (collection === "point-of-view") {
+        const slug = path.basename(filePath, ".mdx");
+        checkArticleLinks(relativePath, slug, body, data, articleSlugs.length, articleSlugs, violations);
       }
     }
   }
