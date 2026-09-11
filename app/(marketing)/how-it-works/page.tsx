@@ -1,3 +1,4 @@
+import Link from "next/link";
 import CTABand from "@/components/blocks/CTABand";
 import PageHero from "@/components/blocks/PageHero";
 import StageSequence from "@/components/blocks/StageSequence";
@@ -128,10 +129,14 @@ export default function HowItWorksPage() {
               that connects a scored call or form to what actually got booked.
             </p>
             <p>
-              The output is the measurement layer itself: a cost-per-booked-outcome model, broken
-              out by channel and location, feeding back into each ad platform&rsquo;s own bidding
-              algorithm through offline conversion import. Four weeks is typical; a stack with more
-              than one CRM or a manual, non-digital intake process usually needs the full six.
+              The output is{" "}
+              <Link href="/services/marketing-attribution">
+                attribution built to your revenue system
+              </Link>
+              : a cost-per-booked-outcome model, broken out by channel and location, feeding back
+              into each ad platform&rsquo;s own bidding algorithm through offline conversion import.
+              Four weeks is typical; a stack with more than one CRM or a manual, non-digital intake
+              process usually needs the full six.
             </p>
 
             <h2>Run the programs — week 7 onward</h2>
@@ -142,6 +147,15 @@ export default function HowItWorksPage() {
               sometimes away from one that had looked strong. The first full reporting cycle
               against the new layer typically produces at least one reallocation nobody would have
               made under the previous numbers.
+            </p>
+            <p>
+              That shift is not confined to one channel. It reaches every stage a program runs
+              in —{" "}
+              <Link href="/services/top-of-funnel">top-of-funnel programs</Link>,{" "}
+              <Link href="/services/middle-of-funnel">middle-of-funnel programs</Link>, and{" "}
+              <Link href="/services/bottom-of-funnel">bottom-of-funnel programs</Link> alike —
+              since all three report against the identical cost-per-booked-outcome standard from
+              week seven onward.
             </p>
             <p>
               This is also where the account team we recommend hiring or reallocating in-house

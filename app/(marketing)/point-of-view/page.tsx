@@ -82,17 +82,19 @@ export default async function PointOfViewHubPage() {
             <p>
               This section exists to argue specific positions on measurement questions that
               operators are actually weighing. Each article takes one stance — why a particular
-              platform number cannot be trusted at face value, what a specific audit tends to turn
-              up, how to read a report most vendors present without context — and argues it
-              directly enough that a reader could disagree with it outright, rather than skim past
-              a hedge.
+              platform number cannot be trusted at face value, what{" "}
+              <Link href="/how-it-works">our four-stage engagement process</Link> turns up before a
+              single dollar moves, how to read a report most vendors present without context — and
+              argues it directly enough that a reader could disagree with it outright, rather than
+              skim past a hedge.
             </p>
             <p>
-              That is a deliberate difference from the service pages. A service page describes
-              what a program does and how it is measured. An article here takes a stance on a
-              question an operator is actually facing before they have decided whether to work
-              with anyone at all, written for that specific reader: someone deciding where next
-              quarter&rsquo;s budget goes.
+              That is a deliberate difference from <Link href="/services">our services</Link>. A
+              service page describes what a program does and how it is measured. An article here
+              takes a stance on a question an operator is actually facing before they have decided
+              whether to work with anyone at all, written for that specific reader: someone
+              deciding where next quarter&rsquo;s budget goes, whether or not they ever{" "}
+              <Link href="/contact">book a call</Link>.
             </p>
             <p>
               Each piece is built the same way: a specific, falsifiable claim, argued from
