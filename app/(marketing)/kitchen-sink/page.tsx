@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export default function KitchenSinkPage() {
   return (
     <div>
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <PageHero
             kicker="Top of funnel"
@@ -32,7 +32,7 @@ export default function KitchenSinkPage() {
         </Container>
       </Section>
 
-      <Section surface="paper-2">
+      <Section surface="raised">
         <Container>
           <SectionHead heading="BoundaryStatement" as="h2" />
           <BoundaryStatement slug="paid-search-ppc">
@@ -46,7 +46,7 @@ export default function KitchenSinkPage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <SectionHead heading="RuleList" as="h2" />
           <RuleList
@@ -75,7 +75,7 @@ export default function KitchenSinkPage() {
         </Container>
       </Section>
 
-      <Section surface="paper-2">
+      <Section surface="raised">
         <Container>
           <SectionHead heading="StageGrid" as="h2" />
           <p className="mb-4 text-sm text-muted">
@@ -87,7 +87,7 @@ export default function KitchenSinkPage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <SectionHead heading="DefinitionList" as="h2" />
           <DefinitionList
@@ -110,7 +110,7 @@ export default function KitchenSinkPage() {
         </Container>
       </Section>
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <SectionHead heading="StageSequence" as="h2" />
           <StageSequence
@@ -144,7 +144,7 @@ export default function KitchenSinkPage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <SectionHead heading="MetricTable" as="h2" />
           <MetricTable
@@ -164,7 +164,7 @@ export default function KitchenSinkPage() {
         </Container>
       </Section>
 
-      <Section surface="paper-2">
+      <Section surface="raised">
         <Container>
           <SectionHead heading="QuoteBlock" as="h2" />
           <QuoteBlock
@@ -176,7 +176,7 @@ export default function KitchenSinkPage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <SectionHead heading="CrossLinks" as="h2" />
           <CrossLinks
@@ -189,7 +189,7 @@ export default function KitchenSinkPage() {
         </Container>
       </Section>
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <SectionHead heading="CTABand" as="h2" />
           <CTABand
@@ -200,7 +200,7 @@ export default function KitchenSinkPage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <SectionHead heading="FAQ" as="h2" />
           <FAQ

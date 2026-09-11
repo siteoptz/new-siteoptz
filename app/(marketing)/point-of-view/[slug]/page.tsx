@@ -87,7 +87,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <JsonLd data={articleSchema} />
       <JsonLd data={personSchema} />
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <Breadcrumbs trail={trail} />
           <h1 className="mt-4 max-w-[28ch] font-serif text-[2rem] leading-[1.2] min-[900px]:text-[2.5rem]">
@@ -110,7 +110,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="reading">
         <Container>
           <div className="grid grid-cols-1 gap-10 min-[1100px]:grid-cols-[220px_1fr]">
             {entry.headings.length > 0 ? (
@@ -139,7 +139,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       </Section>
 
       {related.length > 0 ? (
-        <Section surface="paper-2">
+        <Section surface="raised">
           <Container>
             <p className="font-display text-sm text-muted">Related</p>
             <div className="mt-4 grid grid-cols-1 gap-px bg-rule min-[900px]:grid-cols-2">

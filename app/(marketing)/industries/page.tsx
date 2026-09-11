@@ -54,7 +54,7 @@ export default async function IndustriesHubPage() {
     <div>
       <JsonLd data={collectionSchema} />
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <Breadcrumbs trail={trail} />
           <PageHero
@@ -65,7 +65,7 @@ export default async function IndustriesHubPage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <Prose>
             <p>
@@ -82,7 +82,7 @@ export default async function IndustriesHubPage() {
         </Container>
       </Section>
 
-      <Section surface="paper-2">
+      <Section surface="raised">
         <Container>
           <SectionHead heading="The four industries" />
           <div className="grid grid-cols-1 gap-10 min-[900px]:grid-cols-2">
@@ -105,7 +105,7 @@ export default async function IndustriesHubPage() {
         </Container>
       </Section>
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <CTABand
             heading="Find out what your industry's version of this looks like."

@@ -45,7 +45,7 @@ export default function TermsPage() {
     <div>
       <JsonLd data={webPageSchema} />
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <Breadcrumbs trail={trail} />
           <PageHero
@@ -56,7 +56,7 @@ export default function TermsPage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <Prose>
             <p>
@@ -96,7 +96,7 @@ export default function TermsPage() {
         </Container>
       </Section>
 
-      <Section surface="paper-2">
+      <Section surface="raised">
         <Container>
           <Prose>
             <h2>Not advice, and not a relationship</h2>
@@ -125,7 +125,7 @@ export default function TermsPage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <Prose>
             <h2>Governing law</h2>

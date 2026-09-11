@@ -61,7 +61,7 @@ export default function HowItWorksPage() {
     <div>
       <JsonLd data={howToSchema} />
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <Breadcrumbs trail={trail} />
           <PageHero
@@ -72,7 +72,7 @@ export default function HowItWorksPage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <Prose>
             <p>
@@ -99,7 +99,7 @@ export default function HowItWorksPage() {
         </Container>
       </Section>
 
-      <Section surface="paper-2">
+      <Section surface="raised">
         <Container>
           <Prose>
             <h2>Measurement audit — weeks 1 and 2</h2>
@@ -179,7 +179,7 @@ export default function HowItWorksPage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <SectionHead heading="What the audit deliverable contains" />
           <Prose>
@@ -203,7 +203,7 @@ export default function HowItWorksPage() {
         </Container>
       </Section>
 
-      <Section surface="paper-2">
+      <Section surface="raised">
         <Container>
           <SectionHead heading="What we need from your team" />
           <Prose>
@@ -228,7 +228,7 @@ export default function HowItWorksPage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <SectionHead heading="How pricing works" />
           <Prose>
@@ -244,7 +244,7 @@ export default function HowItWorksPage() {
         </Container>
       </Section>
 
-      <Section surface="paper-2">
+      <Section surface="raised">
         <Container>
           <SectionHead heading="If we are not the right fit" />
           <Prose>
@@ -268,7 +268,7 @@ export default function HowItWorksPage() {
         </Container>
       </Section>
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <CTABand
             heading="Start with the measurement audit."

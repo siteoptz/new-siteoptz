@@ -49,7 +49,7 @@ export default function ServicesHubPage() {
     <div>
       <JsonLd data={collectionSchema} />
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <Breadcrumbs trail={trail} />
           <PageHero
@@ -60,7 +60,7 @@ export default function ServicesHubPage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <Prose>
             <p>
@@ -85,7 +85,7 @@ export default function ServicesHubPage() {
         </Container>
       </Section>
 
-      <Section surface="paper-2">
+      <Section surface="raised">
         <Container>
           <SectionHead
             heading="The three stages"
@@ -131,7 +131,7 @@ export default function ServicesHubPage() {
         </Container>
       </Section>
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <SectionHead as="h2" heading="The layer underneath" />
           <Prose>
@@ -157,7 +157,7 @@ export default function ServicesHubPage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <Prose>
             <p>
@@ -186,7 +186,7 @@ export default function ServicesHubPage() {
         </Container>
       </Section>
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <CTABand
             heading="Find the stage your next program belongs to."

@@ -19,7 +19,7 @@ const LINKS = [
 
 export default function NotFound() {
   return (
-    <Section surface="navy">
+    <Section surface="base">
       <Container>
         <p className="mb-3 text-sm text-blue-300">Page not found</p>
         <h1 className="max-w-[18ch]">This page doesn&rsquo;t exist.</h1>

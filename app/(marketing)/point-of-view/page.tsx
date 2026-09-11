@@ -65,7 +65,7 @@ export default async function PointOfViewHubPage() {
     <div>
       <JsonLd data={collectionSchema} />
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <Breadcrumbs trail={trail} />
           <PageHero
@@ -76,7 +76,7 @@ export default async function PointOfViewHubPage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <Prose>
             <p>
@@ -117,7 +117,7 @@ export default async function PointOfViewHubPage() {
         </Container>
       </Section>
 
-      <Section surface="paper-2">
+      <Section surface="raised">
         <Container>
           <div className="grid grid-cols-1 gap-px bg-rule">
             {sorted.map((entry) => (

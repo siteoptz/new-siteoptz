@@ -41,7 +41,7 @@ export default function ContactPage() {
     <div>
       <JsonLd data={contactPageSchema} />
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <Breadcrumbs trail={trail} />
           <PageHero
@@ -52,7 +52,7 @@ export default function ContactPage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <Prose>
             <p>
@@ -86,7 +86,7 @@ export default function ContactPage() {
         </Container>
       </Section>
 
-      <Section surface="paper-2">
+      <Section surface="raised">
         <Container>
           <div className="grid grid-cols-1 gap-8 min-[700px]:grid-cols-2">
             <div>

@@ -70,26 +70,26 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     return (
       <div>
         <JsonLd data={serviceSchema} />
-        <Section surface="navy">
+        <Section surface="base">
           <Container>
             <Breadcrumbs trail={trail} />
             <PageHero kicker={fm.heroKicker} heading={fm.h1} lead={fm.lead} />
           </Container>
         </Section>
 
-        <Section surface="paper">
+        <Section surface="base">
           <Container>
             <Prose>{entry.content}</Prose>
           </Container>
         </Section>
 
-        <Section surface="paper-2">
+        <Section surface="raised">
           <Container>
             <StageGrid stage={fm.funnelStage} />
           </Container>
         </Section>
 
-        <Section surface="navy">
+        <Section surface="base">
           <Container>
             <CTABand heading={fm.cta.heading} body={fm.cta.body} cta={CONTACT_CTA} />
           </Container>
@@ -102,7 +102,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     <div>
       <JsonLd data={serviceSchema} />
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <Breadcrumbs trail={trail} />
           <PageHero kicker={fm.heroKicker} heading={fm.h1} lead={fm.lead} />
@@ -110,7 +110,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       </Section>
 
       {fm.boundary ? (
-        <Section surface="paper-2">
+        <Section surface="raised">
           <Container>
             <BoundaryStatement slug={slug}>
               <p>{fm.boundary}</p>
@@ -119,14 +119,14 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </Section>
       ) : null}
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <Prose>{entry.content}</Prose>
         </Container>
       </Section>
 
       {fm.faq ? (
-        <Section surface="paper-2">
+        <Section surface="raised">
           <Container>
             <FAQ items={fm.faq} />
           </Container>
@@ -134,14 +134,14 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       ) : null}
 
       {fm.crossLinks ? (
-        <Section surface="paper">
+        <Section surface="base">
           <Container>
             <CrossLinks slugs={fm.crossLinks} />
           </Container>
         </Section>
       ) : null}
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <CTABand heading={fm.cta.heading} body={fm.cta.body} cta={CONTACT_CTA} />
         </Container>

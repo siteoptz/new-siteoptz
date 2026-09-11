@@ -68,20 +68,20 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
     <div>
       <JsonLd data={serviceSchema} />
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <Breadcrumbs trail={trail} />
           <PageHero kicker={fm.heroKicker} heading={fm.h1} lead={fm.lead} />
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <Prose>{entry.content}</Prose>
         </Container>
       </Section>
 
-      <Section surface="paper-2">
+      <Section surface="raised">
         <Container>
           <SectionHead heading="Which services apply" />
           <div className="grid grid-cols-1 gap-px bg-rule min-[900px]:grid-cols-2">
@@ -100,14 +100,14 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       </Section>
 
       {fm.faq ? (
-        <Section surface="paper">
+        <Section surface="base">
           <Container>
             <FAQ items={fm.faq} />
           </Container>
         </Section>
       ) : null}
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <CTABand heading={fm.cta.heading} body={fm.cta.body} cta={CONTACT_CTA} />
         </Container>

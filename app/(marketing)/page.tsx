@@ -35,7 +35,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <div className="grid grid-cols-1 gap-10 min-[900px]:grid-cols-2">
             <div>
@@ -59,7 +59,7 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <SectionHead
             heading="Three systems that don't talk to each other."
@@ -89,7 +89,7 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section surface="paper-2">
+      <Section surface="raised">
         <Container>
           <SectionHead heading="What we do" />
           <RuleList
@@ -129,7 +129,7 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <SectionHead heading="How an engagement runs" />
           <StageSequence
@@ -166,7 +166,7 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <SectionHead heading="Who this is built for" />
           <div className="grid grid-cols-1 gap-8 min-[900px]:grid-cols-2">
@@ -213,7 +213,7 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section surface="paper-2">
+      <Section surface="raised">
         <Container>
           <SectionHead heading="What you receive" />
           <div className="grid grid-cols-1 gap-10 min-[900px]:grid-cols-2">
@@ -263,7 +263,7 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <QuoteBlock
             quote="For the first time, we could see which location's ad spend was actually producing booked appointments."
@@ -277,7 +277,7 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <CTABand
             heading="Start with the measurement audit."

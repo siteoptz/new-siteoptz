@@ -1,18 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy-900: #060b16;
-  --color-navy-800: #0d1626;
-  --color-navy-700: #17243d;
-  --color-blue-600: #2563eb;
-  --color-blue-700: #1d4ed8;
-  --color-blue-300: #7fb0ff;
-  --color-paper: #ffffff;
-  --color-paper-2: #f5f7fa;
-  --color-rule: #e4e9f2;
-  --color-ink: #0d1321;
-  --color-muted: #4e5a72;
-  --color-signal: #d99a45;
+  --color-base: #15100c;
+  --color-raised: #211913;
+  --color-rule: rgba(255, 236, 220, 0.13);
+  --color-accent: #ff8321;
+  --color-accent-lt: #ffa35c;
+  --color-text: #e9e1d9;
+  --color-muted: #a99a8c;
+  --color-signal: #5fc3d6;
+  --color-reading: #fbf8f5;
+  --color-reading-ink: #1a1512;
+  --color-reading-accent: #b34a12;
   --color-danger: #b91c1c;
 
   --font-display: var(--font-display-src), "Inter Tight", system-ui, sans-serif;
@@ -45,8 +44,8 @@ body {
   font-family: var(--font-sans);
   font-size: 17px;
   line-height: 1.6;
-  color: var(--color-ink);
-  background: var(--color-paper);
+  color: var(--color-text);
+  background: var(--color-base);
 }
 
 h1,
@@ -71,7 +70,7 @@ h3 {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-blue-600);
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
 }
 
@@ -84,4 +83,15 @@ h3 {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/*
+ * Section stamps a stable surface-base / surface-raised / surface-reading class alongside its
+ * Tailwind background utility specifically so this adjacent-sibling rule can find it. base and
+ * raised are both dark and close in value — nowhere near as distinct as the old paper/paper-2
+ * pair — so two of the same surface back to back need a visible seam between them.
+ */
+.surface-base + .surface-base,
+.surface-raised + .surface-raised {
+  border-top: 1px solid var(--color-rule);
 }

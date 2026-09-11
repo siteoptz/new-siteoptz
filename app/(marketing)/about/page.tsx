@@ -41,7 +41,7 @@ export default function AboutPage() {
     <div>
       <JsonLd data={aboutPageSchema} />
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <Breadcrumbs trail={trail} />
           <PageHero
@@ -52,7 +52,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <SectionHead heading="How we're structured, and why it stays small" />
           <Prose>
@@ -85,7 +85,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section surface="paper-2">
+      <Section surface="raised">
         <Container>
           <SectionHead heading="Who does the work" />
           <Prose>
@@ -111,7 +111,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section surface="paper">
+      <Section surface="base">
         <Container>
           <SectionHead heading="How we choose clients" />
           <Prose>
@@ -141,7 +141,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section surface="paper-2">
+      <Section surface="raised">
         <Container>
           <SectionHead heading="What we decline" />
           <Prose>
@@ -172,7 +172,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section surface="navy">
+      <Section surface="base">
         <Container>
           <CTABand
             heading="Talk to the person who'd run your account."
