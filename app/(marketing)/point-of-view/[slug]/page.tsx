@@ -6,7 +6,7 @@ import Container from "@/components/ui/Container";
 import Prose from "@/components/ui/Prose";
 import Section from "@/components/ui/Section";
 import { type ArticleEntry, getPointOfViewEntries } from "@/lib/content";
-import { buildArticle, buildBreadcrumbList, buildPerson } from "@/lib/schema";
+import { buildArticle, buildPerson } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
@@ -79,7 +79,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     updatedAt: fm.updatedAt,
   });
   const personSchema = buildPerson({ name: fm.author.name, role: fm.author.role });
-  const breadcrumbSchema = buildBreadcrumbList(trail);
 
   const showUpdated = fm.updatedAt !== fm.publishedAt;
 
@@ -87,7 +86,6 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     <div>
       <JsonLd data={articleSchema} />
       <JsonLd data={personSchema} />
-      <JsonLd data={breadcrumbSchema} />
 
       <Section surface="navy">
         <Container>
