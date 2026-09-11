@@ -15,6 +15,7 @@ function absoluteUrl(path: string): string {
 export interface OrganizationInput {
   name: string;
   logoUrl: string;
+  email?: string;
   sameAs?: string[];
 }
 
@@ -25,6 +26,7 @@ export function buildOrganization(input: OrganizationInput) {
     name: input.name,
     url: requireSiteUrl(),
     logo: input.logoUrl,
+    ...(input.email ? { email: input.email } : {}),
     ...(input.sameAs ? { sameAs: input.sameAs } : {}),
   };
 }

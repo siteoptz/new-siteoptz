@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import JsonLd from "@/components/seo/JsonLd";
+import { buildOrganization, buildWebSite } from "@/lib/schema";
 import { fontDisplay, fontSans, fontSerif } from "./fonts";
 import "./globals.css";
 
@@ -13,7 +15,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${fontDisplay.variable} ${fontSans.variable} ${fontSerif.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <JsonLd
+          data={buildOrganization({
+            name: "SiteOptz",
+            logoUrl: "/favicon.ico",
+            email: "info@siteoptz.com",
+          })}
+        />
+        <JsonLd data={buildWebSite({ name: "SiteOptz" })} />
+        {children}
+      </body>
     </html>
   );
 }
