@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { z } from "zod";
 import { servicesMdxComponents } from "./mdx-components";
-import { getRoute } from "./nav";
+import { counterpartsOf, getRoute } from "./nav";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content");
 
@@ -47,7 +47,13 @@ const servicesFrontmatterBaseSchema = z.object({
   heroKicker: z.string(),
   /** PageHero's lead paragraph — capped at 46ch by the component, not here. */
   lead: z.string(),
-  /** Boundary statement prose, 60-100 words. Omitted on hubs and funnelStage 'cross'. */
+  /**
+   * Boundary statement prose, 60-100 words. Required if and only if the
+   * slug appears in lib/nav.ts's boundary table — checked in loadEntry
+   * against counterpartsOf(slug), not against funnelStage or pageType. The
+   * boundary table has 14 entries against 22 non-pillar service pages;
+   * eight legitimately have no counterpart.
+   */
   boundary: z.string().optional(),
   /** 4-6 entries. Omitted on hubs. */
   faq: z.array(faqItemSchema).optional(),
@@ -61,23 +67,9 @@ const servicesFrontmatterBaseSchema = z.object({
 export const servicesFrontmatterSchema = servicesFrontmatterBaseSchema.superRefine((data, ctx) => {
   if (data.pageType !== "service") return;
 
-  if (data.funnelStage !== "cross") {
-    const boundaryWords = data.boundary ? wordCount(data.boundary) : 0;
-    if (!data.boundary || boundaryWords < 60 || boundaryWords > 100) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["boundary"],
-        message: "service pages (except funnelStage 'cross') require a boundary of 60-100 words",
-      });
-    }
-    if (data.counterpartSlugs.length === 0) {
-      ctx.addIssue({
-        code: "custom",
-        path: ["counterpartSlugs"],
-        message: "service pages (except funnelStage 'cross') require at least one counterpartSlug",
-      });
-    }
-  }
+  // Boundary/counterpartSlugs requirement is data-driven against
+  // lib/nav.ts's boundary table (via the slug), not against funnelStage —
+  // checked separately in loadEntry, where the slug is available.
 
   if (!data.faq || data.faq.length < 4 || data.faq.length > 6) {
     ctx.addIssue({
@@ -176,6 +168,28 @@ function validateCrossLinks(filePath: string, crossLinks: readonly string[] | un
   }
 }
 
+/**
+ * A boundary is required if and only if the slug has a counterpart in
+ * lib/nav.ts's boundary table — not a function of funnelStage or pageType.
+ * The table has 14 entries against 22 non-pillar service pages; eight
+ * (including the pillar) legitimately have none.
+ */
+function validateBoundaryRequirement(
+  filePath: string,
+  slug: string,
+  boundary: string | undefined
+): void {
+  const hasCounterpart = counterpartsOf(slug).length > 0;
+  if (!hasCounterpart) return;
+
+  const words = boundary ? wordCount(boundary) : 0;
+  if (!boundary || words < 60 || words > 100) {
+    throw new Error(
+      `lib/content: invalid frontmatter in ${filePath} — field "boundary": "${slug}" has a counterpart in lib/nav.ts's boundary table and requires a boundary of 60-100 words (found ${words})`
+    );
+  }
+}
+
 async function loadEntry<TFrontmatter>(
   collection: Collection,
   filename: string
@@ -183,6 +197,7 @@ async function loadEntry<TFrontmatter>(
   const filePath = path.join(CONTENT_ROOT, collection, filename);
   const raw = fs.readFileSync(filePath, "utf8");
   const { data, content: body } = matter(raw);
+  const slug = filename.replace(/\.mdx$/, "");
 
   const schema = SCHEMAS[collection];
   const result = schema.safeParse(data);
@@ -196,6 +211,9 @@ async function loadEntry<TFrontmatter>(
     const serviceData = result.data as ServiceFrontmatter;
     validateCounterpartSlugs(filePath, serviceData.counterpartSlugs);
     validateCrossLinks(filePath, serviceData.crossLinks);
+    if (serviceData.pageType === "service") {
+      validateBoundaryRequirement(filePath, slug, serviceData.boundary);
+    }
   }
 
   const components = collection === "services" ? servicesMdxComponents : undefined;
@@ -206,7 +224,6 @@ async function loadEntry<TFrontmatter>(
   const options =
     collection === "services" ? { blockJS: false, blockDangerousJS: true } : undefined;
   const { content } = await compileMDX({ source: body, components, options });
-  const slug = filename.replace(/\.mdx$/, "");
 
   return { slug, frontmatter: result.data as TFrontmatter, content };
 }

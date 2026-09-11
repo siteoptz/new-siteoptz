@@ -35,7 +35,7 @@ export default function KitchenSinkPage() {
       <Section surface="paper-2">
         <Container>
           <SectionHead heading="BoundaryStatement" as="h2" />
-          <BoundaryStatement slug="paid-search-ppc" funnelStage="tof">
+          <BoundaryStatement slug="paid-search-ppc">
             <p>
               This page covers non-brand acquisition only — campaigns built to reach people who
               have not searched your brand name. Defending and converting demand from people who

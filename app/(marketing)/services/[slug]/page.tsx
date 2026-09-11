@@ -109,10 +109,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </Container>
       </Section>
 
-      {fm.funnelStage !== "cross" && fm.boundary ? (
+      {fm.boundary ? (
         <Section surface="paper-2">
           <Container>
-            <BoundaryStatement slug={slug} funnelStage={fm.funnelStage}>
+            <BoundaryStatement slug={slug}>
               <p>{fm.boundary}</p>
             </BoundaryStatement>
           </Container>
