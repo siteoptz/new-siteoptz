@@ -24,6 +24,14 @@
  * required category (this is exactly how marketing-operations shipped two
  * links short in Wave 1 and only a manual audit caught it). The composition
  * check reports which category is missing, by name.
+ *
+ * As of the link-exemptions instruction, a page can declare
+ * `linkExemptions: [{ category, reason }]` in frontmatter to record a
+ * deliberate, reported gap instead of either manufacturing a link or
+ * tolerating a silent gate failure. An exempted category is treated as
+ * satisfied, and its reason is printed on every run — regardless of whether
+ * the category would otherwise pass or fail — so the exemption stays
+ * visible on every build rather than living in someone's memory.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -66,6 +74,34 @@ interface Violation {
   file: string;
   line: number;
   reason: string;
+}
+
+/**
+ * Must stay in sync with lib/content.ts's LINK_EXEMPTION_CATEGORIES — this
+ * script is deliberately decoupled from that schema (it does not import the
+ * MDX compiler), so the category list is duplicated rather than shared.
+ */
+type LinkExemptionCategory = "pillar" | "stageHub" | "siblings" | "counterpart" | "industry" | "proof";
+
+interface ExemptionNotice {
+  file: string;
+  category: LinkExemptionCategory;
+  reason: string;
+}
+
+function parseLinkExemptions(frontmatter: Record<string, unknown>): Map<LinkExemptionCategory, string> {
+  const exemptions = new Map<LinkExemptionCategory, string>();
+  if (!Array.isArray(frontmatter.linkExemptions)) return exemptions;
+
+  for (const entry of frontmatter.linkExemptions) {
+    const category = (entry as { category?: unknown } | null)?.category;
+    const reason = (entry as { reason?: unknown } | null)?.reason;
+    if (typeof category === "string" && typeof reason === "string") {
+      exemptions.set(category as LinkExemptionCategory, reason);
+    }
+  }
+
+  return exemptions;
 }
 
 function escapeRegExp(value: string): string {
@@ -152,26 +188,37 @@ function collectEmittedLinks(body: string, frontmatter: Record<string, unknown>)
  * resolved through lib/nav.ts rather than just counted. Skipped for the
  * pillar itself (marketing-attribution), which has its own distinct linking
  * spec — "links to all three stage hubs" — not this generic one.
+ *
+ * An exempted category (frontmatter.linkExemptions) is treated as satisfied
+ * regardless of whether it would otherwise pass or fail, and its reason is
+ * always recorded in exemptionNotices so it prints on every run.
  */
 function checkLinkComposition(
   file: string,
   slug: string,
   links: Set<string>,
   frontmatter: Record<string, unknown>,
-  violations: Violation[]
+  violations: Violation[],
+  exemptionNotices: ExemptionNotice[]
 ): void {
   if (slug === "marketing-attribution") return;
+
+  const exemptions = parseLinkExemptions(frontmatter);
+  for (const [category, reason] of exemptions) {
+    exemptionNotices.push({ file, category, reason });
+  }
+  const isExempt = (category: LinkExemptionCategory) => exemptions.has(category);
 
   const funnelStage = typeof frontmatter.funnelStage === "string" ? frontmatter.funnelStage : undefined;
   const selfPath = `/services/${slug}`;
   const missing: string[] = [];
 
-  if (!links.has("/services/marketing-attribution")) {
+  if (!isExempt("pillar") && !links.has("/services/marketing-attribution")) {
     missing.push("the attribution pillar (/services/marketing-attribution)");
   }
 
   const stageHub = funnelStage ? STAGE_HUB_PATH[funnelStage] : undefined;
-  if (stageHub && !links.has(stageHub)) {
+  if (!isExempt("stageHub") && stageHub && !links.has(stageHub)) {
     missing.push(`its own stage hub (${stageHub})`);
   }
 
@@ -189,7 +236,7 @@ function checkLinkComposition(
     (route) =>
       route.pageType === "service" && route.funnelStage === funnelStage && route.path !== selfPath
   ).length;
-  if (siblingCount < MIN_SIBLINGS) {
+  if (!isExempt("siblings") && siblingCount < MIN_SIBLINGS) {
     missing.push(`at least ${MIN_SIBLINGS} sibling services (found ${siblingCount})`);
   }
 
@@ -199,16 +246,16 @@ function checkLinkComposition(
   } catch {
     counterpartPaths = [];
   }
-  if (counterpartPaths.length > 0 && !counterpartPaths.some((p) => links.has(p))) {
+  if (!isExempt("counterpart") && counterpartPaths.length > 0 && !counterpartPaths.some((p) => links.has(p))) {
     missing.push(`its counterpart (${counterpartPaths.join(" or ")})`);
   }
 
   const hasIndustry = Array.from(links).some(
     (p) => p.startsWith("/industries/") && p !== "/industries"
   );
-  if (!hasIndustry) missing.push("at least one industry page");
+  if (!isExempt("industry") && !hasIndustry) missing.push("at least one industry page");
 
-  if (!links.has("/proof")) missing.push("at least one proof entry (/proof)");
+  if (!isExempt("proof") && !links.has("/proof")) missing.push("at least one proof entry (/proof)");
 
   if (missing.length > 0) {
     violations.push({
@@ -253,7 +300,8 @@ function checkServicePageDepth(
   slug: string,
   body: string,
   frontmatter: Record<string, unknown>,
-  violations: Violation[]
+  violations: Violation[],
+  exemptionNotices: ExemptionNotice[]
 ): void {
   if (frontmatter.pageType !== "service") return;
 
@@ -275,7 +323,7 @@ function checkServicePageDepth(
     });
   }
 
-  checkLinkComposition(file, slug, links, frontmatter, violations);
+  checkLinkComposition(file, slug, links, frontmatter, violations, exemptionNotices);
 }
 
 function walkCollection(collection: (typeof COLLECTIONS)[number]): string[] {
@@ -289,6 +337,7 @@ function walkCollection(collection: (typeof COLLECTIONS)[number]): string[] {
 
 function main(): void {
   const violations: Violation[] = [];
+  const exemptionNotices: ExemptionNotice[] = [];
 
   for (const collection of COLLECTIONS) {
     for (const filePath of walkCollection(collection)) {
@@ -302,9 +351,17 @@ function main(): void {
 
       if (collection === "services") {
         const slug = path.basename(filePath, ".mdx");
-        checkServicePageDepth(relativePath, slug, body, data, violations);
+        checkServicePageDepth(relativePath, slug, body, data, violations, exemptionNotices);
       }
     }
+  }
+
+  if (exemptionNotices.length > 0) {
+    console.log(`content-check: ${exemptionNotices.length} link exemption(s) recorded\n`);
+    for (const notice of exemptionNotices) {
+      console.log(`${notice.file} — ${notice.category}: ${notice.reason}`);
+    }
+    console.log("");
   }
 
   if (violations.length === 0) {

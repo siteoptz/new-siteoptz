@@ -27,6 +27,25 @@ const ctaSchema = z.object({
   body: z.string(),
 });
 
+/**
+ * Category ids must stay in sync with scripts/content-check.ts's own copy —
+ * that script does not import this schema (it stays decoupled from the MDX
+ * compiler), so the two lists are duplicated rather than shared.
+ */
+export const LINK_EXEMPTION_CATEGORIES = [
+  "pillar",
+  "stageHub",
+  "siblings",
+  "counterpart",
+  "industry",
+  "proof",
+] as const;
+
+const linkExemptionSchema = z.object({
+  category: z.enum(LINK_EXEMPTION_CATEGORIES),
+  reason: z.string(),
+});
+
 const servicesFrontmatterBaseSchema = z.object({
   title: z.string().max(60),
   description: z.string().max(155),
@@ -59,6 +78,13 @@ const servicesFrontmatterBaseSchema = z.object({
   faq: z.array(faqItemSchema).optional(),
   /** Exactly 3 route paths, validated against lib/nav.ts. Omitted on hubs. */
   crossLinks: z.array(z.string()).optional(),
+  /**
+   * Records a deliberate, reported gap in the link-composition gate rather
+   * than tolerating a silent one. content-check.ts treats an exempted
+   * category as satisfied and prints the reason on every run, so the
+   * exemption stays visible instead of living in someone's memory.
+   */
+  linkExemptions: z.array(linkExemptionSchema).optional(),
   cta: ctaSchema,
   publishedAt: z.string(),
   updatedAt: z.string(),
