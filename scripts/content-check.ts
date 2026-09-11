@@ -9,6 +9,15 @@
  *
  * Covers MDX content only. Pages built as .tsx are checked separately at the
  * pre-launch audit (docs/build-prompts.md, Prompt 6.3).
+ *
+ * As of Instruction 2.1, the word-count floor counts prose that lives in
+ * frontmatter (boundary, lead, faq answers, cta.body) alongside the MDX
+ * body, since the service page template renders all of it as words on the
+ * page — only the MDX body word count would understate a real page. The
+ * internal-link minimum was extended the same way: crossLinks and
+ * counterpartSlugs render as real links via the template (CrossLinks,
+ * BoundaryStatement) but never appear as body markdown, so they are counted
+ * alongside inline body links rather than only the latter.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -93,7 +102,13 @@ function countWords(body: string): number {
   return body.trim().split(/\s+/).filter(Boolean).length;
 }
 
-function countInternalLinks(body: string): number {
+/**
+ * Counts inline body markdown links plus the structural links the service
+ * page template renders from frontmatter — crossLinks and the
+ * BoundaryStatement counterpart(s) from counterpartSlugs — neither of which
+ * appears as body markdown text since Instruction 2.1's template.
+ */
+function countInternalLinks(body: string, frontmatter: Record<string, unknown>): number {
   const knownPaths = new Set(ROUTES.map((route) => route.path));
   let count = 0;
   for (const match of body.matchAll(/\]\(([^)]+)\)/g)) {
@@ -102,7 +117,45 @@ function countInternalLinks(body: string): number {
       count += 1;
     }
   }
+
+  if (Array.isArray(frontmatter.crossLinks)) {
+    count += frontmatter.crossLinks.length;
+  }
+
+  if (Array.isArray(frontmatter.counterpartSlugs)) {
+    count += frontmatter.counterpartSlugs.length;
+  }
+
   return count;
+}
+
+/** Sums word counts of frontmatter prose fields: boundary, lead, faq answers, cta.body. */
+function countFrontmatterProseWords(frontmatter: Record<string, unknown>): number {
+  let total = 0;
+
+  if (typeof frontmatter.boundary === "string") {
+    total += countWords(frontmatter.boundary);
+  }
+
+  if (typeof frontmatter.lead === "string") {
+    total += countWords(frontmatter.lead);
+  }
+
+  if (Array.isArray(frontmatter.faq)) {
+    for (const entry of frontmatter.faq as unknown[]) {
+      const answer = (entry as { answer?: unknown } | null)?.answer;
+      if (typeof answer === "string") {
+        total += countWords(answer);
+      }
+    }
+  }
+
+  const cta = frontmatter.cta as { body?: unknown } | undefined;
+  if (typeof cta?.body === "string") {
+    total += countWords(cta.body);
+  }
+
+  return total;
 }
 
 function checkServicePageDepth(
@@ -113,16 +166,16 @@ function checkServicePageDepth(
 ): void {
   if (frontmatter.pageType !== "service") return;
 
-  const words = countWords(body);
+  const words = countWords(body) + countFrontmatterProseWords(frontmatter);
   if (words < WORD_COUNT_FLOOR) {
     violations.push({
       file,
       line: 1,
-      reason: `service page body is ${words} words, below the ${WORD_COUNT_FLOOR}-word floor`,
+      reason: `service page is ${words} words (body plus frontmatter prose), below the ${WORD_COUNT_FLOOR}-word floor`,
     });
   }
 
-  const links = countInternalLinks(body);
+  const links = countInternalLinks(body, frontmatter);
   if (links < MIN_INTERNAL_LINKS) {
     violations.push({
       file,
