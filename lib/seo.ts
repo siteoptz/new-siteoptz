@@ -40,7 +40,12 @@ export function buildMetadata({ title, description, path, ogImage }: BuildMetada
   }
 
   const canonical = new URL(path, siteUrl).toString();
-  const image = ogImage ? new URL(ogImage, siteUrl).toString() : undefined;
+  // Next's file-convention opengraph-image.tsx only auto-injects into pages
+  // that don't define their own `openGraph` object at all — every page here
+  // does, via this function, so that auto-merge never actually fires.
+  // Defaulting to the shared root image keeps a single visual asset while
+  // making every page's metadata reference it explicitly.
+  const image = new URL(ogImage ?? "/opengraph-image", siteUrl).toString();
 
   return {
     metadataBase: new URL(siteUrl),
@@ -53,13 +58,13 @@ export function buildMetadata({ title, description, path, ogImage }: BuildMetada
       title,
       description,
       url: canonical,
-      images: image ? [{ url: image }] : undefined,
+      images: [{ url: image }],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: image ? [image] : undefined,
+      images: [image],
     },
   };
 }
