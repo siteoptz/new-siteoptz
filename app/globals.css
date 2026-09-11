@@ -13,6 +13,7 @@
   --color-ink: #0d1321;
   --color-muted: #4e5a72;
   --color-signal: #d99a45;
+  --color-danger: #b91c1c;
 
   --font-display: var(--font-display-src), "Inter Tight", system-ui, sans-serif;
   --font-sans: var(--font-sans-src), "Inter", system-ui, sans-serif;
