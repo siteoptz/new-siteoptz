@@ -18,16 +18,29 @@
  * counterpartSlugs render as real links via the template (CrossLinks,
  * BoundaryStatement) but never appear as body markdown, so they are counted
  * alongside inline body links rather than only the latter.
+ *
+ * As of Instruction 3.2, link checking also verifies composition, not just
+ * count: a service page can clear the count floor while missing an entire
+ * required category (this is exactly how marketing-operations shipped two
+ * links short in Wave 1 and only a manual audit caught it). The composition
+ * check reports which category is missing, by name.
  */
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import { ROUTES } from "../lib/nav.ts";
+import { counterpartsOf, getRoute, ROUTES, type RouteEntry } from "../lib/nav.ts";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content");
 const COLLECTIONS = ["services", "industries", "proof", "point-of-view"] as const;
 const WORD_COUNT_FLOOR = 1100;
 const MIN_INTERNAL_LINKS = 6;
+const MIN_SIBLINGS = 2;
+
+const STAGE_HUB_PATH: Record<string, string> = {
+  tof: "/services/top-of-funnel",
+  mof: "/services/middle-of-funnel",
+  bof: "/services/bottom-of-funnel",
+};
 
 // Literal single/compound words from CLAUDE.md section 4. Two entries in that
 // list — "success-rate percentages" and "x ROI delivered" — describe a
@@ -103,30 +116,107 @@ function countWords(body: string): number {
 }
 
 /**
- * Counts inline body markdown links plus the structural links the service
- * page template renders from frontmatter — crossLinks and the
- * BoundaryStatement counterpart(s) from counterpartSlugs — neither of which
- * appears as body markdown text since Instruction 2.1's template.
+ * Resolves the full set of internal links a service page emits: inline body
+ * markdown links, plus the structural links the template renders from
+ * frontmatter — crossLinks and the BoundaryStatement counterpart(s) from
+ * counterpartSlugs — neither of which appears as body markdown text.
  */
-function countInternalLinks(body: string, frontmatter: Record<string, unknown>): number {
+function collectEmittedLinks(body: string, frontmatter: Record<string, unknown>): Set<string> {
   const knownPaths = new Set(ROUTES.map((route) => route.path));
-  let count = 0;
+  const links = new Set<string>();
+
   for (const match of body.matchAll(/\]\(([^)]+)\)/g)) {
     const href = match[1]?.split("#")[0]?.trim();
     if (href && knownPaths.has(href)) {
-      count += 1;
+      links.add(href);
     }
   }
 
   if (Array.isArray(frontmatter.crossLinks)) {
-    count += frontmatter.crossLinks.length;
+    for (const link of frontmatter.crossLinks) {
+      if (typeof link === "string") links.add(link);
+    }
   }
 
   if (Array.isArray(frontmatter.counterpartSlugs)) {
-    count += frontmatter.counterpartSlugs.length;
+    for (const slug of frontmatter.counterpartSlugs) {
+      if (typeof slug === "string") links.add(`/services/${slug}`);
+    }
   }
 
-  return count;
+  return links;
+}
+
+/**
+ * Asserts the emitted link set contains one of each required category,
+ * resolved through lib/nav.ts rather than just counted. Skipped for the
+ * pillar itself (marketing-attribution), which has its own distinct linking
+ * spec — "links to all three stage hubs" — not this generic one.
+ */
+function checkLinkComposition(
+  file: string,
+  slug: string,
+  links: Set<string>,
+  frontmatter: Record<string, unknown>,
+  violations: Violation[]
+): void {
+  if (slug === "marketing-attribution") return;
+
+  const funnelStage = typeof frontmatter.funnelStage === "string" ? frontmatter.funnelStage : undefined;
+  const selfPath = `/services/${slug}`;
+  const missing: string[] = [];
+
+  if (!links.has("/services/marketing-attribution")) {
+    missing.push("the attribution pillar (/services/marketing-attribution)");
+  }
+
+  const stageHub = funnelStage ? STAGE_HUB_PATH[funnelStage] : undefined;
+  if (stageHub && !links.has(stageHub)) {
+    missing.push(`its own stage hub (${stageHub})`);
+  }
+
+  const linkedRoutes: RouteEntry[] = [];
+  for (const linkPath of links) {
+    try {
+      linkedRoutes.push(getRoute(linkPath));
+    } catch {
+      // Not a known nav.ts route (e.g. a dynamic /proof/<slug> entry) — fine,
+      // just not usable for category resolution below.
+    }
+  }
+
+  const siblingCount = linkedRoutes.filter(
+    (route) =>
+      route.pageType === "service" && route.funnelStage === funnelStage && route.path !== selfPath
+  ).length;
+  if (siblingCount < MIN_SIBLINGS) {
+    missing.push(`at least ${MIN_SIBLINGS} sibling services (found ${siblingCount})`);
+  }
+
+  let counterpartPaths: string[] = [];
+  try {
+    counterpartPaths = counterpartsOf(slug).map((route) => route.path);
+  } catch {
+    counterpartPaths = [];
+  }
+  if (counterpartPaths.length > 0 && !counterpartPaths.some((p) => links.has(p))) {
+    missing.push(`its counterpart (${counterpartPaths.join(" or ")})`);
+  }
+
+  const hasIndustry = Array.from(links).some(
+    (p) => p.startsWith("/industries/") && p !== "/industries"
+  );
+  if (!hasIndustry) missing.push("at least one industry page");
+
+  if (!links.has("/proof")) missing.push("at least one proof entry (/proof)");
+
+  if (missing.length > 0) {
+    violations.push({
+      file,
+      line: 1,
+      reason: `link composition incomplete — missing: ${missing.join("; ")}`,
+    });
+  }
 }
 
 /** Sums word counts of frontmatter prose fields: boundary, lead, faq answers, cta.body. */
@@ -160,6 +250,7 @@ function countFrontmatterProseWords(frontmatter: Record<string, unknown>): numbe
 
 function checkServicePageDepth(
   file: string,
+  slug: string,
   body: string,
   frontmatter: Record<string, unknown>,
   violations: Violation[]
@@ -175,14 +266,16 @@ function checkServicePageDepth(
     });
   }
 
-  const links = countInternalLinks(body, frontmatter);
-  if (links < MIN_INTERNAL_LINKS) {
+  const links = collectEmittedLinks(body, frontmatter);
+  if (links.size < MIN_INTERNAL_LINKS) {
     violations.push({
       file,
       line: 1,
-      reason: `service page has ${links} internal link(s) to routes in lib/nav.ts, below the ${MIN_INTERNAL_LINKS}-link minimum`,
+      reason: `service page has ${links.size} internal link(s) to routes in lib/nav.ts, below the ${MIN_INTERNAL_LINKS}-link minimum`,
     });
   }
+
+  checkLinkComposition(file, slug, links, frontmatter, violations);
 }
 
 function walkCollection(collection: (typeof COLLECTIONS)[number]): string[] {
@@ -208,7 +301,8 @@ function main(): void {
       checkBannedWords(relativePath, lines, violations);
 
       if (collection === "services") {
-        checkServicePageDepth(relativePath, body, data, violations);
+        const slug = path.basename(filePath, ".mdx");
+        checkServicePageDepth(relativePath, slug, body, data, violations);
       }
     }
   }
