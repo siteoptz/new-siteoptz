@@ -36,6 +36,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import type { LinkExemptionCategory } from "../lib/link-exemptions.ts";
 import { counterpartsOf, getRoute, ROUTES, type RouteEntry } from "../lib/nav.ts";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content");
@@ -75,13 +76,6 @@ interface Violation {
   line: number;
   reason: string;
 }
-
-/**
- * Must stay in sync with lib/content.ts's LINK_EXEMPTION_CATEGORIES — this
- * script is deliberately decoupled from that schema (it does not import the
- * MDX compiler), so the category list is duplicated rather than shared.
- */
-type LinkExemptionCategory = "pillar" | "stageHub" | "siblings" | "counterpart" | "industry" | "proof";
 
 interface ExemptionNotice {
   file: string;

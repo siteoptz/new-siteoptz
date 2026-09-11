@@ -3,6 +3,7 @@ import path from "node:path";
 import matter from "gray-matter";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { z } from "zod";
+import { LINK_EXEMPTION_CATEGORIES } from "./link-exemptions";
 import { servicesMdxComponents } from "./mdx-components";
 import { counterpartsOf, getRoute } from "./nav";
 
@@ -26,20 +27,6 @@ const ctaSchema = z.object({
   heading: z.string(),
   body: z.string(),
 });
-
-/**
- * Category ids must stay in sync with scripts/content-check.ts's own copy —
- * that script does not import this schema (it stays decoupled from the MDX
- * compiler), so the two lists are duplicated rather than shared.
- */
-export const LINK_EXEMPTION_CATEGORIES = [
-  "pillar",
-  "stageHub",
-  "siblings",
-  "counterpart",
-  "industry",
-  "proof",
-] as const;
 
 const linkExemptionSchema = z.object({
   category: z.enum(LINK_EXEMPTION_CATEGORIES),
