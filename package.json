@@ -10,6 +10,7 @@
     "dev": "next dev",
     "prebuild": "node scripts/content-check.ts",
     "build": "next build",
+    "postbuild": "node scripts/check-rendered-links.ts",
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write .",

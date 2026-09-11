@@ -10,20 +10,15 @@
  * As of the 6.3 pre-launch audit, .tsx routes are covered too — the audit
  * found the gate had never touched home, about, contact, privacy, terms, or
  * any of the three hubs, and that gap is exactly how a placeholder MetricTable
- * shipped on the home page undetected. Dynamic `[slug]/page.tsx` templates
- * are excluded from the .tsx link-count check (not from banned-words or
- * placeholder checks) since their real link count comes from the MDX content
- * they render, already covered by checkServicePageDepth/checkArticleLinks
- * below — checking the template's own static JSX for links would just be
- * wrong, not merely redundant.
+ * shipped on the home page undetected.
  *
- * The .tsx link count is a static source-text count of <Link>/<a> elements,
- * not a rendered-DOM count — a page whose links are emitted from a .map()
- * over an array (industries hub, services hub's stage cards) will show one
- * source occurrence per template, not one per rendered instance. It undercounts
- * exactly those pages and can produce a false violation on them; it does not
- * overcount. Read a low count on a list-rendering page with that in mind
- * before treating it as a real gap.
+ * The .tsx contextual-link minimum lives in scripts/check-rendered-links.ts,
+ * not here — it needs the built HTML to count what actually renders (a page
+ * whose links come from a .map() over an array, like the industries hub's
+ * four cards, showed one source occurrence here regardless of how many times
+ * it rendered), which means it has to run as "postbuild", after `next build`
+ * exists to read. Everything else here doesn't need a build, so it stays
+ * "prebuild" and keeps failing fast.
  *
  * As of Instruction 2.1, the word-count floor counts prose that lives in
  * frontmatter (boundary, lead, faq answers, cta.body) alongside the MDX
@@ -217,35 +212,6 @@ function checkQuoteBlockPlaceholderTsx(file: string, lines: string[], violations
       });
     }
   });
-}
-
-/**
- * Counts internal <Link>/<a> elements in a page.tsx's own source text. Every
- * <Link href=...> counts regardless of whether the href is a literal string
- * or a dynamic expression (next/link is for internal navigation only, by
- * convention); a bare <a href="..."> only counts when the literal value
- * starts with "/" — mailto: and external hrefs are not internal links.
- */
-function countTsxInternalLinks(source: string): number {
-  const linkMatches = source.match(/<Link\b[^>]*\bhref=/g);
-  let count = linkMatches ? linkMatches.length : 0;
-
-  for (const match of source.matchAll(/<a\b[^>]*\bhref="([^"]*)"/g)) {
-    if (match[1]?.startsWith("/")) count++;
-  }
-
-  return count;
-}
-
-function checkTsxLinkMinimum(file: string, source: string, violations: Violation[]): void {
-  const count = countTsxInternalLinks(source);
-  if (count < 4) {
-    violations.push({
-      file,
-      line: 1,
-      reason: `page has ${count} internal link(s) in its own source, below the 4-link minimum (source-text count, not rendered — see file header)`,
-    });
-  }
 }
 
 function countWords(body: string): number {
@@ -531,20 +497,13 @@ function main(): void {
   }
 
   for (const filePath of walkAppTsxFiles()) {
-    const source = fs.readFileSync(filePath, "utf8");
-    const lines = source.split("\n");
+    const lines = fs.readFileSync(filePath, "utf8").split("\n");
     const relativePath = path.relative(process.cwd(), filePath);
-    const isDynamicTemplate = filePath.includes("[");
-    const isPage = path.basename(filePath) === "page.tsx";
 
     checkBracketPlaceholder(relativePath, lines, violations);
     checkBannedWordsTsx(relativePath, lines, violations);
     checkMetricTablePlaceholderTsx(relativePath, lines, violations);
     checkQuoteBlockPlaceholderTsx(relativePath, lines, violations);
-
-    if (isPage && !isDynamicTemplate) {
-      checkTsxLinkMinimum(relativePath, source, violations);
-    }
   }
 
   if (exemptionNotices.length > 0) {
