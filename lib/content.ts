@@ -18,6 +18,12 @@ const summaryWordCount = (value: string) => {
   return count >= 60 && count <= 80;
 };
 
+/** ~100-word summary rendered on the industries hub — spec calls for "100-word summaries". */
+const industrySummaryWordCount = (value: string) => {
+  const count = wordCount(value);
+  return count >= 85 && count <= 120;
+};
+
 const faqItemSchema = z.object({
   question: z.string(),
   answer: z.string(),
@@ -105,11 +111,26 @@ export type ServiceFrontmatter = z.infer<typeof servicesFrontmatterBaseSchema>;
 export const industriesFrontmatterSchema = z.object({
   title: z.string().max(60),
   description: z.string().max(155),
+  /** The on-page h1, distinct from `title` — same reasoning as the services schema. */
+  h1: z.string(),
   primaryKeyword: z.string(),
   secondaryKeywords: z.array(z.string()),
-  serviceSlugs: z.array(z.string()).length(6),
+  /** Rendered as PageHero's kicker — "Industries" for every entry. */
+  heroKicker: z.string(),
+  /** PageHero's lead paragraph. */
+  lead: z.string(),
+  /** ~100-word summary, rendered on the /industries hub — not duplicated into the hub's own copy. */
+  summary: z.string().refine(industrySummaryWordCount, "summary must be 85-120 words"),
+  /** 4-6 entries, matching the services schema's FAQ shape. */
+  faq: z.array(faqItemSchema).min(4).max(6),
+  cta: ctaSchema,
   publishedAt: z.string(),
   updatedAt: z.string(),
+  /**
+   * No serviceSlugs field: the six mapped services come from lib/nav.ts's
+   * industryServices(slug), the single source of truth for that mapping,
+   * rather than a second copy of it validated here.
+   */
 });
 export type IndustryFrontmatter = z.infer<typeof industriesFrontmatterSchema>;
 
