@@ -196,6 +196,12 @@ writing any service page, read two already-built pages from the same stage and
 deliberately vary sentence rhythm, opening structure, and example choice. Never reuse a
 sentence across pages. Never describe two channels with the same verb.
 
+Do not define things by negation. "X, not Y" and "not the generic version of X" are banned
+as a sentence pattern — at most one per page, and only where the contrast is the point.
+Every DefinitionList row names a mechanism or an artifact, never a rationale. Internal
+links go where the prose has a real reason to mention the destination; a required link
+with no natural home is reported, not manufactured.
+
 ---
 
 ## 5. SEO requirements — apply to every page
