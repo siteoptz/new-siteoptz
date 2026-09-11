@@ -222,3 +222,19 @@ export function buildContactPage(input: ContactPageInput) {
     url: absoluteUrl(input.path),
   };
 }
+
+export interface WebPageInput {
+  name: string;
+  description: string;
+  path: string;
+}
+
+export function buildWebPage(input: WebPageInput) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: input.name,
+    description: input.description,
+    url: absoluteUrl(input.path),
+  };
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState, useEffect, useRef, useState } from "react";
 import { submitContactForm } from "@/app/(marketing)/contact/actions";
 import FormField from "@/components/ui/FormField";
@@ -247,6 +248,13 @@ export default function ContactForm() {
         >
           {isPending ? "Sending…" : "Send"}
         </button>
+        <p className="mt-3 text-2xs text-muted">
+          Submitting sends the details above to us. See our{" "}
+          <Link href="/privacy" className="underline">
+            privacy policy
+          </Link>{" "}
+          for how we handle it.
+        </p>
       </div>
     </form>
   );
