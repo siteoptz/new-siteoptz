@@ -565,6 +565,8 @@ const BOUNDARY_TABLE: Record<string, readonly string[]> = {
   "creative-ads-strategy": ["creative-production"],
   "creative-production": ["creative-ads-strategy"],
   "content-marketing": ["seo"],
+  partnerships: ["affiliate-marketing"],
+  "affiliate-marketing": ["partnerships"],
 };
 
 /**

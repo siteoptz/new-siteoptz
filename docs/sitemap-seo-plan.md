@@ -59,6 +59,8 @@ rankable.
 | Creative Ads Strategy | Concepting and testing hypotheses for paid campaigns   | Creative Production   |
 | Creative Production   | Producing the assets, at volume, to spec               | Creative Ads Strategy |
 | Content Marketing     | Owned editorial and demand education                   | SEO                   |
+| Partnerships          | Bilateral referral and co-marketing relationships      | Affiliate Marketing   |
+| Affiliate Marketing   | A commission program paid on tracked performance       | Partnerships          |
 
 ---
 
