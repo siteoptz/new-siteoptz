@@ -123,7 +123,7 @@ export default function MobileDrawer({
         aria-expanded={isOpen}
         aria-controls="mobile-drawer"
         onClick={() => setIsOpen(true)}
-        className="text-sm text-[#C3CDDF] hover:text-white"
+        className="text-sm text-muted hover:text-white"
       >
         Menu
       </button>
@@ -135,7 +135,7 @@ export default function MobileDrawer({
         aria-modal="true"
         aria-label="Menu"
         inert={!isOpen}
-        className={`fixed inset-x-0 top-[76px] bottom-0 z-50 overflow-y-auto bg-navy-900 transition-opacity duration-[120ms] ${
+        className={`fixed inset-x-0 top-[76px] bottom-0 z-50 overflow-y-auto bg-base transition-opacity duration-[120ms] ${
           isOpen ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
@@ -143,7 +143,7 @@ export default function MobileDrawer({
           <button
             type="button"
             onClick={closeAndReturnFocus}
-            className="mb-6 text-sm text-[#C3CDDF] hover:text-white"
+            className="mb-6 text-sm text-muted hover:text-white"
           >
             Close
           </button>
@@ -158,7 +158,7 @@ export default function MobileDrawer({
                     type="button"
                     aria-expanded={isExpanded}
                     onClick={() => toggleStage(column.heading)}
-                    className="block py-2 text-left text-sm text-[#C3CDDF] hover:text-white"
+                    className="block py-2 text-left text-sm text-muted hover:text-white"
                   >
                     {column.heading}
                   </button>
@@ -167,7 +167,7 @@ export default function MobileDrawer({
                       <li>
                         <Link
                           href={column.headingHref}
-                          className="block py-1 text-sm text-[#C3CDDF] hover:text-white"
+                          className="block py-1 text-sm text-muted hover:text-white"
                         >
                           All {column.heading}
                         </Link>
@@ -176,7 +176,7 @@ export default function MobileDrawer({
                         <li key={item.href}>
                           <Link
                             href={item.href}
-                            className="block py-1 text-sm text-[#C3CDDF] hover:text-white"
+                            className="block py-1 text-sm text-muted hover:text-white"
                           >
                             {item.label}
                           </Link>
@@ -192,7 +192,7 @@ export default function MobileDrawer({
           <div className="mb-6">
             <Link
               href={industriesColumn.headingHref}
-              className="mb-2 block text-sm font-medium text-white hover:text-blue-300"
+              className="mb-2 block text-sm font-medium text-white hover:text-accent-lt"
             >
               {industriesColumn.heading}
             </Link>
@@ -201,7 +201,7 @@ export default function MobileDrawer({
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="block py-1 text-sm text-[#C3CDDF] hover:text-white"
+                    className="block py-1 text-sm text-muted hover:text-white"
                   >
                     {item.label}
                   </Link>
@@ -215,7 +215,7 @@ export default function MobileDrawer({
               <Link
                 key={link.href}
                 href={link.href}
-                className="block py-2 text-sm text-[#C3CDDF] hover:text-white"
+                className="block py-2 text-sm text-muted hover:text-white"
               >
                 {link.label}
               </Link>

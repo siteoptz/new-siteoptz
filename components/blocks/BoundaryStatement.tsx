@@ -28,13 +28,15 @@ export default function BoundaryStatement({ slug, children }: BoundaryStatementP
   }
 
   return (
-    <div className="border-l-2 border-rule bg-paper-2 py-4 pl-6">
+    // The rule hairline reads fine on paper-2 but disappears against raised — accent at
+    // reduced opacity keeps the left border visible without turning it into a second link color.
+    <div className="border-l-2 border-accent/40 bg-raised py-4 pl-6">
       <div>{children}</div>
       <p className="mt-3 text-sm">
         {counterparts.map((route, index) => (
           <span key={route.path}>
             {index > 0 ? " · " : null}
-            <Link href={route.path} className="text-blue-600 hover:text-blue-700">
+            <Link href={route.path} className="text-accent hover:text-accent-lt">
               {route.anchorVariants[0] ?? route.label}
             </Link>
           </span>

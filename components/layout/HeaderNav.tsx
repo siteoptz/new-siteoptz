@@ -62,8 +62,8 @@ function getFocusableElements(container: HTMLElement): HTMLElement[] {
 }
 
 const NAV_LINK_CLASSES = "border-b-[1.5px] text-sm";
-const NAV_LINK_INACTIVE = "border-transparent text-[#C3CDDF] hover:text-white";
-const NAV_LINK_ACTIVE = "border-blue-300 text-white";
+const NAV_LINK_INACTIVE = "border-transparent text-muted hover:text-white";
+const NAV_LINK_ACTIVE = "border-accent text-white";
 
 function isRouteActive(pathname: string, basePath: string): boolean {
   return pathname === basePath || pathname.startsWith(`${basePath}/`);
@@ -175,7 +175,7 @@ function MegaMenuTrigger({
         id={panelId}
         ref={panelRef}
         inert={!isOpen}
-        className={`fixed inset-x-0 top-[76px] z-40 grid border-b border-[rgba(255,255,255,0.14)] bg-navy-800 transition-[grid-template-rows] duration-[140ms] ease-out ${
+        className={`fixed inset-x-0 top-[76px] z-40 grid border-b border-[rgba(255,236,220,0.14)] bg-raised transition-[grid-template-rows] duration-[140ms] ease-out ${
           isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
         }`}
       >
@@ -186,7 +186,7 @@ function MegaMenuTrigger({
                 <div key={column.headingHref}>
                   <Link
                     href={column.headingHref}
-                    className="mb-3 block text-sm font-medium text-white hover:text-blue-300"
+                    className="mb-3 block text-sm font-medium text-white hover:text-accent-lt"
                   >
                     {column.heading}
                   </Link>
@@ -195,7 +195,7 @@ function MegaMenuTrigger({
                       <li key={item.href}>
                         <Link
                           href={item.href}
-                          className="block py-1 text-sm text-[#C3CDDF] hover:text-white"
+                          className="block py-1 text-sm text-muted hover:text-white"
                         >
                           {item.label}
                         </Link>

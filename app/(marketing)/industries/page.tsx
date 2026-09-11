@@ -94,7 +94,7 @@ export default async function IndustriesHubPage() {
                   <p className="mt-2 text-muted">{entry.frontmatter.summary}</p>
                   <Link
                     href={route.path}
-                    className="mt-2 inline-block text-sm text-blue-600 hover:text-blue-700"
+                    className="mt-2 inline-block text-sm text-accent hover:text-accent-lt"
                   >
                     {entry.frontmatter.h1}
                   </Link>

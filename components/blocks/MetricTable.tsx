@@ -22,7 +22,7 @@ export default function MetricTable({ caption, columns, rows, source }: MetricTa
 
   return (
     <figure className="border border-rule">
-      <figcaption className="border-b border-rule bg-paper-2 px-4 py-3 font-display text-sm">
+      <figcaption className="border-b border-rule bg-raised px-4 py-3 font-display text-sm">
         {caption}
       </figcaption>
       <div className="overflow-x-auto">
@@ -63,7 +63,7 @@ export default function MetricTable({ caption, columns, rows, source }: MetricTa
         Source: {isPlaceholder ? "placeholder — figures pending client approval" : source}
       </figcaption>
       {isPlaceholder ? (
-        <p className="border-t border-dashed border-rule bg-paper-2 px-4 py-2 text-2xs font-medium text-ink">
+        <p className="border-t border-dashed border-rule bg-raised px-4 py-2 text-2xs font-medium text-text">
           Placeholder figures — this fails the production build until replaced.
         </p>
       ) : null}

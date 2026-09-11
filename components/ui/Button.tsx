@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export type ButtonVariant = "primary" | "ghost" | "line";
+export type ButtonVariant = "primary" | "ghost" | "reading";
 
 export interface ButtonProps {
   children: React.ReactNode;
@@ -16,10 +16,15 @@ const BASE_CLASSES =
   "duration-[120ms] disabled:pointer-events-none disabled:opacity-50";
 
 const VARIANT_CLASSES: Record<ButtonVariant, string> = {
-  primary: "border-blue-600 bg-blue-600 text-white hover:bg-blue-700",
+  // #1A1008, not white — the orange is light enough that dark text reads
+  // better on it and is the one that actually clears contrast (white on
+  // accent measures under 2.5:1).
+  primary: "border-accent bg-accent text-[#1A1008] hover:border-accent-lt hover:bg-accent-lt",
   ghost:
-    "border-[rgba(255,255,255,0.3)] bg-transparent text-[#DCE4F2] hover:bg-[rgba(255,255,255,0.07)]",
-  line: "border-[#C7D3E8] bg-transparent text-blue-600 hover:border-blue-600 hover:bg-paper-2",
+    "border-[rgba(255,236,220,0.3)] bg-transparent text-text hover:bg-[rgba(255,236,220,0.07)]",
+  // The article reading surface only — a light background, so this is the
+  // one variant that isn't styled for a dark surface.
+  reading: "border-reading-ink/20 bg-transparent text-reading-accent hover:bg-reading-ink/5",
 };
 
 /**

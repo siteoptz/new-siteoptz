@@ -93,7 +93,7 @@ export default function ContactPage() {
               <h2 className="text-lg">Reach us directly</h2>
               <p className="mt-2 text-muted">
                 Prefer email? Write to{" "}
-                <a href={`mailto:${DIRECT_EMAIL}`} className="text-blue-600 underline">
+                <a href={`mailto:${DIRECT_EMAIL}`} className="text-accent underline">
                   {DIRECT_EMAIL}
                 </a>{" "}
                 — the same person who reads the form reads that inbox.

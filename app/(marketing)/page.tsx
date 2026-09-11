@@ -114,10 +114,10 @@ export default function HomePage() {
               },
             ]}
           />
-          <div className="mt-8 border-t-2 border-blue-600 pt-6">
+          <div className="mt-8 border-t-2 border-accent pt-6">
             <Link
               href={pillar.path}
-              className="font-display text-blue-600 hover:text-blue-700"
+              className="font-display text-accent hover:text-accent-lt"
             >
               {pillar.label}
             </Link>
@@ -160,7 +160,7 @@ export default function HomePage() {
               },
             ]}
           />
-          <Link href={howItWorks.path} className="mt-6 inline-block text-sm text-blue-300 hover:text-white">
+          <Link href={howItWorks.path} className="mt-6 inline-block text-sm text-accent hover:text-white">
             {howItWorks.label}
           </Link>
         </Container>
@@ -178,7 +178,7 @@ export default function HomePage() {
                 that produced it. The question that matters is which location&rsquo;s spend is
                 producing patients, not just calls.
               </p>
-              <Link href={healthcare.path} className="mt-2 inline-block text-sm text-blue-600 hover:text-blue-700">
+              <Link href={healthcare.path} className="mt-2 inline-block text-sm text-accent hover:text-accent-lt">
                 {healthcare.label}
               </Link>
             </div>
@@ -189,7 +189,7 @@ export default function HomePage() {
                 needs to trace back to the ad, the call, or the map-pack listing that drove it.
                 Occupancy moves fast, and a blended report from last week is already out of date.
               </p>
-              <Link href={selfStorage.path} className="mt-2 inline-block text-sm text-blue-600 hover:text-blue-700">
+              <Link href={selfStorage.path} className="mt-2 inline-block text-sm text-accent hover:text-accent-lt">
                 {selfStorage.label}
               </Link>
             </div>
@@ -271,7 +271,7 @@ export default function HomePage() {
             role="Pending client approval"
             organization="Placeholder"
           />
-          <Link href={proof.path} className="mt-4 inline-block text-sm text-blue-600 hover:text-blue-700">
+          <Link href={proof.path} className="mt-4 inline-block text-sm text-accent hover:text-accent-lt">
             More client results
           </Link>
         </Container>

@@ -55,15 +55,15 @@ export default async function Header() {
     <div>
       <Link
         href={pillar.path}
-        className="mb-2 block text-sm font-medium text-white hover:text-blue-300"
+        className="mb-2 block text-sm font-medium text-white hover:text-accent-lt"
       >
         {pillar.shortLabel}
       </Link>
-      <p className="mb-3 text-sm text-[#C3CDDF]">Measures all three funnel stages, together.</p>
+      <p className="mb-3 text-sm text-muted">Measures all three funnel stages, together.</p>
       {mostRecentProof ? (
         <Link
           href={`/proof/${mostRecentProof.slug}`}
-          className="block text-sm text-[#C3CDDF] hover:text-white"
+          className="block text-sm text-muted hover:text-white"
         >
           Recent proof: {mostRecentProof.frontmatter.title}
         </Link>
@@ -95,12 +95,12 @@ export default async function Header() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 h-[76px] border-b border-[rgba(255,255,255,0.14)] bg-navy-900">
+    <header className="sticky top-0 z-50 h-[76px] border-b border-[rgba(255,236,220,0.14)] bg-base">
       <Container>
         <div className="flex h-[76px] items-center justify-between">
           <Link href={home.path} className="flex items-baseline gap-3">
             <span className="font-display text-xl font-bold text-white">SiteOptz</span>
-            <span className="text-2xs text-[#93A3BD]">Marketing intelligence</span>
+            <span className="text-2xs text-muted">Marketing intelligence</span>
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center gap-8 min-[900px]:flex">

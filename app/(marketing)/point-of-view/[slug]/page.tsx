@@ -93,8 +93,8 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
           <h1 className="mt-4 max-w-[28ch] font-serif text-[2rem] leading-[1.2] min-[900px]:text-[2.5rem]">
             {heading}
           </h1>
-          <p className="mt-4 max-w-[var(--measure-sans)] text-[#B7C4DA]">{fm.description}</p>
-          <div className="mt-6 text-sm text-[#93A3BD]">
+          <p className="mt-4 max-w-[var(--measure-sans)] text-muted">{fm.description}</p>
+          <div className="mt-6 text-sm text-muted">
             <span>
               {fm.author.name}, {fm.author.role}
             </span>
@@ -118,11 +118,15 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 aria-label="Table of contents"
                 className="min-[1100px]:sticky min-[1100px]:top-24 min-[1100px]:self-start"
               >
-                <p className="font-display text-sm text-muted">In this article</p>
+                {/* text-muted measures 2.6:1 on the reading surface — reading-ink/65 is this
+                    section's own equivalent secondary-text tone, clearing 4.5:1. */}
+                <p className="font-display text-sm text-reading-ink/65">In this article</p>
                 <ul className="mt-3">
                   {entry.headings.map((h) => (
-                    <li key={h.id} className="border-t border-rule py-2 first:border-t-0">
-                      <a href={`#${h.id}`} className="text-sm text-blue-600 hover:text-blue-700">
+                    // border-rule is a warm overlay tuned for dark surfaces and disappears on
+                    // reading's light background — reading-ink at low opacity is the equivalent here.
+                    <li key={h.id} className="border-t border-reading-ink/15 py-2 first:border-t-0">
+                      <a href={`#${h.id}`} className="text-sm text-reading-accent">
                         {h.text}
                       </a>
                     </li>
@@ -147,9 +151,9 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 <Link
                   key={article.slug}
                   href={`/point-of-view/${article.slug}`}
-                  className="bg-paper p-6 hover:bg-paper-2"
+                  className="bg-base p-6 hover:brightness-110"
                 >
-                  <p className="font-display text-blue-600">
+                  <p className="font-display text-accent">
                     {stripSiteSuffix(article.frontmatter.title)}
                   </p>
                   <p className="mt-1 text-sm text-muted">{article.frontmatter.dek}</p>

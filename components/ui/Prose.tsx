@@ -4,9 +4,8 @@ export interface ProseProps {
 }
 
 const LINK_CLASSES =
-  "[&_a]:text-blue-600 [&_a]:underline [&_a]:decoration-1 [&_a]:decoration-blue-300 " +
-  "[&_a]:underline-offset-2 [&_a]:transition-colors [&_a]:duration-[120ms] " +
-  "[&_a:hover]:decoration-blue-600 [.is-navy_&_a]:text-blue-300";
+  "[&_a]:underline [&_a]:decoration-1 [&_a]:underline-offset-2 " +
+  "[&_a]:transition-colors [&_a]:duration-[120ms]";
 
 const STRUCTURE_CLASSES =
   "[&_p]:mb-[1.25em] [&_ul]:mb-[1.25em] [&_ol]:mb-[1.25em] " +
@@ -15,12 +14,19 @@ const STRUCTURE_CLASSES =
   "[&_h2]:mt-[2em] [&_h2]:mb-[0.75em] [&_h3]:mt-[1.75em] [&_h3]:mb-[0.5em]";
 
 const VARIANT_CLASSES: Record<NonNullable<ProseProps["variant"]>, string> = {
+  // Dark long-form needs a taller line-height and a narrower measure than the old light
+  // system did — this site has 21 pages of it, and 1.6/34rem read too dense on a dark
+  // surface. The old system needed a separate, lighter link shade because the primary
+  // link color failed contrast on a dark surface; accent clears 4.5:1 outright, so
+  // there's one link color now.
   sans:
-    "font-sans [&_p]:max-w-[var(--measure-sans)] [&_h2]:max-w-[var(--measure-sans)] " +
-    "[&_h3]:max-w-[var(--measure-sans)]",
+    "font-sans leading-[1.7] [&_p]:max-w-[32rem] [&_h2]:max-w-[32rem] [&_h3]:max-w-[32rem] " +
+    "[&_a]:text-accent [&_a:hover]:text-accent-lt",
+  // The reading surface only — light, so its own ink and its own link color.
   serif:
     "font-serif leading-[1.7] [&_p]:max-w-[var(--measure-serif)] " +
-    "[&_h2]:max-w-[var(--measure-serif)] [&_h3]:max-w-[var(--measure-serif)]",
+    "[&_h2]:max-w-[var(--measure-serif)] [&_h3]:max-w-[var(--measure-serif)] " +
+    "[&_a]:text-reading-accent",
 };
 
 /**

@@ -91,7 +91,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
                 href={service.path}
                 className="bg-paper p-6 hover:bg-paper-2"
               >
-                <p className="font-display text-blue-600">{service.shortLabel}</p>
+                <p className="font-display text-accent">{service.shortLabel}</p>
                 <p className="mt-1 text-sm text-muted">{service.description}</p>
               </Link>
             ))}

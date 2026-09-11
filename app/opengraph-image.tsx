@@ -12,8 +12,11 @@ export const contentType = "image/png";
  * inside any route segment later would take precedence for that segment
  * only.
  *
- * Uses the color tokens from CLAUDE.md section 3 (navy-900 base, blue-600
- * accent) with a system font stack rather than the site's self-hosted
+ * Uses the warm dark palette (app/globals.css: --color-base, --color-accent)
+ * as literal hex — next/og's ImageResponse can't read CSS custom properties,
+ * so these can't reference the tokens directly and will drift if the
+ * palette changes again — with a system font stack rather than the site's
+ * self-hosted
  * fonts — next/font/google's processed files are not addressable as static
  * assets for next/og's ImageResponse, and fetching a font from Google's CDN
  * at request time would make every shared link depend on that fetch
@@ -29,14 +32,14 @@ export default function OpengraphImage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          backgroundColor: "#060B16",
+          backgroundColor: "#15100C",
           padding: "80px",
           fontFamily: "system-ui, -apple-system, Segoe UI, sans-serif",
         }}
       >
         <div style={{ display: "flex", alignItems: "center" }}>
-          <div style={{ width: 14, height: 14, backgroundColor: "#2563EB", marginRight: 16 }} />
-          <div style={{ color: "#7FB0FF", fontSize: 28, letterSpacing: "-0.01em" }}>SiteOptz</div>
+          <div style={{ width: 14, height: 14, backgroundColor: "#FF8321", marginRight: 16 }} />
+          <div style={{ color: "#FF8321", fontSize: 28, letterSpacing: "-0.01em" }}>SiteOptz</div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", maxWidth: 920 }}>
@@ -51,14 +54,14 @@ export default function OpengraphImage() {
           >
             Marketing intelligence for operators.
           </div>
-          <div style={{ color: "#B7C4DA", fontSize: 26, marginTop: 24, lineHeight: 1.4 }}>
+          <div style={{ color: "#A99A8C", fontSize: 26, marginTop: 24, lineHeight: 1.4 }}>
             Attribution, campaign optimization, and AI implementation, measured to cost per
             booked outcome.
           </div>
         </div>
 
-        <div style={{ display: "flex", height: 6, width: "100%", backgroundColor: "#17243D" }}>
-          <div style={{ height: "100%", width: 220, backgroundColor: "#2563EB" }} />
+        <div style={{ display: "flex", height: 6, width: "100%", backgroundColor: "#211913" }}>
+          <div style={{ height: "100%", width: 220, backgroundColor: "#FF8321" }} />
         </div>
       </div>
     ),

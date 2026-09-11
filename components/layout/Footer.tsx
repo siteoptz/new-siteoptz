@@ -45,7 +45,7 @@ export default function Footer() {
   const companyRoutes = [howItWorks, pointOfView, proof, about, contact];
 
   return (
-    <footer className="border-t border-[rgba(255,255,255,0.14)] bg-navy-900 text-[#C3CDDF]">
+    <footer className="border-t border-[rgba(255,236,220,0.14)] bg-base text-muted">
       <Container>
         <div className="py-12">
           <Link href={home.path} className="font-display text-lg font-semibold text-white">
@@ -61,7 +61,7 @@ export default function Footer() {
             <div key={column.headingHref}>
               <Link
                 href={column.headingHref}
-                className="mb-3 block text-sm font-medium text-white hover:text-blue-300"
+                className="mb-3 block text-sm font-medium text-white hover:text-accent-lt"
               >
                 {column.heading}
               </Link>
@@ -80,7 +80,7 @@ export default function Footer() {
           <div>
             <Link
               href={industriesRoute.path}
-              className="mb-3 block text-sm font-medium text-white hover:text-blue-300"
+              className="mb-3 block text-sm font-medium text-white hover:text-accent-lt"
             >
               {industriesRoute.label}
             </Link>

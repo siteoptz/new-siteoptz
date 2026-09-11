@@ -28,12 +28,14 @@ export default function Breadcrumbs({ trail }: BreadcrumbsProps) {
               {isLast ? (
                 <span aria-current="page">{item.name}</span>
               ) : (
-                <Link href={item.path} className="hover:text-ink">
+                <Link href={item.path} className="hover:text-white">
                   {item.name}
                 </Link>
               )}
               {isLast ? null : (
-                <span aria-hidden="true" className="text-rule">
+                // --color-rule is a low-opacity overlay now, not a solid color — invisible as
+                // text. muted is the solid equivalent for a separator that still needs to read.
+                <span aria-hidden="true" className="text-muted">
                   /
                 </span>
               )}

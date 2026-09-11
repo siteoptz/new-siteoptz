@@ -4,7 +4,7 @@ export interface RuleProps {
 
 const TONE_CLASSES: Record<NonNullable<RuleProps["tone"]>, string> = {
   light: "bg-rule",
-  dark: "bg-[rgba(255,255,255,0.14)]",
+  dark: "bg-[rgba(255,236,220,0.14)]",
 };
 
 /**

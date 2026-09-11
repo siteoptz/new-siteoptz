@@ -25,7 +25,7 @@ export default function FormField({ id, label, error, hint, optional, children }
 
   return (
     <div>
-      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-ink">
+      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-text">
         {label}
         {optional ? <span className="font-normal text-muted"> (optional)</span> : null}
       </label>

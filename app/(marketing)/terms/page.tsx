@@ -147,7 +147,7 @@ export default function TermsPage() {
               <br />
               {REGISTERED_ADDRESS}
               <br />
-              <a href={`mailto:${DIRECT_EMAIL}`} className="text-blue-600 underline">
+              <a href={`mailto:${DIRECT_EMAIL}`} className="text-accent underline">
                 {DIRECT_EMAIL}
               </a>
             </p>

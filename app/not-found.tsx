@@ -21,9 +21,9 @@ export default function NotFound() {
   return (
     <Section surface="base">
       <Container>
-        <p className="mb-3 text-sm text-blue-300">Page not found</p>
+        <p className="mb-3 text-sm text-accent">Page not found</p>
         <h1 className="max-w-[18ch]">This page doesn&rsquo;t exist.</h1>
-        <p className="mt-4 max-w-[46ch] text-[#B7C4DA]">
+        <p className="mt-4 max-w-[46ch] text-muted">
           The link is broken, or the page moved. Here&rsquo;s where the site actually is.
         </p>
         <ul className="mt-8 flex flex-col gap-3">
@@ -31,7 +31,7 @@ export default function NotFound() {
             <li key={route.path}>
               <Link
                 href={route.path}
-                className="font-display text-lg text-white hover:text-blue-300"
+                className="font-display text-lg text-white hover:text-accent-lt"
               >
                 {route.label}
               </Link>

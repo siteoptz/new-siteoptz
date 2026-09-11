@@ -37,24 +37,24 @@ const BREAK_AFTER_INDEX = 2;
  */
 export default function AttributionChain() {
   return (
-    <ol className="list-none border border-[rgba(255,255,255,0.14)] bg-navy-800 p-6">
+    <ol className="list-none border border-[rgba(255,236,220,0.14)] bg-raised p-6">
       {STEPS.map((step, index) => (
         <li key={step.name} className="relative pb-8 pl-8 last:pb-0">
           {index < STEPS.length - 1 ? (
             <span
               aria-hidden="true"
-              className="absolute left-[5px] top-3 h-full w-[1.5px] bg-[rgba(255,255,255,0.25)]"
+              className="absolute left-[5px] top-3 h-full w-[1.5px] bg-accent/30"
             />
           ) : null}
           <span
             aria-hidden="true"
-            className="absolute left-0 top-1 h-[11px] w-[11px] rounded-full bg-blue-300"
+            className="absolute left-0 top-1 h-[11px] w-[11px] rounded-full bg-accent"
           />
           <p className="text-md text-white">{step.name}</p>
-          <p className="mt-1 text-2xs text-[#7F8FAE]">{step.source}</p>
+          <p className="mt-1 text-2xs text-muted">{step.source}</p>
           {index === BREAK_AFTER_INDEX ? (
             <div className="mt-4 border-l-2 border-signal bg-signal/10 py-3 pl-4">
-              <p className="text-sm text-[#DCE4F2]">
+              <p className="text-sm text-text">
                 Most agency reporting stops above this line. Everything below it is where the
                 money is decided.
               </p>

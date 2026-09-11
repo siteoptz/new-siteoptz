@@ -17,7 +17,7 @@ import {
 } from "@/lib/contact-schema";
 
 const INPUT_CLASSES =
-  "block w-full rounded-default border bg-paper px-3 py-2 text-base text-ink placeholder:text-muted";
+  "block w-full rounded-default border bg-raised px-3 py-2 text-base text-text placeholder:text-muted";
 
 function inputClasses(hasError: boolean) {
   return `${INPUT_CLASSES} ${hasError ? "border-danger" : "border-rule"}`;
@@ -244,7 +244,7 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={isPending}
-          className="inline-flex items-center justify-center rounded-default border border-blue-600 bg-blue-600 px-6 py-3 font-sans text-sm font-medium text-white transition-[background-color] duration-[120ms] hover:bg-blue-700 disabled:pointer-events-none disabled:opacity-60"
+          className="inline-flex items-center justify-center rounded-default border border-accent bg-accent px-6 py-3 font-sans text-sm font-medium text-[#1A1008] transition-[background-color] duration-[120ms] hover:border-accent-lt hover:bg-accent-lt disabled:pointer-events-none disabled:opacity-60"
         >
           {isPending ? "Sending…" : "Send"}
         </button>

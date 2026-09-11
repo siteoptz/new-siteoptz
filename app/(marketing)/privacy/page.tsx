@@ -186,7 +186,7 @@ export default function PrivacyPage() {
             <p>
               To request access to, a correction of, or deletion of the information we hold about
               you, email{" "}
-              <a href={`mailto:${DIRECT_EMAIL}`} className="text-blue-600 underline">
+              <a href={`mailto:${DIRECT_EMAIL}`} className="text-accent underline">
                 {DIRECT_EMAIL}
               </a>
               . We respond within one business day, the same commitment we make for every
@@ -205,7 +205,7 @@ export default function PrivacyPage() {
               <br />
               {REGISTERED_ADDRESS}
               <br />
-              <a href={`mailto:${DIRECT_EMAIL}`} className="text-blue-600 underline">
+              <a href={`mailto:${DIRECT_EMAIL}`} className="text-accent underline">
                 {DIRECT_EMAIL}
               </a>
             </p>

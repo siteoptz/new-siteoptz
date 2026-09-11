@@ -38,7 +38,7 @@ export default async function StageGrid({ stage }: StageGridProps) {
     <div>
       {rows.map(({ route, summary }) => (
         <div key={route.path} className="border-b border-rule py-6 first:border-t">
-          <Link href={route.path} className="font-display text-blue-600 hover:text-blue-700">
+          <Link href={route.path} className="font-display text-accent hover:text-accent-lt">
             {route.shortLabel}
           </Link>
           <p className="mt-1 text-muted">{summary}</p>
