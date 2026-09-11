@@ -124,10 +124,10 @@ export default async function PointOfViewHubPage() {
               <Link
                 key={entry.slug}
                 href={`/point-of-view/${entry.slug}`}
-                className="bg-paper p-6 hover:bg-paper-2 min-[900px]:flex min-[900px]:items-baseline min-[900px]:justify-between min-[900px]:gap-8"
+                className="bg-base p-6 hover:brightness-110 min-[900px]:flex min-[900px]:items-baseline min-[900px]:justify-between min-[900px]:gap-8"
               >
                 <div>
-                  <p className="font-display text-lg text-ink">{stripSiteSuffix(entry.frontmatter.title)}</p>
+                  <p className="font-display text-lg text-accent">{stripSiteSuffix(entry.frontmatter.title)}</p>
                   <p className="mt-1 text-muted">{entry.frontmatter.dek}</p>
                 </div>
                 <p className="mt-2 whitespace-nowrap text-sm text-muted min-[900px]:mt-0">

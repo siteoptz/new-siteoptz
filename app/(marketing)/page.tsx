@@ -40,7 +40,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 gap-10 min-[900px]:grid-cols-2">
             <div>
               <h1 className="max-w-[18ch]">Know which marketing spend produced revenue.</h1>
-              <p className="mt-4 max-w-[46ch] text-[#B7C4DA]">
+              <p className="mt-4 max-w-[46ch] text-muted">
                 Most reporting stops at the click. We build the layer that connects spend to the
                 booked appointment, signed agreement, or completed sale it produced, so budget
                 moves toward what the business actually recorded, not what a platform claims.

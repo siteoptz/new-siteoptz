@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export type ButtonVariant = "primary" | "ghost" | "reading";
+export type ButtonVariant = "primary" | "ghost";
 
 export interface ButtonProps {
   children: React.ReactNode;
@@ -22,9 +22,6 @@ const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   primary: "border-accent bg-accent text-[#1A1008] hover:border-accent-lt hover:bg-accent-lt",
   ghost:
     "border-[rgba(255,236,220,0.3)] bg-transparent text-text hover:bg-[rgba(255,236,220,0.07)]",
-  // The article reading surface only — a light background, so this is the
-  // one variant that isn't styled for a dark surface.
-  reading: "border-reading-ink/20 bg-transparent text-reading-accent hover:bg-reading-ink/5",
 };
 
 /**

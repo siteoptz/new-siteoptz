@@ -20,7 +20,9 @@ const INPUT_CLASSES =
   "block w-full rounded-default border bg-raised px-3 py-2 text-base text-text placeholder:text-muted";
 
 function inputClasses(hasError: boolean) {
-  return `${INPUT_CLASSES} ${hasError ? "border-danger" : "border-rule"}`;
+  // A field border is functional, not decorative — it needs 3:1, which border-rule
+  // (a translucent seam meant to fade) doesn't clear. border-field-border does.
+  return `${INPUT_CLASSES} ${hasError ? "border-danger" : "border-field-border"}`;
 }
 
 export default function ContactForm() {
@@ -133,7 +135,7 @@ export default function ContactForm() {
     <form action={formAction} onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
       <div aria-live="assertive" role="alert">
         {formErrorMessage ? (
-          <div className="border border-danger bg-[rgba(185,28,28,0.06)] px-4 py-3 text-sm text-danger">
+          <div className="border border-danger bg-danger/10 px-4 py-3 text-sm text-danger">
             <p>{formErrorMessage}</p>
             {showEmailFallback ? (
               <p className="mt-1">

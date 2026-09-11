@@ -124,8 +124,10 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
                 <ul className="mt-3">
                   {entry.headings.map((h) => (
                     // border-rule is a warm overlay tuned for dark surfaces and disappears on
-                    // reading's light background — reading-ink at low opacity is the equivalent here.
-                    <li key={h.id} className="border-t border-reading-ink/15 py-2 first:border-t-0">
+                    // reading's light background — reading-ink at low opacity is the equivalent
+                    // here. /15 measured as barely perceptible on screen; /25 is the value that
+                    // actually reads as a deliberate hairline rather than a rendering fluke.
+                    <li key={h.id} className="border-t border-reading-ink/25 py-2 first:border-t-0">
                       <a href={`#${h.id}`} className="text-sm text-reading-accent">
                         {h.text}
                       </a>

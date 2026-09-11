@@ -12,7 +12,14 @@
   --color-reading: #fbf8f5;
   --color-reading-ink: #1a1512;
   --color-reading-accent: #b34a12;
-  --color-danger: #b91c1c;
+  /* #B91C1C measured 2.9:1 on base / 2.7:1 on raised — chosen for the old white
+     surface, failing on both dark ones. #F87171 (a clean, pure red, hue 0°
+     vs. accent's warm-orange 26°) clears 6.83:1 / 6.26:1. */
+  --color-danger: #f87171;
+  /* Dedicated to functional field borders (inputs), which need 3:1 as a
+     non-text UI component boundary — --color-rule is a translucent overlay
+     meant to disappear as a decorative seam, not to hold up a field outline. */
+  --color-field-border: #7a6e60;
 
   --font-display: var(--font-display-src), "Inter Tight", system-ui, sans-serif;
   --font-sans: var(--font-sans-src), "Inter", system-ui, sans-serif;
