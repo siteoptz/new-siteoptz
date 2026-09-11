@@ -9,7 +9,7 @@ import Breadcrumbs, { type BreadcrumbItem } from "@/components/layout/Breadcrumb
 import JsonLd from "@/components/seo/JsonLd";
 import Container from "@/components/ui/Container";
 import Prose from "@/components/ui/Prose";
-import Section from "@/components/ui/Section";
+import Section, { type SectionSurface } from "@/components/ui/Section";
 import { type ContentEntry, type ServiceFrontmatter, getServiceEntries } from "@/lib/content";
 import { getRoute, type RouteEntry } from "@/lib/nav";
 import { buildService } from "@/lib/schema";
@@ -18,6 +18,57 @@ import { buildMetadata } from "@/lib/seo";
 export const dynamicParams = false;
 
 const CONTACT_CTA = { label: "Book a call", href: "/contact" };
+
+interface LeafSurfaces {
+  hero: SectionSurface;
+  boundary: SectionSurface;
+  prose: SectionSurface;
+  faq: SectionSurface;
+  crossLinks: SectionSurface;
+  cta: SectionSurface;
+}
+
+/**
+ * boundary, faq, and crossLinks are each optional per service, so the number
+ * of sections actually on the page varies. Assigning every slot a fixed
+ * surface risks a run of three or more identical surfaces in a row once
+ * enough optional sections are missing (hero, prose, crossLinks, and cta are
+ * all "base" by default — today's schema always requires faq for a service
+ * page, which keeps that run from happening, but the layout shouldn't depend
+ * on that content rule to stay correct). This walks the slots in render
+ * order and only falls back to a slot's default surface when it wouldn't sit
+ * behind two of the same surface already — two of the same in a row still
+ * get the automatic hairline seam (globals.css's `.surface-x + .surface-x`
+ * rule), three do not.
+ */
+function deriveLeafSurfaces(fm: ServiceFrontmatter): LeafSurfaces {
+  const slots: Array<{ key: keyof LeafSurfaces; surface: SectionSurface; when: boolean }> = [
+    { key: "hero", surface: "base", when: true },
+    { key: "boundary", surface: "raised", when: Boolean(fm.boundary) },
+    { key: "prose", surface: "base", when: true },
+    { key: "faq", surface: "raised", when: Boolean(fm.faq) },
+    { key: "crossLinks", surface: "base", when: Boolean(fm.crossLinks) },
+    { key: "cta", surface: "base", when: true },
+  ];
+
+  const result = {} as LeafSurfaces;
+  const rendered: SectionSurface[] = [];
+
+  for (const slot of slots) {
+    let surface = slot.surface;
+    if (slot.when) {
+      const last = rendered[rendered.length - 1];
+      const secondLast = rendered[rendered.length - 2];
+      if (surface === last && surface === secondLast) {
+        surface = surface === "base" ? "raised" : "base";
+      }
+      rendered.push(surface);
+    }
+    result[slot.key] = surface;
+  }
+
+  return result;
+}
 
 async function getEntry(slug: string): Promise<ContentEntry<ServiceFrontmatter>> {
   const entries = await getServiceEntries();
@@ -98,11 +149,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     );
   }
 
+  const surfaces = deriveLeafSurfaces(fm);
+
   return (
     <div>
       <JsonLd data={serviceSchema} />
 
-      <Section surface="base">
+      <Section surface={surfaces.hero}>
         <Container>
           <Breadcrumbs trail={trail} />
           <PageHero kicker={fm.heroKicker} heading={fm.h1} lead={fm.lead} />
@@ -110,7 +163,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       </Section>
 
       {fm.boundary ? (
-        <Section surface="raised">
+        <Section surface={surfaces.boundary}>
           <Container>
             <BoundaryStatement slug={slug}>
               <p>{fm.boundary}</p>
@@ -119,14 +172,14 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </Section>
       ) : null}
 
-      <Section surface="base">
+      <Section surface={surfaces.prose}>
         <Container>
           <Prose>{entry.content}</Prose>
         </Container>
       </Section>
 
       {fm.faq ? (
-        <Section surface="raised">
+        <Section surface={surfaces.faq}>
           <Container>
             <FAQ items={fm.faq} />
           </Container>
@@ -134,14 +187,14 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       ) : null}
 
       {fm.crossLinks ? (
-        <Section surface="base">
+        <Section surface={surfaces.crossLinks}>
           <Container>
             <CrossLinks slugs={fm.crossLinks} />
           </Container>
         </Section>
       ) : null}
 
-      <Section surface="base">
+      <Section surface={surfaces.cta}>
         <Container>
           <CTABand heading={fm.cta.heading} body={fm.cta.body} cta={CONTACT_CTA} />
         </Container>
