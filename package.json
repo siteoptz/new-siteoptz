@@ -13,7 +13,8 @@
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "dup": "node scripts/dup-check.ts"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
