@@ -87,14 +87,16 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <JsonLd data={articleSchema} />
       <JsonLd data={personSchema} />
 
-      <Section surface="base">
+      <Section surface="reading">
         <Container>
-          <Breadcrumbs trail={trail} />
+          <Breadcrumbs trail={trail} variant="reading" />
           <h1 className="mt-4 max-w-[28ch] font-serif text-[2rem] leading-[1.2] min-[900px]:text-[2.5rem]">
             {heading}
           </h1>
-          <p className="mt-4 max-w-[var(--measure-sans)] text-muted">{fm.description}</p>
-          <div className="mt-6 text-sm text-muted">
+          {/* text-reading-ink/65 is the reading surface's own secondary-text tone — see the
+              table of contents label below, which established the same pairing. */}
+          <p className="mt-4 max-w-[var(--measure-sans)] text-reading-ink/65">{fm.description}</p>
+          <div className="mt-6 text-sm text-reading-ink/65">
             <span>
               {fm.author.name}, {fm.author.role}
             </span>
@@ -145,20 +147,24 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       </Section>
 
       {related.length > 0 ? (
-        <Section surface="raised">
+        // Reading, not raised — the reading room runs from the hero through here; a
+        // dark "raised" panel this far down would read as a second page stitched on.
+        <Section surface="reading">
           <Container>
-            <p className="font-display text-sm text-muted">Related</p>
-            <div className="mt-4 grid grid-cols-1 gap-px bg-rule min-[900px]:grid-cols-2">
+            <p className="font-display text-sm text-reading-ink/65">Related</p>
+            {/* bg-reading-ink/25 matches the table of contents' hairline — the same warm
+                overlay this surface uses for a divider that still reads at low opacity. */}
+            <div className="mt-4 grid grid-cols-1 gap-px bg-reading-ink/25 min-[900px]:grid-cols-2">
               {related.map((article) => (
                 <Link
                   key={article.slug}
                   href={`/point-of-view/${article.slug}`}
-                  className="bg-base p-6 hover:brightness-110"
+                  className="bg-reading p-6 hover:brightness-95"
                 >
-                  <p className="font-display text-accent">
+                  <p className="font-display text-reading-accent">
                     {stripSiteSuffix(article.frontmatter.title)}
                   </p>
-                  <p className="mt-1 text-sm text-muted">{article.frontmatter.dek}</p>
+                  <p className="mt-1 text-sm text-reading-ink/65">{article.frontmatter.dek}</p>
                 </Link>
               ))}
             </div>
