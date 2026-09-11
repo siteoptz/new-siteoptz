@@ -37,22 +37,22 @@ updatedAt: "2026-09-10"
 
 Meta will report more conversions from a campaign than actually happened, and the mechanism is not fraud — it is view-through attribution. The platform counts a conversion any time someone shown an ad later converts within its attribution window, whether or not that person ever consciously noticed the ad, clicked it, or was influenced by it at all. An impression scrolled past in half a second gets treated the same as a deliberate click. That is why the number in Ads Manager is reliably higher than the number in a CRM, and why comparing the two directly makes paid social look worse than it is, or better than it is, depending on which side of the gap gets quoted.
 
-We do not resolve that by adjusting the platform's number. We resolve it by testing prospecting's actual effect directly — geographic holdouts and matched-market tests that show what happens to bookings in markets where a campaign runs against markets where it does not.
+We resolve that by testing prospecting's actual effect directly — geographic holdouts and matched-market tests that show what happens to bookings in markets where a campaign runs against markets where it does not.
 
 ## How the work differs
 
 <DefinitionList items={[
-  { term: "Creative volume", definition: "A steady cadence of new creative treated as a dependency the program runs on, not an optional add-on, since prospecting fatigues an audience faster than retargeting does." },
+  { term: "Creative volume", definition: "A steady cadence of new creative treated as an ongoing dependency the program runs on, since prospecting fatigues an audience faster than retargeting does." },
   { term: "Geo holdout testing", definition: "Comparable markets held back from a campaign on a rotating basis, so the lift it produces can be measured against a real control rather than assumed from a before-and-after comparison." },
   { term: "Matched-market testing", definition: "Where a true geographic holdout is not practical, markets matched on size, demographics, and historical performance are compared instead, with a difference attributed to the campaign only once it clears a meaningful threshold." },
-  { term: "View-through discounting", definition: "Platform-reported view-through conversions logged and reported separately from click-through and matched outcomes, never blended into one inflated total." },
+  { term: "View-through discounting", definition: "Platform-reported view-through conversions logged and reported on their own separate line from click-through and matched outcomes." },
   { term: "Audience structure", definition: "Prospecting audiences built to exclude existing customers and recent site visitors, since including them would let retargeting's effect masquerade as prospecting's." },
-  { term: "Platform allocation", definition: "Budget split across Meta, LinkedIn, or TikTok based on where the target audience actually spends attention for this specific business, not a default split applied to every account." },
+  { term: "Platform allocation", definition: "Budget split across Meta, LinkedIn, or TikTok based on where the target audience actually spends attention for this specific business." },
 ]} />
 
 ## How it is measured
 
-The number reported is lift, measured through a holdout or matched-market comparison and expressed as bookings attributable to a campaign running versus not running — not the platform's view-through conversion count, and not click-through conversions alone, since click-through undercounts the same way view-through overcounts. That lift figure is what feeds into the [attribution layer](/services/marketing-attribution), reported on the same terms as every other channel's number, not a special case carved out for social.
+The number reported is lift, measured through a holdout or matched-market comparison and expressed as bookings attributable to a campaign running versus not running, not the platform's own reported conversion count. That lift figure is what feeds into the [attribution layer](/services/marketing-attribution), reported on the same terms as every other channel's number.
 
 What this channel cannot claim credit for: a conversion from someone who had already decided to buy and would have converted through another channel regardless of the ad. Prospecting campaigns are measured on incremental lift specifically to avoid that overlap; a platform's raw conversion count makes no attempt to separate the two.
 

@@ -50,14 +50,14 @@ What we build instead of a rank tracker is a baseline: a fixed set of questions,
   { term: "Question set construction", definition: "A fixed set of realistic buyer questions built from actual search and call data, not guessed from what sounds like something a customer might ask." },
   { term: "Baseline scanning", definition: "The same question set run against each assistant on a repeating schedule, with every answer's text, cited sources, and whether the business was mentioned recorded verbatim." },
   { term: "Source auditing", definition: "The specific pages and third-party sites an assistant actually cites when it does mention the business, since that is the surface being optimized, not the assistant itself." },
-  { term: "Structured content", definition: "Content restructured for direct extraction — clear, self-contained answers to specific questions — since assistants tend to pull short, unambiguous passages rather than reward general authority the way search ranking sometimes does." },
+  { term: "Structured content", definition: "Content restructured for direct extraction — clear, self-contained answers to specific questions — since assistants tend to pull short, unambiguous passages when generating an answer." },
   { term: "Multi-assistant coverage", definition: "Tracking spans the assistants relevant to this business's buyers specifically, not a single default platform, since different assistants draw on different sources and behave differently." },
   { term: "Accuracy tracking", definition: "Answers reviewed not just for whether the business is mentioned but for whether what is said about it is accurate, since a wrong answer is worse than no answer." },
 ]} />
 
 ## How it is measured
 
-The number tracked is mention rate across the baseline question set — how often, out of repeated runs, an assistant surfaces the business at all — alongside which sources got cited when it did. That is compared over time against the same fixed questions, not a rotating set that would make the comparison meaningless.
+The number tracked is mention rate across the baseline question set — how often, out of repeated runs, an assistant surfaces the business at all — alongside which sources got cited when it did. That is compared over time against that same fixed question set, which is what keeps the comparison meaningful run over run. Where an assistant does link out, the traffic it sends is followed through to a booked outcome via the same [attribution layer](/services/marketing-attribution) applied to every other channel on this site.
 
 What this cannot claim credit for: any single answer on any single day. One favorable mention proves nothing, the same way one unfavorable mention does not prove failure — the pattern across the baseline over weeks is the actual signal.
 
@@ -65,7 +65,7 @@ What this cannot claim credit for: any single answer on any single day. One favo
 
 No one can guarantee a model recommends you, and any vendor who says otherwise is either confused about how these systems work or is not being straight with you. AI assistants generate answers from a mix of training data, retrieved sources, and, increasingly, live search results, combined through a process no outside party controls or can reliably predict. There is no bid, no submission form, and no paid placement that inserts a business into a generated answer.
 
-What can be influenced is the material an assistant might draw from and cite — clear, well-structured, accurate information published where these systems can find it. Influencing the inputs is real work with a real, measurable effect on mention rate over time. Promising the output is not something anyone can honestly sell.
+What can be influenced is the material an assistant might draw from and cite — clear, well-structured, accurate information published where these systems can find it. Influencing the inputs is real work with a real, measurable effect on mention rate over time. Promising the output would be dishonest, since no outside party controls it.
 
 ## What we need from you
 
