@@ -120,7 +120,7 @@ const routes = [
       "reaching people who do not know you yet",
       "top-of-funnel programs",
     ],
-    description: "Ten programs for reaching people who do not know you yet.",
+    description: "Nine programs for reaching people who do not know you yet.",
   },
   {
     path: "/services/paid-social-advertising",
@@ -248,20 +248,6 @@ const routes = [
     ],
     description: "Creator partnerships with tracked attribution, not screenshots.",
   },
-  {
-    path: "/services/amazon-non-brand-search",
-    label: "Amazon Non-Brand Search",
-    shortLabel: "Amazon non-brand",
-    parent: "/services/top-of-funnel",
-    funnelStage: "tof",
-    pageType: "service",
-    anchorVariants: [
-      "Amazon PPC management agency",
-      "Amazon non-brand, reported separately from brand",
-      "Amazon non-brand search",
-    ],
-    description: "Category and competitor targeting on Amazon, reported separately from brand.",
-  },
 
   {
     path: "/services/middle-of-funnel",
@@ -275,7 +261,7 @@ const routes = [
       "the stage where most measurement gives up",
       "middle-of-funnel programs",
     ],
-    description: "Five programs for people who know you and have not decided yet.",
+    description: "Four programs for people who know you and have not decided yet.",
   },
   {
     path: "/services/social-media",
@@ -332,20 +318,6 @@ const routes = [
       "branded search (PPC)",
     ],
     description: "Defending brand terms, only where it is incremental.",
-  },
-  {
-    path: "/services/amazon-branded-search",
-    label: "Amazon Branded Search",
-    shortLabel: "Amazon branded",
-    parent: "/services/middle-of-funnel",
-    funnelStage: "mof",
-    pageType: "service",
-    anchorVariants: [
-      "Amazon brand defense advertising",
-      "holding your own listings on Amazon",
-      "Amazon branded search",
-    ],
-    description: "Holding your own listings against competitor conquesting.",
   },
 
   {
@@ -583,8 +555,6 @@ export function servicesByStage(stage: FunnelStage): RouteEntry[] {
 const BOUNDARY_TABLE: Record<string, readonly string[]> = {
   "paid-search-ppc": ["branded-search-ppc"],
   "branded-search-ppc": ["paid-search-ppc"],
-  "amazon-non-brand-search": ["amazon-branded-search"],
-  "amazon-branded-search": ["amazon-non-brand-search"],
   "paid-social-advertising": ["retargeting"],
   retargeting: ["paid-social-advertising"],
   "social-media": ["paid-social-advertising"],

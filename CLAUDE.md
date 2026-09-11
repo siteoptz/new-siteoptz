@@ -191,7 +191,7 @@ X" is always shippable. "We increase X by Y%" requires a named source.
 
 **Headlines** state the reader's situation or the thing we do. They do not tease.
 
-Twenty-three service pages share a skeleton. Sameness is the failure mode. Before
+Twenty-one service pages share a skeleton. Sameness is the failure mode. Before
 writing any service page, read two already-built pages from the same stage and
 deliberately vary sentence rhythm, opening structure, and example choice. Never reuse a
 sentence across pages. Never describe two channels with the same verb.

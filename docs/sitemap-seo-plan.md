@@ -27,7 +27,7 @@ Change it now — it is a rename today and a redirect map later.
 
 ## 2. The funnel architecture, and why it works here
 
-Three stage hubs, 23 service pages, one cross-funnel pillar.
+Three stage hubs, 21 service pages, one cross-funnel pillar.
 
 `/services/marketing-attribution` is the pillar and sits outside the funnel, because it
 is the thing that measures all three stages. Every service page links up to it. This is
@@ -49,8 +49,6 @@ rankable.
 | --------------------- | ------------------------------------------------------ | --------------------- |
 | Paid Search (PPC)     | Covers non-brand acquisition only                      | Branded Search (PPC)  |
 | Branded Search (PPC)  | Covers defending and converting existing demand        | Paid Search (PPC)     |
-| Amazon Non-Brand      | Category and competitor targeting on Amazon            | Amazon Branded        |
-| Amazon Branded        | Defending your own listings and brand terms            | Amazon Non-Brand      |
 | Paid Social           | Prospecting to people who do not know you              | Retargeting           |
 | Retargeting           | Re-engaging people who already interacted              | Paid Social           |
 | Social Media          | Organic presence and community, no paid spend          | Paid Social           |
@@ -66,7 +64,7 @@ rankable.
 
 ## 4. Standard service page anatomy
 
-Every one of the 23 pages uses this structure. Deltas are noted per page in section 5.
+Every one of the 21 pages uses this structure. Deltas are noted per page in section 5.
 Do not invent new sections. If a page needs one, add it here first so all 23 stay
 consistent.
 
@@ -111,15 +109,15 @@ deltas from the standard anatomy.
 
 ---
 
-### Top of funnel — 10 pages
+### Top of funnel — 9 pages
 
 **`/services/top-of-funnel`** (hub)
 
 - Primary: top of funnel marketing services
 - Title (52): `Top of Funnel Marketing Services | SiteOptz`
-- Meta (147): `Ten programs for reaching people who do not know you yet — and the measurement that shows which of them produced a customer, not just a click.`
+- Meta (147): `Nine programs for reaching people who do not know you yet — and the measurement that shows which of them produced a customer, not just a click.`
 - H1: Reaching people who do not know you yet.
-- 700–900 words. Lists all ten children with 60-word summaries pulled from frontmatter.
+- 700–900 words. Lists all nine children with 60-word summaries pulled from frontmatter.
 
 **`/services/paid-social-advertising`**
 
@@ -199,23 +197,15 @@ deltas from the standard anatomy.
 - Meta (148): `Creator partnerships with tracked attribution — codes, links, and matched-market tests instead of screenshots of impressions from a media kit.`
 - H1: Creator partnerships you can actually attribute.
 
-**`/services/amazon-non-brand-search`**
-
-- Primary: Amazon PPC management agency
-- Secondary: Amazon non-brand advertising, Sponsored Products management, ACoS optimization
-- Title (48): `Amazon PPC Management Agency | SiteOptz`
-- Meta (149): `Category and competitor targeting on Amazon managed to contribution margin rather than ACoS, with brand and non-brand reported separately.`
-- H1: Amazon non-brand, reported separately from brand.
-
 ---
 
-### Middle of funnel — 6 pages
+### Middle of funnel — 5 pages
 
 **`/services/middle-of-funnel`** (hub)
 
 - Primary: middle of funnel marketing services
 - Title (55): `Middle of Funnel Marketing Services | SiteOptz`
-- Meta (143): `Five programs for people who know you and have not decided yet — and the measurement that shows what actually moved them forward.`
+- Meta (143): `Four programs for people who know you and have not decided yet — and the measurement that shows what actually moved them forward.`
 - H1: The stage where most measurement gives up.
 - 600–800 words.
 
@@ -252,14 +242,6 @@ deltas from the standard anatomy.
 - Meta (152): `Defending your brand terms without paying for clicks you would have earned free. We measure incrementality before recommending a brand budget.`
 - H1: Paying for brand terms, only where it is incremental.
 - Delta: add a section on incrementality testing method.
-
-**`/services/amazon-branded-search`**
-
-- Primary: Amazon brand defense advertising
-- Secondary: Amazon branded search management, Sponsored Brands
-- Title (50): `Amazon Brand Defense Advertising | SiteOptz`
-- Meta (144): `Holding your own listings against competitor conquesting, with spend judged on defended revenue rather than blended account-level ACoS.`
-- H1: Holding your own listings on Amazon.
 
 ---
 
@@ -329,7 +311,7 @@ deltas from the standard anatomy.
 - Primary: marketing operations consulting
 - Secondary: martech stack consolidation, marketing data governance, lead routing
 - Title (48): `Marketing Operations Consulting | SiteOptz`
-- Meta (149): `Stack consolidation, lead routing, data governance, and the plumbing that decides whether any of the other twenty-two programs can be measured.`
+- Meta (149): `Stack consolidation, lead routing, data governance, and the plumbing that decides whether any of the other twenty programs can be measured.`
 - H1: The plumbing everything else depends on.
 - Delta: links to the pillar twice — this page and attribution are the closest pair.
 
@@ -381,9 +363,9 @@ hrefs anywhere in the codebase.
 
 ---
 
-## 7. The real risk on 23 service pages
+## 7. The real risk on 21 service pages
 
-23 pages at 1,100+ words is roughly 28,000 words of specific, non-overlapping copy. The
+21 pages at 1,100+ words is roughly 26,000 words of specific, non-overlapping copy. The
 failure mode is not effort, it is sameness. Twenty pages that share a skeleton and swap
 the channel noun read as a doorway farm to a search engine and as filler to a CMO.
 
@@ -559,5 +541,5 @@ Tracked here so they do not surface at launch.
 2. **OG images.** `opengraph-image.tsx` per route segment via `next/og` was in the Phase 0
    technical checklist but was not included in prompt 0.2, so it does not exist. Without it,
    every shared link renders a blank card. Build it as a standalone commit before Phase 4 —
-   it is one file using the type tokens, and it covers all 40 routes.
+   it is one file using the type tokens, and it covers all 38 routes.
 3. **Favicon set.** Real favicon, apple-touch-icon, and `theme-color` matching `--color-navy-900`.

@@ -290,8 +290,7 @@ thin ones live at once.
 **Wave 3** — `programmatic-advertising`, `creative-ads-strategy`, `creative-production`,
 `campaign-launch-strategy`, `social-media`, `affiliate-marketing`
 
-**Wave 4** — `influencer-marketing`, `amazon-non-brand-search`, `amazon-branded-search`,
-`partnerships`
+**Wave 4** — `influencer-marketing`, `partnerships`
 
 ## Prompt 3.x — run once per page, substituting the slug
 
@@ -493,9 +492,11 @@ Settle these before the phase that depends on them.
    Media and needs re-scoping. Blocks Wave 2.
 2. **SEO/GEO/AEO split.** Specced as three pages. Three distinct keyword sets, three
    competitor sets. Blocks Wave 1.
-3. **Amazon pages.** These imply e-commerce clients, which is a different audience from the
-   four industries the site targets. Either add e-commerce as a fifth industry or accept
-   that two service pages have no matching industry page. Blocks Wave 4.
+3. ~~**Amazon pages.**~~ Resolved: cut from the plan. `amazon-non-brand-search` and
+   `amazon-branded-search` implied e-commerce clients, a fifth audience the site does not
+   target, which would have failed the link-composition gate (no industry page to link
+   to). Removed from `lib/nav.ts`, the boundary table, and this plan. Wave 4 is now just
+   `influencer-marketing` and `partnerships`.
 4. **Client approval** for named figures and quotes. Blocks Phase 5.1 completion.
 5. **Team names, roles, photography** for /about. Blocks Phase 6.1 completion.
 6. **Limb named or not** on the agency partners page. Blocks Phase 4.
