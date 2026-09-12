@@ -15,7 +15,8 @@
     "lint": "eslint",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
-    "dup": "node scripts/dup-check.ts"
+    "dup": "node scripts/dup-check.ts",
+    "check:redirects": "node scripts/check-redirects.ts"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
