@@ -135,12 +135,57 @@ export const industriesFrontmatterSchema = z.object({
 });
 export type IndustryFrontmatter = z.infer<typeof industriesFrontmatterSchema>;
 
+const metricTableColumnSchema = z.object({
+  key: z.string(),
+  label: z.string(),
+  numeric: z.boolean().optional(),
+});
+
+/** Mirrors MetricTableProps, minus the JSX — `source` is required here, unlike the component's own optional prop, because a proof entry's numbers are never structural-only. */
+const metricTableDataSchema = z.object({
+  caption: z.string(),
+  columns: z.array(metricTableColumnSchema),
+  rows: z.array(z.record(z.string(), z.union([z.string(), z.number()]))),
+  source: z.string(),
+});
+
+const proofTimelineEntrySchema = z.object({
+  label: z.string(),
+  description: z.string(),
+});
+
+const proofQuoteSchema = z.object({
+  quote: z.string(),
+  name: z.string(),
+  role: z.string(),
+  organization: z.string(),
+});
+
+/**
+ * approvedBy is unconditionally required, not conditioned on the entry
+ * having metrics — every proof entry's detail template requires a
+ * `whatChanged` MetricTable (also unconditionally required below), so
+ * requiring approvedBy at the schema level already fails the build for any
+ * entry that would otherwise ship metrics without a recorded approver.
+ */
+const proofApprovalSchema = z.object({
+  name: z.string(),
+  date: z.string(),
+});
+
 export const proofFrontmatterSchema = z.object({
   title: z.string().max(60),
   description: z.string().max(155),
   industrySlug: z.string(),
-  servicesUsed: z.array(z.string()),
-  approvedBy: z.string(),
+  situation: z.string(),
+  whatWasUnmeasurable: z.string(),
+  whatWeBuilt: z.string(),
+  whatChanged: metricTableDataSchema,
+  timeline: z.array(proofTimelineEntrySchema).min(1),
+  quote: proofQuoteSchema,
+  /** Exactly 3 route paths, rendered as CrossLinks and validated against lib/nav.ts — same shape and constraint as the services schema's crossLinks field. */
+  servicesUsed: z.array(z.string()).length(3),
+  approvedBy: proofApprovalSchema,
   publishedAt: z.string(),
   updatedAt: z.string(),
 });
@@ -213,6 +258,18 @@ function validateCrossLinks(filePath: string, crossLinks: readonly string[] | un
   }
 }
 
+function validateServicesUsed(filePath: string, servicesUsed: readonly string[]): void {
+  for (const routePath of servicesUsed) {
+    try {
+      getRoute(routePath);
+    } catch {
+      throw new Error(
+        `lib/content: invalid frontmatter in ${filePath} — field "servicesUsed": "${routePath}" does not resolve to a route in lib/nav.ts`
+      );
+    }
+  }
+}
+
 /**
  * A boundary is required if and only if the slug has a counterpart in
  * lib/nav.ts's boundary table — not a function of funnelStage or pageType.
@@ -259,6 +316,11 @@ async function loadEntry<TFrontmatter>(
     if (serviceData.pageType === "service") {
       validateBoundaryRequirement(filePath, slug, serviceData.boundary);
     }
+  }
+
+  if (collection === "proof") {
+    const proofData = result.data as ProofFrontmatter;
+    validateServicesUsed(filePath, proofData.servicesUsed);
   }
 
   const components =
