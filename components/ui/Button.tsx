@@ -20,8 +20,11 @@ const VARIANT_CLASSES: Record<ButtonVariant, string> = {
   // better on it and is the one that actually clears contrast (white on
   // accent measures under 2.5:1).
   primary: "border-accent bg-accent text-[#1A1008] hover:border-accent-lt hover:bg-accent-lt",
+  // ghost has no fill of its own, so the border is the only cue this is a control — it needs
+  // 3:1 against the page behind it. rgba(...,0.3) measured 2.48:1/2.51:1 against base/raised;
+  // 0.45 clears 4.09:1/4.04:1.
   ghost:
-    "border-[rgba(255,236,220,0.3)] bg-transparent text-text hover:bg-[rgba(255,236,220,0.07)]",
+    "border-[rgba(255,236,220,0.45)] bg-transparent text-text hover:bg-[rgba(255,236,220,0.07)]",
 };
 
 /**

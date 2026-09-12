@@ -155,18 +155,25 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
             {/* bg-reading-ink/25 matches the table of contents' hairline — the same warm
                 overlay this surface uses for a divider that still reads at low opacity. */}
             <div className="mt-4 grid grid-cols-1 gap-px bg-reading-ink/25 min-[900px]:grid-cols-2">
-              {related.map((article) => (
-                <Link
-                  key={article.slug}
-                  href={`/point-of-view/${article.slug}`}
-                  className="bg-reading p-6 hover:brightness-95"
-                >
-                  <p className="font-display text-reading-accent">
-                    {stripSiteSuffix(article.frontmatter.title)}
-                  </p>
-                  <p className="mt-1 text-sm text-reading-ink/65">{article.frontmatter.dek}</p>
-                </Link>
-              ))}
+              {related.map((article, index) => {
+                // A lone leftover card in an odd-count grid spans both columns instead of
+                // leaving an empty cell — an empty cell has no child to paint over the
+                // container's own divider background, so it renders as a solid block instead
+                // of the 1px seam the gap is meant to be.
+                const isTrailingOdd = related.length % 2 === 1 && index === related.length - 1;
+                return (
+                  <Link
+                    key={article.slug}
+                    href={`/point-of-view/${article.slug}`}
+                    className={`bg-reading p-6 hover:brightness-95 ${isTrailingOdd ? "min-[900px]:col-span-2" : ""}`}
+                  >
+                    <p className="font-display text-reading-accent">
+                      {stripSiteSuffix(article.frontmatter.title)}
+                    </p>
+                    <p className="mt-1 text-sm text-reading-ink/65">{article.frontmatter.dek}</p>
+                  </Link>
+                );
+              })}
             </div>
           </Container>
         </Section>

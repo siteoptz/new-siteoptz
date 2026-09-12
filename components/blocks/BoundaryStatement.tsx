@@ -28,9 +28,10 @@ export default function BoundaryStatement({ slug, children }: BoundaryStatementP
   }
 
   return (
-    // The rule hairline reads fine on paper-2 but disappears against raised — accent at
-    // reduced opacity keeps the left border visible without turning it into a second link color.
-    <div className="border-l-2 border-accent/40 bg-raised py-4 pl-6">
+    // A left border marking a real callout needs 3:1, same as the signal marker's — accent/40
+    // measured 2.18:1 against raised. accent/65 clears 3.70:1 while staying visibly dimmer than
+    // the full-strength accent used for the counterpart links right below it.
+    <div className="border-l-2 border-accent/65 bg-raised py-4 pl-6">
       <div>{children}</div>
       <p className="mt-3 text-sm">
         {counterparts.map((route, index) => (

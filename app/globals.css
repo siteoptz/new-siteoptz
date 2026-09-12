@@ -81,6 +81,13 @@ h3 {
   outline-offset: 3px;
 }
 
+/* --color-accent is tuned for the dark surfaces and measures 2.33:1 against reading — well
+   under the 3:1 a focus ring needs. reading-accent, already the reading surface's link color,
+   clears 5.08:1. */
+.surface-reading :focus-visible {
+  outline-color: var(--color-reading-accent);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
