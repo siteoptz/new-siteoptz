@@ -18,7 +18,7 @@ const REGISTERED_ADDRESS = "9595 Six Pines Dr., Ste 8210, The Woodlands, TX 7738
 export const metadata = buildMetadata({
   title: "Privacy Policy | SiteOptz",
   description:
-    "What this website collects, how call recording and cookies work, how long data is kept, and how client data is handled under signed BAAs.",
+    "What this website collects, how cookies work, how long data is kept, and how client data is handled under signed BAAs.",
   path: "/privacy",
 });
 
@@ -62,10 +62,10 @@ export default function PrivacyPage() {
             <h2>What this covers</h2>
             <p>
               This policy covers two different things, and they are governed differently. The
-              first is this website: the form you can fill out, the analytics that run while you
-              browse, and the calls placed to a tracked number. The second is the data we handle
-              on a client&rsquo;s behalf once an engagement starts — a client&rsquo;s CRM records, ad
-              accounts, or call logs. That second category belongs to the client, is governed by
+              first is this website: the form you can fill out and the analytics that run while
+              you browse. The second is the data we handle on a client&rsquo;s behalf once an
+              engagement starts — a client&rsquo;s CRM records, ad accounts, or call logs. That
+              second category belongs to the client, is governed by
               the signed statement of work described in our{" "}
               <Link href="/terms">terms of service</Link>, and is covered separately in the{" "}
               &ldquo;Client data&rdquo; section below.
@@ -82,10 +82,6 @@ export default function PrivacyPage() {
               referring source, approximate location from IP address, and device and browser
               type.
             </p>
-            <p>
-              Through call tracking — CallRail, when a tracked number shown on this site is
-              called: the calling number, call duration, and the session that led to the call.
-            </p>
           </Prose>
         </Container>
       </Section>
@@ -93,27 +89,14 @@ export default function PrivacyPage() {
       <Section surface="raised">
         <Container>
           <Prose>
-            <h2>Call recording</h2>
-            <p>
-              Calls to numbers displayed on this site may be recorded. We record for quality
-              review and to attribute a call to the campaign and page that produced it. Recordings
-              are accessible only to the people working on the account the call relates to, and
-              CallRail is the processor that stores them on our behalf. A recording tied to a
-              non-converting inquiry is deleted after 30 days, on the same schedule as the rest of
-              that inquiry&rsquo;s record; a recording tied to a client or opportunity record is kept
-              for as long as that record is kept, described below.
-            </p>
-
             <h2>Cookies</h2>
             <p>
-              This site sets two kinds of cookies, and no others. Analytics cookies, set by GA4
-              and Google Tag Manager, so we can see aggregate traffic and behavior. First-party
-              cookies set by CallRail, which connect a call back to the session that produced it,
-              so we can tell which page and campaign led to it. Neither is an advertising cookie —
-              this site does not run retargeting pixels, and we do not sell or share this data
-              with advertisers. You can refuse both through your browser&rsquo;s cookie controls;
-              refusing them does not affect your ability to browse the site or submit the contact
-              form.
+              This site sets one kind of cookie, and no others. Analytics cookies, set by GA4 and
+              Google Tag Manager, so we can see aggregate traffic and behavior. This is not an
+              advertising cookie — this site does not run retargeting pixels, and we do not sell
+              or share this data with advertisers. You can refuse it through your browser&rsquo;s
+              cookie controls; refusing it does not affect your ability to browse the site or
+              submit the contact form.
             </p>
           </Prose>
         </Container>
@@ -128,8 +111,7 @@ export default function PrivacyPage() {
               is deleted after 30 days. Once a submission becomes a client or opportunity record,
               we keep it for the life of the relationship plus 10 years. Analytics data is kept
               according to Google&rsquo;s retention setting for this property, not a period we set
-              ourselves. Call recordings follow the same rule as the record they belong to,
-              described above.
+              ourselves.
             </p>
 
             <h2>Who processes data on our behalf</h2>
@@ -137,15 +119,12 @@ export default function PrivacyPage() {
               <strong>Google</strong> — analytics (GA4) and tag management (Google Tag Manager)
               for this site.
               <br />
-              <strong>CallRail</strong> — call tracking, call recording, and the cookie that
-              attributes a call to a session.
-              <br />
               <strong>GoHighLevel</strong> — receives contact form submissions and stores them as
               leads.
               <br />
               <strong>Vercel</strong> — hosts this website.
             </p>
-            <p>We do not use a processor beyond the four listed here.</p>
+            <p>We do not use a processor beyond the three listed here.</p>
           </Prose>
         </Container>
       </Section>
