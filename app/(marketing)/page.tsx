@@ -3,7 +3,6 @@ import AttributionChain from "@/components/blocks/AttributionChain";
 import CTABand from "@/components/blocks/CTABand";
 import DefinitionList from "@/components/blocks/DefinitionList";
 import MetricTable from "@/components/blocks/MetricTable";
-import QuoteBlock from "@/components/blocks/QuoteBlock";
 import RuleList from "@/components/blocks/RuleList";
 import StageSequence from "@/components/blocks/StageSequence";
 import Button from "@/components/ui/Button";
@@ -24,7 +23,6 @@ export const metadata = buildMetadata({
 export default function HomePage() {
   const pillar = getRoute("/services/marketing-attribution");
   const howItWorks = getRoute("/how-it-works");
-  const proof = getRoute("/proof");
   const healthcare = getRoute("/industries/healthcare-marketing");
   const selfStorage = getRoute("/industries/self-storage-marketing");
   const contact = getRoute("/contact");
@@ -242,7 +240,7 @@ export default function HomePage() {
               ]}
             />
             <MetricTable
-              caption="Cost per booked outcome by channel"
+              caption="Structure of the monthly performance report"
               columns={[
                 { key: "channel", label: "Channel" },
                 { key: "spend", label: "Spend", numeric: true },
@@ -251,29 +249,14 @@ export default function HomePage() {
                 { key: "cpbo", label: "Cost per booked", numeric: true },
               ]}
               rows={[
-                { channel: "Paid search (non-brand)", spend: "—", qualified: "—", booked: "—", cpbo: "—" },
-                { channel: "Paid social", spend: "—", qualified: "—", booked: "—", cpbo: "—" },
-                { channel: "SEO", spend: "—", qualified: "—", booked: "—", cpbo: "—" },
-                { channel: "Organic capture", spend: "—", qualified: "—", booked: "—", cpbo: "—" },
-                { channel: "Email", spend: "—", qualified: "—", booked: "—", cpbo: "—" },
+                { channel: "Paid search (non-brand)" },
+                { channel: "Paid social" },
+                { channel: "SEO" },
+                { channel: "Organic capture" },
+                { channel: "Email" },
               ]}
-              source="placeholder"
             />
           </div>
-        </Container>
-      </Section>
-
-      <Section surface="base">
-        <Container>
-          <QuoteBlock
-            quote="For the first time, we could see which location's ad spend was actually producing booked appointments."
-            name="Placeholder attribution"
-            role="Pending client approval"
-            organization="Placeholder"
-          />
-          <Link href={proof.path} className="mt-4 inline-block text-sm text-accent hover:text-accent-lt">
-            More client results
-          </Link>
         </Container>
       </Section>
 

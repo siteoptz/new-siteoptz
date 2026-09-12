@@ -8,18 +8,19 @@ export interface MetricTableProps {
   caption: string;
   columns: MetricTableColumn[];
   rows: Record<string, string | number>[];
-  source: string;
+  /** Omit for a structural example with no data cells — see the row cell rendering below. */
+  source?: string;
 }
 
 /**
- * When source is 'placeholder', every numeric cell renders an em dash and a
- * visible marker appears below the table — the prebuild content check
- * already fails production on placeholder content; this makes it visible
- * in preview too.
+ * A row's data cells are whatever keys it sets — a row with only its label
+ * key renders empty data cells, for a structural example (the column
+ * headers and row labels are real; there is no data yet to show).
+ * scripts/content-check.ts's own placeholder gate is a text-search for
+ * source="placeholder", independent of this component, so it still catches
+ * that value if anyone reintroduces it later.
  */
 export default function MetricTable({ caption, columns, rows, source }: MetricTableProps) {
-  const isPlaceholder = source === "placeholder";
-
   return (
     <figure className="border border-rule">
       <figcaption className="border-b border-rule bg-raised px-4 py-3 font-display text-sm">
@@ -51,7 +52,7 @@ export default function MetricTable({ caption, columns, rows, source }: MetricTa
                       column.numeric ? "text-right" : "text-left"
                     }`}
                   >
-                    {column.numeric && isPlaceholder ? "—" : row[column.key]}
+                    {row[column.key]}
                   </td>
                 ))}
               </tr>
@@ -59,13 +60,10 @@ export default function MetricTable({ caption, columns, rows, source }: MetricTa
           </tbody>
         </table>
       </div>
-      <figcaption className="border-t border-rule px-4 py-2 text-2xs text-muted">
-        Source: {isPlaceholder ? "placeholder — figures pending client approval" : source}
-      </figcaption>
-      {isPlaceholder ? (
-        <p className="border-t border-dashed border-rule bg-raised px-4 py-2 text-2xs font-medium text-text">
-          Placeholder figures — this fails the production build until replaced.
-        </p>
+      {source ? (
+        <figcaption className="border-t border-rule px-4 py-2 text-2xs text-muted">
+          Source: {source}
+        </figcaption>
       ) : null}
     </figure>
   );

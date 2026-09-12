@@ -49,7 +49,7 @@ const routes = [
     funnelStage: null,
     pageType: "page",
     anchorVariants: ["about SiteOptz", "about us"],
-    description: "Who does the work, and how we think about it.",
+    description: "How the firm is structured, and how we choose clients.",
   },
   {
     path: "/contact",

@@ -14,7 +14,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "About SiteOptz | Marketing Intelligence",
   description:
-    "A small senior team doing analyst work for operators. Who does the work, how we are structured, and what we will not take on.",
+    "A small senior team doing analyst work for operators. How we are structured, how we choose clients, and what we will not take on.",
   path: "/about",
 });
 
@@ -47,12 +47,12 @@ export default function AboutPage() {
           <PageHero
             kicker="About"
             heading="A small team doing analyst work."
-            lead="Who does the work, how the firm is structured, and what we choose not to take on."
+            lead="How the firm is structured, how we choose clients, and what we choose not to take on."
           />
         </Container>
       </Section>
 
-      <Section surface="base">
+      <Section surface="raised">
         <Container>
           <SectionHead heading="How we're structured, and why it stays small" />
           <Prose>
@@ -82,32 +82,6 @@ export default function AboutPage() {
               call than staff your account with someone junior just to keep the calendar full.
             </p>
           </Prose>
-        </Container>
-      </Section>
-
-      <Section surface="raised">
-        <Container>
-          <SectionHead heading="Who does the work" />
-          <Prose>
-            <p>
-              Every engagement is staffed by name, not by role — this is who you would actually be
-              working with.
-            </p>
-          </Prose>
-          <div className="mt-6 flex flex-col gap-4">
-            {[1, 2].map((row) => (
-              <div key={row} className="border-t border-rule py-4">
-                <p className="font-display text-md font-semibold text-muted">[Name], [Title]</p>
-                <p className="mt-1 text-muted">
-                  [One or two sentences on what this person actually does on a client account.]
-                </p>
-              </div>
-            ))}
-          </div>
-          <p className="mt-4 text-2xs text-muted">
-            Placeholder — add, remove, or replace these rows with real names, roles, and photos
-            before this page goes live.
-          </p>
         </Container>
       </Section>
 

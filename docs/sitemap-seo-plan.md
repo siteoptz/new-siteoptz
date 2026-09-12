@@ -545,3 +545,11 @@ Tracked here so they do not surface at launch.
    every shared link renders a blank card. Build it as a standalone commit before Phase 4 —
    it is one file using the type tokens, and it covers all 38 routes.
 3. **Favicon set.** Real favicon, apple-touch-icon, and `theme-color` matching `--color-navy-900`.
+4. **Home page client quote.** The QuoteBlock previously on the home page was removed rather
+   than shipped with a placeholder attribution — it had no real name, role, or organization
+   behind it. Needs one approved client quote, with that client's actual name, role, and
+   organization, before it returns.
+5. **`/about` team roster.** The "Who does the work" section was removed rather than shipped
+   with placeholder rows — the page's argument about staying small holds without a roster; it
+   does not hold with an empty one. Needs real team members' names and roles, with photos
+   optional, before it returns.
