@@ -8,6 +8,10 @@
  * script only spawns `next start` on a fixed local port, runs its
  * assertions, and shuts the server down again.
  *
+ * Set REDIRECT_CHECK_URL to check a deployed environment instead (e.g. a
+ * Vercel preview or production URL) — no server is spawned in that case,
+ * and requests go straight to that URL.
+ *
  * Every mapped source below is registered without a trailing slash (see
  * lib/redirects.ts's own comment on why). A real request to the old,
  * trailing-slash form of one of these URLs still resolves correctly, but as
@@ -23,7 +27,8 @@ import { spawn, type ChildProcess } from "node:child_process";
 import { REDIRECTS } from "../lib/redirects.ts";
 
 const PORT = 3919;
-const BASE_URL = `http://localhost:${PORT}`;
+const REMOTE_URL = process.env.REDIRECT_CHECK_URL?.replace(/\/$/, "");
+const BASE_URL = REMOTE_URL ?? `http://localhost:${PORT}`;
 const SERVER_TIMEOUT_MS = 20_000;
 
 interface RedirectCase {
@@ -125,9 +130,13 @@ async function verifyLeftAlone(path: string): Promise<string | null> {
 }
 
 async function main(): Promise<void> {
-  const server: ChildProcess = spawn("npx", ["next", "start", "-p", String(PORT)], {
-    stdio: "ignore",
-  });
+  const server: ChildProcess | null = REMOTE_URL
+    ? null
+    : spawn("npx", ["next", "start", "-p", String(PORT)], { stdio: "ignore" });
+
+  if (REMOTE_URL) {
+    console.log(`check-redirects: checking ${BASE_URL} (no local server spawned)\n`);
+  }
 
   let failures = 0;
   let passes = 0;
@@ -157,7 +166,7 @@ async function main(): Promise<void> {
       }
     }
   } finally {
-    server.kill();
+    server?.kill();
   }
 
   console.log("");
