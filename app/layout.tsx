@@ -20,7 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd
           data={buildOrganization({
             name: "SiteOptz",
-            logoUrl: "/favicon.ico",
+            logoUrl: "/logo-512.png",
             email: "info@siteoptz.com",
           })}
         />

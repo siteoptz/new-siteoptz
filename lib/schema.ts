@@ -25,7 +25,7 @@ export function buildOrganization(input: OrganizationInput) {
     "@type": "Organization",
     name: input.name,
     url: requireSiteUrl(),
-    logo: input.logoUrl,
+    logo: absoluteUrl(input.logoUrl),
     ...(input.email ? { email: input.email } : {}),
     ...(input.sameAs ? { sameAs: input.sameAs } : {}),
   };
