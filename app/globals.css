@@ -4,8 +4,13 @@
   --color-base: #15100c;
   --color-raised: #211913;
   --color-rule: rgba(255, 236, 220, 0.13);
-  --color-accent: #ff8321;
-  --color-accent-lt: #ffa35c;
+  /* Official brand orange, from the source PSD's brand sheet — the prior #FF8321 was
+     sampled from a low-resolution raster and drifted slightly. #F7931D measures 8.23:1 on
+     base and 7.54:1 on raised (both better than the value it replaces). accent-lt is the
+     same lighten relationship the old pair used (+0.116 HSL lightness), applied to the
+     corrected hue: 10.09:1 on base, 9.25:1 on raised. */
+  --color-accent: #f7931d;
+  --color-accent-lt: #f9ae56;
   --color-text: #e9e1d9;
   --color-muted: #a99a8c;
   --color-signal: #5fc3d6;
@@ -14,7 +19,7 @@
   --color-reading-accent: #b34a12;
   /* #B91C1C measured 2.9:1 on base / 2.7:1 on raised — chosen for the old white
      surface, failing on both dark ones. #F87171 (a clean, pure red, hue 0°
-     vs. accent's warm-orange 26°) clears 6.83:1 / 6.26:1. */
+     vs. accent's warm-orange 32°) clears 6.83:1 / 6.26:1. */
   --color-danger: #f87171;
   /* Dedicated to functional field borders (inputs), which need 3:1 as a
      non-text UI component boundary — --color-rule is a translucent overlay

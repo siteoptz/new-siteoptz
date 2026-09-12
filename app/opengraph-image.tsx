@@ -38,8 +38,8 @@ export default function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center" }}>
-          <div style={{ width: 14, height: 14, backgroundColor: "#FF8321", marginRight: 16 }} />
-          <div style={{ color: "#FF8321", fontSize: 28, letterSpacing: "-0.01em" }}>SiteOptz</div>
+          <div style={{ width: 14, height: 14, backgroundColor: "#F7931D", marginRight: 16 }} />
+          <div style={{ color: "#F7931D", fontSize: 28, letterSpacing: "-0.01em" }}>SiteOptz</div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", maxWidth: 920 }}>
@@ -61,7 +61,7 @@ export default function OpengraphImage() {
         </div>
 
         <div style={{ display: "flex", height: 6, width: "100%", backgroundColor: "#211913" }}>
-          <div style={{ height: "100%", width: 220, backgroundColor: "#FF8321" }} />
+          <div style={{ height: "100%", width: 220, backgroundColor: "#F7931D" }} />
         </div>
       </div>
     ),

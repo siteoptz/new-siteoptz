@@ -106,8 +106,8 @@ the footer.
 --color-raised:         #211913;   /* raised panels, CTA bands, alternating sections */
 --color-rule:           rgba(255,236,220,.13);  /* decorative hairlines only */
 --color-field-border:   #7A6E60;   /* form field borders — functional, needs 3:1 */
---color-accent:         #FF8321;   /* links, buttons, active state — the logo's orange */
---color-accent-lt:      #FFA35C;   /* hover — lighten, never darken, on dark surfaces */
+--color-accent:         #F7931D;   /* official brand orange (source PSD) — links, buttons, active state */
+--color-accent-lt:      #F9AE56;   /* hover — lighten, never darken, on dark surfaces */
 --color-text:           #E9E1D9;   /* body copy on dark */
 --color-muted:          #A99A8C;   /* secondary text on dark */
 --color-danger:         #F87171;   /* form validation errors */
