@@ -51,7 +51,7 @@ app/
     layout.tsx
     page.tsx                          home
     services/page.tsx                 services hub
-    services/[slug]/page.tsx          23 service pages + 3 stage hubs, from MDX
+    services/[slug]/page.tsx          21 service pages + 3 stage hubs, from MDX
     how-it-works/page.tsx
     industries/page.tsx
     industries/[slug]/page.tsx        4 industry pages from MDX
@@ -95,56 +95,82 @@ case: primitives commit, then page commit.
 
 ## 3. Design system
 
-The visual reference is siteoptz.ai — deep navy base, #2563EB blue, dense structured
-footer. Inherit the palette and the brand feel. Do **not** inherit its copy conventions.
+The site is dark throughout on a warm base drawn from the logo. The one exception is the
+article detail template, which is a light reading surface from below the header to above
+the footer.
 
 ### Color tokens
 
 ```css
---color-navy-900: #060B16;   /* base dark surface, hero, footer, CTA bands */
---color-navy-800: #0D1626;   /* raised panel on dark */
---color-navy-700: #17243D;   /* borders and dividers on dark */
---color-blue-600: #2563EB;   /* primary action, links, active state */
---color-blue-700: #1D4ED8;   /* hover */
---color-blue-300: #7FB0FF;   /* accent text on dark surfaces only */
---color-paper:    #FFFFFF;   /* default content surface */
---color-paper-2:  #F5F7FA;   /* alternating section surface */
---color-rule:     #E4E9F2;   /* hairline on light */
---color-ink:      #0D1321;   /* body text on light */
---color-muted:    #4E5A72;   /* secondary text on light */
---color-signal:   #D99A45;   /* ONE semantic use: marking a measurement break */
+--color-base:           #15100C;   /* base dark surface — most sections, header, footer */
+--color-raised:         #211913;   /* raised panels, CTA bands, alternating sections */
+--color-rule:           rgba(255,236,220,.13);  /* decorative hairlines only */
+--color-field-border:   #7A6E60;   /* form field borders — functional, needs 3:1 */
+--color-accent:         #FF8321;   /* links, buttons, active state — the logo's orange */
+--color-accent-lt:      #FFA35C;   /* hover — lighten, never darken, on dark surfaces */
+--color-text:           #E9E1D9;   /* body copy on dark */
+--color-muted:          #A99A8C;   /* secondary text on dark */
+--color-danger:         #F87171;   /* form validation errors */
+--color-signal:         #5FC3D6;   /* the attribution break marker — see below */
+--color-reading:        #FBF8F5;   /* article body surface only */
+--color-reading-ink:    #1A1512;   /* text on the reading surface */
+--color-reading-accent: #B34A12;   /* links on the reading surface */
 ```
 
-Rules: long-form body copy always sits on `paper` or `paper-2`. Dark surfaces are
-reserved for the home hero, page heroes, the stage sequence, CTA bands, and the footer.
-Never set body copy longer than three paragraphs on navy. `--color-signal` is not a
-decorative accent; it appears only where the page marks a break in attribution.
+There is one accent. The orange clears 4.5:1 on both dark surfaces, so it carries inline
+body links directly — no second link color. On dark, hover lightens to `--color-accent-lt`;
+never darken.
+
+`--color-signal` is cool by design so it can never be mistaken for the brand accent, and
+still has exactly one use: the break in the attribution chain, on the home page and the
+attribution pillar.
+
+`--color-rule` is a translucent overlay and is for decorative hairlines only. It measures
+under 3:1 by design. Anything functional — a form field boundary, a control edge — uses
+`--color-field-border` or a token that clears 3:1. Never use `--color-rule` as a text color;
+it disappears.
+
+### Surfaces
+
+`Section` takes `surface: 'base' | 'raised' | 'reading'` and is the only place a surface or
+vertical rhythm is set. No page or block sets its own.
+
+Pages alternate `base` and `raised`. That contrast is much lower than a light system's
+would be, so a section following one of the same surface gets a hairline top border. Never
+allow three identical surfaces in a row — the services leaf template derives its sequence
+rather than assigning fixed surfaces, so this holds when optional sections are absent.
+
+`reading` is used by the article detail template only, across its whole span: hero, byline,
+table of contents, body, and related articles. Header and footer stay on `base` everywhere,
+including there. The point-of-view hub stays dark — the transition into a light reading room
+happens on click.
+
+The reading surface needs its own focus ring: the global ring uses `--color-accent`, which
+drops to 2.33:1 on cream. `.surface-reading :focus-visible` overrides to
+`--color-reading-accent`.
 
 ### Typography
 
-- **Display / headings:** Inter Tight (variable axis, no fixed weight loaded), 600 for
-  headings, 700 for the header wordmark only; tracking -0.028em at h2, -0.033em at h1
+- **Display / headings:** Inter Tight, variable — 600 for headings, 700 for the wordmark
 - **Body / UI:** Inter, 400/500
-- **Editorial body:** Source Serif 4, 400 — used only in `/point-of-view` article bodies and in pull quotes. Nowhere else.
+- **Editorial body:** Source Serif 4, 400 — the article reading surface and pull quotes only
 
 Scale (rem): 0.78, 0.85, 0.94, 1.0, 1.06, 1.18, 1.35, 1.6, 2.0, 2.5, 3.2, 4.0.
-Body 17px/1.6. Measure capped at 34rem sans, 38rem serif.
+Body 17px. Line-height 1.7 on dark, measure capped at 36rem — dark long-form needs both, and
+this site has 21 pages of it. The serif reading variant runs 1.7 at a 38rem measure.
 
 ### Layout
 
-12-column grid, content max-width 1360px, gutter `clamp(1.25rem, 5vw, 4.5rem)`.
-Section rhythm: 96px mobile / 128px desktop vertical padding. Left-aligned throughout;
-centered text only inside CTA bands. Alternate `paper` and `paper-2` between sections so
-the page reads as sequenced rather than stacked.
+12-column grid, content max-width 1180px, gutter `clamp(1.25rem, 5vw, 4.5rem)`. Section
+rhythm 96px mobile / 128px desktop. Left-aligned throughout; centered text only inside CTA
+bands.
 
 ### Prohibitions
 
-These are the tells that make a page read as generated. Do not ship them.
-
 - All-caps or tracked-out eyebrow labels above headings
 - Accenting a single word in a headline with color, italic, or weight
-- Numbered markers (01 / 02 / 03) except on the four-stage process, which is a real sequence
-- Identical rounded cards with the same border-radius and soft grey shadow on everything
+- Numbered markers except on the four-stage process, which is a real sequence
+- Identical rounded cards with the same radius and shadow applied to everything
 - Gradient washes as decoration
 - Fade-and-slide-up entrance animations on scroll
 - Hover lift transitions on cards
@@ -152,13 +178,15 @@ These are the tells that make a page read as generated. Do not ship them.
 - Stock dashboard illustrations, abstract network graphics, AI-brain imagery
 - Emoji or other non-text decoration
 - Border-radius above 4px on any surface
+- Tailwind's built-in color utilities (`bg-blue-600`, `text-gray-400`, and so on). They
+  resolve against Tailwind's own palette rather than failing, so a component using one looks
+  correct and is wrong. Only project tokens.
 
-**Motion.** One orchestrated moment per page maximum, and only where it shows a change
-of state the user caused. Respect `prefers-reduced-motion`.
+**Motion.** One orchestrated moment per page maximum. Respect `prefers-reduced-motion`.
 
-**Quality floor, unannounced.** Responsive to 360px. Visible keyboard focus. WCAG AA
-contrast on every text/background pair. Semantic headings in order. All interactive
-elements reachable by keyboard.
+**Quality floor, unannounced.** Responsive to 360px. Visible keyboard focus on every surface.
+WCAG AA on every text pair — 4.5:1 body, 3:1 large text and functional non-text elements.
+Semantic headings in order.
 
 ---
 
@@ -216,9 +244,20 @@ Non-negotiable per page:
    lands at when the writing is good.
 4. JSON-LD via `components/seo/JsonLd`. Types per page listed in `docs/sitemap-seo-plan.md`.
    Organization + WebSite on the root layout only.
-5. Minimum four contextual internal links in body copy, using descriptive anchor text
-   drawn from the target page's own vocabulary. Never "click here", never "learn more"
-   as the full anchor. Pull link destinations from `lib/nav.ts`.
+5. Internal links, by page type. Anchor text is drawn from the destination page's own
+   vocabulary, never "click here" or a bare "learn more". Pull destinations from
+   `lib/nav.ts` — no hardcoded hrefs anywhere in the codebase.
+   - **Service pages:** the six-category composition rule — the attribution pillar, the
+     page's own stage hub, at least two sibling services, its counterpart where one exists,
+     at least one industry page, and at least one proof entry. Enforced by
+     `scripts/content-check.ts`, not by a raw count.
+   - **Articles:** at least one link to the attribution pillar and at least one to a service
+     page.
+   - **Every other .tsx route:** at least four contextual internal links in body copy,
+     counted from rendered output by `scripts/check-rendered-links.ts`.
+   - **`/_not-found`:** exempt. Its job is one-click recovery, not authority flow.
+   A required link that has no natural home in a page's argument is reported, not
+   manufactured — record it in the page's `linkExemptions` frontmatter with a reason.
 6. Breadcrumbs on every page below the top level, with BreadcrumbList schema.
 7. Images: `next/image`, explicit width/height, meaningful `alt`, `priority` only on the
    hero image of the page.
@@ -236,7 +275,11 @@ Non-negotiable per page:
 - [ ] Metadata present, title and description within limits
 - [ ] JSON-LD validates (paste into Google Rich Results Test)
 - [ ] One h1, sequential headings
-- [ ] ≥4 contextual internal links, all resolving
+- [ ] Internal links, by page type, all resolving: service pages clear the six-category
+      composition rule (not a raw count); articles carry at least one link to the
+      attribution pillar and at least one to a service page; every other `.tsx` route
+      carries ≥4 contextual internal links in body copy; `/_not-found` is exempt — its job
+      is one-click recovery, not authority flow
 - [ ] No banned words, no unsourced numbers, no `[[metric:]]` in a production build
 - [ ] Renders correctly at 360px, 768px, 1280px, 1600px
 - [ ] Keyboard navigable, focus visible, contrast AA
