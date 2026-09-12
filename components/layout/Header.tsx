@@ -99,8 +99,19 @@ export default async function Header() {
       <Container>
         <div className="flex h-[76px] items-center justify-between">
           <Link href={home.path} className="flex items-baseline gap-3">
+            {/* Decorative — the wordmark span below carries the link's accessible name.
+                Plain img, not next/image: next/image refuses to optimize SVG sources
+                without images.dangerouslyAllowSVG in next.config.ts, which is a wider
+                security-relevant change than this brand-mark lockup calls for. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/icon.svg" alt="" width={35} height={28} className="h-[28px] w-auto shrink-0" />
             <span className="font-display text-xl font-bold text-white">SiteOptz</span>
-            <span className="text-2xs text-muted">Marketing intelligence</span>
+            <span
+              aria-hidden="true"
+              className="hidden text-2xs text-muted min-[480px]:inline"
+            >
+              Marketing intelligence
+            </span>
           </Link>
 
           <nav aria-label="Primary" className="hidden items-center gap-8 min-[900px]:flex">

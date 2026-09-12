@@ -48,8 +48,14 @@ export default function Footer() {
     <footer className="border-t border-[rgba(255,236,220,0.14)] bg-base text-muted">
       <Container>
         <div className="py-12">
-          <Link href={home.path} className="font-display text-lg font-semibold text-white">
-            SiteOptz
+          <Link href={home.path} className="flex items-baseline gap-3">
+            {/* Decorative — the wordmark span below carries the link's accessible name.
+                Plain img, not next/image: next/image refuses to optimize SVG sources
+                without images.dangerouslyAllowSVG in next.config.ts, which is a wider
+                security-relevant change than this brand-mark lockup calls for. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/icon.svg" alt="" width={35} height={28} className="h-[28px] w-auto shrink-0" />
+            <span className="font-display text-lg font-semibold text-white">SiteOptz</span>
           </Link>
           <p className="mt-3 max-w-[var(--measure-sans)] text-sm">{POSITIONING_LINE}</p>
         </div>
