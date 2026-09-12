@@ -60,7 +60,7 @@ export default function ServicesHubPage() {
         </Container>
       </Section>
 
-      <Section surface="base">
+      <Section surface="base" width="narrow">
         <Container>
           <Prose>
             <p>
@@ -131,7 +131,7 @@ export default function ServicesHubPage() {
         </Container>
       </Section>
 
-      <Section surface="base">
+      <Section surface="base" width="narrow">
         <Container>
           <SectionHead as="h2" heading="The layer underneath" />
           <Prose>
@@ -157,7 +157,7 @@ export default function ServicesHubPage() {
         </Container>
       </Section>
 
-      <Section surface="base">
+      <Section surface="base" width="narrow">
         <Container>
           <Prose>
             <p>

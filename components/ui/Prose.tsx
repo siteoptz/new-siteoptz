@@ -30,28 +30,21 @@ const VARIANT_CLASSES: Record<NonNullable<ProseProps["variant"]>, string> = {
 };
 
 // services/industries MDX bodies may embed DefinitionList (dl), MetricTable (figure),
-// QuoteBlock (blockquote), or AttributionChain (ol) alongside genuine prose — those are
-// grid blocks meant to span the full container, never the narrowed reading column, so
-// they get an explicit full-span placement rather than inheriting the column start below.
-const PLACEMENT_CLASSES =
-  "grid grid-cols-1 min-[1100px]:grid-cols-12 " +
-  "min-[1100px]:[&>p]:col-start-4 min-[1100px]:[&>p]:col-span-9 " +
-  "min-[1100px]:[&>h2]:col-start-4 min-[1100px]:[&>h2]:col-span-9 " +
-  "min-[1100px]:[&>h3]:col-start-4 min-[1100px]:[&>h3]:col-span-9 " +
-  "min-[1100px]:[&>ul]:col-start-4 min-[1100px]:[&>ul]:col-span-9 " +
-  "min-[1100px]:[&>dl]:col-span-12 min-[1100px]:[&>figure]:col-span-12 " +
-  "min-[1100px]:[&>blockquote]:col-span-12 min-[1100px]:[&>ol]:col-span-12";
+// QuoteBlock (blockquote), or AttributionChain (ol) alongside genuine prose. Without an
+// explicit span, CSS grid auto-placement gives every direct child just one of twelve
+// columns — a real bug independent of any column offset — so every direct child
+// (prose tag or embedded component alike) gets an explicit full-span placement here.
+const PLACEMENT_CLASSES = "grid grid-cols-1 min-[1100px]:grid-cols-12 min-[1100px]:[&>*]:col-span-12";
 
 /**
  * Measure and vertical rhythm for long-form body copy, styling descendant
  * p/ul/ol/li/strong/em/a/h2/h3 for MDX output. Never styles h1 — the page's
  * one h1 lives in the hero, not in body copy.
  *
- * The sans variant places its prose tags in columns 4-12 of a 12-column grid at
- * 1100px and up (aligning under SectionHead's lead paragraph, not its heading),
- * returning to a single full-width column below that. The serif reading variant
- * is left alone — the article template already places it in its own TOC/body
- * grid, and narrowing it again here would double up.
+ * The sans variant's content spans the full container width — column placement is
+ * Section's job (see its `width` prop) applied to prose-heavy sections, not Prose's.
+ * The serif reading variant is left alone — the article template already places it
+ * in its own TOC/body grid.
  */
 export default function Prose({ children, variant = "sans" }: ProseProps) {
   const proseClasses = `${VARIANT_CLASSES[variant]} ${STRUCTURE_CLASSES} ${LINK_CLASSES}`;
