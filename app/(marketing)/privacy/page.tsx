@@ -56,7 +56,7 @@ export default function PrivacyPage() {
         </Container>
       </Section>
 
-      <Section surface="base" width="narrow">
+      <Section surface="base">
         <Container>
           <Prose>
             <h2>What this covers</h2>
@@ -90,7 +90,7 @@ export default function PrivacyPage() {
         </Container>
       </Section>
 
-      <Section surface="raised" width="narrow">
+      <Section surface="raised">
         <Container>
           <Prose>
             <h2>Call recording</h2>
@@ -119,7 +119,7 @@ export default function PrivacyPage() {
         </Container>
       </Section>
 
-      <Section surface="base" width="narrow">
+      <Section surface="base">
         <Container>
           <Prose>
             <h2>Retention</h2>
@@ -150,7 +150,7 @@ export default function PrivacyPage() {
         </Container>
       </Section>
 
-      <Section surface="raised" width="narrow">
+      <Section surface="raised">
         <Container>
           <Prose>
             <h2>Client data</h2>
@@ -179,7 +179,7 @@ export default function PrivacyPage() {
         </Container>
       </Section>
 
-      <Section surface="base" width="narrow">
+      <Section surface="base">
         <Container>
           <Prose>
             <h2>Your choices</h2>

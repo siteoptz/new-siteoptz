@@ -99,7 +99,7 @@ export default function HowItWorksPage() {
         </Container>
       </Section>
 
-      <Section surface="raised" width="narrow">
+      <Section surface="raised">
         <Container>
           <Prose>
             <h2>Measurement audit — weeks 1 and 2</h2>
@@ -179,7 +179,7 @@ export default function HowItWorksPage() {
         </Container>
       </Section>
 
-      <Section surface="base" width="narrow">
+      <Section surface="base">
         <Container>
           <SectionHead heading="What the audit deliverable contains" />
           <Prose>
@@ -203,7 +203,7 @@ export default function HowItWorksPage() {
         </Container>
       </Section>
 
-      <Section surface="raised" width="narrow">
+      <Section surface="raised">
         <Container>
           <SectionHead heading="What we need from your team" />
           <Prose>
@@ -228,7 +228,7 @@ export default function HowItWorksPage() {
         </Container>
       </Section>
 
-      <Section surface="base" width="narrow">
+      <Section surface="base">
         <Container>
           <SectionHead heading="How pricing works" />
           <Prose>
@@ -244,7 +244,7 @@ export default function HowItWorksPage() {
         </Container>
       </Section>
 
-      <Section surface="raised" width="narrow">
+      <Section surface="raised">
         <Container>
           <SectionHead heading="If we are not the right fit" />
           <Prose>

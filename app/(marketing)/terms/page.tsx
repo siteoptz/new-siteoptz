@@ -56,7 +56,7 @@ export default function TermsPage() {
         </Container>
       </Section>
 
-      <Section surface="base" width="narrow">
+      <Section surface="base">
         <Container>
           <Prose>
             <p>
@@ -96,7 +96,7 @@ export default function TermsPage() {
         </Container>
       </Section>
 
-      <Section surface="raised" width="narrow">
+      <Section surface="raised">
         <Container>
           <Prose>
             <h2>Not advice, and not a relationship</h2>
@@ -125,7 +125,7 @@ export default function TermsPage() {
         </Container>
       </Section>
 
-      <Section surface="base" width="narrow">
+      <Section surface="base">
         <Container>
           <Prose>
             <h2>Governing law</h2>

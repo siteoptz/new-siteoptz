@@ -128,7 +128,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </Container>
         </Section>
 
-        <Section surface="base" width="narrow">
+        <Section surface="base">
           <Container>
             <Prose>{entry.content}</Prose>
           </Container>
@@ -172,7 +172,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </Section>
       ) : null}
 
-      <Section surface={surfaces.prose} width="narrow">
+      <Section surface={surfaces.prose}>
         <Container>
           <Prose>{entry.content}</Prose>
         </Container>

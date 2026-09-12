@@ -65,7 +65,7 @@ export default async function IndustriesHubPage() {
         </Container>
       </Section>
 
-      <Section surface="base" width="narrow">
+      <Section surface="base">
         <Container>
           <Prose>
             <p>

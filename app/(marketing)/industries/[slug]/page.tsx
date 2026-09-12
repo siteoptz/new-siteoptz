@@ -75,7 +75,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
         </Container>
       </Section>
 
-      <Section surface="base" width="narrow">
+      <Section surface="base">
         <Container>
           <Prose>{entry.content}</Prose>
         </Container>

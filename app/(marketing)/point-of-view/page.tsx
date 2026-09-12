@@ -76,7 +76,7 @@ export default async function PointOfViewHubPage() {
         </Container>
       </Section>
 
-      <Section surface="base" width="narrow">
+      <Section surface="base">
         <Container>
           <Prose>
             <p>

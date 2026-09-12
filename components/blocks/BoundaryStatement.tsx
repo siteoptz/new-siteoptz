@@ -32,8 +32,8 @@ export default function BoundaryStatement({ slug, children }: BoundaryStatementP
     // measured 2.18:1 against raised. accent/65 clears 3.70:1 while staying visibly dimmer than
     // the full-strength accent used for the counterpart links right below it.
     <div className="border-l-2 border-accent/65 bg-raised py-4 pl-6">
-      <div>{children}</div>
-      <p className="mt-3 text-sm">
+      <div className="max-w-[36rem]">{children}</div>
+      <p className="mt-3 max-w-[36rem] text-sm">
         {counterparts.map((route, index) => (
           <span key={route.path}>
             {index > 0 ? " · " : null}

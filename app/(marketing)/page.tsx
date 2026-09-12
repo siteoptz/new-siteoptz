@@ -59,7 +59,7 @@ export default function HomePage() {
         </Container>
       </Section>
 
-      <Section surface="base" width="narrow">
+      <Section surface="base">
         <Container>
           <SectionHead
             heading="Three systems that don't talk to each other."

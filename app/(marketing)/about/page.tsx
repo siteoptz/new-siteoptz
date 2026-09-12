@@ -52,7 +52,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section surface="base" width="narrow">
+      <Section surface="base">
         <Container>
           <SectionHead heading="How we're structured, and why it stays small" />
           <Prose>
@@ -111,7 +111,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section surface="base" width="narrow">
+      <Section surface="base">
         <Container>
           <SectionHead heading="How we choose clients" />
           <Prose>
@@ -141,7 +141,7 @@ export default function AboutPage() {
         </Container>
       </Section>
 
-      <Section surface="raised" width="narrow">
+      <Section surface="raised">
         <Container>
           <SectionHead heading="What we decline" />
           <Prose>
