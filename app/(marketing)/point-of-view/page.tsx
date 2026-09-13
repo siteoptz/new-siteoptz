@@ -11,7 +11,7 @@ import { buildCollectionPage } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 const PAGE_DESCRIPTION =
-  "Written positions on attribution, AI search, and marketing measurement — for operators deciding where to put next quarter's budget.";
+  "Written positions on attribution, AI search, and marketing measurement - for operators deciding where to put next quarter's budget.";
 
 export const metadata = buildMetadata({
   title: "Point of View | SiteOptz",
@@ -81,10 +81,10 @@ export default async function PointOfViewHubPage() {
           <Prose>
             <p>
               This section exists to argue specific positions on measurement questions that
-              operators are actually weighing. Each article takes one stance — why a particular
+              operators are actually weighing. Each article takes one stance - why a particular
               platform number cannot be trusted at face value, what{" "}
               <Link href="/how-it-works">our four-stage engagement process</Link> turns up before a
-              single dollar moves, how to read a report most vendors present without context — and
+              single dollar moves, how to read a report most vendors present without context - and
               argues it directly enough that a reader could disagree with it outright, rather than
               skim past a hedge.
             </p>
@@ -99,8 +99,8 @@ export default async function PointOfViewHubPage() {
             <p>
               Each piece is built the same way: a specific, falsifiable claim, argued from
               documented mechanisms rather than from a statistic nobody can actually source.
-              Where a claim rests on how a platform or a system genuinely behaves — an
-              attribution window, a modeling assumption, a default a vendor rarely explains — that
+              Where a claim rests on how a platform or a system genuinely behaves - an
+              attribution window, a modeling assumption, a default a vendor rarely explains - that
               mechanism gets named and described in enough detail to check independently. Where an
               argument would require a number no one here can trace to a named account, it gets
               made without one, even where a number would land more easily.

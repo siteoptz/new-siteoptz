@@ -79,7 +79,7 @@ export default function HowItWorksPage() {
               Most agencies describe their process as a relationship: onboarding, strategy,
               execution, optimization, repeat. That framing works fine for creative and media
               buying, and it hides exactly the part of the engagement that determines whether
-              anything downstream can be trusted — the measurement layer underneath it. This page
+              anything downstream can be trusted - the measurement layer underneath it. This page
               describes the four stages in the order they actually happen, with what each one
               requires, what it produces, and how long it takes.
             </p>
@@ -102,11 +102,11 @@ export default function HowItWorksPage() {
       <Section surface="raised">
         <Container>
           <Prose>
-            <h2>Measurement audit — weeks 1 and 2</h2>
+            <h2>Measurement audit - weeks 1 and 2</h2>
             <p>
               The audit starts with access, not a meeting: read access to the ad accounts and
               analytics currently in use, and either an export or a read-only connection to
-              whatever system records a booked outcome — a CRM, an EMR, a property management
+              whatever system records a booked outcome - a CRM, an EMR, a property management
               system. From that, we build a channel-by-location map showing what is tracked today
               against what the revenue system actually recorded, and name the specific gap between
               the two rather than describing it in general terms.
@@ -115,12 +115,12 @@ export default function HowItWorksPage() {
               The output is a written document: which channels and locations have a real,
               auditable connection to a booked outcome, which are inferred or estimated, and which
               have none at all. It is scoped to two weeks regardless of how many locations or
-              channels are involved, and it stands on its own — a business that stops here walks
+              channels are involved, and it stands on its own - a business that stops here walks
               away with an accurate account of where its reporting can be trusted and where it
               cannot.
             </p>
 
-            <h2>Build the layer — weeks 3 through 6</h2>
+            <h2>Build the layer - weeks 3 through 6</h2>
             <p>
               This stage requires a different kind of access: administrative rights to the ad
               platforms and call tracking system, since offline conversion import and call scoring
@@ -139,10 +139,10 @@ export default function HowItWorksPage() {
               process usually needs the full six.
             </p>
 
-            <h2>Run the programs — week 7 onward</h2>
+            <h2>Run the programs - week 7 onward</h2>
             <p>
               Campaigns that were previously judged on platform-reported clicks and conversions
-              start reporting against the new standard instead, and budget moves accordingly —
+              start reporting against the new standard instead, and budget moves accordingly - 
               sometimes toward a channel that had looked mediocre under the old measurement, and
               sometimes away from one that had looked strong. The first full reporting cycle
               against the new layer typically produces at least one reallocation nobody would have
@@ -150,10 +150,10 @@ export default function HowItWorksPage() {
             </p>
             <p>
               That shift is not confined to one channel. It reaches every stage a program runs
-              in —{" "}
+              in - {" "}
               <Link href="/services/top-of-funnel">top-of-funnel programs</Link>,{" "}
               <Link href="/services/middle-of-funnel">middle-of-funnel programs</Link>, and{" "}
-              <Link href="/services/bottom-of-funnel">bottom-of-funnel programs</Link> alike —
+              <Link href="/services/bottom-of-funnel">bottom-of-funnel programs</Link> alike - 
               since all three report against the identical cost-per-booked-outcome standard from
               week seven onward.
             </p>
@@ -167,7 +167,7 @@ export default function HowItWorksPage() {
               number.
             </p>
 
-            <h2>Standing review — ongoing</h2>
+            <h2>Standing review - ongoing</h2>
             <p>
               Reporting runs on a monthly cadence: cost per booked outcome by channel and
               location, checked against the previous month, with a decision log recording what
@@ -188,13 +188,13 @@ export default function HowItWorksPage() {
               revenue system records, with each cell marked as connected, estimated, or missing
               entirely. A written account of the largest gaps, in the order they are worth fixing
               first, rather than a flat list with no priority attached. And a specific recommendation
-              for each gap — an access request, a tagging fix, an export schedule — concrete enough
+              for each gap - an access request, a tagging fix, an export schedule - concrete enough
               to act on without a follow-up call to clarify what it means.
             </p>
             <p>
               The matrix also states plainly which gaps the audit itself cannot close. A location
               still running paper intake forms, or a CRM with no export and no API, shows up as a
-              named limitation rather than a footnote buried in an appendix — the kind of finding a
+              named limitation rather than a footnote buried in an appendix - the kind of finding a
               business needs before deciding whether the build stage is worth starting, not after
               a retainer is already underway. Every recommendation in the deliverable is one the
               client&rsquo;s own team could execute without us, if that turned out to be the right call.
@@ -211,7 +211,7 @@ export default function HowItWorksPage() {
               Access is the largest requirement, and it grows across the four stages: read-only
               for the audit, administrative for the build stage, since call scoring and offline
               conversion import both make changes inside the ad platforms directly. Beyond access,
-              one person who can answer how intake actually works day to day — which forms route
+              one person who can answer how intake actually works day to day - which forms route
               where, what a call sounds like before anyone scores it, where a lead can quietly get
               lost. That person does not need to be senior. They need to be the one who would
               actually notice if a step silently stopped happening.

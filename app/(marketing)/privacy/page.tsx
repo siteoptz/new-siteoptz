@@ -64,7 +64,7 @@ export default function PrivacyPage() {
               This policy covers two different things, and they are governed differently. The
               first is this website: the form you can fill out and the analytics that run while
               you browse. The second is the data we handle on a client&rsquo;s behalf once an
-              engagement starts — a client&rsquo;s CRM records, ad accounts, or call logs. That
+              engagement starts - a client&rsquo;s CRM records, ad accounts, or call logs. That
               second category belongs to the client, is governed by
               the signed statement of work described in our{" "}
               <Link href="/terms">terms of service</Link>, and is covered separately in the{" "}
@@ -78,7 +78,7 @@ export default function PrivacyPage() {
               trying to measure.
             </p>
             <p>
-              Through analytics — Google Analytics 4 and Google Tag Manager: pages viewed,
+              Through analytics - Google Analytics 4 and Google Tag Manager: pages viewed,
               referring source, approximate location from IP address, and device and browser
               type.
             </p>
@@ -93,7 +93,7 @@ export default function PrivacyPage() {
             <p>
               This site sets one kind of cookie, and no others. Analytics cookies, set by GA4 and
               Google Tag Manager, so we can see aggregate traffic and behavior. This is not an
-              advertising cookie — this site does not run retargeting pixels, and we do not sell
+              advertising cookie - this site does not run retargeting pixels, and we do not sell
               or share this data with advertisers. You can refuse it through your browser&rsquo;s
               cookie controls; refusing it does not affect your ability to browse the site or
               submit the contact form.
@@ -116,13 +116,13 @@ export default function PrivacyPage() {
 
             <h2>Who processes data on our behalf</h2>
             <p>
-              <strong>Google</strong> — analytics (GA4) and tag management (Google Tag Manager)
+              <strong>Google</strong> - analytics (GA4) and tag management (Google Tag Manager)
               for this site.
               <br />
-              <strong>GoHighLevel</strong> — receives contact form submissions and stores them as
+              <strong>GoHighLevel</strong> - receives contact form submissions and stores them as
               leads.
               <br />
-              <strong>Vercel</strong> — hosts this website.
+              <strong>Vercel</strong> - hosts this website.
             </p>
             <p>We do not use a processor beyond the three listed here.</p>
           </Prose>
@@ -134,8 +134,8 @@ export default function PrivacyPage() {
           <Prose>
             <h2>Client data</h2>
             <p>
-              When an engagement gives us access to a client&rsquo;s systems — a CRM, an EMR, a call
-              tracking platform, an ad account — that access is granted by the client, scoped to
+              When an engagement gives us access to a client&rsquo;s systems - a CRM, an EMR, a call
+              tracking platform, an ad account - that access is granted by the client, scoped to
               what the engagement requires, and used only for that engagement. It is handled by
               the same senior team described on our <Link href="/about">about SiteOptz</Link> page,
               not a rotating pool of contractors.
@@ -145,13 +145,13 @@ export default function PrivacyPage() {
               any work touching protected health information begins. Our team has completed
               HIPAA training, and we operate under written policies and safeguards governing how
               that data is stored, handled, and who can access it. We make no certification claim
-              beyond this — no HIPAA certification exists, and no government body issues one.
+              beyond this - no HIPAA certification exists, and no government body issues one.
             </p>
             <p>
               We work to keep patient and customer identifiers out of the advertising platforms
               and analytics tools we configure, using de-identified or hashed values wherever a
               platform requires an identifier at all. Client data is never used to train any model,
-              and it is never shared between clients — what we learn on one engagement stays with
+              and it is never shared between clients - what we learn on one engagement stays with
               that engagement.
             </p>
           </Prose>
@@ -189,7 +189,7 @@ export default function PrivacyPage() {
               </a>
             </p>
             <p>
-              Questions about a specific engagement are best asked directly — see{" "}
+              Questions about a specific engagement are best asked directly - see{" "}
               <Link href="/how-it-works">our four-stage engagement process</Link> for how one
               runs, or <Link href="/contact">book a call</Link> to talk to someone about it.
             </p>

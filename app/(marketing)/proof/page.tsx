@@ -62,7 +62,7 @@ export default async function ProofHubPage() {
           <PageHero
             kicker="Proof"
             heading="Client work, with the numbers we can evidence."
-            lead="Case studies from named client accounts, each approved in writing before it publishes — never a blended number across engagements."
+            lead="Case studies from named client accounts, each approved in writing before it publishes - never a blended number across engagements."
           />
         </Container>
       </Section>
@@ -72,13 +72,13 @@ export default async function ProofHubPage() {
           <Prose>
             <p>
               Every case on this page is real, and every case is checkable. Before you read any of
-              them, here is exactly how a number gets from a client&rsquo;s account onto this page —
+              them, here is exactly how a number gets from a client&rsquo;s account onto this page - 
               and the two things we will not do to make that number look better than it is.
             </p>
             <p>
               Every figure on this page and on every case beneath it comes from one place: the
-              system where the client&rsquo;s own business recorded the outcome — a CRM, an EMR, a
-              property management system — tied back through the{" "}
+              system where the client&rsquo;s own business recorded the outcome - a CRM, an EMR, a
+              property management system - tied back through the{" "}
               <Link href="/services/marketing-attribution">attribution layer</Link> built during{" "}
               <Link href="/how-it-works">the engagement itself</Link>. We do not report
               platform-claimed conversions, and we do not estimate what an outcome was probably
@@ -104,7 +104,7 @@ export default async function ProofHubPage() {
             </p>
             <p>
               This is slower than most agencies&rsquo; approach to case studies, and it means some
-              real work never gets published — a client who agrees the engagement went well is not
+              real work never gets published - a client who agrees the engagement went well is not
               always willing to put a written number behind it publicly, and we do not substitute a
               softer claim in its place. We would rather show fewer cases and stand behind every one
               of them than pad this page with the kind of case study any vendor can produce for
@@ -115,7 +115,7 @@ export default async function ProofHubPage() {
               same three questions we hold ourselves to here: which account is this number from, can
               I see the client&rsquo;s written approval, and is this figure blended with anything
               else. A vendor unwilling to answer any of the three is telling you something about the
-              rest of their reporting too — or{" "}
+              rest of their reporting too - or{" "}
               <Link href="/contact">ask us those same questions directly</Link>.
             </p>
           </Prose>

@@ -68,7 +68,7 @@ export default function HomePage() {
               ad platforms reporting clicks and impressions, the phone and form tools capturing
               the inquiry, and the CRM, EMR, or property management system where a booked outcome
               is actually recorded. Each reports its own version of what happened. None of them
-              reports what the business needs to know — which dollar produced which outcome.
+              reports what the business needs to know - which dollar produced which outcome.
             </p>
             <p>
               When those systems stay disconnected, budget drifts toward whatever produces the
@@ -80,7 +80,7 @@ export default function HomePage() {
             <p>
               We build the measurement layer before we touch a campaign, because every later
               decision depends on it. Reallocating budget, testing new creative, launching a
-              market — none of it means anything if the number it is judged against is not real.
+              market - none of it means anything if the number it is judged against is not real.
             </p>
           </Prose>
         </Container>
@@ -119,7 +119,7 @@ export default function HomePage() {
               {pillar.label}
             </Link>
             <p className="mt-1 text-muted">
-              Underneath all three stages above, not a fourth program beside them — the layer
+              Underneath all three stages above, not a fourth program beside them - the layer
               that measures whether any of it produced revenue.
             </p>
           </div>

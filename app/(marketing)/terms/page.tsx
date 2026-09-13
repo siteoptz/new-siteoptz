@@ -51,7 +51,7 @@ export default function TermsPage() {
           <PageHero
             kicker="Terms"
             heading="Terms of service."
-            lead="What governs this website, and what governs a client engagement — they are not the same document."
+            lead="What governs this website, and what governs a client engagement - they are not the same document."
           />
         </Container>
       </Section>
@@ -82,7 +82,7 @@ export default function TermsPage() {
               <Link href="/services/marketing-attribution">
                 attribution built to your revenue system
               </Link>{" "}
-              remain our intellectual property whether or not you become a client — reading about
+              remain our intellectual property whether or not you become a client - reading about
               a method here does not grant a license to use it.
             </p>
 
@@ -118,7 +118,7 @@ export default function TermsPage() {
             <p>
               To the extent permitted by law, {LEGAL_ENTITY} is not liable for indirect,
               incidental, or consequential damages arising from your use of this website. This
-              section does not limit liability arising under a signed statement of work — that
+              section does not limit liability arising under a signed statement of work - that
               document sets its own terms.
             </p>
           </Prose>

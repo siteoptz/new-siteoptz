@@ -58,13 +58,13 @@ export default function ContactPage() {
             <p>
               The form below is short, but the last field is the one that matters: describe the
               specific question you can&rsquo;t currently answer, not the department budget. Whoever
-              would run the engagement reads every submission themselves — no intake queue — and
+              would run the engagement reads every submission themselves - no intake queue - and
               you&rsquo;ll hear back within one business day with either a time to talk or a direct,
               honest referral elsewhere if what you&rsquo;ve described isn&rsquo;t something we do.
             </p>
             <p>
               We ask about location count and spend up front because the answer changes what&rsquo;s
-              worth building first — a single clinic and a forty-location portfolio start from
+              worth building first - a single clinic and a forty-location portfolio start from
               different places, even when the underlying question is the same. There&rsquo;s no wrong
               answer here; it just tells us where to begin.
             </p>
@@ -96,7 +96,7 @@ export default function ContactPage() {
                 <a href={`mailto:${DIRECT_EMAIL}`} className="text-accent underline">
                   {DIRECT_EMAIL}
                 </a>{" "}
-                — the same person who reads the form reads that inbox.
+ - the same person who reads the form reads that inbox.
               </p>
             </div>
             <div>

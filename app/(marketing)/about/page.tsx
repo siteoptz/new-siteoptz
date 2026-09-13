@@ -60,7 +60,7 @@ export default function AboutPage() {
               SiteOptz is structured as one senior team, not a layered account org chart. The same
               one or two people carry an account through{" "}
               <Link href="/how-it-works">our four-stage engagement process</Link>, from the first
-              audit to the standing monthly review — there is no account manager sitting between
+              audit to the standing monthly review - there is no account manager sitting between
               the person who builds{" "}
               <Link href="/services/marketing-attribution">
                 attribution built to your revenue system
@@ -90,11 +90,11 @@ export default function AboutPage() {
           <SectionHead heading="How we choose clients" />
           <Prose>
             <p>
-              We work best with multi-location operators —{" "}
+              We work best with multi-location operators - {" "}
               <Link href="/industries/healthcare-marketing">
                 marketing for multi-location healthcare groups
               </Link>
-              , self-storage portfolios, professional services firms — where a single blended
+              , self-storage portfolios, professional services firms - where a single blended
               number hides which location or channel is actually producing revenue. That is also
               where a small team goes furthest: a handful of accounts we can go deep on, rather
               than a roster too large to know any of them well.
@@ -127,7 +127,7 @@ export default function AboutPage() {
             </p>
             <p>
               We decline work where nobody will grant access to the systems that record a booked
-              outcome — a CRM, an EMR, a property management system. An attribution model built
+              outcome - a CRM, an EMR, a property management system. An attribution model built
               without that access is a guess wearing a dashboard, and we won&rsquo;t sell one.
             </p>
             <p>
@@ -150,7 +150,7 @@ export default function AboutPage() {
         <Container>
           <CTABand
             heading="Talk to the person who'd run your account."
-            body="No queue, no handoff — book a working session and see if the timing lines up."
+            body="No queue, no handoff - book a working session and see if the timing lines up."
             cta={{ label: "Book a call", href: "/contact" }}
           />
         </Container>

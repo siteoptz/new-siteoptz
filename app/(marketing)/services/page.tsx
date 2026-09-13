@@ -71,7 +71,7 @@ export default function ServicesHubPage() {
               knows but has not decided. <Link href={bof.path}>Bottom of funnel</Link> converts
               demand that already exists. Every one of the twenty programs belongs to exactly one
               of those three stages, and each stage&rsquo;s own page names the specific thing that
-              makes measurement hard at that point in the relationship — three different problems,
+              makes measurement hard at that point in the relationship - three different problems,
               each one specific to its stage.
             </p>
             <p>
@@ -143,7 +143,7 @@ export default function ServicesHubPage() {
               judged on the identical standard: what the business actually booked.
             </p>
             <p>
-              Some of that matching is deterministic — a phone number or email captured at the
+              Some of that matching is deterministic - a phone number or email captured at the
               point of conversion connects a click to the record it produced with no ambiguity.
               Some of it has to be estimated, using timing, geography, and session behavior when no
               shared identifier exists, and reported with a confidence score attached to show
@@ -173,14 +173,14 @@ export default function ServicesHubPage() {
               The same three stages apply regardless of which industry a business operates in. A
               multi-location healthcare group, a self-storage portfolio, a professional services
               firm, and an agency running this measurement layer behind its own name are all
-              working with the identical twenty programs, organized the identical way — what
+              working with the identical twenty programs, organized the identical way - what
               differs is which specific programs matter most for that operator&rsquo;s own numbers,
               covered on the <Link href="/industries">industries</Link> pages.
             </p>
             <p>
               For a walkthrough of how an engagement actually runs once a starting point is
-              chosen — what gets built in the first weeks, and when programs start running against
-              the new standard — see <Link href="/how-it-works">how it works</Link>.
+              chosen - what gets built in the first weeks, and when programs start running against
+              the new standard - see <Link href="/how-it-works">how it works</Link>.
             </p>
           </Prose>
         </Container>

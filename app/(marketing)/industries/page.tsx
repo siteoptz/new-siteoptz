@@ -13,7 +13,7 @@ import { buildCollectionPage } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 const PAGE_DESCRIPTION =
-  "Multi-location healthcare, self-storage portfolios, professional services, and agency partners — where measurement is the hard part.";
+  "Multi-location healthcare, self-storage portfolios, professional services, and agency partners - where measurement is the hard part.";
 
 export const metadata = buildMetadata({
   title: "Industries We Work In | SiteOptz",
@@ -74,8 +74,8 @@ export default async function IndustriesHubPage() {
               single blended number hides which specific site, program, or account is actually
               producing results. A multi-location healthcare group, a self-storage portfolio, a
               professional services firm with a long sales cycle, and an agency running this
-              measurement layer under its own name all need the same underlying discipline —
-              attribution that survives being broken out by location or account — applied to
+              measurement layer under its own name all need the same underlying discipline - 
+              attribution that survives being broken out by location or account - applied to
               different systems and different constraints.
             </p>
           </Prose>
