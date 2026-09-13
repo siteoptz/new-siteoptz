@@ -2,7 +2,6 @@ import Link from "next/link";
 import AttributionChain from "@/components/blocks/AttributionChain";
 import CTABand from "@/components/blocks/CTABand";
 import DefinitionList from "@/components/blocks/DefinitionList";
-import MetricTable from "@/components/blocks/MetricTable";
 import RuleList from "@/components/blocks/RuleList";
 import StageSequence from "@/components/blocks/StageSequence";
 import Button from "@/components/ui/Button";
@@ -214,49 +213,30 @@ export default function HomePage() {
       <Section surface="raised">
         <Container>
           <SectionHead heading="What you receive" />
-          <div className="grid grid-cols-1 gap-10 min-[900px]:grid-cols-2">
-            <DefinitionList
-              items={[
-                {
-                  term: "Attribution map",
-                  definition: "Every channel and location mapped to how it reports into the revenue system.",
-                },
-                {
-                  term: "Monthly performance report",
-                  definition: "Cost per booked outcome by channel and location, not platform-reported conversions.",
-                },
-                {
-                  term: "Call review record",
-                  definition: "A sample of scored calls, so quality is auditable, not assumed.",
-                },
-                {
-                  term: "Location scorecards",
-                  definition: "Performance ranked by site, not blended into one national number.",
-                },
-                {
-                  term: "Decision log",
-                  definition: "What changed each month and why, tied to the data that prompted it.",
-                },
-              ]}
-            />
-            <MetricTable
-              caption="Structure of the monthly performance report"
-              columns={[
-                { key: "channel", label: "Channel" },
-                { key: "spend", label: "Spend", numeric: true },
-                { key: "qualified", label: "Qualified inquiries", numeric: true },
-                { key: "booked", label: "Booked", numeric: true },
-                { key: "cpbo", label: "Cost per booked", numeric: true },
-              ]}
-              rows={[
-                { channel: "Paid search (non-brand)" },
-                { channel: "Paid social" },
-                { channel: "SEO" },
-                { channel: "Organic capture" },
-                { channel: "Email" },
-              ]}
-            />
-          </div>
+          <DefinitionList
+            items={[
+              {
+                term: "Attribution map",
+                definition: "Every channel and location mapped to how it reports into the revenue system.",
+              },
+              {
+                term: "Monthly performance report",
+                definition: "Cost per booked outcome by channel and location, not platform-reported conversions.",
+              },
+              {
+                term: "Call review record",
+                definition: "A sample of scored calls, so quality is auditable, not assumed.",
+              },
+              {
+                term: "Location scorecards",
+                definition: "Performance ranked by site, not blended into one national number.",
+              },
+              {
+                term: "Decision log",
+                definition: "What changed each month and why, tied to the data that prompted it.",
+              },
+            ]}
+          />
         </Container>
       </Section>
 
