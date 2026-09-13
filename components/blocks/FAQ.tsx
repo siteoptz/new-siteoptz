@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import JsonLd from "@/components/seo/JsonLd";
+import ExpandIndicator from "@/components/ui/ExpandIndicator";
 import { buildFaqPage } from "@/lib/schema";
 
 export interface FaqItem {
@@ -49,9 +50,12 @@ export default function FAQ({ items }: FAQProps) {
               aria-expanded={isOpen}
               aria-controls={panelId}
               onClick={() => toggle(index)}
-              className="w-full py-4 text-left font-display"
+              className={`group flex w-full cursor-pointer items-center justify-between gap-4 py-4 text-left font-display ${
+                isOpen ? "text-white" : "text-text hover:text-white"
+              }`}
             >
-              {item.question}
+              <span>{item.question}</span>
+              <ExpandIndicator isExpanded={isOpen} />
             </button>
             <div
               id={panelId}

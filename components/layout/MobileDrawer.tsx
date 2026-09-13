@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Button from "@/components/ui/Button";
+import ExpandIndicator from "@/components/ui/ExpandIndicator";
 import type { MegaMenuColumn } from "./HeaderNav";
 
 export interface NavItem {
@@ -158,9 +159,12 @@ export default function MobileDrawer({
                     type="button"
                     aria-expanded={isExpanded}
                     onClick={() => toggleStage(column.heading)}
-                    className="block py-2 text-left text-sm text-muted hover:text-white"
+                    className={`group flex min-h-11 w-full cursor-pointer items-center justify-between gap-4 text-left text-sm ${
+                      isExpanded ? "text-white" : "text-muted hover:text-white"
+                    }`}
                   >
-                    {column.heading}
+                    <span>{column.heading}</span>
+                    <ExpandIndicator isExpanded={isExpanded} />
                   </button>
                   {isExpanded ? (
                     <ul className="pl-4">
