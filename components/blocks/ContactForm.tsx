@@ -96,7 +96,7 @@ export default function ContactForm() {
         <ol className="mt-6 flex flex-col gap-5">
           <li>
             <p className="font-display text-md font-semibold">
-              1. A senior person reads it — within one business day
+              1. A senior person reads it - within one business day
             </p>
             <p className="mt-1 text-muted">
               Not a queue and not a sales development rep. Whoever would run the engagement reads
@@ -139,7 +139,7 @@ export default function ContactForm() {
             <p>{formErrorMessage}</p>
             {showEmailFallback ? (
               <p className="mt-1">
-                Nothing is lost — email your details directly to{" "}
+                Nothing is lost - email your details directly to{" "}
                 <a href={`mailto:${DIRECT_EMAIL}`} className="underline">
                   {DIRECT_EMAIL}
                 </a>{" "}
@@ -213,7 +213,7 @@ export default function ContactForm() {
             id="stack"
             label="Current stack"
             optional
-            hint="Ad platforms, CRM or EMR, call tracking — whatever's already in place."
+            hint="Ad platforms, CRM or EMR, call tracking - whatever's already in place."
             error={displayedErrors.stack}
           >
             {(props) => (

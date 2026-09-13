@@ -46,7 +46,7 @@ export const contactFormSchema = z.object({
   goal: z
     .string()
     .trim()
-    .min(20, "Give us a couple of sentences — this is the field that matters.")
+    .min(20, "Give us a couple of sentences - this is the field that matters.")
     .max(2000, "Keep this under 2000 characters."),
 });
 
