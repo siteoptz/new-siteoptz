@@ -26,6 +26,8 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
+      // Private client dashboards — unindexed by design, see app/d/[slug].
+      disallow: "/d/",
     },
     sitemap: new URL("/sitemap.xml", siteUrl).toString(),
   };
