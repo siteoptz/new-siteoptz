@@ -92,7 +92,7 @@ export default function HowItWorksPage() {
             stages={[
               { number: "01", title: "Measurement audit", body: "What is tracked, mapped against what the revenue system records.", when: "Weeks 1–2" },
               { number: "02", title: "Build the layer", body: "Call scoring, CRM or EMR matching, and a cost-per-booked-outcome model.", when: "Weeks 3–6" },
-              { number: "03", title: "Run the programs", body: "Campaigns run against the new standard, not the platform's own report.", when: "Week 7 onward" },
+              { number: "03", title: "Run the programs", body: "Campaigns run against the new measurement standard.", when: "Week 7 onward" },
               { number: "04", title: "Standing review", body: "Monthly reporting, with budget reallocated toward what is working.", when: "Ongoing" },
             ]}
           />
@@ -195,8 +195,8 @@ export default function HowItWorksPage() {
               The matrix also states plainly which gaps the audit itself cannot close. A location
               still running paper intake forms, or a CRM with no export and no API, shows up as a
               named limitation rather than a footnote buried in an appendix - the kind of finding a
-              business needs before deciding whether the build stage is worth starting, not after
-              a retainer is already underway. Every recommendation in the deliverable is one the
+              business needs while it can still decide whether the build stage is worth starting,
+              before any retainer begins. Every recommendation in the deliverable is one the
               client&rsquo;s own team could execute without us, if that turned out to be the right call.
             </p>
           </Prose>

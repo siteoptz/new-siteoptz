@@ -66,14 +66,13 @@ export default function AboutPage() {
                 attribution built to your revenue system
               </Link>{" "}
               and the person who explains it to you on a call. That structure is a constraint we
-              chose on purpose, not a size we haven&rsquo;t grown out of yet.
+              chose on purpose, and one we intend to keep.
             </p>
             <p>
               Continuity is the actual payoff. The person explaining why a channel&rsquo;s budget
-              moved this month is the same person who built the model measuring it, not someone
-              briefed secondhand an hour before the call. Over a multi-year engagement, that
-              difference shows up less in any single report and more in how fast a real problem
-              gets noticed and named.
+              moved this month is the same person who built the model measuring it. Over a
+              multi-year engagement, that continuity shows up less in any single report and more
+              in how fast a real problem gets noticed and named.
             </p>
             <p>
               It costs something, and we&rsquo;d rather say so directly than let a prospective client
