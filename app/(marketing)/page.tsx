@@ -15,7 +15,7 @@ import { getRoute, industriesList, servicesByStage } from "@/lib/nav";
 export const metadata = buildMetadata({
   title: "Know Which Marketing Spend Produced Revenue | SiteOptz",
   description:
-    "Marketing intelligence built to your revenue system: attribution, campaign optimization, and reporting measured to cost per booked outcome, not clicks.",
+    "Marketing intelligence built to your revenue system: attribution, campaign optimization, and reporting measured to cost per booked outcome.",
   path: "/",
 });
 
@@ -73,11 +73,11 @@ export default function HomePage() {
               reports what the business needs to know - which dollar produced which outcome.
             </p>
             <p>
-              When those systems stay disconnected, budget drifts toward whatever produces the
-              most volume, not the most customers. A channel that generates fewer, better
+              When those systems stay disconnected, budget drifts toward whichever channel
+              produces the largest volume of leads. A channel that generates fewer, better
               inquiries starts to look expensive next to one that generates a flood of unqualified
               clicks, and it gets cut first. Decisions end up made on whichever result was loudest
-              in last week&rsquo;s meeting, not on what the revenue system actually recorded.
+              in last week&rsquo;s meeting.
             </p>
             <p>
               We build the measurement layer before we touch a campaign, because every later
@@ -121,8 +121,8 @@ export default function HomePage() {
               {pillar.label}
             </Link>
             <p className="mt-1 text-muted">
-              Underneath all three stages above, not a fourth program beside them - the layer
-              that measures whether any of it produced revenue.
+              Underneath all three stages above - the layer that measures whether any of it
+              produced revenue.
             </p>
           </div>
         </Container>
@@ -148,7 +148,7 @@ export default function HomePage() {
               {
                 number: "03",
                 title: "Run the programs",
-                body: "Campaigns run against the new measurement standard, not the platform's own report.",
+                body: "Campaigns run against the cost-per-booked-outcome standard the previous stage built.",
                 when: "Week 7 onward",
               },
               {
@@ -178,7 +178,7 @@ export default function HomePage() {
                 Healthcare groups running paid and organic programs across a dozen or more sites,
                 where a lead is worthless if it cannot be tied back to the location and channel
                 that produced it. The question that matters is which location&rsquo;s spend is
-                producing patients, not just calls.
+                actually producing patients.
               </p>
               <Link href={healthcare.path} className="mt-2 inline-block text-sm text-accent hover:text-accent-lt">
                 {healthcare.label}
@@ -200,7 +200,7 @@ export default function HomePage() {
               <p className="mt-2 text-muted">
                 Firms that sell on trust and a long sales cycle, where the marketing that starts a
                 relationship rarely closes it in the same channel. Attribution here has to span
-                months of contact, not a single session.
+                months of contact before a relationship actually closes.
               </p>
             </div>
             <div>
@@ -235,15 +235,15 @@ export default function HomePage() {
               },
               {
                 term: "Monthly performance report",
-                definition: "Cost per booked outcome by channel and location, not platform-reported conversions.",
+                definition: "Cost per booked outcome by channel and location, sourced from the revenue system itself.",
               },
               {
                 term: "Call review record",
-                definition: "A sample of scored calls, so quality is auditable, not assumed.",
+                definition: "A sample of scored calls, so quality is auditable.",
               },
               {
                 term: "Location scorecards",
-                definition: "Performance ranked by site, not blended into one national number.",
+                definition: "Performance ranked site by site.",
               },
               {
                 term: "Decision log",
