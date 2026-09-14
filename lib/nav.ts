@@ -1,5 +1,5 @@
 /**
- * Single source of truth for navigation: all 40 routes from docs/sitemap-seo-plan.md.
+ * Single source of truth for navigation: all 44 routes from docs/sitemap-seo-plan.md.
  * No hardcoded hrefs anywhere else in the codebase — read routes and links from here.
  */
 
@@ -496,6 +496,86 @@ const routes = [
     anchorVariants: ["agency partners", "partnering with agencies", "agency partnerships"],
     description: "A measurement layer agencies can put behind their own name.",
   },
+  {
+    path: "/industries/finance-banking",
+    label: "Finance & Banking",
+    shortLabel: "Finance & banking",
+    parent: "/industries",
+    funnelStage: null,
+    pageType: "page",
+    anchorVariants: [
+      "financial services marketing",
+      "marketing measured to the funded account",
+      "finance and banking",
+    ],
+    description: "Bank and credit union marketing, measured to the funded account.",
+  },
+  {
+    path: "/industries/manufacturing",
+    label: "Manufacturing",
+    shortLabel: "Manufacturing",
+    parent: "/industries",
+    funnelStage: null,
+    pageType: "page",
+    anchorVariants: [
+      "manufacturing marketing",
+      "attribution across a distributor channel",
+      "manufacturing",
+    ],
+    description: "Industrial B2B marketing, measured through a distributor channel.",
+  },
+  {
+    path: "/industries/transportation-logistics",
+    label: "Transportation & Logistics",
+    shortLabel: "Transportation & logistics",
+    parent: "/industries",
+    funnelStage: null,
+    pageType: "page",
+    anchorVariants: [
+      "logistics marketing",
+      "marketing measured to the booked load",
+      "transportation and logistics",
+    ],
+    description: "Freight and logistics marketing, measured to the booked load.",
+  },
+  {
+    path: "/industries/energy-utilities",
+    label: "Energy & Utilities",
+    shortLabel: "Energy & utilities",
+    parent: "/industries",
+    funnelStage: null,
+    pageType: "page",
+    anchorVariants: [
+      "energy marketing",
+      "measurement for a permit-bound sales cycle",
+      "energy and utilities",
+    ],
+    description: "Energy and utilities marketing, measured through a permit-bound cycle.",
+  },
+  {
+    path: "/industries/education",
+    label: "Education",
+    shortLabel: "Education",
+    parent: "/industries",
+    funnelStage: null,
+    pageType: "page",
+    anchorVariants: [
+      "education marketing",
+      "marketing measured to enrolled, not inquired",
+      "education",
+    ],
+    description: "Enrollment marketing, measured to enrolled, not inquired.",
+  },
+  {
+    path: "/industries/legal",
+    label: "Legal",
+    shortLabel: "Legal",
+    parent: "/industries",
+    funnelStage: null,
+    pageType: "page",
+    anchorVariants: ["law firm marketing", "measurement to the signed case", "legal"],
+    description: "Law firm marketing, measured to the signed case.",
+  },
 
   // Proof
   {
@@ -618,6 +698,54 @@ const INDUSTRY_SERVICES: Record<string, readonly string[]> = {
     "conversion-rate-optimization",
     "creative-ads-strategy",
   ],
+  "finance-banking": [
+    "marketing-attribution",
+    "paid-search-ppc",
+    "content-marketing",
+    "branded-search-ppc",
+    "marketing-operations",
+    "conversion-rate-optimization",
+  ],
+  manufacturing: [
+    "marketing-attribution",
+    "seo",
+    "content-marketing",
+    "paid-search-ppc",
+    "marketing-operations",
+    "email-marketing",
+  ],
+  "transportation-logistics": [
+    "marketing-attribution",
+    "paid-search-ppc",
+    "seo",
+    "organic-capture",
+    "marketing-operations",
+    "conversion-rate-optimization",
+  ],
+  "energy-utilities": [
+    "marketing-attribution",
+    "seo",
+    "content-marketing",
+    "paid-search-ppc",
+    "marketing-operations",
+    "organic-capture",
+  ],
+  education: [
+    "marketing-attribution",
+    "paid-search-ppc",
+    "paid-social-advertising",
+    "seo",
+    "email-marketing",
+    "conversion-rate-optimization",
+  ],
+  legal: [
+    "marketing-attribution",
+    "paid-search-ppc",
+    "seo",
+    "organic-capture",
+    "conversion-rate-optimization",
+    "branded-search-ppc",
+  ],
 };
 
 export function industryServices(industrySlug: string): RouteEntry[] {
@@ -626,4 +754,15 @@ export function industryServices(industrySlug: string): RouteEntry[] {
     throw new Error(`lib/nav: unknown industry slug "${industrySlug}"`);
   }
   return services.map((slug) => getRoute(`/services/${slug}`));
+}
+
+/**
+ * All individual industry pages, in ROUTES order — every entry whose parent
+ * is /industries, which excludes the /industries hub itself. The mega menu
+ * and footer both build their Industries list from this rather than a
+ * hardcoded set of getRoute() calls, so a new industry only needs adding
+ * here, not in every place that lists them.
+ */
+export function industriesList(): RouteEntry[] {
+  return ROUTES.filter((entry) => entry.parent === "/industries");
 }

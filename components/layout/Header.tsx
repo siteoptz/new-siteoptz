@@ -2,7 +2,7 @@ import Link from "next/link";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import { getProofEntries } from "@/lib/content";
-import { type FunnelStage, getRoute, servicesByStage } from "@/lib/nav";
+import { type FunnelStage, getRoute, industriesList, servicesByStage } from "@/lib/nav";
 import HeaderNav, { type HeaderNavItem, type MegaMenuColumn } from "./HeaderNav";
 import MobileDrawer from "./MobileDrawer";
 
@@ -37,12 +37,7 @@ export default async function Header() {
   const industriesColumn: MegaMenuColumn = {
     heading: industriesRoute.label,
     headingHref: industriesRoute.path,
-    items: [
-      getRoute("/industries/healthcare-marketing"),
-      getRoute("/industries/self-storage-marketing"),
-      getRoute("/industries/professional-services-marketing"),
-      getRoute("/industries/agency-partners"),
-    ].map((route) => ({ href: route.path, label: route.label })),
+    items: industriesList().map((route) => ({ href: route.path, label: route.label })),
   };
 
   const proofEntries = await getProofEntries();

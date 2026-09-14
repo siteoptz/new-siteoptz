@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Container from "@/components/ui/Container";
 import Rule from "@/components/ui/Rule";
-import { type FunnelStage, getRoute, servicesByStage } from "@/lib/nav";
+import { type FunnelStage, getRoute, industriesList, servicesByStage } from "@/lib/nav";
 
 const POSITIONING_LINE =
   "We build the measurement layer that connects what you spend to what your business books, then run the acquisition programs on top of it.";
@@ -35,12 +35,7 @@ export default function Footer() {
     buildStageColumn("/services/bottom-of-funnel", "bof"),
   ];
 
-  const industryRoutes = [
-    getRoute("/industries/healthcare-marketing"),
-    getRoute("/industries/self-storage-marketing"),
-    getRoute("/industries/professional-services-marketing"),
-    getRoute("/industries/agency-partners"),
-  ];
+  const industryRoutes = industriesList();
 
   const companyRoutes = [howItWorks, pointOfView, proof, about, contact];
 

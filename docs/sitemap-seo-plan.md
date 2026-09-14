@@ -472,6 +472,92 @@ section of its stage hub and note the decision here.
 - Schema: Service, FAQPage, BreadcrumbList
 - Words: 900–1,200
 
+### `/industries/finance-banking`
+
+- Primary: financial services marketing agency
+- Secondary: bank marketing attribution, credit union marketing, wealth management lead tracking
+- Title (46): `Financial Services Marketing Agency | SiteOptz`
+- Meta (136): `Marketing measured to the funded account, tracked through core banking systems and compliance review, with PII kept out of ad platforms.`
+- H1: Marketing measured to the funded account.
+- Sections: page hero · what makes bank and credit union attribution hard — closed core
+  banking systems, the application-to-funded lag, branch/digital overlap, compliance review,
+  PII constraints · how we handle compliance and PII · which of the six mapped services apply
+  and how they combine · what a monthly review looks like · FAQ (5) · proof links · CTA
+- Schema: Service, FAQPage, BreadcrumbList
+- Words: 1,200–1,500
+
+### `/industries/manufacturing`
+
+- Primary: manufacturing marketing agency
+- Secondary: industrial B2B marketing, distributor lead attribution, RFQ tracking
+- Title (41): `Manufacturing Marketing Agency | SiteOptz`
+- Meta (134): `RFQ and spec-request attribution for industrial B2B, built to survive a distributor channel that hides who the end buyer actually was.`
+- H1: Attribution across a distributor channel that hides the buyer.
+- Sections: page hero · what makes industrial B2B attribution hard — the distributor channel
+  breaking the chain, buying-committee structure, quarter-long sales cycles, CRM hygiene ·
+  how we handle distributor-channel visibility · which of the six mapped services apply and
+  how they combine · what a monthly review looks like · FAQ (5) · proof links · CTA
+- Schema: Service, FAQPage, BreadcrumbList
+- Words: 1,100–1,400
+
+### `/industries/transportation-logistics`
+
+- Primary: logistics marketing agency
+- Secondary: freight marketing attribution, carrier lead generation, 3PL marketing
+- Title (37): `Logistics Marketing Agency | SiteOptz`
+- Meta (146): `Freight and 3PL marketing measured to the booked load in your TMS, not the quote request - with lane-level reporting instead of national averages.`
+- H1: Marketing measured to the booked load.
+- Sections: page hero · what makes freight and 3PL attribution hard — quote volume as a poor
+  revenue proxy, lane-level and regional demand variance, TMS export limits, carrier vs.
+  shipper acquisition · how we separate real inquiries from price shopping · which of the six
+  mapped services apply and how they combine · what a monthly review looks like · FAQ (4) ·
+  proof links · CTA
+- Schema: Service, FAQPage, BreadcrumbList
+- Words: 1,100–1,400
+
+### `/industries/energy-utilities`
+
+- Primary: energy marketing agency
+- Secondary: utility marketing attribution, solar lead generation, energy services marketing
+- Title (48): `Energy and Utilities Marketing Agency | SiteOptz`
+- Meta (146): `Solar and energy services marketing measured past the signature, through permitting and interconnection, with territory as a qualification filter.`
+- H1: Measurement for a long, permit-bound sales cycle.
+- Sections: page hero · what makes energy and utilities attribution hard — the signed-to-
+  installed lag, service territory as a qualification filter, incentive and tariff changes,
+  lead resellers · how we qualify by territory · which of the six mapped services apply and
+  how they combine · what a monthly review looks like · FAQ (5) · proof links · CTA
+- Schema: Service, FAQPage, BreadcrumbList
+- Words: 1,200–1,500
+
+### `/industries/education`
+
+- Primary: education marketing agency
+- Secondary: enrollment marketing attribution, higher education lead tracking, student
+  recruitment marketing
+- Title (37): `Education Marketing Agency | SiteOptz`
+- Meta (143): `Enrollment marketing measured through inquiry, application, and acceptance to the SIS record of enrolled, with FERPA-aware tracking throughout.`
+- H1: Marketing measured to enrolled, not inquired.
+- Sections: page hero · what makes enrollment attribution hard — SIS isolation, the inquiry-
+  to-enrollment lag crossing a term boundary, extreme seasonality, FERPA, programme-level
+  demand variance · how we handle FERPA in tracking · which of the six mapped services apply
+  and how they combine · what a monthly review looks like · FAQ (5) · proof links · CTA
+- Schema: Service, FAQPage, BreadcrumbList
+- Words: 1,200–1,500
+
+### `/industries/legal`
+
+- Primary: law firm marketing agency
+- Secondary: legal marketing attribution, attorney lead tracking, case intake measurement
+- Title (36): `Law Firm Marketing Agency | SiteOptz`
+- Meta (150): `Legal marketing measured to the signed case by practice area, with intake call review built in - since intake decides more outcomes than campaigns do.`
+- H1: Measurement to the signed case, not the phone call.
+- Sections: page hero · what makes legal attribution hard — case-value variance by orders of
+  magnitude, intake as the real conversion point, bar advertising rules, referral vs.
+  marketing-sourced blending · how we review intake · which of the six mapped services apply
+  and how they combine · what a monthly review looks like · FAQ (5) · proof links · CTA
+- Schema: Service, FAQPage, BreadcrumbList
+- Words: 1,100–1,400
+
 ### `/proof` and `/proof/[slug]`
 
 - Primary (hub): marketing attribution case studies
