@@ -10,7 +10,7 @@ import Prose from "@/components/ui/Prose";
 import SectionHead from "@/components/ui/SectionHead";
 import Section from "@/components/ui/Section";
 import { buildMetadata } from "@/lib/seo";
-import { getRoute, servicesByStage } from "@/lib/nav";
+import { getRoute, industriesList, servicesByStage } from "@/lib/nav";
 
 export const metadata = buildMetadata({
   title: "Know Which Marketing Spend Produced Revenue | SiteOptz",
@@ -22,9 +22,11 @@ export const metadata = buildMetadata({
 export default function HomePage() {
   const pillar = getRoute("/services/marketing-attribution");
   const howItWorks = getRoute("/how-it-works");
+  const industries = getRoute("/industries");
   const healthcare = getRoute("/industries/healthcare-marketing");
   const selfStorage = getRoute("/industries/self-storage-marketing");
   const contact = getRoute("/contact");
+  const industryCount = industriesList().length;
 
   const tof = getRoute("/services/top-of-funnel");
   const mof = getRoute("/services/middle-of-funnel");
@@ -165,7 +167,10 @@ export default function HomePage() {
 
       <Section surface="base">
         <Container>
-          <SectionHead heading="Who this is built for" />
+          <SectionHead
+            heading="Who this is built for"
+            lead="Four examples here - the same problem shows up well beyond this list."
+          />
           <div className="grid grid-cols-1 gap-8 min-[900px]:grid-cols-2">
             <div>
               <h3>Multi-location healthcare</h3>
@@ -207,6 +212,15 @@ export default function HomePage() {
               </p>
             </div>
           </div>
+          <p className="mt-8 text-muted">
+            The pattern repeats the same way in every case: the outcome that actually matters is
+            recorded in a system the ad platforms cannot see. That holds across all{" "}
+            {industryCount}{" "}
+            <Link href={industries.path} className="text-accent hover:text-accent-lt">
+              industries we serve
+            </Link>
+            .
+          </p>
         </Container>
       </Section>
 
