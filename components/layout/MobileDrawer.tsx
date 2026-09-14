@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import Button from "@/components/ui/Button";
-import ExpandIndicator from "@/components/ui/ExpandIndicator";
+import CollapsibleSection from "@/components/ui/CollapsibleSection";
 import type { MegaMenuColumn } from "./HeaderNav";
 
 export interface NavItem {
@@ -24,7 +24,11 @@ function getFocusableElements(container: HTMLElement): HTMLElement[] {
     container.querySelectorAll<HTMLElement>(
       'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
     )
-  );
+    // A collapsed CollapsibleSection panel is inert but still rendered, so
+    // querySelectorAll still returns its links — exclude them, or the drawer's
+    // own Tab trap can compute a "last" element the browser will never
+    // actually let a keyboard user land on.
+  ).filter((element) => !element.closest("[inert]"));
 }
 
 /**
@@ -38,7 +42,7 @@ export default function MobileDrawer({
   contact,
 }: MobileDrawerProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const [expandedStages, setExpandedStages] = useState<Set<string>>(new Set());
+  const [expandedSections, setExpandedSections] = useState<Set<string>>(new Set());
   const triggerRef = useRef<HTMLButtonElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
@@ -104,8 +108,8 @@ export default function MobileDrawer({
     triggerRef.current?.focus();
   }
 
-  function toggleStage(heading: string) {
-    setExpandedStages((current) => {
+  function toggleSection(heading: string) {
+    setExpandedSections((current) => {
       const next = new Set(current);
       if (next.has(heading)) {
         next.delete(heading);
@@ -151,67 +155,64 @@ export default function MobileDrawer({
 
           <div className="mb-6">
             <p className="mb-2 text-sm font-medium text-white">Services</p>
-            {stageColumns.map((column) => {
-              const isExpanded = expandedStages.has(column.heading);
-              return (
-                <div key={column.headingHref} className="mb-2">
-                  <button
-                    type="button"
-                    aria-expanded={isExpanded}
-                    onClick={() => toggleStage(column.heading)}
-                    className={`group flex min-h-11 w-full cursor-pointer items-center justify-between gap-4 text-left text-sm ${
-                      isExpanded ? "text-white" : "text-muted hover:text-white"
-                    }`}
-                  >
-                    <span>{column.heading}</span>
-                    <ExpandIndicator isExpanded={isExpanded} />
-                  </button>
-                  {isExpanded ? (
-                    <ul className="pl-4">
-                      <li>
-                        <Link
-                          href={column.headingHref}
-                          className="block py-1 text-sm text-muted hover:text-white"
-                        >
-                          All {column.heading}
-                        </Link>
-                      </li>
-                      {column.items.map((item) => (
-                        <li key={item.href}>
-                          <Link
-                            href={item.href}
-                            className="block py-1 text-sm text-muted hover:text-white"
-                          >
-                            {item.label}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : null}
-                </div>
-              );
-            })}
+            {stageColumns.map((column) => (
+              <CollapsibleSection
+                key={column.headingHref}
+                label={column.heading}
+                isExpanded={expandedSections.has(column.heading)}
+                onToggle={() => toggleSection(column.heading)}
+              >
+                <ul className="pl-4">
+                  <li>
+                    <Link
+                      href={column.headingHref}
+                      className="block py-1 text-sm text-muted hover:text-white"
+                    >
+                      All {column.heading}
+                    </Link>
+                  </li>
+                  {column.items.map((item) => (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className="block py-1 text-sm text-muted hover:text-white"
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </CollapsibleSection>
+            ))}
           </div>
 
           <div className="mb-6">
-            <Link
-              href={industriesColumn.headingHref}
-              className="mb-2 block text-sm font-medium text-white hover:text-accent-lt"
+            <CollapsibleSection
+              label={industriesColumn.heading}
+              isExpanded={expandedSections.has(industriesColumn.heading)}
+              onToggle={() => toggleSection(industriesColumn.heading)}
             >
-              {industriesColumn.heading}
-            </Link>
-            <ul className="pl-4">
-              {industriesColumn.items.map((item) => (
-                <li key={item.href}>
+              <ul className="pl-4">
+                <li>
                   <Link
-                    href={item.href}
+                    href={industriesColumn.headingHref}
                     className="block py-1 text-sm text-muted hover:text-white"
                   >
-                    {item.label}
+                    All {industriesColumn.heading}
                   </Link>
                 </li>
-              ))}
-            </ul>
+                {industriesColumn.items.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="block py-1 text-sm text-muted hover:text-white"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </CollapsibleSection>
           </div>
 
           <div className="mb-6">
