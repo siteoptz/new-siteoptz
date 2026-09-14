@@ -414,11 +414,13 @@ section of its stage hub and note the decision here.
 
 - Primary: industries we serve marketing
 - Title (32): `Industries We Work In | SiteOptz`
-- Meta (140): `Multi-location healthcare, self-storage portfolios, professional services, and agency partners — where measurement is the hard part.`
+- Meta (153): `Ten sectors, one shared problem: the outcome that matters is recorded in a system - an EMR, a core banking system, a case file - ad platforms cannot see.`
 - H1: Where measurement is the hard part.
-- Sections: page hero · what the four have in common · four entries with 100-word summaries · CTA
+- Sections: page hero · what the ten share, named system by system (EMR, core banking system,
+  TMS, SIS, property management system, case management system) · ten entries with 100-word
+  summaries · CTA
 - Schema: CollectionPage, BreadcrumbList
-- Words: 500–700
+- Words: 700–900
 
 ### `/industries/healthcare-marketing`
 

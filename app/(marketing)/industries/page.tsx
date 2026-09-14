@@ -13,7 +13,7 @@ import { buildCollectionPage } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 const PAGE_DESCRIPTION =
-  "Multi-location healthcare, self-storage portfolios, professional services, and agency partners - where measurement is the hard part.";
+  "Ten sectors, one shared problem: the outcome that matters is recorded in a system - an EMR, a core banking system, a case file - ad platforms cannot see.";
 
 export const metadata = buildMetadata({
   title: "Industries We Work In | SiteOptz",
@@ -60,7 +60,7 @@ export default async function IndustriesHubPage() {
           <PageHero
             kicker="Industries"
             heading="Where measurement is the hard part."
-            lead="Four verticals, each with its own reason a blended report cannot be trusted, and its own version of the same measurement layer built to fix it."
+            lead="Ten sectors, each recording its real outcome in a system built for something other than marketing - and each needing the same measurement layer built to reach into it anyway."
           />
         </Container>
       </Section>
@@ -69,14 +69,69 @@ export default async function IndustriesHubPage() {
         <Container>
           <Prose>
             <p>
-              These four operator types share a structural problem more than a market: each runs
-              marketing across more than one location, channel, or client relationship, where a
-              single blended number hides which specific site, program, or account is actually
-              producing results. A multi-location healthcare group, a self-storage portfolio, a
-              professional services firm with a long sales cycle, and an agency running this
-              measurement layer under its own name all need the same underlying discipline - 
-              attribution that survives being broken out by location or account - applied to
-              different systems and different constraints.
+              Ten sectors sit on this page, and what they share is not a market category - it is
+              where the outcome that actually matters gets recorded. A multi-location healthcare
+              group&rsquo;s real outcome is a booked, attended consultation, and it lives inside an
+              EMR. A bank or credit union&rsquo;s is a funded account, inside a core banking system.
+              A freight or logistics operator&rsquo;s is a booked load, inside a TMS. An educational
+              institution&rsquo;s is an enrolled student, inside a student information system. A
+              self-storage operator&rsquo;s is a rented unit, inside a property management system. A
+              law firm&rsquo;s is a signed case, inside a case management system. None of those six
+              systems was ever built with a marketing team in mind, let alone to report back to an
+              ad platform, and the remaining four sectors
+              carry a version of the same problem in a system just as closed: a distributor&rsquo;s
+              own records a manufacturer rarely sees, a permitting and interconnection process
+              standing between a signature and a real installation, a CRM holding a cohort of deals
+              still working through a multi-month cycle, and - for an agency partner - a client&rsquo;s
+              own systems this measurement layer is built to reach into on someone else&rsquo;s behalf.
+            </p>
+            <p>
+              A blended, company-wide number hides this the same way in every one of the ten. The
+              number itself is rarely wrong, exactly; averaging away the location, the account, or
+              the practice area simply erases the one piece of information that would tell an
+              operator where to act. A healthcare group&rsquo;s regional cost per lead can look
+              healthy while one location quietly drains budget it cannot convert. A law firm&rsquo;s
+              blended cost per lead can look acceptable while a low-value practice area masks a
+              high-value one with a genuine intake problem. The same structure repeats in a
+              distributor channel that hides the end buyer, a TMS blending real bookings with
+              price-shopping inquiries, and a core banking system holding funded accounts a
+              marketing dashboard never sees. The blended number is not dishonest. It simply cannot
+              see the thing that most needs fixing.
+            </p>
+            <p>
+              What differs across the ten is which system holds the answer, what constrains getting
+              it out, and how long the gap runs between the marketing that produced an inquiry and
+              the system finally recording an outcome. A regulated sector - healthcare, finance,
+              education - adds a compliance layer on top of the system boundary: HIPAA, PII rules,
+              or FERPA constrain not just what gets tracked but how it can be connected at all, and
+              marketing copy itself often needs review before it can run. An operational sector -
+              manufacturing, transportation and logistics, energy and utilities - adds a different
+              constraint instead: a distributor or installer who never reports back, a booking
+              system that exports poorly, a permitting process that adds months between a
+              signature and a real result. Professional services and legal each carry a version of
+              both, a long or highly variable decision cycle sitting on top of a system, a CRM or a
+              case management platform, that was never built with attribution in mind. Agency
+              partners is the exception that proves the pattern: the system in question belongs to
+              someone else&rsquo;s client, and the measurement layer runs underneath a brand that
+              is not our own.
+            </p>
+            <p>
+              Ten different systems, ten different constraints, and the same underlying discipline
+              applied to each: find where the real outcome is recorded, build a connection into it
+              that respects whatever boundary governs that system, and report against that outcome
+              rather than the platform-reported click or the leading indicator that arrived weeks
+              before it.
+            </p>
+            <p>
+              The version of that discipline built for each sector looks different on the page
+              that follows it - a healthcare page describing HIPAA-aware call scoring reads
+              nothing like a freight page describing TMS exports, and neither reads like a law
+              firm&rsquo;s page on intake call review. What stays constant underneath the
+              difference is the standard the reporting gets held to: cost per real,
+              system-confirmed outcome, broken out by whatever unit that sector actually competes
+              at - location, lane, practice area, programme, territory - rather than rolled into
+              one company-wide average that flatters the whole while hiding which part of it is
+              actually working. What follows is each sector&rsquo;s specific version of that work.
             </p>
           </Prose>
         </Container>
@@ -84,7 +139,7 @@ export default async function IndustriesHubPage() {
 
       <Section surface="raised">
         <Container>
-          <SectionHead heading="The four industries" />
+          <SectionHead heading="The ten industries" />
           <div className="grid grid-cols-1 gap-10 min-[900px]:grid-cols-2">
             {entries.map((entry) => {
               const route = getRoute(`/industries/${entry.slug}`);

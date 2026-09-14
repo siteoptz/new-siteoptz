@@ -442,7 +442,7 @@ const routes = [
     funnelStage: null,
     pageType: "index",
     anchorVariants: ["industries we serve", "industries", "who we work with"],
-    description: "The four verticals we build for, and how each is measured.",
+    description: "Ten sectors, each with its own system the ad platforms cannot see into.",
   },
   {
     path: "/industries/healthcare-marketing",
