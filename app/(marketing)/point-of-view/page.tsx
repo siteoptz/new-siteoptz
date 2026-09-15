@@ -5,6 +5,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import Container from "@/components/ui/Container";
 import Prose from "@/components/ui/Prose";
 import Section from "@/components/ui/Section";
+import SectionHead from "@/components/ui/SectionHead";
 import { getPointOfViewEntries } from "@/lib/content";
 import { getRoute, type RouteEntry } from "@/lib/nav";
 import { buildCollectionPage } from "@/lib/schema";
@@ -78,6 +79,7 @@ export default async function PointOfViewHubPage() {
 
       <Section surface="base">
         <Container>
+          <SectionHead heading="Marketing measurement insights, argued as positions" />
           <Prose>
             <p>
               This section exists to argue specific positions on measurement questions that

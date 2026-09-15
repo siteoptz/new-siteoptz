@@ -91,7 +91,7 @@ export default function ContactPage() {
         <Container>
           <div className="grid grid-cols-1 gap-8 min-[700px]:grid-cols-2">
             <div>
-              <h2 className="text-lg">Reach us directly</h2>
+              <h2 className="text-lg">Reach us for a marketing attribution consultation</h2>
               <p className="mt-2 text-muted">
                 Prefer email? Write to{" "}
                 <a href={`mailto:${DIRECT_EMAIL}`} className="text-accent underline">

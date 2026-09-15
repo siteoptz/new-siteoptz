@@ -104,7 +104,7 @@ deltas from the standard anatomy.
 - Secondary: closed-loop attribution, offline conversion tracking, CRM attribution, multi-touch attribution services
 - Title (59): `Marketing Attribution Consulting for Operators | SiteOptz`
 - Meta (152): `Attribution built to your revenue system, not the ad platform's. Call scoring, CRM and EMR matching, and cost per booked outcome by channel and location.`
-- H1: Attribution built to the system where your revenue is recorded.
+- H1: Marketing attribution consulting, built to the system where your revenue is recorded.
 - Deltas: replace section 2 with the six-step chain and the marked break. Add a section on
   how accuracy is documented where matching is probabilistic. 6 FAQ entries. 1,600–2,000
   words. Links to all three stage hubs.
@@ -118,7 +118,7 @@ deltas from the standard anatomy.
 - Primary: top of funnel marketing services
 - Title (52): `Top of Funnel Marketing Services | SiteOptz`
 - Meta (147): `Nine programs for reaching people who do not know you yet — and the measurement that shows which of them produced a customer, not just a click.`
-- H1: Reaching people who do not know you yet.
+- H1: Top of funnel marketing services, reaching people who do not know you yet.
 - 700–900 words. Lists all nine children with 60-word summaries pulled from frontmatter.
 
 **`/services/paid-social-advertising`**
@@ -127,7 +127,7 @@ deltas from the standard anatomy.
 - Secondary: enterprise paid social management, Meta ads management, prospecting campaigns
 - Title (48): `Paid Social Advertising Agency | SiteOptz`
 - Meta (149): `Prospecting campaigns on Meta, LinkedIn, and TikTok measured to booked outcomes, with creative testing that produces answers rather than opinions.`
-- H1: Paid social measured past the platform's own report.
+- H1: Paid social advertising agency, measured past the platform's own report.
 - Delta: section 5 must address view-through attribution directly.
 
 **`/services/paid-search-ppc`**
@@ -136,7 +136,7 @@ deltas from the standard anatomy.
 - Secondary: non-brand paid search management, Google Ads management, Local Services Ads
 - Title (46): `Enterprise PPC Management | SiteOptz`
 - Meta (151): `Non-brand Google Ads and LSA managed against cost per booked outcome, with call scoring, search term hygiene, and budget set location by location.`
-- H1: Non-brand paid search judged on booked outcomes.
+- H1: Enterprise PPC management, judged on booked outcomes.
 
 **`/services/creative-ads-strategy`**
 
@@ -144,15 +144,15 @@ deltas from the standard anatomy.
 - Secondary: creative testing framework, ad concept development
 - Title (44): `Ad Creative Strategy Services | SiteOptz`
 - Meta (144): `Creative built as a set of testable hypotheses, with a testing structure that tells you which idea worked and why, not which ad spent the most.`
-- H1: Creative as a testable hypothesis.
+- H1: Ad creative strategy services, built as a testable hypothesis.
 
 **`/services/campaign-launch-strategy`**
 
 - Primary: marketing campaign launch strategy
 - Secondary: go to market campaign planning, new market launch marketing
-- Title (49): `Campaign Launch Strategy | SiteOptz`
+- Title (45): `Marketing Campaign Launch Strategy | SiteOptz`
 - Meta (146): `Launch plans with measurement built in from day one — so the first ninety days produce a decision, not a report full of channel-level guesses.`
-- H1: Launches that produce a decision, not a report.
+- H1: Marketing campaign launch strategy, built to produce a decision.
 - Delta: replace section 6 with a launch timeline showing what happens in weeks 1–12.
 
 **`/services/seo`**
@@ -161,7 +161,7 @@ deltas from the standard anatomy.
 - Secondary: enterprise SEO agency, technical SEO consulting, non-brand organic growth
 - Title (49): `Multi-Location SEO Services | SiteOptz`
 - Meta (150): `Non-brand organic acquisition measured per location on a scan grid, so you see the radius each site actually covers instead of one national rank.`
-- H1: Organic visibility measured per location.
+- H1: Multi-location SEO services, measured per location.
 
 **`/services/generative-engine-optimization`**
 
@@ -169,7 +169,7 @@ deltas from the standard anatomy.
 - Secondary: GEO agency, AI search visibility, ChatGPT recommendation optimization
 - Title (56): `Generative Engine Optimization Services | SiteOptz`
 - Meta (153): `We measure how often AI assistants recommend you, what they say, and which sources they cite — then work on the sources. Baseline scan available.`
-- H1: What the assistant says when someone asks about you.
+- H1: Generative engine optimization services, measuring what the assistant says about you.
 - Delta: add a "what this is not" section stating outright that no one can guarantee a
   model recommends you. Keep it. It is the strongest trust signal on the site. 6 FAQ
   entries, 1,400–1,700 words.
@@ -180,7 +180,7 @@ deltas from the standard anatomy.
 - Secondary: featured snippet optimization, People Also Ask optimization, voice search
 - Title (52): `Answer Engine Optimization Services | SiteOptz`
 - Meta (145): `Structuring content so search engines can lift a direct answer from it — snippets, People Also Ask, and voice results, measured as a channel.`
-- H1: Being the answer, not the tenth result.
+- H1: Answer engine optimization services, aimed at being the answer shown.
 
 **`/services/programmatic-advertising`**
 
@@ -188,7 +188,7 @@ deltas from the standard anatomy.
 - Secondary: DSP management, connected TV advertising, display retargeting
 - Title (47): `Programmatic Advertising Agency | SiteOptz`
 - Meta (150): `Display, CTV, and audio bought programmatically with inventory transparency and a conversion definition that survives a view-through window.`
-- H1: Programmatic with the view-through window closed.
+- H1: Programmatic advertising agency, with the view-through window closed.
 - Delta: section 5 must cover fraud, viewability, and why we discount view-through.
 
 **`/services/influencer-marketing`**
@@ -197,7 +197,7 @@ deltas from the standard anatomy.
 - Secondary: creator partnerships, influencer attribution, UGC campaigns
 - Title (44): `Influencer Marketing Agency | SiteOptz`
 - Meta (148): `Creator partnerships with tracked attribution — codes, links, and matched-market tests instead of screenshots of impressions from a media kit.`
-- H1: Creator partnerships you can actually attribute.
+- H1: Influencer marketing agency, for partnerships you can actually attribute.
 
 ---
 
@@ -208,16 +208,16 @@ deltas from the standard anatomy.
 - Primary: middle of funnel marketing services
 - Title (55): `Middle of Funnel Marketing Services | SiteOptz`
 - Meta (143): `Four programs for people who know you and have not decided yet — and the measurement that shows what actually moved them forward.`
-- H1: The stage where most measurement gives up.
+- H1: Middle of funnel marketing services, where most measurement gives up.
 - 600–800 words.
 
 **`/services/social-media`**
 
 - Primary: organic social media management agency
 - Secondary: B2B social media management, community management
-- Title (52): `Organic Social Media Management | SiteOptz`
+- Title (49): `Organic Social Media Management Agency | SiteOptz`
 - Meta (141): `Owned social presence and community, run separately from paid, with reporting that does not take credit for what the ads produced.`
-- H1: Organic social, reported honestly against paid.
+- H1: Organic social media management agency, reported honestly against paid.
 
 **`/services/content-marketing`**
 
@@ -225,15 +225,15 @@ deltas from the standard anatomy.
 - Secondary: demand education content, content strategy consulting, editorial operations
 - Title (45): `B2B Content Marketing Agency | SiteOptz`
 - Meta (147): `Editorial built for buyers in the middle of a decision, with assisted-conversion reporting that shows which pieces appeared in closed deals.`
-- H1: Content measured by the deals it appeared in.
+- H1: B2B content marketing agency, measured by the deals it appeared in.
 
 **`/services/affiliate-marketing`**
 
 - Primary: affiliate marketing management agency
 - Secondary: affiliate program management, partner network management
-- Title (52): `Affiliate Marketing Management | SiteOptz`
+- Title (48): `Affiliate Marketing Management Agency | SiteOptz`
 - Meta (150): `Program management with last-click inflation removed — we identify which affiliates create demand and which are intercepting it at the checkout.`
-- H1: Affiliates that create demand, separated from those intercepting it.
+- H1: Affiliate marketing management agency, demand creation kept separate from interception.
 - Delta: section 5 must cover coupon and loyalty extension interception explicitly.
 
 **`/services/branded-search-ppc`**
@@ -242,7 +242,7 @@ deltas from the standard anatomy.
 - Secondary: brand term defense, competitor conquesting defense
 - Title (47): `Branded Search PPC Management | SiteOptz`
 - Meta (152): `Defending your brand terms without paying for clicks you would have earned free. We measure incrementality before recommending a brand budget.`
-- H1: Paying for brand terms, only where it is incremental.
+- H1: Branded search PPC management, paying for brand terms only where incremental.
 - Delta: add a section on incrementality testing method.
 
 ---
@@ -254,7 +254,7 @@ deltas from the standard anatomy.
 - Primary: bottom of funnel marketing services
 - Title (55): `Bottom of Funnel Marketing Services | SiteOptz`
 - Meta (146): `Seven programs for converting demand that already exists — where the difference between a good and bad month is usually operational, not creative.`
-- H1: Converting the demand you already have.
+- H1: Bottom of funnel marketing services, converting the demand you already have.
 - 700–900 words.
 
 **`/services/conversion-rate-optimization`**
@@ -263,16 +263,16 @@ deltas from the standard anatomy.
 - Secondary: CRO consulting, landing page testing, form and intake optimization
 - Title (51): `Conversion Rate Optimization Agency | SiteOptz`
 - Meta (148): `Testing run to statistical significance on real traffic volumes, including the intake steps after the form — where most conversions are lost.`
-- H1: Testing that runs long enough to mean something.
+- H1: Conversion rate optimization agency, testing long enough to mean something.
 - Delta: section 4 must include a row on sample size discipline and one on post-form intake.
 
 **`/services/email-marketing`**
 
 - Primary: email marketing and lifecycle agency
 - Secondary: lifecycle marketing, marketing automation management, nurture programs
-- Title (49): `Email and Lifecycle Marketing | SiteOptz`
+- Title (47): `Email Marketing and Lifecycle Agency | SiteOptz`
 - Meta (145): `Lifecycle programs measured on incremental revenue, not open rates — including what the sequence would have earned had it never been sent.`
-- H1: Lifecycle email measured on incremental revenue.
+- H1: Email marketing and lifecycle agency, measured on incremental revenue.
 
 **`/services/organic-capture`**
 
@@ -280,7 +280,7 @@ deltas from the standard anatomy.
 - Secondary: local SEO map pack, review management, branded organic capture
 - Title (52): `Google Business Profile Management | SiteOptz`
 - Meta (150): `Capturing demand at the moment of decision: business profiles, reviews, map pack position, and branded queries, managed location by location.`
-- H1: Capturing demand at the moment of decision.
+- H1: Google Business Profile management, capturing demand at the moment of decision.
 - Delta: state clearly this is branded and local capture, distinct from the SEO page.
 
 **`/services/retargeting`**
@@ -289,7 +289,7 @@ deltas from the standard anatomy.
 - Secondary: remarketing campaign management, audience segmentation retargeting
 - Title (45): `Retargeting Advertising Services | SiteOptz`
 - Meta (151): `Re-engagement campaigns with incrementality testing built in, so you know what the retargeting produced rather than what it took credit for.`
-- H1: Retargeting, with the incrementality question answered.
+- H1: Retargeting advertising services, with the incrementality question answered.
 - Delta: section 5 must state plainly that most retargeting reports overstate.
 
 **`/services/partnerships`**
@@ -298,7 +298,7 @@ deltas from the standard anatomy.
 - Secondary: co-marketing programs, referral partner programs, channel partnerships
 - Title (48): `Strategic Marketing Partnerships | SiteOptz`
 - Meta (142): `Referral and co-marketing programs with tracked sources, agreed attribution rules, and reporting both sides of the partnership can see.`
-- H1: Partnerships with the attribution agreed up front.
+- H1: Strategic marketing partnerships, with the attribution agreed up front.
 
 **`/services/creative-production`**
 
@@ -306,7 +306,7 @@ deltas from the standard anatomy.
 - Secondary: ad asset production, creative operations, high volume creative
 - Title (44): `Creative Production Services | SiteOptz`
 - Meta (143): `Producing the volume of assets modern paid media consumes, to spec, on a cadence the testing plan can actually keep pace with.`
-- H1: Producing creative at the volume testing requires.
+- H1: Creative production services, at the pace testing actually requires.
 
 **`/services/marketing-operations`**
 
@@ -314,7 +314,7 @@ deltas from the standard anatomy.
 - Secondary: martech stack consolidation, marketing data governance, lead routing
 - Title (48): `Marketing Operations Consulting | SiteOptz`
 - Meta (149): `Stack consolidation, lead routing, data governance, and the plumbing that decides whether any of the other twenty programs can be measured.`
-- H1: The plumbing everything else depends on.
+- H1: Marketing operations consulting, the plumbing everything else depends on.
 - Delta: links to the pillar twice — this page and attribution are the closest pair.
 
 ---
@@ -401,9 +401,9 @@ section of its stage hub and note the decision here.
 
 - Primary: marketing attribution audit
 - Secondary: marketing measurement audit, marketing agency onboarding process
-- Title (33): `How an Engagement Runs | SiteOptz`
+- Title (38): `Marketing Attribution Audit | SiteOptz`
 - Meta (144): `Four stages: measurement audit, build the layer, run the programs, standing review. The first two are fixed scope and useful on their own.`
-- H1: How an engagement runs.
+- H1: How a marketing attribution audit runs, stage by stage.
 - Sections: page hero · each of the four stages in full, with inputs, outputs, and duration
   · what the audit deliverable contains · what we need from your team · pricing model
   explained in structure, not numbers · what happens if we are not the right fit · CTA
@@ -415,7 +415,7 @@ section of its stage hub and note the decision here.
 - Primary: marketing agency by industry
 - Title (39): `Marketing Agency by Industry | SiteOptz`
 - Meta (153): `Ten sectors, one shared problem: the outcome that matters is recorded in a system - an EMR, a core banking system, a case file - ad platforms cannot see.`
-- H1: Where measurement is the hard part.
+- H1: A marketing agency by industry, where measurement is the hard part.
 - Sections: page hero · what the ten share, named system by system (EMR, core banking system,
   TMS, SIS, property management system, case management system) · ten entries with 100-word
   summaries · CTA
@@ -428,7 +428,7 @@ section of its stage hub and note the decision here.
 - Secondary: medical practice marketing agency, patient acquisition marketing, EMR conversion tracking
 - Title (52): `Multi-Location Healthcare Marketing Agency | SiteOptz`
 - Meta (152): `Patient acquisition measured to the booked consultation in your EMR, across every location, with HIPAA-aware tracking and call handling review.`
-- H1: Patient acquisition measured to the booked consultation.
+- H1: A multi-location healthcare marketing agency, measured to the booked consultation.
 - Sections: page hero · what makes healthcare attribution hard — EMR isolation, HIPAA
   constraints, call-driven intake, per-location capacity · how we handle PHI and tracking ·
   which of the six mapped services apply and how they combine · what a monthly review looks
@@ -442,7 +442,7 @@ section of its stage hub and note the decision here.
 - Secondary: self storage SEO, storage facility PPC, occupancy marketing
 - Title (39): `Self-Storage Marketing Agency | SiteOptz`
 - Meta (149): `Facility-level marketing for storage portfolios: spend allocated by occupancy and rate, map pack coverage per site, reporting the whole portfolio.`
-- H1: Marketing run facility by facility.
+- H1: A self storage marketing agency, run facility by facility.
 - Sections: page hero · why portfolio-wide averages hide everything · occupancy and rate as
   inputs to budget · map pack coverage per facility · what the portfolio report shows ·
   FAQ (4) · CTA
@@ -455,7 +455,7 @@ section of its stage hub and note the decision here.
 - Secondary: B2B lead attribution, long sales cycle attribution
 - Title (48): `Professional Services Marketing Agency | SiteOptz`
 - Meta (146): `Long consideration cycles measured properly: inquiry to signed engagement, with the lag accounted for instead of averaged away in monthly reporting.`
-- H1: Measurement that survives a nine-month sales cycle.
+- H1: Professional services marketing agency, built for a nine-month sales cycle.
 - Sections: page hero · why monthly reporting misleads on long cycles · cohort-based
   reporting explained · what we track between inquiry and signature · which services apply ·
   FAQ (4) · CTA
@@ -466,9 +466,9 @@ section of its stage hub and note the decision here.
 
 - Primary: white label marketing attribution for agencies
 - Secondary: agency partnership marketing analytics, outsourced marketing measurement
-- Title (46): `Attribution and Analytics for Agencies | SiteOptz`
+- Title (57): `White Label Marketing Attribution for Agencies | SiteOptz`
 - Meta (150): `We build and run the measurement layer underneath your creative and campaign work, under your brand or ours. Fixed scope, defined escalation paths.`
-- H1: The measurement layer, built underneath your work.
+- H1: White label marketing attribution for agencies, built underneath your work.
 - Sections: page hero · what we take on and what stays yours · white-label vs co-branded
   terms · how reporting is delivered to your clients · commercial structure · FAQ (4) · CTA
 - Schema: Service, FAQPage, BreadcrumbList
@@ -480,7 +480,7 @@ section of its stage hub and note the decision here.
 - Secondary: bank marketing attribution, credit union marketing, wealth management lead tracking
 - Title (46): `Financial Services Marketing Agency | SiteOptz`
 - Meta (136): `Marketing measured to the funded account, tracked through core banking systems and compliance review, with PII kept out of ad platforms.`
-- H1: Marketing measured to the funded account.
+- H1: A financial services marketing agency, measured to the funded account.
 - Sections: page hero · what makes bank and credit union attribution hard — closed core
   banking systems, the application-to-funded lag, branch/digital overlap, compliance review,
   PII constraints · how we handle compliance and PII · which of the six mapped services apply
@@ -494,7 +494,7 @@ section of its stage hub and note the decision here.
 - Secondary: industrial B2B marketing, distributor lead attribution, RFQ tracking
 - Title (41): `Manufacturing Marketing Agency | SiteOptz`
 - Meta (134): `RFQ and spec-request attribution for industrial B2B, built to survive a distributor channel that hides who the end buyer actually was.`
-- H1: Attribution across a distributor channel that hides the buyer.
+- H1: A manufacturing marketing agency, built for a channel that hides the buyer.
 - Sections: page hero · what makes industrial B2B attribution hard — the distributor channel
   breaking the chain, buying-committee structure, quarter-long sales cycles, CRM hygiene ·
   how we handle distributor-channel visibility · which of the six mapped services apply and
@@ -508,7 +508,7 @@ section of its stage hub and note the decision here.
 - Secondary: freight marketing attribution, carrier lead generation, 3PL marketing
 - Title (37): `Logistics Marketing Agency | SiteOptz`
 - Meta (146): `Freight and 3PL marketing measured to the booked load in your TMS, not the quote request - with lane-level reporting instead of national averages.`
-- H1: Marketing measured to the booked load.
+- H1: A logistics marketing agency, measured to the booked load.
 - Sections: page hero · what makes freight and 3PL attribution hard — quote volume as a poor
   revenue proxy, lane-level and regional demand variance, TMS export limits, carrier vs.
   shipper acquisition · how we separate real inquiries from price shopping · which of the six
@@ -521,9 +521,9 @@ section of its stage hub and note the decision here.
 
 - Primary: energy marketing agency
 - Secondary: utility marketing attribution, solar lead generation, energy services marketing
-- Title (48): `Energy and Utilities Marketing Agency | SiteOptz`
+- Title (48): `Energy Marketing Agency for Utilities | SiteOptz`
 - Meta (146): `Solar and energy services marketing measured past the signature, through permitting and interconnection, with territory as a qualification filter.`
-- H1: Measurement for a long, permit-bound sales cycle.
+- H1: An energy marketing agency, built for a long, permit-bound sales cycle.
 - Sections: page hero · what makes energy and utilities attribution hard — the signed-to-
   installed lag, service territory as a qualification filter, incentive and tariff changes,
   lead resellers · how we qualify by territory · which of the six mapped services apply and
@@ -538,7 +538,7 @@ section of its stage hub and note the decision here.
   recruitment marketing
 - Title (37): `Education Marketing Agency | SiteOptz`
 - Meta (143): `Enrollment marketing measured through inquiry, application, and acceptance to the SIS record of enrolled, with FERPA-aware tracking throughout.`
-- H1: Marketing measured to enrolled, not inquired.
+- H1: An education marketing agency, measured to actual enrollment.
 - Sections: page hero · what makes enrollment attribution hard — SIS isolation, the inquiry-
   to-enrollment lag crossing a term boundary, extreme seasonality, FERPA, programme-level
   demand variance · how we handle FERPA in tracking · which of the six mapped services apply
@@ -552,7 +552,7 @@ section of its stage hub and note the decision here.
 - Secondary: legal marketing attribution, attorney lead tracking, case intake measurement
 - Title (36): `Law Firm Marketing Agency | SiteOptz`
 - Meta (150): `Legal marketing measured to the signed case by practice area, with intake call review built in - since intake decides more outcomes than campaigns do.`
-- H1: Measurement to the signed case, not the phone call.
+- H1: A law firm marketing agency, measured to the signed case.
 - Sections: page hero · what makes legal attribution hard — case-value variance by orders of
   magnitude, intake as the real conversion point, bar advertising rules, referral vs.
   marketing-sourced blending · how we review intake · which of the six mapped services apply
@@ -563,7 +563,7 @@ section of its stage hub and note the decision here.
 ### `/proof` and `/proof/[slug]`
 
 - Primary (hub): marketing attribution case studies
-- Title (34): `Client Work and Results | SiteOptz`
+- Title (45): `Marketing Attribution Case Studies | SiteOptz`
 - Meta (143): `Engagements described with the numbers we can evidence: what was measured, what changed, and what it cost. No composite case studies.`
 - H1 (hub): Client work, with the numbers we can evidence.
 - Hub sections: page hero · how figures are sourced and approved · filterable list by
@@ -577,7 +577,7 @@ section of its stage hub and note the decision here.
 ### `/point-of-view` and `/point-of-view/[slug]`
 
 - Primary (hub): marketing measurement insights
-- Title (24): `Point of View | SiteOptz`
+- Title (41): `Marketing Measurement Insights | SiteOptz`
 - Meta (139): `Written positions on attribution, AI search, and marketing measurement — for operators deciding where to put next quarter's budget.`
 - H1 (hub): Positions, argued.
 - Detail template: Source Serif 4 body, 38rem measure, sticky table of contents on desktop,
@@ -602,7 +602,7 @@ section of its stage hub and note the decision here.
 ### `/contact`
 
 - Primary: marketing attribution consultation
-- Title (33): `Book a Working Session | SiteOptz`
+- Title (45): `Marketing Attribution Consultation | SiteOptz`
 - Meta (138): `Tell us what you are trying to measure. We reply within one business day with either a session time or a referral elsewhere.`
 - H1: Book a working session.
 - Sections: short intro · form · what happens after you submit, in specific steps · direct

@@ -66,7 +66,7 @@ export default function HowItWorksPage() {
           <Breadcrumbs trail={trail} />
           <PageHero
             kicker="Process"
-            heading="How an engagement runs."
+            heading="How a marketing attribution audit runs, stage by stage."
             lead="Four stages, in order. The first two are fixed scope and produce something useful whether or not the relationship continues past them."
           />
         </Container>

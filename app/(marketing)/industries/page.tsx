@@ -59,7 +59,7 @@ export default async function IndustriesHubPage() {
           <Breadcrumbs trail={trail} />
           <PageHero
             kicker="Industries"
-            heading="Where measurement is the hard part."
+            heading="A marketing agency by industry, where measurement is the hard part."
             lead="Ten sectors, each recording its real outcome in a system built for something other than marketing - and each needing the same measurement layer built to reach into it anyway."
           />
         </Container>

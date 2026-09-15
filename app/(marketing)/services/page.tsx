@@ -54,7 +54,7 @@ export default function ServicesHubPage() {
           <Breadcrumbs trail={trail} />
           <PageHero
             kicker="Services"
-            heading="Twenty programs, one measurement layer underneath."
+            heading="Twenty marketing intelligence services, one measurement layer underneath."
             lead="Three funnel stages, each with its own measurement problem, and the attribution layer underneath all three, holding every stage to the same standard."
           />
         </Container>

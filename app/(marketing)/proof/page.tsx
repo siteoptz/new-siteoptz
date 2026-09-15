@@ -6,6 +6,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import Container from "@/components/ui/Container";
 import Prose from "@/components/ui/Prose";
 import Section from "@/components/ui/Section";
+import SectionHead from "@/components/ui/SectionHead";
 import { getProofEntries } from "@/lib/content";
 import { getRoute, type RouteEntry } from "@/lib/nav";
 import { buildCollectionPage } from "@/lib/schema";
@@ -69,6 +70,7 @@ export default async function ProofHubPage() {
 
       <Section surface="base">
         <Container>
+          <SectionHead heading="Marketing attribution case studies, sourced from named accounts" />
           <Prose>
             <p>
               Every case on this page is real, and every case is checkable. Before you read any of

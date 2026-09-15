@@ -91,7 +91,7 @@ export default function HomePage() {
 
       <Section surface="raised">
         <Container>
-          <SectionHead heading="What we do" />
+          <SectionHead heading="What a marketing attribution consultancy does" />
           <RuleList
             items={[
               {
