@@ -148,9 +148,23 @@
          font-size:7.94px;color:var(--mute);border-top:1.2px solid var(--line);padding-top:6.01px; }
   .foot .r{ font-weight:600;color:var(--ink2);font-family:"Inter Tight","Helvetica Neue",Helvetica,Arial,sans-serif; }
   .anon{ font-size:7.94px;color:var(--mute);font-style:italic; }
+
+  /* Screen-only viewing chrome: the pages stay a fixed 11in print size, so on
+     a wide monitor they render small and pinned to the left edge. This scales
+     and centers them for on-screen viewing without touching the print layout
+     above - none of it applies when printing or exporting to PDF. */
+  @media screen {
+    html{ background:var(--bg); }
+    body{ display:flex; justify-content:center; align-items:flex-start; }
+    .screen-scale{
+      transform-origin:top center;
+      transform:scale(min(calc(100vw / 11in), 1.6));
+    }
+  }
 </style>
 </head>
 <body>
+<div class="screen-scale">
 
 <!-- ============ PAGE 1 ============ -->
 <div class="page">
@@ -445,5 +459,6 @@
     <span class="r">Media Contribution · 3 / 3</span></div>
 </div>
 
+</div>
 </body>
 </html>
