@@ -15,7 +15,7 @@ import { getRoute, industriesList, servicesByStage } from "@/lib/nav";
 export const metadata = buildMetadata({
   title: "Know Which Marketing Spend Produced Revenue | SiteOptz",
   description:
-    "Marketing intelligence built to your revenue system: attribution, campaign optimization, and reporting measured to cost per booked outcome.",
+    "SiteOptz is a marketing attribution consultancy: we build the system connecting spend to booked revenue, then run campaigns on top of it.",
   path: "/",
 });
 
@@ -40,9 +40,10 @@ export default function HomePage() {
             <div>
               <h1 className="max-w-[18ch]">Know which marketing spend produced revenue.</h1>
               <p className="mt-4 max-w-[46ch] text-muted">
-                Most reporting stops at the click. We build the layer that connects spend to the
-                booked appointment, signed agreement, or completed sale it produced, so budget
-                moves toward what the business actually recorded, not what a platform claims.
+                Most reporting stops at the click. SiteOptz is the marketing attribution
+                consultancy that builds the layer connecting spend to the booked appointment,
+                signed agreement, or completed sale it produced, so budget moves toward what the
+                business actually recorded, not what a platform claims.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Button variant="primary" href={contact.path}>

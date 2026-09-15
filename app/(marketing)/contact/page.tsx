@@ -14,7 +14,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Book a Working Session | SiteOptz",
   description:
-    "Tell us what you are trying to measure. We reply within one business day with either a session time or a referral elsewhere.",
+    "Book a marketing attribution consultation: tell us what you are trying to measure, and we reply within one business day with a time or a referral.",
   path: "/contact",
 });
 
@@ -56,8 +56,9 @@ export default function ContactPage() {
         <Container>
           <Prose>
             <p>
-              The form below is short, but the last field is the one that matters: describe the
-              specific question you can&rsquo;t currently answer, not the department budget. Whoever
+              The form below books a marketing attribution consultation, and it&rsquo;s short - but
+              the last field is the one that matters: describe the specific question you
+              can&rsquo;t currently answer, not the department budget. Whoever
               would run the engagement reads every submission themselves - no intake queue - and
               you&rsquo;ll hear back within one business day with either a time to talk or a direct,
               honest referral elsewhere if what you&rsquo;ve described isn&rsquo;t something we do.

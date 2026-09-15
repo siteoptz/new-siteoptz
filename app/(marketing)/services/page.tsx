@@ -13,7 +13,7 @@ import { buildCollectionPage } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 const PAGE_DESCRIPTION =
-  "Twenty programs organized into three funnel stages, with one measurement layer underneath all three rather than a fourth stage beside them.";
+  "Twenty marketing intelligence services across three funnel stages, with one measurement layer underneath all three, not a fourth stage beside them.";
 
 export const metadata = buildMetadata({
   title: "Marketing Intelligence Services | SiteOptz",
@@ -64,8 +64,8 @@ export default function ServicesHubPage() {
         <Container>
           <Prose>
             <p>
-              Twenty programs, organized entirely by where a customer actually is in the
-              relationship when they encounter one of them.{" "}
+              Twenty marketing intelligence services, organized entirely by where a customer
+              actually is in the relationship when they encounter one of them.{" "}
               <Link href={tof.path}>Top of funnel</Link> reaches someone who does not yet know the
               business exists. <Link href={mof.path}>Middle of funnel</Link> works on someone who
               knows but has not decided. <Link href={bof.path}>Bottom of funnel</Link> converts

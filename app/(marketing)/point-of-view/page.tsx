@@ -81,7 +81,8 @@ export default async function PointOfViewHubPage() {
           <Prose>
             <p>
               This section exists to argue specific positions on measurement questions that
-              operators are actually weighing. Each article takes one stance - why a particular
+              operators are actually weighing - marketing measurement insights, not passive
+              updates. Each article takes one stance - why a particular
               platform number cannot be trusted at face value, what{" "}
               <Link href="/how-it-works">our four-stage engagement process</Link> turns up before a
               single dollar moves, how to read a report most vendors present without context - and
