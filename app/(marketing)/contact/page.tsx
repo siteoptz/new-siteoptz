@@ -12,7 +12,7 @@ import { buildContactPage } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Book a Working Session | SiteOptz",
+  title: "Marketing Attribution Consultation | SiteOptz",
   description:
     "Book a marketing attribution consultation: tell us what you are trying to measure, and we reply within one business day with a time or a referral.",
   path: "/contact",

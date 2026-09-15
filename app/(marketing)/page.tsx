@@ -13,7 +13,7 @@ import { buildMetadata } from "@/lib/seo";
 import { getRoute, industriesList, servicesByStage } from "@/lib/nav";
 
 export const metadata = buildMetadata({
-  title: "Know Which Marketing Spend Produced Revenue | SiteOptz",
+  title: "Marketing Attribution Consultancy | SiteOptz",
   description:
     "SiteOptz is a marketing attribution consultancy: we build the system connecting spend to booked revenue, then run campaigns on top of it.",
   path: "/",

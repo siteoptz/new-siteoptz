@@ -15,7 +15,7 @@ const PAGE_DESCRIPTION =
   "Engagements described with the numbers we can evidence: what was measured, what changed, and what it cost. No composite case studies.";
 
 export const metadata = buildMetadata({
-  title: "Client Work and Results | SiteOptz",
+  title: "Marketing Attribution Case Studies | SiteOptz",
   description: PAGE_DESCRIPTION,
   path: "/proof",
 });

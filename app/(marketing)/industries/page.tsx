@@ -16,7 +16,7 @@ const PAGE_DESCRIPTION =
   "Ten sectors, one shared problem: the outcome that matters is recorded in a system - an EMR, a core banking system, a case file - ad platforms cannot see.";
 
 export const metadata = buildMetadata({
-  title: "Industries We Work In | SiteOptz",
+  title: "Industries We Serve Marketing | SiteOptz",
   description: PAGE_DESCRIPTION,
   path: "/industries",
 });

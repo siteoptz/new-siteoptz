@@ -13,7 +13,7 @@ import { buildHowTo } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "How an Engagement Runs | SiteOptz",
+  title: "Marketing Attribution Audit | SiteOptz",
   description:
     "Four stages: measurement audit, build the layer, run the programs, standing review. The first two are fixed scope and useful on their own.",
   path: "/how-it-works",

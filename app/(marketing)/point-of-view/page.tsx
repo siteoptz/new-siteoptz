@@ -14,7 +14,7 @@ const PAGE_DESCRIPTION =
   "Written positions on attribution, AI search, and marketing measurement - for operators deciding where to put next quarter's budget.";
 
 export const metadata = buildMetadata({
-  title: "Point of View | SiteOptz",
+  title: "Marketing Measurement Insights | SiteOptz",
   description: PAGE_DESCRIPTION,
   path: "/point-of-view",
 });
