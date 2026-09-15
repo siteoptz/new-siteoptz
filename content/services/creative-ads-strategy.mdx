@@ -36,15 +36,15 @@ publishedAt: "2026-09-10"
 updatedAt: "2026-09-10"
 ---
 
-A platform's ad-delivery algorithm is built to spend budget efficiently, not to run a fair test, and those two goals conflict directly inside a creative test. Within the first day or two, a small, statistically meaningless early difference in click-through gets read by the algorithm as a real signal, and it starts shifting budget toward whichever variant happens to be ahead. The "winner" a platform declares by day three is frequently just whichever version got lucky early - a result that would very plausibly flip if both variants ran to a genuine sample size.
+A platform's ad-delivery algorithm is built to spend budget efficiently, not to run a fair test, and those two goals conflict directly inside a creative test. Within the first day or two, a small, statistically meaningless early difference in click-through rates gets read by the algorithm as a real signal, and it starts shifting budget toward whichever variant happens to be ahead. The "winner" a platform declares by day three is frequently just whichever version got lucky early - a result that would very plausibly flip if both variants ran to a genuine sample size.
 
 Surviving that requires taking control the platform does not hand over by default: an even budget split held for a pre-committed length of time, read only once that threshold is actually reached. It is a small amount of manual override standing between a real finding and a coincidence dressed up as one.
 
 ## How the work differs
 
 <DefinitionList items={[
-  { term: "Hypothesis framing", definition: "Each concept written as a specific, falsifiable claim about what will change behavior, stated before any creative is built." },
-  { term: "Even-split enforcement", definition: "Budget split evenly across variants for the length of the test, overriding the platform's own auto-optimization default." },
+  { term: "Hypothesis framing", definition: "Each creative concept written as a specific, falsifiable claim about what will change behavior, stated before any creative is built." },
+  { term: "Even-split enforcement", definition: "Budget split evenly across creative variants for the length of the test, overriding the platform's own auto-optimization default." },
   { term: "Pre-committed sample size", definition: "The sample size needed to detect a meaningful difference calculated from current traffic and baseline conversion rate before the test launches." },
   { term: "Single-variable isolation", definition: "One variable changed per test - the hook, the format, the offer - so a result traces back to a specific creative decision." },
   { term: "Result documentation", definition: "Every test's hypothesis, sample size, and outcome logged in a shared record on completion, win or lose." },
@@ -59,7 +59,7 @@ What this channel cannot claim credit for: a result declared while the platform 
 
 ## What we need from you
 
-Whoever manages the ad account needs to disable or override auto-optimization for the length of each test, since a platform left on its default setting will quietly undo the even split within days. Access to whatever creative assets, brand guidelines, and past-performance data already exist, so new hypotheses build on what is already known rather than starting from nothing. And patience for a test to reach its pre-committed sample size before asking what it shows, since a mid-test peek is exactly the habit this process exists to break.
+Whoever manages the ad account needs to disable or override auto-optimization for the length of each test, since a platform left on its default setting will quietly undo the even split within days. Access to whatever creative assets, brand identity guidelines, and past ad performance data already exist, so new hypotheses build on what is already known rather than starting from nothing. And patience for a test to reach its pre-committed sample size before asking what it shows, since a mid-test peek is exactly the habit this process exists to break.
 
 ## Who this is for
 

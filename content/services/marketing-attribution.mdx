@@ -31,18 +31,18 @@ faq:
   - question: "What happens to historical data?"
     answer: "We do not retroactively rebuild attribution for spend that already happened - the tracking and matching this requires has to be live at the time of the click or call to work. What we can do is establish a clean baseline from the day the layer goes live, and use whatever historical platform-reported numbers exist as context for how much the picture changes once real matching is in place. Most clients find that gap itself is informative, even without a rebuilt history."
   - question: "How is this different from GA4 attribution?"
-    answer: "GA4's attribution models compare channels using its own event data and its own definition of a conversion, which for most accounts is still a form fill or a page view, not a booked outcome. It cannot see into your CRM, EMR, or PMS, so it has no way to know whether that form fill became revenue. What we build sits on top of GA4 rather than replacing it - GA4 stays useful for on-site behavior, while the outcome-level matching happens against your actual revenue system."
+    answer: "GA4's own multi-touch attribution model compares channels using its own event data and its own definition of a conversion, which for most accounts is still a form fill or a page view, not a booked outcome. It cannot see into your CRM, EMR, or PMS, so it has no way to know whether that form fill became revenue. What we build sits on top of GA4 rather than replacing it - GA4 stays useful for on-site behavior, while the outcome-level matching happens against your actual revenue system."
   - question: "Who owns the tracking setup if we leave?"
     answer: "You do. The tracking architecture, the tagging, and the documentation for how matching works are built in your own accounts and your own tag manager container, not a black box we control. If the engagement ends, everything stays live and instrumented exactly as it was; you would lose the ongoing call scoring and reporting service, not the underlying tracking itself. We document the setup specifically so a future team, whether internal or another vendor, can pick it up without starting over."
 publishedAt: "2026-09-10"
 updatedAt: "2026-09-10"
 ---
 
-Marketing attribution consulting exists because every ad platform reports its own conversions, and every one of them is grading its own homework. A platform counts a conversion when its own pixel or API sees a signal it recognizes - a form submit, a call button tap, a landing page view within an attribution window it defines. None of that is the same as a booked appointment, a signed agreement, or a completed sale. The gap between what a platform reports and what the business actually recorded is where budget gets misallocated, month after month, without anyone noticing until the pattern is a year old.
+Marketing attribution consulting exists because every ad platform reports its own conversions, and every one of them is grading its own homework. A platform counts a conversion when its own pixel or API sees a signal it recognizes - a form submit, an ad click, a call button tap, a landing page view within an attribution window it defines. None of that is the same as a booked appointment, a signed agreement, or a completed sale. The gap between what a platform reports and what the business actually recorded is where budget gets misallocated, month after month, without anyone noticing until the pattern is a year old.
 
 This is not a small distortion. A channel that generates fewer, more qualified inquiries will look worse in platform-reported cost per lead than a channel flooding the funnel with unqualified volume, and the flood gets more budget the following quarter. Run that comparison for a year against the wrong number, and the compounding effect is a marketing budget that has been optimized, carefully and consistently, toward the wrong outcome.
 
-We build the layer that closes that gap: the tracking, call scoring, and matching required to connect every dollar spent to the outcome your business actually recorded, in the system where that outcome lives - your CRM, your EMR, or your property management system, not a marketing dashboard.
+We build the closed-loop measurement layer: the tracking, call scoring, and matching required to connect every dollar spent to the outcome your business actually recorded, in the system where that outcome lives - your CRM, your EMR, or your property management system, not a marketing dashboard.
 
 <AttributionChain />
 
@@ -51,10 +51,10 @@ The six-step chain above is where that connection actually happens. Steps one th
 ## What we build
 
 <DefinitionList items={[
-  { term: "Tracking architecture", definition: "A single event taxonomy across GA4, Google Tag Manager, Meta, and any other ad platform in use, so a lead means the same trigger and the same fields everywhere it fires, not five slightly different definitions across five tools." },
+  { term: "Tracking architecture", definition: "A single cross-channel event taxonomy across GA4, Google Tag Manager, Meta, and any other ad platform in use, so a lead means the same trigger and the same fields everywhere it fires, not five slightly different definitions across five tools." },
   { term: "Call scoring", definition: "Every inbound call recorded and scored against a fixed rubric - booking intent, existing customer, wrong number, vendor or spam - so a call center transfer or a robocall never counts as a qualified inquiry." },
   { term: "Offline conversion import", definition: "Booked outcomes recorded in your CRM, EMR, or PMS pushed back to the ad platforms on a schedule, using the platform's own offline conversion API, so bidding algorithms optimize toward outcomes instead of clicks." },
-  { term: "Identity matching", definition: "Match keys - phone number, email, session ID, or a hashed identifier where privacy rules require it - used to connect a click to the record it produced, deterministically where the data supports it and probabilistically where it does not." },
+  { term: "Identity matching", definition: "Match keys - phone number, email, session ID, or a hashed identifier where privacy rules require it - used to connect a marketing touchpoint to the record it produced, deterministically where the data supports it and probabilistically where it does not." },
   { term: "Location-level reporting", definition: "Every metric broken out by the site or region that produced it, so a strong national average cannot hide three underperforming locations." },
   { term: "Decision log", definition: "A dated record of what changed each month and the data that prompted it, so a budget shift can be traced back to a specific number rather than an impression." },
 ]} />
@@ -65,7 +65,7 @@ The conversion we optimize toward is a booked outcome recorded in your own syste
 
 For a call-driven business, the conversion definition is a call scored above the booking-intent threshold, not a call answered - a robocall or a wrong number that consumes thirty seconds of hold time is not the same event as a genuine inquiry, and treating them the same inflates every channel that happens to generate more incidental call volume. For a form-driven business, the definition is a form submission the sales team subsequently marks as a real opportunity, not the raw submission count, which is inflated by the same bot traffic and duplicate entries every marketer already knows to distrust.
 
-Attribution can establish which channel, campaign, and location a booked outcome traces back to, within the limits of the match quality documented for that connection. It cannot establish causation in a strict sense - no attribution model can prove a customer would not have converted anyway through a different channel - and we do not present it as if it can. What it can do is give you a consistent, auditable standard for comparing channels against the same outcome, instead of comparing a platform's self-reported clicks against a competitor's self-reported form fills.
+Attribution reporting can establish which channel, campaign, and location a booked outcome traces back to, within the limits of the match quality documented for that connection. It cannot establish causation in a strict sense - no attribution model can prove a customer would not have converted anyway through a different channel - and we do not present it as if it can. What it can do is give you a consistent, auditable standard for comparing channels against the same outcome, instead of comparing a platform's self-reported clicks against a competitor's self-reported form fills.
 
 ## Where matching is probabilistic
 

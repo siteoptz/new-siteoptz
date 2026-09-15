@@ -85,9 +85,11 @@ export default async function PointOfViewHubPage() {
               This section exists to argue specific positions on measurement questions that
               operators are actually weighing - marketing measurement insights, not passive
               updates. Each article takes one stance - why a particular
-              platform number cannot be trusted at face value, what{" "}
+              platform number cannot be trusted at face value against real business outcomes,
+              what{" "}
               <Link href="/how-it-works">our four-stage engagement process</Link> turns up before a
-              single dollar moves, how to read a report most vendors present without context - and
+              single dollar moves, how to read a marketing campaign report most vendors present
+              without context - and
               argues it directly enough that a reader could disagree with it outright, rather than
               skim past a hedge.
             </p>
@@ -96,14 +98,16 @@ export default async function PointOfViewHubPage() {
               service page describes what a program does and how it is measured. An article here
               takes a stance on a question an operator is actually facing before they have decided
               whether to work with anyone at all, written for that specific reader: someone
-              deciding where next quarter&rsquo;s budget goes, whether or not they ever{" "}
+              deciding where next quarter&rsquo;s budget goes across marketing channels, whether or
+              not they ever{" "}
               <Link href="/contact">book a call</Link>.
             </p>
             <p>
               Each piece is built the same way: a specific, falsifiable claim, argued from
               documented mechanisms rather than from a statistic nobody can actually source.
               Where a claim rests on how a platform or a system genuinely behaves - an
-              attribution window, a modeling assumption, a default a vendor rarely explains - that
+              attribution window, a cross-channel modeling assumption, a default a vendor rarely
+              explains - that
               mechanism gets named and described in enough detail to check independently. Where an
               argument would require a number no one here can trace to a named account, it gets
               made without one, even where a number would land more easily.

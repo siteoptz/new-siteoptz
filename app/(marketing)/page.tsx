@@ -41,9 +41,9 @@ export default function HomePage() {
               <h1 className="max-w-[18ch]">Know which marketing spend produced revenue.</h1>
               <p className="mt-4 max-w-[46ch] text-muted">
                 Most reporting stops at the click. SiteOptz is the marketing attribution
-                consultancy that builds the layer connecting spend to the booked appointment,
-                signed agreement, or completed sale it produced, so budget moves toward what the
-                business actually recorded, not what a platform claims.
+                consultancy that builds the layer connecting spend to the business outcome it
+                produced - a booked appointment, signed agreement, or completed sale - so budget
+                moves toward what the business actually recorded, not what a platform claims.
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <Button variant="primary" href={contact.path}>
@@ -63,22 +63,23 @@ export default function HomePage() {
         <Container>
           <SectionHead
             heading="Three systems that don't talk to each other."
-            lead="Most measurement problems are not analytics problems. They are systems problems."
+            lead="Most marketing measurement problems are not analytics problems. They are systems problems."
           />
           <Prose>
             <p>
               Every account runs three systems that were never built to speak to each other: the
               ad platforms reporting clicks and impressions, the phone and form tools capturing
               the inquiry, and the CRM, EMR, or property management system where a booked outcome
-              is actually recorded. Each reports its own version of what happened. None of them
-              reports what the business needs to know - which dollar produced which outcome.
+              is actually recorded. Each reports its own version of the same customer journey.
+              None of them reports what the business needs to know - which dollar produced which
+              outcome.
             </p>
             <p>
               When those systems stay disconnected, budget drifts toward whichever channel
               produces the largest volume of leads. A channel that generates fewer, better
               inquiries starts to look expensive next to one that generates a flood of unqualified
               clicks, and it gets cut first. Decisions end up made on whichever result was loudest
-              in last week&rsquo;s meeting.
+              in last week&rsquo;s marketing team meeting.
             </p>
             <p>
               We build the measurement layer before we touch a campaign, because every later

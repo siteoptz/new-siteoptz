@@ -28,14 +28,14 @@ faq:
   - question: "What happens when a test is inconclusive?"
     answer: "It gets reported as inconclusive, along with the traffic and time that would actually be required to reach a real answer on that specific page. We do not quietly rerun it with a looser significance threshold until something clears the bar, since that produces a result that looks decisive without being one. An inconclusive result is still useful information - it usually means the variation tested was not different enough to matter, or the page was not the actual constraint. Either finding changes what gets tested next."
   - question: "Do you change our site or hand us specifications?"
-    answer: "Both are workable, depending on your team's setup. Where we have implementation access, we build and run variations directly; where your development team owns the codebase, we hand over exact specifications and review the result once it is live. What we do not do is hand over a vague recommendation and call the engagement finished - whichever path fits your team, it ends with something actually running and measured, not a slide deck of suggestions."
+    answer: "Both are workable, depending on your team's setup. Where we have implementation access, we build and run variations of your landing page directly; where your development team owns the codebase, we hand over exact specifications and review the result once it is live. What we do not do is hand over a vague recommendation and call the engagement finished - whichever path fits your team, it ends with something actually running and measured, not a slide deck of suggestions."
 publishedAt: "2026-09-10"
 updatedAt: "2026-09-10"
 ---
 
 Most conversion rate optimization agency work is sold as a practice built for e-commerce traffic volumes - hundreds of thousands of monthly visitors, tests reaching significance in days. A multi-location healthcare group or a self-storage portfolio rarely has that traffic at the page level. Testing a landing page that gets four hundred visits a month will not reach statistical significance before the underlying campaign, season, or price changes anyway, and running the test regardless just produces a result that looks decisive and is not.
 
-The larger problem is where the losses actually happen. Most testing tools stop measuring at the form submission, but a meaningful share of real conversion loss happens after that: how quickly the lead is routed, how long until a callback, what happens on the actual phone call. Optimizing the page while ignoring what happens after the form is optimizing the part that was rarely losing the most.
+The larger problem is where the losses actually happen. Most testing tools stop measuring at the form submission, but a meaningful share of real conversion loss happens after that: how quickly the lead is routed, how long until a callback, what happens on the actual phone call. Optimizing the page's user experience while ignoring what happens after the form is optimizing the part that was rarely losing the most.
 
 ## How the work differs
 
@@ -43,7 +43,7 @@ The larger problem is where the losses actually happen. Most testing tools stop 
   { term: "Sample size discipline", definition: "Before a test launches, current traffic and conversion rate are used to calculate how long it would need to run to reach significance; if that is longer than the test is useful for, it does not run as a split test." },
   { term: "Post-form intake", definition: "Time from form submission to first callback, and the outcome of that callback, tracked as part of the conversion funnel." },
   { term: "Test prioritization", definition: "Candidates ranked by expected impact and by whether the traffic exists to reach a conclusion." },
-  { term: "Qualitative input", definition: "Call recordings and session replay reviewed before a hypothesis is written, so a test targets an observed friction point, not a guess about design preference." },
+  { term: "Qualitative input", definition: "Call recordings and session replay reviewed before a hypothesis is written, so a test targets observed user behavior and friction, not a guess about design preference." },
   { term: "Multi-location handling", definition: "Where individual-location traffic is too low to test alone, similar locations are grouped for testing, then results checked for hidden per-location differences before rolling out everywhere." },
   { term: "Inconclusive handling", definition: "A test that ends inconclusive is reported as inconclusive, with the traffic and time a real answer would require." },
 ]} />
@@ -62,4 +62,4 @@ Access to whatever analytics and session recording tool is already in place, or 
 
 Built for operators who have real non-brand traffic already arriving through [paid search](/services/paid-search-ppc) or [paid social](/services/paid-social-advertising) but suspect the page, the form, or the intake process is where a meaningful share of it is lost - one of several [bottom-of-funnel](/services/bottom-of-funnel) programs aimed at converting demand that already exists. Where a visitor leaves without converting at all, [retargeting](/services/retargeting) re-engages that same population on other channels, working from the data CRO already has on where they dropped off. If combined traffic across all pages is under roughly a thousand monthly visits per page being tested, expect to hear that directly rather than have a test launched anyway.
 
-[Professional services firms](/industries/professional-services-marketing) with a long consideration window often find more opportunity in intake than in the page itself. The plumbing that makes any of this measurable - lead routing, deduplication, the systems side - is [marketing operations](/services/marketing-operations). See [client results](/proof) for a finished example of what this reporting looks like.
+[Professional services firms](/industries/professional-services-marketing) with a long consideration window often find more opportunity in intake than in the page itself. The plumbing that makes any of this measurable - lead routing, deduplication, the systems side - is [marketing operations](/services/marketing-operations). [Client case studies](/proof) show a finished example of what this reporting looks like.

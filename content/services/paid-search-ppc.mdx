@@ -28,7 +28,7 @@ faq:
   - question: "Can LSA and Google Ads run together without double counting?"
     answer: "Yes, but only if both are matched back to the same call log and CRM records rather than trusted on their own reported numbers, since LSA and Google Ads each claim credit independently and neither knows about the other. We reconcile both platforms' claimed conversions against that same source of truth before either counts toward a budget decision. Where the two would otherwise claim the same booked outcome, we attribute it to whichever ad the customer's own path shows actually produced it. That reconciliation runs monthly, not once at setup."
   - question: "Do you bid on competitor terms?"
-    answer: "Not within this program - competitor and brand terms are excluded from non-brand campaigns entirely, since bidding on either is a different economic decision with a different measurement standard than reaching people who do not know you yet. Competitor conquesting is a separate conversation and a separate budget line, evaluated on its own incrementality rather than folded into non-brand performance. Mixing the two would make it impossible to tell which spend produced which kind of demand. We keep them separate so each can be judged honestly."
+    answer: "Not within this program - competitor and branded keyword terms are excluded from non-brand campaigns entirely, since bidding on either is a different economic decision with a different measurement standard than reaching people who do not know you yet. Competitor conquesting is a separate conversation and a separate budget line, evaluated on its own incrementality rather than folded into non-brand performance. Mixing the two would make it impossible to tell which spend produced which kind of demand. We keep them separate so each can be judged honestly."
   - question: "How quickly can budget move between locations?"
     answer: "Once location-level cost per booked outcome is reporting reliably, which typically takes the first full reporting cycle, budget can move between locations as fast as the ad platforms allow - usually days, not months. The constraint is rarely the platform; it is having enough matched, scored data at each location to know a move is justified rather than reactive to a short run of noise. We look for a sustained pattern across at least a few weeks before recommending a shift, not one strong or weak day. Once that pattern exists, moving the budget itself is fast."
   - question: "Who owns the account if we leave?"
@@ -37,7 +37,7 @@ publishedAt: "2026-09-10"
 updatedAt: "2026-09-10"
 ---
 
-Non-brand paid search is judged against three numbers that all lean the same direction. Last-click attribution routes credit to whichever campaign happened to run last, which is usually a brand campaign catching someone who already knew you. Google Ads' own conversion count includes calls that never should have counted - wrong numbers, existing customers calling back, a vendor cold-calling the same tracking number your ads use. And Local Services Ads reports leads in a currency of its own that does not reconcile with your CRM, your call log, or anything else you can audit.
+Non-brand PPC advertising is judged against three numbers that all lean the same direction. Last-click attribution routes credit to whichever campaign happened to run last, which is usually a brand campaign catching someone who already knew you. Google Ads' own conversion count includes calls that never should have counted - wrong numbers, existing customers calling back, a vendor cold-calling the same tracking number your ads use. And Google Local Services Ads reports leads in a currency of its own that does not reconcile with your CRM, your call log, or anything else you can audit.
 
 None of that is a reason to stop running non-brand search. It is a reason to measure it against a different number: cost per booked outcome, calculated at the location that produced it, using calls and forms that have actually been scored.
 
@@ -48,7 +48,7 @@ None of that is a reason to stop running non-brand search. It is a reason to mea
   { term: "Search term hygiene", definition: "Search query reports reviewed weekly against that standing negative list, so budget does not quietly drift toward broad, low-intent queries." },
   { term: "Call scoring", definition: "Every call from a Google Ads or LSA click scored against a fixed rubric before it counts as a qualified inquiry, removing wrong numbers, vendor calls, and existing customers." },
   { term: "LSA reconciliation", definition: "Local Services Ads lead charges matched against your own call log and CRM, since LSA's own dashboard cannot see whether a lead actually booked." },
-  { term: "Location-level budget", definition: "Budget set and moved per location against its own cost per booked outcome, not a blended regional average, since a location already at capacity should not keep receiving the same spend as one with room to grow." },
+  { term: "Location-level budget", definition: "Ad spend set and moved per location against its own cost per booked outcome, not a blended regional average, since a service area already at capacity should not keep receiving the same spend as one with room to grow." },
   { term: "Competitor exclusion", definition: "Competitor and brand terms excluded from non-brand campaigns entirely, with bidding on either routed to its own budget and its own page." },
 ]} />
 
@@ -64,6 +64,6 @@ Administrative access to the Google Ads and Local Services Ads accounts, since s
 
 ## Who this is for
 
-Built for operators running non-brand search as one of several [top-of-funnel](/services/top-of-funnel) programs across more than one location, where a single account-level return number cannot show which sites are actually producing booked outcomes. It runs well alongside [paid social prospecting](/services/paid-social-advertising) in the same market, with the same measurement standard applied to both.
+Built for enterprise-level operators running non-brand search to reach local customers as one of several [top-of-funnel](/services/top-of-funnel) programs across more than one location, where a single account-level return number cannot show which sites are actually producing booked outcomes. It runs well alongside [paid social prospecting](/services/paid-social-advertising) in the same market, with the same measurement standard applied to both.
 
 [Multi-location healthcare groups](/industries/healthcare-marketing) run this exact combination most often. If you want the specifics before committing to anything, [the four-stage process](/how-it-works) lays out what happens week by week, and [client results](/proof) show what the reporting actually looks like once it is running.

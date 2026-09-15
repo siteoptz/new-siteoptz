@@ -128,8 +128,8 @@ export default async function IndustriesHubPage() {
               nothing like a freight page describing TMS exports, and neither reads like a law
               firm&rsquo;s page on intake call review. What stays constant underneath the
               difference is the standard the reporting gets held to: cost per real,
-              system-confirmed outcome, broken out by whatever unit that sector actually competes
-              at - location, lane, practice area, programme, territory - rather than rolled into
+              system-confirmed outcome, broken out by whatever industry-specific unit that sector actually
+              competes at - location, lane, practice area, programme, territory - rather than rolled into
               one company-wide average that flatters the whole while hiding which part of it is
               actually working. What follows is each sector&rsquo;s specific version of that work.
             </p>

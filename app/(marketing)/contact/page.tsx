@@ -75,7 +75,7 @@ export default function ContactPage() {
               order, <Link href="/services/marketing-attribution">
                 attribution built to your revenue system
               </Link>{" "}
-              for the measurement layer itself, <Link href="/about">about SiteOptz</Link> for who
+              for how we measure marketing attribution, <Link href="/about">about SiteOptz</Link> for who
               reads what you send, and <Link href="/industries">industries we serve</Link> for the
               kinds of operators we build for most often.
             </p>

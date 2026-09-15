@@ -145,8 +145,9 @@ export default function ServicesHubPage() {
             <p>
               Some of that matching is deterministic - a phone number or email captured at the
               point of conversion connects a click to the record it produced with no ambiguity.
-              Some of it has to be estimated, using timing, geography, and session behavior when no
-              shared identifier exists, and reported with a confidence score attached to show
+              Some of it has to be estimated, using timing, geography, and session behavior across
+              multiple data sources when no shared identifier exists, and reported with a
+              confidence score attached to show
               exactly how sure that estimate is. Every program above inherits that same honesty requirement:
               whichever stage a report comes from, it says plainly which of its numbers are
               measured and which are estimated.{" "}

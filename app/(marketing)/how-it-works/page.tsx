@@ -105,7 +105,7 @@ export default function HowItWorksPage() {
             <h2>Measurement audit - weeks 1 and 2</h2>
             <p>
               The audit starts with access, not a meeting: read access to the ad accounts and
-              analytics currently in use, and either an export or a read-only connection to
+              analytics platforms currently in use, and either an export or a read-only connection to
               whatever system records a booked outcome - a CRM, an EMR, a property management
               system. From that, we build a channel-by-location map showing what is tracked today
               against what the revenue system actually recorded, and name the specific gap between
@@ -126,7 +126,8 @@ export default function HowItWorksPage() {
               platforms and call tracking system, since offline conversion import and call scoring
               both make changes inside those tools directly. Call scoring goes live first, against
               a fixed rubric agreed with the client&rsquo;s team, followed by the CRM or EMR matching
-              that connects a scored call or form to what actually got booked.
+              that connects a scored call or form - the conversion event itself - to what actually
+              got booked.
             </p>
             <p>
               The output is{" "}
@@ -142,7 +143,8 @@ export default function HowItWorksPage() {
             <h2>Run the programs - week 7 onward</h2>
             <p>
               Campaigns that were previously judged on platform-reported clicks and conversions
-              start reporting against the new standard instead, and budget moves accordingly - 
+              start reporting against the new standard instead, and budget allocation shifts
+              accordingly -
               sometimes toward a channel that had looked mediocre under the old measurement, and
               sometimes away from one that had looked strong. The first full reporting cycle
               against the new layer typically produces at least one reallocation nobody would have
@@ -208,7 +210,8 @@ export default function HowItWorksPage() {
           <SectionHead heading="What we need from your team" />
           <Prose>
             <p>
-              Access is the largest requirement, and it grows across the four stages: read-only
+              Access is the largest requirement of the client onboarding process, and it grows
+              across the four stages: read-only
               for the audit, administrative for the build stage, since call scoring and offline
               conversion import both make changes inside the ad platforms directly. Beyond access,
               one person who can answer how intake actually works day to day - which forms route
