@@ -412,8 +412,8 @@ section of its stage hub and note the decision here.
 
 ### `/industries`
 
-- Primary: industries we serve marketing
-- Title (32): `Industries We Work In | SiteOptz`
+- Primary: marketing agency by industry
+- Title (39): `Marketing Agency by Industry | SiteOptz`
 - Meta (153): `Ten sectors, one shared problem: the outcome that matters is recorded in a system - an EMR, a core banking system, a case file - ad platforms cannot see.`
 - H1: Where measurement is the hard part.
 - Sections: page hero · what the ten share, named system by system (EMR, core banking system,
@@ -424,7 +424,7 @@ section of its stage hub and note the decision here.
 
 ### `/industries/healthcare-marketing`
 
-- Primary: healthcare marketing agency multi-location
+- Primary: multi-location healthcare marketing agency
 - Secondary: medical practice marketing agency, patient acquisition marketing, EMR conversion tracking
 - Title (52): `Multi-Location Healthcare Marketing Agency | SiteOptz`
 - Meta (152): `Patient acquisition measured to the booked consultation in your EMR, across every location, with HIPAA-aware tracking and call handling review.`
