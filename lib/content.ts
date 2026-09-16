@@ -206,8 +206,13 @@ export const pointOfViewFrontmatterSchema = z.object({
   author: articleAuthorSchema,
   publishedAt: z.string(),
   updatedAt: z.string(),
-  /** Other article slugs to surface as "related". May be empty — the template renders nothing at all when it is. */
-  relatedSlugs: z.array(z.string()),
+  /**
+   * Other article slugs to surface as "related", in display order. Optional — when
+   * absent or empty, the template falls back to the most recent other articles
+   * instead of rendering nothing. Set this only for a deliberate pairing that
+   * should override the recency-based default.
+   */
+  relatedSlugs: z.array(z.string()).optional(),
 });
 export type PointOfViewFrontmatter = z.infer<typeof pointOfViewFrontmatterSchema>;
 

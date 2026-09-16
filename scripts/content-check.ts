@@ -48,8 +48,13 @@
  * for the "services" collection, below) — they would fail a point-of-view
  * article on arrival. Articles get their own, lighter link rule instead: at
  * least one link to the attribution pillar, and at least one to a service
- * page. The related-article requirement only activates once a second
- * article exists, so a single-article site does not fail on day one.
+ * page.
+ *
+ * relatedSlugs is optional frontmatter, not a gate requirement — the article
+ * template falls back to the most recent other articles whenever it's
+ * absent or empty, so adding a new article never fails the build on an
+ * existing one that has no explicit relatedSlugs of its own. The gate only
+ * flags a relatedSlugs entry that fails to resolve to a real article.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -395,25 +400,28 @@ function checkServicePageDepth(
 
 /**
  * Lighter link rule for content/point-of-view: at least one link to the
- * attribution pillar, at least one to a service page. The related-article
- * requirement (frontmatter.relatedSlugs pointing at another real article)
- * only activates once totalArticleCount is 2 or more, so this does not fail
- * the build while only one article exists.
+ * attribution pillar, at least one to a service page. relatedSlugs is
+ * optional frontmatter — the article template falls back to the most
+ * recent other articles whenever it's absent, empty, or every entry fails
+ * to resolve, so presence is never required here. What is still worth
+ * catching: an author-supplied relatedSlugs entry that doesn't resolve to
+ * another real article slug, since that typo would silently do nothing
+ * (the template drops unresolved entries before falling back) rather than
+ * fail loudly anywhere else.
  */
 function checkArticleLinks(
   file: string,
   slug: string,
   body: string,
   frontmatter: Record<string, unknown>,
-  totalArticleCount: number,
   articleSlugs: readonly string[],
   violations: Violation[]
 ): void {
   const links = collectEmittedLinks(body, frontmatter);
-  const missing: string[] = [];
+  const problems: string[] = [];
 
   if (!links.has("/services/marketing-attribution")) {
-    missing.push("a link to the attribution pillar (/services/marketing-attribution)");
+    problems.push("a link to the attribution pillar (/services/marketing-attribution)");
   }
 
   const hasServiceLink = Array.from(links).some((linkPath) => {
@@ -426,24 +434,23 @@ function checkArticleLinks(
       return false;
     }
   });
-  if (!hasServiceLink) missing.push("at least one link to a service page");
+  if (!hasServiceLink) problems.push("at least one link to a service page");
 
-  if (totalArticleCount >= 2) {
-    const relatedSlugs = Array.isArray(frontmatter.relatedSlugs) ? frontmatter.relatedSlugs : [];
-    const validRelated = relatedSlugs.filter(
-      (candidate): candidate is string =>
-        typeof candidate === "string" && candidate !== slug && articleSlugs.includes(candidate)
+  if (Array.isArray(frontmatter.relatedSlugs) && frontmatter.relatedSlugs.length > 0) {
+    const unresolved = frontmatter.relatedSlugs.filter(
+      (candidate) =>
+        typeof candidate !== "string" || candidate === slug || !articleSlugs.includes(candidate)
     );
-    if (validRelated.length === 0) {
-      missing.push("at least one related article, now that a second article exists");
+    if (unresolved.length > 0) {
+      problems.push(`relatedSlugs entries that don't resolve to another real article: ${unresolved.join(", ")}`);
     }
   }
 
-  if (missing.length > 0) {
+  if (problems.length > 0) {
     violations.push({
       file,
       line: 1,
-      reason: `article link requirements incomplete — missing: ${missing.join("; ")}`,
+      reason: `article link requirements incomplete — missing: ${problems.join("; ")}`,
     });
   }
 }
@@ -491,7 +498,7 @@ function main(): void {
 
       if (collection === "point-of-view") {
         const slug = path.basename(filePath, ".mdx");
-        checkArticleLinks(relativePath, slug, body, data, articleSlugs.length, articleSlugs, violations);
+        checkArticleLinks(relativePath, slug, body, data, articleSlugs, violations);
       }
     }
   }

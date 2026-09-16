@@ -60,9 +60,23 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
   const heading = stripSiteSuffix(fm.title);
 
   const allEntries = await getPointOfViewEntries();
-  const related = fm.relatedSlugs
+  const explicitRelated = (fm.relatedSlugs ?? [])
     .map((relatedSlug) => allEntries.find((candidate) => candidate.slug === relatedSlug))
-    .filter((candidate): candidate is ArticleEntry => candidate !== undefined);
+    .filter((candidate): candidate is ArticleEntry => candidate !== undefined && candidate.slug !== slug);
+  // relatedSlugs is optional and may resolve to nothing (absent, empty, or every
+  // entry a typo) — fall back to the most recent other articles rather than
+  // rendering an empty section, so a new article never breaks an existing one's
+  // related list just by existing.
+  const related =
+    explicitRelated.length > 0
+      ? explicitRelated
+      : allEntries
+          .filter((candidate) => candidate.slug !== slug)
+          .sort(
+            (a, b) =>
+              new Date(b.frontmatter.publishedAt).getTime() - new Date(a.frontmatter.publishedAt).getTime()
+          )
+          .slice(0, 3);
 
   const trail: BreadcrumbItem[] = [
     { name: "Home", path: "/" },
