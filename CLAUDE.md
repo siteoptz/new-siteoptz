@@ -200,6 +200,19 @@ Semantic headings in order.
 
 ---
 
+## 3c. Article cluster pattern
+
+> Articles are spokes in the same pillar-and-spoke structure the service pages use. Every
+> article declares the service pages and industry pages it supports, and a theme from the
+> fixed enum. Those pages render a Related Reading block listing the articles that support
+> them. An article that cannot name a service page it supports does not have a reason to
+> exist - raise it rather than assigning one arbitrarily.
+>
+> The hub groups by theme, not by date. Add a theme to the enum only when three articles
+> would sit in it; until then, the closest existing theme is correct.
+
+---
+
 ## 4. Voice and copy rules
 
 Plain, declarative, specific. Active voice. Sentence case. Short sentences. Assume the
