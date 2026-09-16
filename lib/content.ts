@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { z } from "zod";
 import { LINK_EXEMPTION_CATEGORIES } from "./link-exemptions";
-import { articleMdxComponents, servicesMdxComponents } from "./mdx-components";
+import { createArticleMdxComponents, servicesMdxComponents } from "./mdx-components";
 import { counterpartsOf, getRoute } from "./nav";
 import { slugifyHeading } from "./slugify";
 
@@ -332,7 +332,7 @@ async function loadEntry<TFrontmatter>(
     collection === "services"
       ? servicesMdxComponents
       : collection === "point-of-view"
-        ? articleMdxComponents
+        ? createArticleMdxComponents(listMdxFiles("point-of-view").map((file) => file.replace(/\.mdx$/, "")))
         : undefined;
   // blockJS is off for services and point-of-view MDX, both trusted
   // first-party content (not user-generated) that needs JS object/array
