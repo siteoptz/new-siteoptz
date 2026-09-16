@@ -621,6 +621,58 @@ section of its stage hub and note the decision here.
 
 ---
 
+## 9. Rejected SEMrush recommendations (September 2026 audit)
+
+924 recommendations came back from the September 2026 SEMrush audit. 138 were backlinks,
+excluded per standing instruction. Of the remaining 786, about 105 were real and worth
+acting on — the primary-keyword gaps in meta descriptions, titles, and H1s fixed in the
+four commits before this one. The rest were reviewed and rejected. Recorded here so none
+of them gets re-litigated at the next audit.
+
+1. **`AggregateRating` schema, 89 pages.** The site has no reviews. Marking up ratings that
+   do not exist is a direct violation of Google's structured data policy — self-serving
+   review markup with no genuine reviews behind it is ineligible for rich results, and
+   fabricating one risks a manual action, not just a lost rich-result eligibility. Revisit
+   only if genuine, verifiable client reviews exist and the markup describes them
+   accurately.
+2. **Word count increases, 41 pages.** Service pages run 1,100–1,600 words against a
+   build-enforced floor. SEMrush is comparing against competitors who pad. Section 7 above
+   already states the position directly: if a page cannot clear 1,100 words without
+   padding, it is not a page. This does not change because a competitor's page is longer.
+3. **Embedded video, 2 pages.** CLAUDE.md section 3 prohibits stock media, and no original
+   video exists for either page. Adding placeholder or stock video to satisfy a recommendation
+   rather than to serve a reader is exactly the behavior that prohibition exists to prevent.
+4. **Secondary-keyword placement in H1 and title, 281 instances.** Each page targets one
+   primary keyword and three or four secondaries. SEMrush flags the H1 and title for every
+   keyword they do not contain. A page has one H1 and one title; satisfying every secondary
+   as well would require four of each, which is invalid HTML and would destroy the heading
+   hierarchy. These flags are structurally unsatisfiable — ignore them at every future audit,
+   not just this one.
+5. **Bounce rate and time-on-page, 8 instances.** The site had a handful of organic clicks
+   in the quarter before launch. This is noise until there is enough traffic to measure
+   anything real. Revisit once organic traffic is established.
+
+**Related-terms recommendations (commit 4).** Of the roughly 115 related-terms instances
+SEMrush flagged as present on competitor pages and absent from ours, about 80% were
+reviewed and skipped rather than added — as inaccurate to what the page actually does, too
+generic to improve any specific sentence, or in direct conflict with the page's own stated
+positioning. Examples: `account based attribution` on `/industries/professional-services-marketing`
+(the page describes cohort tracking, not ABM); `demand generation` on `/services/content-marketing`
+(the page explicitly argues demand education, not demand generation); `time decay` across
+several industry pages (misrepresents the weighting mechanism actually described); `real time`
+on multiple service pages (the described cadence is monthly or scheduled, not real-time);
+`click attribution` on `/industries/finance-banking` (inaccurate to the described mechanism).
+A few candidate terms were flatly wrong for the business — `los angeles` on
+`/services/creative-production` (the company is in The Woodlands, TX), `coca cola` on
+`/services/influencer-marketing` (not a client, would be a fabricated claim), and `metal
+organic framework mof` on `/services/organic-capture` (a chemistry term, a false-positive
+collision with "Google Map pack"). The lesson generalizes: a related-terms tool measures
+term co-occurrence on competitor pages, not whether a term is true of this business — treat
+every suggestion as a hypothesis to check against the page's actual content, not an
+instruction to insert.
+
+---
+
 ## Outstanding asset and infrastructure gaps
 
 Tracked here so they do not surface at launch.
