@@ -671,6 +671,22 @@ term co-occurrence on competitor pages, not whether a term is true of this busin
 every suggestion as a hypothesis to check against the page's actual content, not an
 instruction to insert.
 
+**Healthcare analytics recommendations (Instruction 11).** From the September 2026 SEMrush
+healthcare analytics keyword research, the following were deliberately excluded, totalling
+roughly 630 monthly searches. Every term containing "market" — `healthcare analytics
+market`, `healthcare data analytics market`, `big data analytics in healthcare market`,
+`healthcare predictive analytics market`, `healthcare payer analytics market`, and the rest.
+These are market-research queries: a searcher typing one wants an industry report on market
+size and growth rate, not a consultancy. `healthcare payer analytics`, `clinical data
+analytics`, and `healthcare operational analytics` were excluded for a different reason —
+these are health IT and clinical informatics terms, and the buyer behind them is a CIO, not
+a CMO. Terms reported at 0 volume and 0 difficulty were excluded because that combination
+indicates insufficient data rather than an easy win.
+
+A 0% difficulty score from SEMrush generally means the tool had too little data to calculate
+one, not that the term is easy to rank for. Treat it as a data gap at every future audit, not
+as an opportunity signal.
+
 ---
 
 ## Outstanding asset and infrastructure gaps
