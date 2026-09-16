@@ -474,3 +474,23 @@ export async function getPointOfViewEntries(): Promise<ArticleEntry[]> {
     })
   );
 }
+
+/**
+ * Articles that name `path` in supportsServices or supportsIndustries, most
+ * recent first, capped at 4 — the reciprocal half of the topic-cluster
+ * link: an article linking to a service or industry page is one signal, the
+ * page listing the articles back is what makes it a cluster.
+ */
+export async function getSupportingArticles(path: string): Promise<ArticleEntry[]> {
+  const entries = await getPointOfViewEntries();
+  return entries
+    .filter(
+      (entry) =>
+        entry.frontmatter.supportsServices.includes(path) ||
+        entry.frontmatter.supportsIndustries.includes(path)
+    )
+    .sort(
+      (a, b) => new Date(b.frontmatter.publishedAt).getTime() - new Date(a.frontmatter.publishedAt).getTime()
+    )
+    .slice(0, 4);
+}

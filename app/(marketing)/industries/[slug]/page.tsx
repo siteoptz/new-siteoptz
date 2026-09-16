@@ -3,20 +3,49 @@ import { notFound } from "next/navigation";
 import CTABand from "@/components/blocks/CTABand";
 import FAQ from "@/components/blocks/FAQ";
 import PageHero from "@/components/blocks/PageHero";
+import RelatedReading from "@/components/blocks/RelatedReading";
 import Breadcrumbs, { type BreadcrumbItem } from "@/components/layout/Breadcrumbs";
 import JsonLd from "@/components/seo/JsonLd";
 import Container from "@/components/ui/Container";
 import Prose from "@/components/ui/Prose";
 import SectionHead from "@/components/ui/SectionHead";
-import Section from "@/components/ui/Section";
-import { type ContentEntry, type IndustryFrontmatter, getIndustryEntries } from "@/lib/content";
+import Section, { type SectionSurface } from "@/components/ui/Section";
+import { type ContentEntry, type IndustryFrontmatter, getIndustryEntries, getSupportingArticles } from "@/lib/content";
 import { getRoute, industryServices, type RouteEntry } from "@/lib/nav";
 import { buildService } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
+import { deriveSequentialSurfaces } from "@/lib/section-surfaces";
 
 export const dynamicParams = false;
 
 const CONTACT_CTA = { label: "Book a call", href: "/contact" };
+
+interface IndustryTailSurfaces {
+  faq: SectionSurface;
+  relatedReading: SectionSurface;
+  cta: SectionSurface;
+}
+
+/**
+ * Hero, prose, and the services grid are fixed at base, base, raised —
+ * always three sections, in that order. faq and relatedReading are each
+ * optional (faq per industry, relatedReading emergent as articles get
+ * written), so the tail can run three "base" sections in a row once both
+ * are present, which wasn't possible back when this template had no
+ * optional sections after the fixed three. Walking the full sequence keeps
+ * that from landing as three identical surfaces in a row.
+ */
+function deriveIndustryTailSurfaces(hasFaq: boolean, hasRelatedReading: boolean): IndustryTailSurfaces {
+  const derived = deriveSequentialSurfaces<"hero" | "prose" | "services" | "faq" | "relatedReading" | "cta">([
+    { key: "hero", surface: "base", when: true },
+    { key: "prose", surface: "base", when: true },
+    { key: "services", surface: "raised", when: true },
+    { key: "faq", surface: "base", when: hasFaq },
+    { key: "relatedReading", surface: "base", when: hasRelatedReading },
+    { key: "cta", surface: "base", when: true },
+  ]);
+  return { faq: derived.faq, relatedReading: derived.relatedReading, cta: derived.cta };
+}
 
 async function getEntry(slug: string): Promise<ContentEntry<IndustryFrontmatter>> {
   const entries = await getIndustryEntries();
@@ -57,6 +86,8 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
   const route = getRoute(`/industries/${slug}`);
   const trail = buildTrail(route);
   const services = industryServices(slug);
+  const supportingArticles = await getSupportingArticles(route.path);
+  const tailSurfaces = deriveIndustryTailSurfaces(Boolean(fm.faq), supportingArticles.length > 0);
 
   const serviceSchema = buildService({
     name: fm.h1,
@@ -100,14 +131,22 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       </Section>
 
       {fm.faq ? (
-        <Section surface="base">
+        <Section surface={tailSurfaces.faq}>
           <Container>
             <FAQ items={fm.faq} />
           </Container>
         </Section>
       ) : null}
 
-      <Section surface="base">
+      {supportingArticles.length > 0 ? (
+        <Section surface={tailSurfaces.relatedReading}>
+          <Container>
+            <RelatedReading articles={supportingArticles} />
+          </Container>
+        </Section>
+      ) : null}
+
+      <Section surface={tailSurfaces.cta}>
         <Container>
           <CTABand heading={fm.cta.heading} body={fm.cta.body} cta={CONTACT_CTA} />
         </Container>

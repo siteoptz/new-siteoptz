@@ -4,16 +4,18 @@ import CrossLinks from "@/components/blocks/CrossLinks";
 import CTABand from "@/components/blocks/CTABand";
 import FAQ from "@/components/blocks/FAQ";
 import PageHero from "@/components/blocks/PageHero";
+import RelatedReading from "@/components/blocks/RelatedReading";
 import StageGrid from "@/components/blocks/StageGrid";
 import Breadcrumbs, { type BreadcrumbItem } from "@/components/layout/Breadcrumbs";
 import JsonLd from "@/components/seo/JsonLd";
 import Container from "@/components/ui/Container";
 import Prose from "@/components/ui/Prose";
 import Section, { type SectionSurface } from "@/components/ui/Section";
-import { type ContentEntry, type ServiceFrontmatter, getServiceEntries } from "@/lib/content";
+import { type ContentEntry, type ServiceFrontmatter, getServiceEntries, getSupportingArticles } from "@/lib/content";
 import { getRoute, type RouteEntry } from "@/lib/nav";
 import { buildService } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
+import { deriveSequentialSurfaces } from "@/lib/section-surfaces";
 
 export const dynamicParams = false;
 
@@ -25,49 +27,35 @@ interface LeafSurfaces {
   prose: SectionSurface;
   faq: SectionSurface;
   crossLinks: SectionSurface;
+  relatedReading: SectionSurface;
   cta: SectionSurface;
 }
 
 /**
- * boundary, faq, and crossLinks are each optional per service, so the number
- * of sections actually on the page varies. Assigning every slot a fixed
- * surface risks a run of three or more identical surfaces in a row once
- * enough optional sections are missing (hero, prose, crossLinks, and cta are
- * all "base" by default — today's schema always requires faq for a service
- * page, which keeps that run from happening, but the layout shouldn't depend
- * on that content rule to stay correct). This walks the slots in render
- * order and only falls back to a slot's default surface when it wouldn't sit
+ * boundary, faq, crossLinks, and relatedReading are each optional per
+ * service, so the number of sections actually on the page varies. Assigning
+ * every slot a fixed surface risks a run of three or more identical
+ * surfaces in a row once enough optional sections are missing or present
+ * (hero, prose, crossLinks, relatedReading, and cta are all "base" by
+ * default — today's schema always requires faq for a service page, which
+ * keeps that run from happening on its own, but the layout shouldn't depend
+ * on that content rule to stay correct, and relatedReading's presence isn't
+ * knowable from frontmatter at all). This walks the slots in render order
+ * and only falls back to a slot's default surface when it wouldn't sit
  * behind two of the same surface already — two of the same in a row still
  * get the automatic hairline seam (globals.css's `.surface-x + .surface-x`
  * rule), three do not.
  */
-function deriveLeafSurfaces(fm: ServiceFrontmatter): LeafSurfaces {
-  const slots: Array<{ key: keyof LeafSurfaces; surface: SectionSurface; when: boolean }> = [
+function deriveLeafSurfaces(fm: ServiceFrontmatter, hasRelatedReading: boolean): LeafSurfaces {
+  return deriveSequentialSurfaces<keyof LeafSurfaces>([
     { key: "hero", surface: "base", when: true },
     { key: "boundary", surface: "raised", when: Boolean(fm.boundary) },
     { key: "prose", surface: "base", when: true },
     { key: "faq", surface: "raised", when: Boolean(fm.faq) },
     { key: "crossLinks", surface: "base", when: Boolean(fm.crossLinks) },
+    { key: "relatedReading", surface: "base", when: hasRelatedReading },
     { key: "cta", surface: "base", when: true },
-  ];
-
-  const result = {} as LeafSurfaces;
-  const rendered: SectionSurface[] = [];
-
-  for (const slot of slots) {
-    let surface = slot.surface;
-    if (slot.when) {
-      const last = rendered[rendered.length - 1];
-      const secondLast = rendered[rendered.length - 2];
-      if (surface === last && surface === secondLast) {
-        surface = surface === "base" ? "raised" : "base";
-      }
-      rendered.push(surface);
-    }
-    result[slot.key] = surface;
-  }
-
-  return result;
+  ]);
 }
 
 async function getEntry(slug: string): Promise<ContentEntry<ServiceFrontmatter>> {
@@ -108,6 +96,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const fm = entry.frontmatter;
   const route = getRoute(`/services/${slug}`);
   const trail = buildTrail(route);
+  const supportingArticles = await getSupportingArticles(route.path);
 
   const serviceSchema = buildService({
     name: fm.h1,
@@ -140,6 +129,14 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           </Container>
         </Section>
 
+        {supportingArticles.length > 0 ? (
+          <Section surface="base">
+            <Container>
+              <RelatedReading articles={supportingArticles} />
+            </Container>
+          </Section>
+        ) : null}
+
         <Section surface="base">
           <Container>
             <CTABand heading={fm.cta.heading} body={fm.cta.body} cta={CONTACT_CTA} />
@@ -149,7 +146,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     );
   }
 
-  const surfaces = deriveLeafSurfaces(fm);
+  const surfaces = deriveLeafSurfaces(fm, supportingArticles.length > 0);
 
   return (
     <div>
@@ -190,6 +187,14 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <Section surface={surfaces.crossLinks}>
           <Container>
             <CrossLinks slugs={fm.crossLinks} />
+          </Container>
+        </Section>
+      ) : null}
+
+      {supportingArticles.length > 0 ? (
+        <Section surface={surfaces.relatedReading}>
+          <Container>
+            <RelatedReading articles={supportingArticles} />
           </Container>
         </Section>
       ) : null}
