@@ -40,10 +40,21 @@ function flattenText(node: React.ReactNode): string {
  * Assigns the id lib/content.ts's extractH2Headings computed for this exact
  * heading text, via the same slugify function — so the table of contents'
  * anchors and the ids actually rendered here cannot drift apart.
+ *
+ * tabIndex={-1} makes the heading programmatically focusable without adding
+ * it to tab order. The table of contents links are plain `#id` anchors with
+ * no JS — browsers move focus to the fragment target as part of native hash
+ * navigation, but only when the target is focusable, so without this a
+ * screen reader user lands on the section visually with no "you are here"
+ * announced.
  */
 function ArticleH2({ children }: { children?: React.ReactNode }) {
   const id = slugifyHeading(flattenText(children));
-  return <h2 id={id}>{children}</h2>;
+  return (
+    <h2 id={id} tabIndex={-1}>
+      {children}
+    </h2>
+  );
 }
 
 /**
