@@ -58,6 +58,7 @@ export function buildMetadata({ title, description, path, ogImage }: BuildMetada
       title,
       description,
       url: canonical,
+      siteName: "SiteOptz",
       images: [{ url: image }],
     },
     twitter: {
