@@ -196,6 +196,20 @@ const articleAuthorSchema = z.object({
   role: z.string(),
 });
 
+/**
+ * Fixed enum, not free-text — the hub groups articles by this, so adding a
+ * sixth theme is a decision about the hub's structure, not a typo an author
+ * can introduce by typing a new string.
+ */
+export const ARTICLE_THEMES = [
+  "attribution",
+  "healthcare",
+  "paid-media",
+  "search-visibility",
+  "measurement-practice",
+] as const;
+export type ArticleTheme = (typeof ARTICLE_THEMES)[number];
+
 export const pointOfViewFrontmatterSchema = z.object({
   title: z.string().max(60),
   description: z.string().max(155),
@@ -213,6 +227,21 @@ export const pointOfViewFrontmatterSchema = z.object({
    * should override the recency-based default.
    */
   relatedSlugs: z.array(z.string()).optional(),
+  /** Which of the hub's topic groups this article belongs to. */
+  theme: z.enum(ARTICLE_THEMES),
+  /**
+   * Service route paths this article actually argues for, in display order —
+   * not what it would be nice to rank for. 1-3 entries, validated against
+   * lib/nav.ts in validateSupportsServices. An article that supports no
+   * service page has no reason to exist in this cluster.
+   */
+  supportsServices: z.array(z.string()).min(1).max(3),
+  /**
+   * Industry route paths this article supports. 0-2 entries — an article
+   * about a mechanism rather than a vertical (attribution, paid-media) may
+   * support none at all.
+   */
+  supportsIndustries: z.array(z.string()).max(2),
 });
 export type PointOfViewFrontmatter = z.infer<typeof pointOfViewFrontmatterSchema>;
 
@@ -275,6 +304,44 @@ function validateServicesUsed(filePath: string, servicesUsed: readonly string[])
   }
 }
 
+function validateSupportsServices(filePath: string, supportsServices: readonly string[]): void {
+  for (const routePath of supportsServices) {
+    const route = (() => {
+      try {
+        return getRoute(routePath);
+      } catch {
+        throw new Error(
+          `lib/content: invalid frontmatter in ${filePath} — field "supportsServices": "${routePath}" does not resolve to a route in lib/nav.ts`
+        );
+      }
+    })();
+    if (route.pageType !== "service") {
+      throw new Error(
+        `lib/content: invalid frontmatter in ${filePath} — field "supportsServices": "${routePath}" does not resolve to a service page (pageType "${route.pageType}")`
+      );
+    }
+  }
+}
+
+function validateSupportsIndustries(filePath: string, supportsIndustries: readonly string[]): void {
+  for (const routePath of supportsIndustries) {
+    const route = (() => {
+      try {
+        return getRoute(routePath);
+      } catch {
+        throw new Error(
+          `lib/content: invalid frontmatter in ${filePath} — field "supportsIndustries": "${routePath}" does not resolve to a route in lib/nav.ts`
+        );
+      }
+    })();
+    if (route.parent !== "/industries") {
+      throw new Error(
+        `lib/content: invalid frontmatter in ${filePath} — field "supportsIndustries": "${routePath}" does not resolve to an industry page`
+      );
+    }
+  }
+}
+
 /**
  * A boundary is required if and only if the slug has a counterpart in
  * lib/nav.ts's boundary table — not a function of funnelStage or pageType.
@@ -326,6 +393,12 @@ async function loadEntry<TFrontmatter>(
   if (collection === "proof") {
     const proofData = result.data as ProofFrontmatter;
     validateServicesUsed(filePath, proofData.servicesUsed);
+  }
+
+  if (collection === "point-of-view") {
+    const articleData = result.data as PointOfViewFrontmatter;
+    validateSupportsServices(filePath, articleData.supportsServices);
+    validateSupportsIndustries(filePath, articleData.supportsIndustries);
   }
 
   const components =
