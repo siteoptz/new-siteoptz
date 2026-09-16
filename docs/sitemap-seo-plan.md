@@ -580,10 +580,20 @@ section of its stage hub and note the decision here.
 - Title (41): `Marketing Measurement Insights | SiteOptz`
 - Meta (139): `Written positions on attribution, AI search, and marketing measurement — for operators deciding where to put next quarter's budget.`
 - H1 (hub): Positions, argued.
+- Hub structure (as of Instruction 12): intro copy above, unchanged, followed by articles
+  grouped by theme rather than listed flat by date. Each article declares one theme —
+  attribution, healthcare, paid-media, search-visibility, measurement-practice — and one
+  section renders per theme that actually has an article, most recent first within it. A
+  theme with no articles yet renders no section at all, not an empty one. Sections are
+  ordered by article count descending, so the fullest cluster leads; themes tied on count
+  keep attribution, measurement-practice, paid-media, search-visibility, healthcare as the
+  tie-break order. CTABand below the grouped sections. At four articles this produces two
+  sections (healthcare, then paid-media) — expected, not a bug to fix.
 - Detail template: Source Serif 4 body, 38rem measure, sticky table of contents on desktop,
   byline, published and updated dates, related articles
 - Schema: CollectionPage on hub; Article + BreadcrumbList + Person on detail
-- Words: hub 300–500; articles 1,200–2,500
+- Words: hub 300–500 (the theme grouping is structure, not additional prose); articles
+  1,200–2,500
 - First five articles: why platform-reported conversions overstate paid search · what a
   measurement audit actually finds · how to read a map pack scan · what GEO can and cannot
   do today · the case against blended cost per lead

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CTABand from "@/components/blocks/CTABand";
 import PageHero from "@/components/blocks/PageHero";
 import Breadcrumbs, { type BreadcrumbItem } from "@/components/layout/Breadcrumbs";
 import JsonLd from "@/components/seo/JsonLd";
@@ -6,10 +7,61 @@ import Container from "@/components/ui/Container";
 import Prose from "@/components/ui/Prose";
 import Section from "@/components/ui/Section";
 import SectionHead from "@/components/ui/SectionHead";
-import { getPointOfViewEntries } from "@/lib/content";
+import { type ArticleEntry, type ArticleTheme, getPointOfViewEntries } from "@/lib/content";
 import { getRoute, type RouteEntry } from "@/lib/nav";
 import { buildCollectionPage } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
+
+/**
+ * Display order for the hub's theme groups, and the tie-break order when
+ * two themes have the same article count (groupsByTheme sorts by count
+ * descending via a stable sort, so ties keep this order). Deliberately its
+ * own list rather than lib/content.ts's ARTICLE_THEMES — that array's order
+ * is the schema's declaration order, not a claim about which theme leads
+ * the hub.
+ */
+const THEME_DISPLAY_ORDER: readonly ArticleTheme[] = [
+  "attribution",
+  "measurement-practice",
+  "paid-media",
+  "search-visibility",
+  "healthcare",
+];
+
+const THEME_HEADINGS: Record<ArticleTheme, string> = {
+  attribution: "Attribution",
+  "measurement-practice": "Measurement practice",
+  "paid-media": "Paid media",
+  "search-visibility": "Search visibility",
+  healthcare: "Healthcare",
+};
+
+interface ThemeGroup {
+  theme: ArticleTheme;
+  heading: string;
+  articles: ArticleEntry[];
+}
+
+/**
+ * Groups articles by theme, most recent first within each group, dropping
+ * any theme with no articles yet — a theme existing in the enum is not a
+ * reason to show an empty section for it. Sorted by article count
+ * descending so the fullest cluster leads; Array#sort is stable, so themes
+ * tied on count keep THEME_DISPLAY_ORDER's order rather than an arbitrary one.
+ */
+function groupByTheme(entries: readonly ArticleEntry[]): ThemeGroup[] {
+  return THEME_DISPLAY_ORDER.map((theme) => ({
+    theme,
+    heading: THEME_HEADINGS[theme],
+    articles: entries
+      .filter((entry) => entry.frontmatter.theme === theme)
+      .sort(
+        (a, b) => new Date(b.frontmatter.publishedAt).getTime() - new Date(a.frontmatter.publishedAt).getTime()
+      ),
+  }))
+    .filter((group) => group.articles.length > 0)
+    .sort((a, b) => b.articles.length - a.articles.length);
+}
 
 const PAGE_DESCRIPTION =
   "Written positions on attribution, AI search, and marketing measurement - for operators deciding where to put next quarter's budget.";
@@ -52,9 +104,7 @@ function buildTrail(route: RouteEntry): BreadcrumbItem[] {
 export default async function PointOfViewHubPage() {
   const trail = buildTrail(getRoute("/point-of-view"));
   const entries = await getPointOfViewEntries();
-  const sorted = [...entries].sort(
-    (a, b) => new Date(b.frontmatter.publishedAt).getTime() - new Date(a.frontmatter.publishedAt).getTime()
-  );
+  const themeGroups = groupByTheme(entries);
 
   const collectionSchema = buildCollectionPage({
     name: "Point of View",
@@ -126,23 +176,38 @@ export default async function PointOfViewHubPage() {
 
       <Section surface="raised">
         <Container>
-          <div className="grid grid-cols-1 gap-px bg-rule">
-            {sorted.map((entry) => (
-              <Link
-                key={entry.slug}
-                href={`/point-of-view/${entry.slug}`}
-                className="bg-base p-6 hover:brightness-110 min-[900px]:flex min-[900px]:items-baseline min-[900px]:justify-between min-[900px]:gap-8"
-              >
-                <div>
-                  <p className="font-display text-lg text-accent">{stripSiteSuffix(entry.frontmatter.title)}</p>
-                  <p className="mt-1 text-muted">{entry.frontmatter.dek}</p>
-                </div>
-                <p className="mt-2 whitespace-nowrap text-sm text-muted min-[900px]:mt-0">
-                  {formatDate(entry.frontmatter.publishedAt)}
-                </p>
-              </Link>
-            ))}
-          </div>
+          {themeGroups.map((group) => (
+            <div key={group.theme}>
+              <SectionHead as="h3" heading={group.heading} />
+              <div className="grid grid-cols-1 gap-px bg-rule">
+                {group.articles.map((entry) => (
+                  <Link
+                    key={entry.slug}
+                    href={`/point-of-view/${entry.slug}`}
+                    className="bg-base p-6 hover:brightness-110 min-[900px]:flex min-[900px]:items-baseline min-[900px]:justify-between min-[900px]:gap-8"
+                  >
+                    <div>
+                      <p className="font-display text-lg text-accent">{stripSiteSuffix(entry.frontmatter.title)}</p>
+                      <p className="mt-1 text-muted">{entry.frontmatter.dek}</p>
+                    </div>
+                    <p className="mt-2 whitespace-nowrap text-sm text-muted min-[900px]:mt-0">
+                      {formatDate(entry.frontmatter.publishedAt)}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          ))}
+        </Container>
+      </Section>
+
+      <Section surface="base">
+        <Container>
+          <CTABand
+            heading="Convinced by one of these? Talk it through."
+            body="A short conversation about which of these positions actually matches what you're seeing in your own numbers."
+            cta={{ label: "Book a call", href: "/contact" }}
+          />
         </Container>
       </Section>
     </div>
