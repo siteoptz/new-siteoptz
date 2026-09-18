@@ -133,27 +133,12 @@ export function buildArticle(input: ArticleInput) {
     description: input.description,
     url: absoluteUrl(input.path),
     author: {
-      "@type": "Person",
+      "@type": "Organization",
       name: input.authorName,
     },
     datePublished: input.publishedAt,
     dateModified: input.updatedAt,
     ...(input.imageUrl ? { image: [input.imageUrl] } : {}),
-  };
-}
-
-export interface PersonInput {
-  name: string;
-  role: string;
-}
-
-/** A standalone Person node for an article byline, alongside (not instead of) Article's own nested author reference. */
-export function buildPerson(input: PersonInput) {
-  return {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: input.name,
-    jobTitle: input.role,
   };
 }
 

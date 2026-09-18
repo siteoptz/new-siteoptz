@@ -619,7 +619,9 @@ section of its stage hub and note the decision here.
   sections (healthcare, then paid-media) — expected, not a bug to fix.
 - Detail template: Source Serif 4 body, 38rem measure, sticky table of contents on desktop,
   byline, published and updated dates, related articles
-- Schema: CollectionPage on hub; Article + BreadcrumbList + Person on detail
+- Schema: CollectionPage on hub; Article + BreadcrumbList on detail. Article's own author
+  node is `Organization` (SiteOptz), not `Person` — bylines are organizational, not
+  individual, so there is no separate standalone Person node.
 - Words: hub 300–500 (the theme grouping is structure, not additional prose); articles
   1,200–2,500
 - First five articles: why platform-reported conversions overstate paid search · what a

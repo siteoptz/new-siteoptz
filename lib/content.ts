@@ -191,11 +191,6 @@ export const proofFrontmatterSchema = z.object({
 });
 export type ProofFrontmatter = z.infer<typeof proofFrontmatterSchema>;
 
-const articleAuthorSchema = z.object({
-  name: z.string(),
-  role: z.string(),
-});
-
 /**
  * Fixed enum, not free-text — the hub groups articles by this, so adding a
  * sixth theme is a decision about the hub's structure, not a typo an author
@@ -217,7 +212,8 @@ export const pointOfViewFrontmatterSchema = z.object({
   secondaryKeywords: z.array(z.string()),
   /** One sentence, shown on the hub next to the title. */
   dek: z.string(),
-  author: articleAuthorSchema,
+  /** An organization byline — every article is published under the SiteOptz name, not an individual's. */
+  author: z.string(),
   publishedAt: z.string(),
   updatedAt: z.string(),
   /**

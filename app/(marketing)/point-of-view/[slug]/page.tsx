@@ -6,7 +6,7 @@ import Container from "@/components/ui/Container";
 import Prose from "@/components/ui/Prose";
 import Section from "@/components/ui/Section";
 import { type ArticleEntry, getPointOfViewEntries } from "@/lib/content";
-import { buildArticle, buildPerson } from "@/lib/schema";
+import { buildArticle } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
 export const dynamicParams = false;
@@ -88,18 +88,16 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
     headline: heading,
     description: fm.description,
     path: `/point-of-view/${slug}`,
-    authorName: fm.author.name,
+    authorName: fm.author,
     publishedAt: fm.publishedAt,
     updatedAt: fm.updatedAt,
   });
-  const personSchema = buildPerson({ name: fm.author.name, role: fm.author.role });
 
   const showUpdated = fm.updatedAt !== fm.publishedAt;
 
   return (
     <div>
       <JsonLd data={articleSchema} />
-      <JsonLd data={personSchema} />
 
       <Section surface="reading">
         <Container>
@@ -111,9 +109,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
               table of contents label below, which established the same pairing. */}
           <p className="mt-4 max-w-[var(--measure-sans)] text-reading-ink/65">{fm.description}</p>
           <div className="mt-6 text-sm text-reading-ink/65">
-            <span>
-              {fm.author.name}, {fm.author.role}
-            </span>
+            <span>{fm.author}</span>
             <span className="mx-2">·</span>
             <span>Published {formatDate(fm.publishedAt)}</span>
             {showUpdated ? (
