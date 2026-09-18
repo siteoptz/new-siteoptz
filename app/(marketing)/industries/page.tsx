@@ -8,12 +8,11 @@ import Prose from "@/components/ui/Prose";
 import SectionHead from "@/components/ui/SectionHead";
 import Section from "@/components/ui/Section";
 import { getIndustryEntries } from "@/lib/content";
-import { getRoute, ROUTES, type RouteEntry } from "@/lib/nav";
+import { getRoute, industriesList, type RouteEntry } from "@/lib/nav";
 import { buildCollectionPage } from "@/lib/schema";
 import { buildMetadata } from "@/lib/seo";
 
-const PAGE_DESCRIPTION =
-  "Ten sectors, one shared problem: the outcome that matters is recorded in a system - an EMR, a core banking system, a case file - ad platforms cannot see.";
+const PAGE_DESCRIPTION = `${industriesList().length} sectors, one shared problem: the outcome that matters is recorded in a system - an EMR, a core banking system, a case file - ad platforms cannot see.`;
 
 export const metadata = buildMetadata({
   title: "Marketing Agency by Industry | SiteOptz",
@@ -35,11 +34,10 @@ export default async function IndustriesHubPage() {
   const trail = buildTrail(getRoute("/industries"));
   const rawEntries = await getIndustryEntries();
 
-  // Ordered per lib/nav.ts's ROUTES, the canonical order from section 5 of
-  // the SEO plan — not directory-read order, which is alphabetical by slug.
-  const industryOrder = ROUTES.filter((route) => route.parent === "/industries").map(
-    (route) => route.path.split("/").pop()
-  );
+  // Ordered per lib/nav.ts's industriesList(), the canonical order from
+  // section 5 of the SEO plan — not directory-read order, which is
+  // alphabetical by slug.
+  const industryOrder = industriesList().map((route) => route.path.split("/").pop());
   const entries = industryOrder
     .map((slug) => rawEntries.find((entry) => entry.slug === slug))
     .filter((entry): entry is (typeof rawEntries)[number] => entry !== undefined);
@@ -60,7 +58,7 @@ export default async function IndustriesHubPage() {
           <PageHero
             kicker="Industries"
             heading="A marketing agency by industry, where measurement is the hard part."
-            lead="Ten sectors, each recording its real outcome in a system built for something other than marketing - and each needing the same measurement layer built to reach into it anyway."
+            lead={`${industriesList().length} sectors, each recording its real outcome in a system built for something other than marketing - and each needing the same measurement layer built to reach into it anyway.`}
           />
         </Container>
       </Section>
@@ -69,14 +67,17 @@ export default async function IndustriesHubPage() {
         <Container>
           <Prose>
             <p>
-              Ten sectors sit on this page, and what they share is not a market category - it is
+              {industriesList().length} sectors sit on this page, and what they share is not a
+              market category - it is
               where the outcome that actually matters gets recorded. A multi-location healthcare
               group&rsquo;s real outcome is a booked, attended consultation, and it lives inside an
               EMR. A bank or credit union&rsquo;s is a funded account, inside a core banking system.
               A freight or logistics operator&rsquo;s is a booked load, inside a TMS. An educational
               institution&rsquo;s is an enrolled student, inside a student information system. A
               self-storage operator&rsquo;s is a rented unit, inside a property management system. A
-              law firm&rsquo;s is a signed case, inside a case management system. None of those six
+              law firm&rsquo;s is a signed case, inside a case management system. A dental
+              practice&rsquo;s is an accepted treatment plan, inside its own practice management
+              software. None of those seven
               systems was ever built with a marketing team in mind, let alone to report back to an
               ad platform, and the remaining four sectors
               carry a version of the same problem in a system just as closed: a distributor&rsquo;s
@@ -86,7 +87,8 @@ export default async function IndustriesHubPage() {
               own systems this measurement layer is built to reach into on someone else&rsquo;s behalf.
             </p>
             <p>
-              A blended, company-wide number hides this the same way in every one of the ten. The
+              A blended, company-wide number hides this the same way in every one of the{" "}
+              {industriesList().length}. The
               number itself is rarely wrong, exactly; averaging away the location, the account, or
               the practice area simply erases the one piece of information that would tell an
               operator where to act. A healthcare group&rsquo;s regional cost per lead can look
@@ -99,7 +101,7 @@ export default async function IndustriesHubPage() {
               see the thing that most needs fixing.
             </p>
             <p>
-              What differs across the ten is which system holds the answer, what constrains getting
+              What differs across the {industriesList().length} is which system holds the answer, what constrains getting
               it out, and how long the gap runs between the marketing that produced an inquiry and
               the system finally recording an outcome. A regulated sector - healthcare, finance,
               education - adds a compliance layer on top of the system boundary: HIPAA, PII rules,
@@ -116,7 +118,7 @@ export default async function IndustriesHubPage() {
               is not our own.
             </p>
             <p>
-              Ten different systems, ten different constraints, and the same underlying discipline
+              {industriesList().length} different systems, {industriesList().length} different constraints, and the same underlying discipline
               applied to each: find where the real outcome is recorded, build a connection into it
               that respects whatever boundary governs that system, and report against that outcome
               rather than the platform-reported click or the leading indicator that arrived weeks
@@ -139,7 +141,7 @@ export default async function IndustriesHubPage() {
 
       <Section surface="raised">
         <Container>
-          <SectionHead heading="The ten industries" />
+          <SectionHead heading={`The ${industriesList().length} industries`} />
           <div className="grid grid-cols-1 gap-10 min-[900px]:grid-cols-2">
             {entries.map((entry) => {
               const route = getRoute(`/industries/${entry.slug}`);
