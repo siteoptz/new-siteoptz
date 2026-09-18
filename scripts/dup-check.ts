@@ -1,10 +1,16 @@
 /**
- * Compares every pair of MDX bodies within each of content/services/*.mdx
- * and content/industries/*.mdx (separately — the two collections have very
- * different shapes, so a shared phrase across collections isn't the same
- * kind of finding) and reports the longest shared contiguous phrase over
- * SHARED_PHRASE_REPORT_THRESHOLD words, with both file names and the
- * phrase.
+ * Compares every pair of MDX bodies within each of content/services/*.mdx,
+ * content/industries/*.mdx, and content/point-of-view/*.mdx (separately —
+ * each collection has a very different shape, so a shared phrase across
+ * collections isn't the same kind of finding) and reports the longest
+ * shared contiguous phrase over SHARED_PHRASE_REPORT_THRESHOLD words, with
+ * both file names and the phrase.
+ *
+ * point-of-view was added late (Instruction 13's fourth healthcare
+ * article) — every "dup-check clean" claim on an article before that point
+ * in the project's history was checking services and industries only, not
+ * the articles themselves, because this list never included the
+ * collection they live in.
  *
  * This is a review tool, not a gate — not wired into the build. Run
  * manually via `npm run dup`, starting after the second page in a
@@ -17,7 +23,7 @@ import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
 
-const COLLECTIONS = ["services", "industries"] as const;
+const COLLECTIONS = ["services", "industries", "point-of-view"] as const;
 const SHARED_PHRASE_REPORT_THRESHOLD = 8;
 
 function tokenize(text: string): string[] {
