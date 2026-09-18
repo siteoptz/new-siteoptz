@@ -56,7 +56,7 @@ const VERIFIED_MAP: ReadonlyArray<readonly [string, string]> = [
   ["/seo-services-for-ecommerce", "/services/seo"],
   ["/seo-services-for-attorneys", "/industries/professional-services-marketing"],
   ["/seo-services-for-travel", "/services/seo"],
-  ["/seo-services-for-dentists", "/industries/healthcare-marketing"],
+  ["/seo-services-for-dentists", "/industries/dental-marketing"],
   ["/automotive-seo-services", "/services/seo"],
   ["/fashion-seo-services-agency", "/services/seo"],
   ["/restaurant-seo-services", "/services/seo"],
