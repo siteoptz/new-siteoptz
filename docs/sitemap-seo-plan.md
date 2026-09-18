@@ -459,7 +459,7 @@ section of its stage hub and note the decision here.
 - Primary: professional services marketing agency
 - Secondary: B2B lead attribution, long sales cycle attribution
 - Title (48): `Professional Services Marketing Agency | SiteOptz`
-- Meta (146): `Long consideration cycles measured properly: inquiry to signed engagement, with the lag accounted for instead of averaged away in monthly reporting.`
+- Meta (149): `Deals here can span nine reporting cycles before closing - lag a professional services marketing agency tracks by cohort to each deal's real outcome.`
 - H1: Professional services marketing agency, built for a nine-month sales cycle.
 - Sections: page hero · why monthly reporting misleads on long cycles · cohort-based
   reporting explained · what we track between inquiry and signature · which services apply ·
@@ -484,7 +484,7 @@ section of its stage hub and note the decision here.
 - Primary: financial services marketing agency
 - Secondary: bank marketing attribution, credit union marketing, wealth management lead tracking
 - Title (46): `Financial Services Marketing Agency | SiteOptz`
-- Meta (136): `Marketing measured to the funded account, tracked through core banking systems and compliance review, with PII kept out of ad platforms.`
+- Meta (154): `Core banking systems hold the funded account weeks after application - the gap a financial services marketing agency closes, PII kept out of ad platforms.`
 - H1: A financial services marketing agency, measured to the funded account.
 - Sections: page hero · what makes bank and credit union attribution hard — closed core
   banking systems, the application-to-funded lag, branch/digital overlap, compliance review,
@@ -498,7 +498,7 @@ section of its stage hub and note the decision here.
 - Primary: manufacturing marketing agency
 - Secondary: industrial B2B marketing, distributor lead attribution, RFQ tracking
 - Title (41): `Manufacturing Marketing Agency | SiteOptz`
-- Meta (134): `RFQ and spec-request attribution for industrial B2B, built to survive a distributor channel that hides who the end buyer actually was.`
+- Meta (153): `Distributors can close a sale the manufacturer never sees - the blind spot a manufacturing marketing agency exists to trace, RFQ through to actual order.`
 - H1: A manufacturing marketing agency, built for a channel that hides the buyer.
 - Sections: page hero · what makes industrial B2B attribution hard — the distributor channel
   breaking the chain, buying-committee structure, quarter-long sales cycles, CRM hygiene ·
@@ -512,7 +512,7 @@ section of its stage hub and note the decision here.
 - Primary: logistics marketing agency
 - Secondary: freight marketing attribution, carrier lead generation, 3PL marketing
 - Title (37): `Logistics Marketing Agency | SiteOptz`
-- Meta (146): `Freight and 3PL marketing measured to the booked load in your TMS, not the quote request - with lane-level reporting instead of national averages.`
+- Meta (147): `Most quote requests are price shopping with no real intent to book - a logistics marketing agency works from the TMS-confirmed booked load instead.`
 - H1: A logistics marketing agency, measured to the booked load.
 - Sections: page hero · what makes freight and 3PL attribution hard — quote volume as a poor
   revenue proxy, lane-level and regional demand variance, TMS export limits, carrier vs.
@@ -527,7 +527,7 @@ section of its stage hub and note the decision here.
 - Primary: energy marketing agency
 - Secondary: utility marketing attribution, solar lead generation, energy services marketing
 - Title (48): `Energy Marketing Agency for Utilities | SiteOptz`
-- Meta (146): `Solar and energy services marketing measured past the signature, through permitting and interconnection, with territory as a qualification filter.`
+- Meta (153): `Permitting and interconnection add months between a signature and a working system - a gap an energy marketing agency keeps visible, territory-qualified.`
 - H1: An energy marketing agency, built for a long, permit-bound sales cycle.
 - Sections: page hero · what makes energy and utilities attribution hard — the signed-to-
   installed lag, service territory as a qualification filter, incentive and tariff changes,
@@ -542,7 +542,7 @@ section of its stage hub and note the decision here.
 - Secondary: enrollment marketing attribution, higher education lead tracking, student
   recruitment marketing
 - Title (37): `Education Marketing Agency | SiteOptz`
-- Meta (143): `Enrollment marketing measured through inquiry, application, and acceptance to the SIS record of enrolled, with FERPA-aware tracking throughout.`
+- Meta (152): `Inquiry, application, acceptance, enrolled: four separate events an education marketing agency has to track through a FERPA-aware connection to the SIS.`
 - H1: An education marketing agency, measured to actual enrollment.
 - Sections: page hero · what makes enrollment attribution hard — SIS isolation, the inquiry-
   to-enrollment lag crossing a term boundary, extreme seasonality, FERPA, programme-level
@@ -556,7 +556,7 @@ section of its stage hub and note the decision here.
 - Primary: law firm marketing agency
 - Secondary: legal marketing attribution, attorney lead tracking, case intake measurement
 - Title (36): `Law Firm Marketing Agency | SiteOptz`
-- Meta (150): `Legal marketing measured to the signed case by practice area, with intake call review built in - since intake decides more outcomes than campaigns do.`
+- Meta (152): `Case value swings by orders of magnitude between practice areas - why a law firm marketing agency reports cost per signed case instead of cost per lead.`
 - H1: A law firm marketing agency, measured to the signed case.
 - Sections: page hero · what makes legal attribution hard — case-value variance by orders of
   magnitude, intake as the real conversion point, bar advertising rules, referral vs.
