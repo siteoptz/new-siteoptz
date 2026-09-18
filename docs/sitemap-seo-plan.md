@@ -565,6 +565,29 @@ section of its stage hub and note the decision here.
 - Schema: Service, FAQPage, BreadcrumbList
 - Words: 1,100–1,400
 
+### `/industries/dental-marketing`
+
+- Primary: dental practice marketing agency
+- Secondary: cosmetic dentistry marketing, dental sleep medicine marketing, dental patient
+  acquisition
+- Title (43): `Dental Practice Marketing Agency | SiteOptz`
+- Meta (150): `Marketing measured to case acceptance, not phone calls - for cosmetic and
+  dental sleep medicine practices where one accepted case is worth a quarter of spend.`
+- H1: Dental practice marketing measured to case acceptance.
+- Sections: the industry anatomy (page hero · what makes dental attribution hard · how we
+  measure to case acceptance · which of the six mapped services apply and how they combine ·
+  what a monthly review looks like · FAQ (5) · proof links · CTA)
+- Schema: Service, FAQPage, BreadcrumbList
+- Words: 1,300–1,600
+- Note (Instruction 14): every dental query in the first week's Search Console export is an
+  SEO-service query, inherited demand from the old WordPress site's
+  `/seo-services-for-dentists/`, the domain's highest-impression page. This page is not built
+  to capture that demand — a dental SEO services page would recreate the exact page the
+  rebuild moved away from. It exists to give dental a legitimate home, give the inherited
+  redirect a relevant destination, and rank for dental marketing rather than dental SEO. Names
+  cosmetic dentistry and dental sleep medicine prominently as the two sub-verticals carrying
+  the query volume; neither gets its own page yet.
+
 ### `/proof` and `/proof/[slug]`
 
 - Primary (hub): marketing attribution case studies

@@ -576,6 +576,20 @@ const routes = [
     anchorVariants: ["law firm marketing", "measurement to the signed case", "legal"],
     description: "Law firm marketing, measured to the signed case.",
   },
+  {
+    path: "/industries/dental-marketing",
+    label: "Dental",
+    shortLabel: "Dental",
+    parent: "/industries",
+    funnelStage: null,
+    pageType: "page",
+    anchorVariants: [
+      "dental practice marketing",
+      "marketing measured to case acceptance",
+      "dental",
+    ],
+    description: "Dental practice marketing, measured to case acceptance.",
+  },
 
   // Proof
   {
@@ -745,6 +759,23 @@ const INDUSTRY_SERVICES: Record<string, readonly string[]> = {
     "organic-capture",
     "conversion-rate-optimization",
     "branded-search-ppc",
+  ],
+  /**
+   * Deliberately excludes marketing-operations, which every other
+   * healthcare-adjacent industry includes, in favor of email-marketing —
+   * dental practices run recall and reactivation as a core acquisition
+   * channel in a way medical groups do not. The practice-management-
+   * software integration problem is covered in the page's own measurement
+   * section rather than by a marketing-operations link, so this mapping
+   * doesn't read as a copy of healthcare-marketing's.
+   */
+  "dental-marketing": [
+    "marketing-attribution",
+    "seo",
+    "organic-capture",
+    "paid-search-ppc",
+    "conversion-rate-optimization",
+    "email-marketing",
   ],
 };
 
