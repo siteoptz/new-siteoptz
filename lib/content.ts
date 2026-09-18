@@ -4,7 +4,7 @@ import matter from "gray-matter";
 import { compileMDX } from "next-mdx-remote/rsc";
 import { z } from "zod";
 import { LINK_EXEMPTION_CATEGORIES } from "./link-exemptions";
-import { createArticleMdxComponents, servicesMdxComponents } from "./mdx-components";
+import { createArticleMdxComponents, industriesMdxComponents, servicesMdxComponents } from "./mdx-components";
 import { counterpartsOf, getRoute } from "./nav";
 import { slugifyHeading } from "./slugify";
 
@@ -404,15 +404,18 @@ async function loadEntry<TFrontmatter>(
   const components =
     collection === "services"
       ? servicesMdxComponents
-      : collection === "point-of-view"
-        ? createArticleMdxComponents(listMdxFiles("point-of-view").map((file) => file.replace(/\.mdx$/, "")))
-        : undefined;
-  // blockJS is off for services and point-of-view MDX, both trusted
-  // first-party content (not user-generated) that needs JS object/array
-  // literals for props like DefinitionList's `items`. blockDangerousJS stays
-  // on as a second layer, blocking eval/Function/process even so.
+      : collection === "industries"
+        ? industriesMdxComponents
+        : collection === "point-of-view"
+          ? createArticleMdxComponents(listMdxFiles("point-of-view").map((file) => file.replace(/\.mdx$/, "")))
+          : undefined;
+  // blockJS is off for services, industries, and point-of-view MDX, all
+  // trusted first-party content (not user-generated) that needs JS
+  // object/array literals for props like DefinitionList's `items`.
+  // blockDangerousJS stays on as a second layer, blocking eval/Function/
+  // process even so.
   const options =
-    collection === "services" || collection === "point-of-view"
+    collection === "services" || collection === "industries" || collection === "point-of-view"
       ? { blockJS: false, blockDangerousJS: true }
       : undefined;
   const { content } = await compileMDX({ source: body, components, options });

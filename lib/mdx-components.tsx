@@ -26,6 +26,17 @@ export const servicesMdxComponents = {
 };
 
 /**
+ * content/industries shares the same primitives and the same nav.ts-
+ * validated anchor as content/services — same content-driven collection
+ * shape, same anatomy. Instruction 14 is the first industry page to need a
+ * component (DefinitionList, for "what makes measurement hard"); before
+ * that, every industries MDX body compiled with no `components` at all,
+ * which meant its internal links rendered as plain, unvalidated anchors
+ * rather than going through getRoute() the way every other collection's do.
+ */
+export const industriesMdxComponents = servicesMdxComponents;
+
+/**
  * Point-of-view articles aren't in nav.ts — that table is the curated,
  * roughly-fixed set of structural routes from docs/sitemap-seo-plan.md,
  * while articles get added ad hoc on their own schedule. An article
