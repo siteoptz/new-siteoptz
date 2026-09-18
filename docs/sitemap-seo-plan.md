@@ -425,7 +425,10 @@ section of its stage hub and note the decision here.
 ### `/industries/healthcare-marketing`
 
 - Primary: multi-location healthcare marketing agency
-- Secondary: medical practice marketing agency, patient acquisition marketing, EMR conversion tracking
+- Secondary: multi-location healthcare marketing, multi-site healthcare marketing, healthcare
+  systems marketing attribution, patient acquisition marketing. Revised 18 Sep 2026 from the
+  first week's Search Console query data rather than from pre-launch keyword research — see
+  Instruction 13.
 - Title (52): `Multi-Location Healthcare Marketing Agency | SiteOptz`
 - Meta (152): `Patient acquisition measured to the booked consultation in your EMR, across every location, with HIPAA-aware tracking and call handling review.`
 - H1: A multi-location healthcare marketing agency, measured to the booked consultation.
@@ -439,7 +442,9 @@ section of its stage hub and note the decision here.
 ### `/industries/self-storage-marketing`
 
 - Primary: self storage marketing agency
-- Secondary: self storage SEO, storage facility PPC, occupancy marketing
+- Secondary: self storage PPC, self storage marketing company, storage facility marketing,
+  occupancy marketing. Revised 18 Sep 2026 from the first week's Search Console query data
+  rather than from pre-launch keyword research — see Instruction 13.
 - Title (39): `Self-Storage Marketing Agency | SiteOptz`
 - Meta (149): `Facility-level marketing for storage portfolios: spend allocated by occupancy and rate, map pack coverage per site, reporting the whole portfolio.`
 - H1: A self storage marketing agency, run facility by facility.
