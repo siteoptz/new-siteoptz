@@ -435,9 +435,14 @@ section of its stage hub and note the decision here.
 - Sections: page hero · what makes healthcare attribution hard — EMR isolation, HIPAA
   constraints, call-driven intake, per-location capacity · how we handle PHI and tracking ·
   which of the six mapped services apply and how they combine · what a monthly review looks
-  like for a clinic group · FAQ (5) · proof links · CTA
+  like for a clinic group · FAQ (6) · proof links · CTA
 - Schema: Service, FAQPage, BreadcrumbList
 - Words: 1,300–1,600
+- Note (conversational-query FAQ pass, Sep 23–29 data): added a sixth FAQ answering "What are
+  the best marketing measurement platforms for multi-location healthcare groups?", a
+  full-sentence query ranking at a page-one position with zero clicks. Answered as platform
+  capability criteria, not a product recommendation. FAQ count had room (5 of 6 max), so this
+  was an addition, not a replacement.
 
 ### `/industries/self-storage-marketing`
 
@@ -450,7 +455,7 @@ section of its stage hub and note the decision here.
 - H1: A self storage marketing agency, run facility by facility.
 - Sections: page hero · why portfolio-wide averages hide everything · occupancy and rate as
   inputs to budget · map pack coverage per facility · what the portfolio report shows ·
-  FAQ (4) · CTA
+  FAQ (5) · CTA
 - Schema: Service, FAQPage, BreadcrumbList
 - Words: 1,100–1,400
 
@@ -575,7 +580,7 @@ section of its stage hub and note the decision here.
 - H1: Dental practice marketing measured to case acceptance.
 - Sections: the industry anatomy (page hero · what makes dental attribution hard · how we
   measure to case acceptance · which of the six mapped services apply and how they combine ·
-  what a monthly review looks like · FAQ (5) · proof links · CTA)
+  what a monthly review looks like · FAQ (6) · proof links · CTA)
 - Schema: Service, FAQPage, BreadcrumbList
 - Words: 1,300–1,700
 - Note (Instruction 14): every dental query in the first week's Search Console export is an
@@ -597,6 +602,12 @@ section of its stage hub and note the decision here.
   six mapped services, so the title and meta description now name search visibility alongside
   the measurement positioning, without claiming a ranking guarantee the SEO page itself
   refuses.
+- Note (conversational-query FAQ pass, Sep 23–29 data): added FAQ entries answering two
+  full-sentence queries ranking at page-one positions with zero clicks — "How do I choose an
+  SEO agency for my dental practice?" and "What should a dental practice expect from an SEO
+  engagement?" — both answered as neutral criteria, not a pitch. FAQ count was at its 6-entry
+  max, so "Do you work with single-location practices or only groups?" was replaced; it was
+  the most generic of the six, a fit question rather than a real measurement mechanism.
 
 ### `/proof` and `/proof/[slug]`
 
