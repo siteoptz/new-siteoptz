@@ -568,25 +568,35 @@ section of its stage hub and note the decision here.
 ### `/industries/dental-marketing`
 
 - Primary: dental practice marketing agency
-- Secondary: cosmetic dentistry marketing, dental sleep medicine marketing, dental patient
+- Secondary: dental SEO agency, orthodontist marketing, oral surgery marketing, dental patient
   acquisition
-- Title (43): `Dental Practice Marketing Agency | SiteOptz`
-- Meta (150): `Marketing measured to case acceptance, not phone calls - for cosmetic and
-  dental sleep medicine practices where one accepted case is worth a quarter of spend.`
+- Title (49): `Dental Practice Marketing Agency & SEO | SiteOptz`
+- Meta (154): `Dental SEO and marketing measured to case acceptance, not phone calls - for cosmetic, orthodontic, and oral surgery practices where cases fund real spend.`
 - H1: Dental practice marketing measured to case acceptance.
 - Sections: the industry anatomy (page hero · what makes dental attribution hard · how we
   measure to case acceptance · which of the six mapped services apply and how they combine ·
   what a monthly review looks like · FAQ (5) · proof links · CTA)
 - Schema: Service, FAQPage, BreadcrumbList
-- Words: 1,300–1,600
+- Words: 1,300–1,700
 - Note (Instruction 14): every dental query in the first week's Search Console export is an
   SEO-service query, inherited demand from the old WordPress site's
   `/seo-services-for-dentists/`, the domain's highest-impression page. This page is not built
   to capture that demand — a dental SEO services page would recreate the exact page the
   rebuild moved away from. It exists to give dental a legitimate home, give the inherited
-  redirect a relevant destination, and rank for dental marketing rather than dental SEO. Names
-  cosmetic dentistry and dental sleep medicine prominently as the two sub-verticals carrying
-  the query volume; neither gets its own page yet.
+  redirect a relevant destination, and rank for dental marketing rather than dental SEO.
+- Note (follow-up, week of 23–29 Sep): the dental page reached 57% of the site's search
+  impressions at page-one positions with zero clicks. Two gaps closed from real query data.
+  First, vocabulary — the page named cosmetic dentistry and dental sleep medicine, but the
+  actual demand was orthodontics (38 impressions across six queries, including the two
+  highest-volume ones) and oral surgery (6 impressions, best position 2); sleep medicine had
+  nearly disappeared from the data. Orthodontics and oral surgery are now named throughout —
+  the opening situation, the measurement-hard rows, a dedicated FAQ on referral intake — with
+  cosmetic dentistry kept and dental sleep medicine demoted to one passing mention. Second, the
+  click gap — a searcher at position 5 for "best dental seo company" saw a title and
+  description with none of those words in them. SEO and local search visibility are two of the
+  six mapped services, so the title and meta description now name search visibility alongside
+  the measurement positioning, without claiming a ranking guarantee the SEO page itself
+  refuses.
 
 ### `/proof` and `/proof/[slug]`
 
