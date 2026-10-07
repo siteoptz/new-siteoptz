@@ -18,21 +18,31 @@ const GHL_TIMEOUT_MS = 8000;
 async function getClientIp(): Promise<string> {
   const headerList = await headers();
   const forwardedFor = headerList.get("x-forwarded-for");
+  // x-forwarded-for can carry a comma-separated proxy chain on Vercel - always take the
+  // first entry, never the whole header, so a consent record holds one address.
   if (forwardedFor) return forwardedFor.split(",")[0]!.trim();
   return headerList.get("x-real-ip") ?? "unknown";
 }
 
-// Read server-side from the Referer header rather than trusted from a client-supplied field,
-// so smsConsentPage can't be spoofed to misattribute a consent record to the wrong creative.
-async function getSubmissionPage(): Promise<string> {
+// Referer is client-supplied like any other header, so this is a reliability fallback, not a
+// spoofing guard: it only records the page the form was submitted from, not where the
+// session started, which is why the hidden consentPage/landingPage fields take priority.
+async function getRefererPage(): Promise<string> {
   const headerList = await headers();
   const referer = headerList.get("referer");
-  if (!referer) return "unknown";
+  if (!referer) return "";
   try {
     return new URL(referer).pathname;
   } catch {
-    return "unknown";
+    return "";
   }
+}
+
+// Audit metadata, not a security boundary - trimmed and length-capped so a pathological
+// query string can't bloat the record, nothing more.
+function clampField(value: FormDataEntryValue | null, maxLength = 512): string {
+  if (typeof value !== "string") return "";
+  return value.trim().slice(0, maxLength);
 }
 
 /** Logged on every path that could otherwise silently drop a lead. Grep for this tag in production logs. */
@@ -100,7 +110,9 @@ export async function submitContactForm(
   }
 
   const submittedAt = new Date().toISOString();
-  const submissionPage = await getSubmissionPage();
+  const refererPage = await getRefererPage();
+  const consentPage = clampField(formData.get("consentPage"));
+  const landingPage = clampField(formData.get("landingPage"));
 
   const submission = {
     ...result.data,
@@ -108,13 +120,27 @@ export async function submitContactForm(
     spendLabel: SPEND_BAND_LABELS[result.data.spend],
     submittedAt,
     source: "siteoptz.com/contact",
+    // development locally, preview on a Vercel preview deploy, production on production -
+    // read from VERCEL_ENV rather than the hostname so it can't be fooled by a custom domain.
+    // Every GHL workflow's entry condition gates on this being "production".
+    environment: process.env.VERCEL_ENV ?? "development",
     // Sent on every submission, including a declined consent - a record showing consent was
     // declined at a given time is as useful as one showing it was given, and GHL won't expose
-    // a field in its mapping UI if it's sometimes absent from the payload.
+    // a field in its mapping UI if it's sometimes absent from the payload. Same reasoning
+    // applies to the page/landing/ad-parameter fields below: never omitted, empty string or
+    // "(unknown)" instead.
     smsConsentText: SMS_CONSENT_TEXT_V1,
     smsConsentAt: submittedAt,
-    smsConsentPage: submissionPage,
+    smsConsentPage: consentPage || refererPage || "(unknown)",
+    smsConsentLandingPage: landingPage || refererPage || "(unknown)",
     smsConsentIp: ip,
+    fbclid: clampField(formData.get("fbclid")),
+    utm_source: clampField(formData.get("utm_source")),
+    utm_medium: clampField(formData.get("utm_medium")),
+    utm_campaign: clampField(formData.get("utm_campaign")),
+    utm_content: clampField(formData.get("utm_content")),
+    utm_term: clampField(formData.get("utm_term")),
+    gclid: clampField(formData.get("gclid")),
   };
 
   const webhookUrl = process.env.GHL_WEBHOOK_URL;

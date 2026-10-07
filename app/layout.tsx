@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import LandingSessionCapture from "@/components/LandingSessionCapture";
 import JsonLd from "@/components/seo/JsonLd";
 import { buildOrganization, buildWebSite } from "@/lib/schema";
 import { fontDisplay, fontSans, fontSerif } from "./fonts";
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${fontDisplay.variable} ${fontSans.variable} ${fontSerif.variable}`}
     >
       <body>
+        <LandingSessionCapture />
         {GTM_ENABLED ? (
           <noscript>
             <iframe

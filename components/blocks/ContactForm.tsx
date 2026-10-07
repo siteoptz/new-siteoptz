@@ -16,6 +16,7 @@ import {
   SPEND_BAND_LABELS,
   SPEND_BANDS,
 } from "@/lib/contact-schema";
+import { readOrWriteLandingSession, SESSION_FIELD_NAMES } from "@/lib/landing-session";
 
 const INPUT_CLASSES =
   "block w-full rounded-default border bg-raised px-3 py-2 text-base text-text placeholder:text-muted";
@@ -60,6 +61,8 @@ export default function ContactForm() {
   const [clientErrors, setClientErrors] = useState<ContactFormFieldErrors>({});
   const [clientFormError, setClientFormError] = useState<string | null>(null);
   const loadedAtInputRef = useRef<HTMLInputElement>(null);
+  const consentPageInputRef = useRef<HTMLInputElement>(null);
+  const sessionFieldsRef = useRef<HTMLDivElement>(null);
   const confirmationRef = useRef<HTMLHeadingElement>(null);
 
   const displayedErrors = Object.keys(clientErrors).length > 0 ? clientErrors : state.fieldErrors;
@@ -71,6 +74,20 @@ export default function ContactForm() {
     // own render and make the trap fire (or fail to) for reasons unrelated to submission speed.
     if (loadedAtInputRef.current) {
       loadedAtInputRef.current.value = String(Date.now());
+    }
+  }, []);
+
+  useEffect(() => {
+    if (consentPageInputRef.current) {
+      consentPageInputRef.current.value = `${window.location.pathname}${window.location.search}`;
+    }
+
+    const session = readOrWriteLandingSession();
+    const container = sessionFieldsRef.current;
+    if (!container) return;
+    for (const input of container.querySelectorAll<HTMLInputElement>("input[name]")) {
+      const value = session[input.name];
+      if (value !== undefined) input.value = value;
     }
   }, []);
 
@@ -188,6 +205,12 @@ export default function ContactForm() {
         <input type="text" id="company_site" name="company_site" tabIndex={-1} autoComplete="off" />
       </div>
       <input type="hidden" name="loaded_at" ref={loadedAtInputRef} defaultValue="" />
+      <input type="hidden" name="consentPage" ref={consentPageInputRef} defaultValue="" />
+      <div ref={sessionFieldsRef}>
+        {SESSION_FIELD_NAMES.map((name) => (
+          <input key={name} type="hidden" name={name} defaultValue="" />
+        ))}
+      </div>
 
       <div className="grid grid-cols-1 gap-5 min-[700px]:grid-cols-2">
         <FormField id="name" label="Name" error={displayedErrors.name}>
