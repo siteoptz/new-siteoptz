@@ -65,6 +65,7 @@ export async function submitContactForm(
     spend: formData.get("spend"),
     stack: formData.get("stack"),
     goal: formData.get("goal"),
+    smsConsent: formData.get("smsConsent") === "on",
   };
 
   const result = contactFormSchema.safeParse(raw);

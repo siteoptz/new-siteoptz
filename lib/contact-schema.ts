@@ -26,6 +26,15 @@ export const SPEND_BAND_LABELS: Record<(typeof SPEND_BANDS)[number], string> = {
   "200k-plus": "$200k+/month",
 };
 
+/**
+ * The exact string shown next to the SMS consent checkbox. Sent verbatim in the webhook
+ * payload so a consent record stays resolvable to the wording actually displayed. If this
+ * text ever changes, add SMS_CONSENT_TEXT_V2 and leave this one in place rather than editing
+ * it in place - old records must keep pointing at what they actually saw.
+ */
+export const SMS_CONSENT_TEXT_V1 =
+  "By checking this box, you agree to receive text messages (i.e. conversational, marketing, promotional, customer care, etc.) from SiteOptz related to our services at the phone number provided above. Message frequency varies. Message and data rates may apply. Reply STOP to opt out of SMS messages or HELP for help. Visit https://siteoptz.com/privacy for our privacy policy and https://siteoptz.com/terms for our Terms of Service.";
+
 export const contactFormSchema = z.object({
   name: z.string().trim().min(1, "Enter your name."),
   email: z
@@ -57,6 +66,7 @@ export const contactFormSchema = z.object({
     .trim()
     .min(20, "Give us a couple of sentences - this is the field that matters.")
     .max(2000, "Keep this under 2000 characters."),
+  smsConsent: z.boolean(),
 });
 
 export type ContactFormValues = z.infer<typeof contactFormSchema>;

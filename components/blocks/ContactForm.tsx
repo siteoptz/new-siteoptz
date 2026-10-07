@@ -12,6 +12,7 @@ import {
   initialContactFormState,
   LOCATION_BAND_LABELS,
   LOCATION_BANDS,
+  SMS_CONSENT_TEXT_V1,
   SPEND_BAND_LABELS,
   SPEND_BANDS,
 } from "@/lib/contact-schema";
@@ -23,6 +24,35 @@ function inputClasses(hasError: boolean) {
   // A field border is functional, not decorative — it needs 3:1, which border-rule
   // (a translucent seam meant to fade) doesn't clear. border-field-border does.
   return `${INPUT_CLASSES} ${hasError ? "border-danger" : "border-field-border"}`;
+}
+
+// Splits on the two URL substrings so the rendered label turns them into links while the
+// concatenation of its text content stays byte-identical to SMS_CONSENT_TEXT_V1 - the
+// payload sends that same constant, so the disclaimer the person saw and the one recorded
+// as consented-to can never drift apart.
+const SMS_CONSENT_LINK_PATTERN = /(https:\/\/siteoptz\.com\/(?:privacy|terms))/g;
+const SMS_CONSENT_LINK_TARGETS: Record<string, string> = {
+  "https://siteoptz.com/privacy": "/privacy",
+  "https://siteoptz.com/terms": "/terms",
+};
+
+function renderSmsConsentLabel(text: string) {
+  return text.split(SMS_CONSENT_LINK_PATTERN).map((part, index) => {
+    const href = SMS_CONSENT_LINK_TARGETS[part];
+    if (!href) return part;
+    return (
+      <a
+        key={index}
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(event) => event.stopPropagation()}
+        className="underline"
+      >
+        {part}
+      </a>
+    );
+  });
 }
 
 export default function ContactForm() {
@@ -69,6 +99,7 @@ export default function ContactForm() {
       spend: formData.get("spend"),
       stack: formData.get("stack"),
       goal: formData.get("goal"),
+      smsConsent: formData.get("smsConsent") === "on",
     };
     const result = contactFormSchema.safeParse(raw);
     if (!result.success) {
@@ -255,6 +286,18 @@ export default function ContactForm() {
             )}
           </FormField>
         </div>
+      </div>
+
+      <div className="flex items-start gap-3">
+        <input
+          type="checkbox"
+          id="smsConsent"
+          name="smsConsent"
+          className="consent-checkbox mt-0.5 shrink-0"
+        />
+        <label htmlFor="smsConsent" className="text-2xs text-muted">
+          {renderSmsConsentLabel(SMS_CONSENT_TEXT_V1)}
+        </label>
       </div>
 
       <div>
