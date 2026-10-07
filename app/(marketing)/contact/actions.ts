@@ -141,6 +141,11 @@ export async function submitContactForm(
     utm_content: clampField(formData.get("utm_content")),
     utm_term: clampField(formData.get("utm_term")),
     gclid: clampField(formData.get("gclid")),
+    // "landing" when the ad params came from the same page load as the session's first page,
+    // "mid-session" when a later page load overwrote them with a new click, "" when no ad
+    // click has happened at all this session - lets a lead be told apart as an ad click
+    // straight to the form versus a returning organic visitor who got retargeted.
+    adParamsSource: clampField(formData.get("adParamsSource")),
   };
 
   const webhookUrl = process.env.GHL_WEBHOOK_URL;

@@ -16,7 +16,7 @@ import {
   SPEND_BAND_LABELS,
   SPEND_BANDS,
 } from "@/lib/contact-schema";
-import { readOrWriteLandingSession, SESSION_FIELD_NAMES } from "@/lib/landing-session";
+import { SESSION_FIELD_NAMES, syncLandingSession } from "@/lib/landing-session";
 
 const INPUT_CLASSES =
   "block w-full rounded-default border bg-raised px-3 py-2 text-base text-text placeholder:text-muted";
@@ -82,7 +82,7 @@ export default function ContactForm() {
       consentPageInputRef.current.value = `${window.location.pathname}${window.location.search}`;
     }
 
-    const session = readOrWriteLandingSession();
+    const session = syncLandingSession();
     const container = sessionFieldsRef.current;
     if (!container) return;
     for (const input of container.querySelectorAll<HTMLInputElement>("input[name]")) {
