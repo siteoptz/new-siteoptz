@@ -13,7 +13,10 @@ import { isRateLimited } from "@/lib/rate-limit";
 
 // Below this elapsed time, the form could not have been read and filled by a person.
 const MIN_ELAPSED_MS = 2500;
-const GHL_TIMEOUT_MS = 8000;
+// Generous for a webhook POST and well inside what a person will wait on paid traffic, where a
+// stalled "Sending…" spinner after a paid click is the single most expensive place to lose a
+// lead in the funnel.
+const GHL_TIMEOUT_MS = 5000;
 
 async function getClientIp(): Promise<string> {
   const headerList = await headers();
@@ -150,14 +153,15 @@ export async function submitContactForm(
 
   const webhookUrl = process.env.GHL_WEBHOOK_URL;
 
+  // From here down, every failure path - a missing webhook URL, a GHL timeout, a non-2xx
+  // response, a network error - is something the visitor cannot fix and a retry cannot
+  // improve: retrying only risks a duplicate contact once whatever was wrong resolves itself.
+  // So every one of them is logged at error level, for a human to recover by hand from the
+  // logs, and answered with the same success state a real delivery gets. A visitor who already
+  // typed everything should never be asked to solve a GoHighLevel outage.
   if (!webhookUrl) {
     logDroppedSubmission("GHL_WEBHOOK_URL is not configured", submission);
-    return {
-      status: "error",
-      fieldErrors: {},
-      formError: `We couldn't submit this automatically.`,
-      emailFallback: true,
-    };
+    return { status: "success", fieldErrors: {} };
   }
 
   try {
@@ -170,24 +174,14 @@ export async function submitContactForm(
 
     if (!response.ok) {
       logDroppedSubmission(`GHL responded with status ${response.status}`, submission);
-      return {
-        status: "error",
-        fieldErrors: {},
-        formError: `We couldn't submit this automatically.`,
-        emailFallback: true,
-      };
+      return { status: "success", fieldErrors: {} };
     }
   } catch (error) {
     logDroppedSubmission(
       error instanceof Error ? error.message : "unknown fetch error",
       submission
     );
-    return {
-      status: "error",
-      fieldErrors: {},
-      formError: `We couldn't submit this automatically.`,
-      emailFallback: true,
-    };
+    return { status: "success", fieldErrors: {} };
   }
 
   return { status: "success", fieldErrors: {} };
