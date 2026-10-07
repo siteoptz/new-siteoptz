@@ -33,6 +33,15 @@ export const contactFormSchema = z.object({
     .trim()
     .min(1, "Enter your work email.")
     .email("Enter a valid email address."),
+  phone: z
+    .string()
+    .trim()
+    .min(1, "Phone number is required")
+    .transform((v) => v.replace(/\D/g, ""))
+    .refine((d) => d.length === 10 || (d.length === 11 && d.startsWith("1")), {
+      message: "Enter a 10-digit US phone number",
+    })
+    .transform((d) => `+1${d.slice(-10)}`),
   company: z.string().trim().min(1, "Enter your company name."),
   role: z.string().trim().min(1, "Enter your role."),
   locations: z.enum(LOCATION_BANDS, { message: "Select the number of locations." }),
@@ -56,6 +65,7 @@ export type ContactFormFieldErrors = Partial<Record<keyof ContactFormValues, str
 export const CONTACT_FIELD_ORDER: (keyof ContactFormValues)[] = [
   "name",
   "email",
+  "phone",
   "company",
   "role",
   "locations",

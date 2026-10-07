@@ -62,6 +62,7 @@ export default function ContactForm() {
     const raw = {
       name: formData.get("name"),
       email: formData.get("email"),
+      phone: formData.get("phone"),
       company: formData.get("company"),
       role: formData.get("role"),
       locations: formData.get("locations"),
@@ -165,6 +166,20 @@ export default function ContactForm() {
         <FormField id="email" label="Work email" error={displayedErrors.email}>
           {(props) => (
             <input {...props} type="email" name="email" required className={inputClasses(!!displayedErrors.email)} />
+          )}
+        </FormField>
+
+        <FormField id="phone" label="Phone" error={displayedErrors.phone}>
+          {(props) => (
+            <input
+              {...props}
+              type="tel"
+              inputMode="tel"
+              autoComplete="tel"
+              name="phone"
+              required
+              className={inputClasses(!!displayedErrors.phone)}
+            />
           )}
         </FormField>
 

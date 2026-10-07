@@ -58,6 +58,7 @@ export async function submitContactForm(
   const raw = {
     name: formData.get("name"),
     email: formData.get("email"),
+    phone: formData.get("phone"),
     company: formData.get("company"),
     role: formData.get("role"),
     locations: formData.get("locations"),
