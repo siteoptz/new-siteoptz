@@ -77,9 +77,15 @@ export default function PrivacyPage() {
               number of locations, marketing spend band, current stack, and what you told us
               you&rsquo;re trying to measure. The form also has an optional box consenting to text
               messages. Whether you check it or leave it unchecked, we record that choice along
-              with the time it was made, the page the form was submitted from, and the IP address
-              the submission came from - a declined consent is logged with the same detail as a
-              given one.
+              with the time it was made, the page you first arrived on, the page the form was
+              submitted from, and the IP address the submission came from - a declined consent is
+              logged with the same detail as a given one.
+            </p>
+            <p>
+              If you arrived from a paid ad, we also record the advertising campaign details
+              carried in that arrival page&rsquo;s web address - the campaign, source, medium,
+              content, and term values, and a click identifier supplied by the advertising
+              platform.
             </p>
             <p>
               Through analytics - Google Analytics 4 and Google Tag Manager: pages viewed,
@@ -93,7 +99,7 @@ export default function PrivacyPage() {
       <Section surface="raised">
         <Container>
           <Prose>
-            <h2>Cookies</h2>
+            <h2>Cookies and browser storage</h2>
             <p>
               This site sets one kind of cookie, and no others. Analytics cookies, set by GA4 and
               Google Tag Manager, so we can see aggregate traffic and behavior. This is not an
@@ -101,6 +107,14 @@ export default function PrivacyPage() {
               or share this data with advertisers. You can refuse it through your browser&rsquo;s
               cookie controls; refusing it does not affect your ability to browse the site or
               submit the contact form.
+            </p>
+            <p>
+              If you arrive from a paid ad, this site separately stores the page you landed on
+              and any campaign parameters using sessionStorage, a browser storage mechanism
+              distinct from a cookie. It holds that information only for the length of your
+              visit and clears automatically when you close the browser tab. It is first-party,
+              held on your device for this site&rsquo;s own use, and no third party reads it
+              directly.
             </p>
           </Prose>
         </Container>
