@@ -57,7 +57,9 @@ export async function submitContactForm(
   _prevState: ContactFormState,
   formData: FormData
 ): Promise<ContactFormState> {
-  const honeypot = String(formData.get("company_site") ?? "").trim();
+  // Field name is a meaningless token, not "company_site" - see ContactForm.tsx for why a
+  // name describing any real field is exactly what attracts autofill to a honeypot.
+  const honeypot = String(formData.get("qzx92f") ?? "").trim();
   const loadedAt = Number(formData.get("loaded_at"));
   const elapsed = Date.now() - loadedAt;
 

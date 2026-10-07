@@ -199,10 +199,20 @@ export default function ContactForm() {
         ) : null}
       </div>
 
-      {/* Hidden from sighted users and screen readers alike; a bot that fills every field trips it. */}
-      <div aria-hidden="true" className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">
-        <label htmlFor="company_site">Company site</label>
-        <input type="text" id="company_site" name="company_site" tabIndex={-1} autoComplete="off" />
+      {/*
+        A bot that fills every field trips this. display:none (not off-screen positioning,
+        opacity, or a zero-size box) is what keeps autofill and password managers out of it -
+        those treat an off-screen-but-visible field as fair game, which is exactly what caused
+        a real visitor's password manager to fill the old version of this field and get their
+        submission silently flagged. The name is a meaningless token on purpose: autofill
+        matches on name/type, and a name describing any real field (email, company, website,
+        address, and so on) is a magnet for exactly the heuristic this is trying to avoid.
+        Still real type="text" input, not type="hidden", which autofill simply skips and would
+        defeat the point of having a trap at all.
+      */}
+      <div aria-hidden="true" className="hidden">
+        <label htmlFor="qzx92f">Leave blank</label>
+        <input type="text" id="qzx92f" name="qzx92f" tabIndex={-1} autoComplete="off" />
       </div>
       <input type="hidden" name="loaded_at" ref={loadedAtInputRef} defaultValue="" />
       <input type="hidden" name="consentPage" ref={consentPageInputRef} defaultValue="" />
