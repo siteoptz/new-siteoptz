@@ -8,16 +8,21 @@ end rather than from a server log.
 ## Phase 1 — payload shape, read at webhook.site
 
 `GHL_WEBHOOK_URL` was temporarily pointed at a webhook.site inspector for the Preview
-environment. Two submissions, both read back via webhook.site's own API (not this app's logs):
+environment. Two submissions, both read back via webhook.site's own API (not this app's logs).
+
+Identifying values below (`smsConsentIp`, `phone`, `email`, `name`, `company`) have been
+replaced with RFC 5737/documentation-range placeholders. Field shapes, types, and every other
+value - timestamps, the full `smsConsentText`, landing page, ad parameters, `environment` - are
+unmodified.
 
 **Checked:**
 
 ```json
 {
-  "name": "Commit4 Checked Test",
-  "email": "commit4.checked@example.com",
-  "phone": "+15552223333",
-  "company": "Verification Co",
+  "name": "Test Submission",
+  "email": "test@example.com",
+  "phone": "+15555550123",
+  "company": "Test Co",
   "role": "Ops",
   "locations": "1",
   "spend": "under-10k",
@@ -31,7 +36,7 @@ environment. Two submissions, both read back via webhook.site's own API (not thi
   "smsConsentAt": "2026-10-07T21:27:36.932Z",
   "smsConsentPage": "/contact",
   "smsConsentLandingPage": "/contact",
-  "smsConsentIp": "162.235.68.120",
+  "smsConsentIp": "203.0.113.42",
   "fbclid": "",
   "utm_source": "",
   "utm_medium": "",
@@ -50,10 +55,10 @@ environment. Two submissions, both read back via webhook.site's own API (not thi
 
 ```json
 {
-  "name": "Commit4 Unchecked Test",
-  "email": "commit4.unchecked@example.com",
-  "phone": "+15554445555",
-  "company": "Verification Co",
+  "name": "Test Submission",
+  "email": "test@example.com",
+  "phone": "+15555550123",
+  "company": "Test Co",
   "role": "Ops",
   "locations": "1",
   "spend": "under-10k",
@@ -67,7 +72,7 @@ environment. Two submissions, both read back via webhook.site's own API (not thi
   "smsConsentAt": "2026-10-07T21:29:02.461Z",
   "smsConsentPage": "/contact",
   "smsConsentLandingPage": "/contact",
-  "smsConsentIp": "162.235.68.120",
+  "smsConsentIp": "203.0.113.42",
   "fbclid": "",
   "utm_source": "",
   "utm_medium": "",
@@ -89,7 +94,8 @@ new tab) was confirmed to leave the checkbox unchecked both before and after.
 Preview has its own value and has been redeployed with it baked in). Two further submissions,
 same browser, same deployed form:
 
-- **Checked** - name "SiteOptz GHL Mapping Test - CHECKED", phone 4054146886, confirmed success
+- **Checked** - name "SiteOptz GHL Mapping Test - CHECKED", phone +15555550123 (placeholder;
+  the live test used a real number provided in chat, not recorded here), confirmed success
   ("Your submission is in.") on the deployed page.
 - **Unchecked** - name "SiteOptz GHL Mapping Test - UNCHECKED", same phone, confirmed success
   the same way.
@@ -109,8 +115,8 @@ independently of the client confirmation. **Check GoHighLevel for more than one 
 - [x] Two browser submissions, box checked and unchecked, read at a request inspector
 - [x] `smsConsent` is boolean `false` when unchecked, never `"on"`, `"false"`, or absent
 - [x] `smsConsentText` byte identical to `SMS_CONSENT_TEXT_V1`
-- [x] `smsConsentIp` is one address, not a chain (`162.235.68.120`, confirmed on real Vercel
-      infrastructure, not `::1`)
+- [x] `smsConsentIp` is one address, not a chain (confirmed on real Vercel infrastructure, not
+      `::1` - actual value redacted above, replaced with the `203.0.113.42` placeholder)
 - [x] `smsConsentPage` and `smsConsentLandingPage` both present and non-empty
 - [x] All seven ad-parameter fields (`fbclid`/`utm_*`/`gclid`) plus `adParamsSource` present as
       empty strings on a direct visit, never omitted
