@@ -6,6 +6,7 @@ import {
   type ContactFormFieldErrors,
   type ContactFormState,
   LOCATION_BAND_LABELS,
+  SMS_CONSENT_TEXT_V1,
   SPEND_BAND_LABELS,
 } from "@/lib/contact-schema";
 import { isRateLimited } from "@/lib/rate-limit";
@@ -19,6 +20,19 @@ async function getClientIp(): Promise<string> {
   const forwardedFor = headerList.get("x-forwarded-for");
   if (forwardedFor) return forwardedFor.split(",")[0]!.trim();
   return headerList.get("x-real-ip") ?? "unknown";
+}
+
+// Read server-side from the Referer header rather than trusted from a client-supplied field,
+// so smsConsentPage can't be spoofed to misattribute a consent record to the wrong creative.
+async function getSubmissionPage(): Promise<string> {
+  const headerList = await headers();
+  const referer = headerList.get("referer");
+  if (!referer) return "unknown";
+  try {
+    return new URL(referer).pathname;
+  } catch {
+    return "unknown";
+  }
 }
 
 /** Logged on every path that could otherwise silently drop a lead. Grep for this tag in production logs. */
@@ -85,12 +99,22 @@ export async function submitContactForm(
     };
   }
 
+  const submittedAt = new Date().toISOString();
+  const submissionPage = await getSubmissionPage();
+
   const submission = {
     ...result.data,
     locationsLabel: LOCATION_BAND_LABELS[result.data.locations],
     spendLabel: SPEND_BAND_LABELS[result.data.spend],
-    submittedAt: new Date().toISOString(),
+    submittedAt,
     source: "siteoptz.com/contact",
+    // Sent on every submission, including a declined consent - a record showing consent was
+    // declined at a given time is as useful as one showing it was given, and GHL won't expose
+    // a field in its mapping UI if it's sometimes absent from the payload.
+    smsConsentText: SMS_CONSENT_TEXT_V1,
+    smsConsentAt: submittedAt,
+    smsConsentPage: submissionPage,
+    smsConsentIp: ip,
   };
 
   const webhookUrl = process.env.GHL_WEBHOOK_URL;

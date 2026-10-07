@@ -73,9 +73,13 @@ export default function PrivacyPage() {
 
             <h2>What we collect on this site</h2>
             <p>
-              If you submit the contact form: your name, work email, company, role, number of
-              locations, marketing spend band, current stack, and what you told us you&rsquo;re
-              trying to measure.
+              If you submit the contact form: your name, work email, phone number, company, role,
+              number of locations, marketing spend band, current stack, and what you told us
+              you&rsquo;re trying to measure. The form also has an optional box consenting to text
+              messages. Whether you check it or leave it unchecked, we record that choice along
+              with the time it was made, the page the form was submitted from, and the IP address
+              the submission came from - a declined consent is logged with the same detail as a
+              given one.
             </p>
             <p>
               Through analytics - Google Analytics 4 and Google Tag Manager: pages viewed,
@@ -105,6 +109,31 @@ export default function PrivacyPage() {
       <Section surface="base">
         <Container>
           <Prose>
+            <h2>Text messages</h2>
+            <p>
+              The SMS consent box on the contact form is optional. Leaving it unchecked never
+              affects whether we respond, how fast we respond, or anything else about how this
+              site treats your submission - it only controls whether we text the number you gave
+              us.
+            </p>
+            <p>
+              If you check it, the messages we send are conversational, marketing, promotional,
+              and customer care messages about our services, sent to the number provided on the
+              form. Message frequency varies, and message and data rates may apply. Reply STOP to
+              opt out of text messages, or HELP for help.
+            </p>
+            <p>
+              Phone numbers and SMS consent collected through this site are not sold, rented, or
+              shared with third parties for their own marketing. Opt-in data is not shared with
+              third parties for marketing purposes.
+            </p>
+          </Prose>
+        </Container>
+      </Section>
+
+      <Section surface="base">
+        <Container>
+          <Prose>
             <h2>Retention</h2>
             <p>
               A contact form submission that does not turn into a client or an active opportunity
@@ -119,8 +148,8 @@ export default function PrivacyPage() {
               <strong>Google</strong> - analytics (GA4) and tag management (Google Tag Manager)
               for this site.
               <br />
-              <strong>GoHighLevel</strong> - receives contact form submissions and stores them as
-              leads.
+              <strong>GoHighLevel</strong> - receives contact form submissions, including the
+              phone number, and stores them as leads.
               <br />
               <strong>Vercel</strong> - hosts this website.
             </p>
