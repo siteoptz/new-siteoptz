@@ -61,15 +61,22 @@ export async function submitContactForm(
   const loadedAt = Number(formData.get("loaded_at"));
   const elapsed = Date.now() - loadedAt;
 
-  // Both traps fail closed: a filled honeypot or an implausible timestamp is treated as a
-  // bot, logged, and answered with the same confirmation a real submission gets, so a
-  // scripted sender has no signal telling it what tripped.
-  if (honeypot.length > 0 || !Number.isFinite(loadedAt) || elapsed < MIN_ELAPSED_MS) {
-    console.warn("[contact-spam-trap] rejected submission", {
+  // Neither signal vetoes the submission anymore. A password manager or browser autofill
+  // routinely fills a hidden decoy field on a real visitor's behalf - a filled honeypot is not
+  // reliable evidence of a bot for this form's audience - and a false veto silently discards a
+  // real enterprise lead with no error, no retry, and no record. Both signals are carried on
+  // the payload instead, for a human to review in GoHighLevel rather than a heuristic that
+  // can't be audited to make the call.
+  const spamSignals: string[] = [];
+  if (honeypot.length > 0) spamSignals.push("honeypot");
+  if (!Number.isFinite(loadedAt) || elapsed < MIN_ELAPSED_MS) spamSignals.push("elapsed-too-fast");
+
+  if (spamSignals.length > 0) {
+    console.warn("[contact-spam-trap] flagged submission", {
+      signals: spamSignals.join(","),
       honeypotFilled: honeypot.length > 0,
       elapsedMs: Number.isFinite(elapsed) ? elapsed : null,
     });
-    return { status: "success", fieldErrors: {} };
   }
 
   const ip = await getClientIp();
@@ -149,6 +156,11 @@ export async function submitContactForm(
     // click has happened at all this session - lets a lead be told apart as an ad click
     // straight to the form versus a returning organic visitor who got retargeted.
     adParamsSource: clampField(formData.get("adParamsSource")),
+    // A heuristic flag, not a verdict - a human reviewing the contact in GoHighLevel makes the
+    // actual call. false/"" on every clean submission so the field is never absent from the
+    // payload, the same reasoning as every other audit field above.
+    spamSuspected: spamSignals.length > 0,
+    spamSignals: spamSignals.join(","),
   };
 
   const webhookUrl = process.env.GHL_WEBHOOK_URL;
