@@ -9,6 +9,7 @@ import { headers } from "next/headers";
 // Sentry only here makes server-only a property of the file structure, not a setting that could
 // drift. No sentry.client.config / instrumentation-client.ts exists anywhere in this project.
 import * as Sentry from "@sentry/nextjs";
+import { waitUntil } from "@vercel/functions";
 import {
   contactFormSchema,
   type ContactFormFieldErrors,
@@ -71,6 +72,12 @@ function captureLeadEvent(
       Sentry.captureMessage(message);
     }
   });
+  // captureException/captureMessage only queue the event - they don't send it. The server
+  // action's response already went back to the visitor by the time this line runs, and Vercel
+  // is free to freeze or tear down the invocation immediately after that, mid-flight on the
+  // queued event's network delivery. waitUntil keeps this invocation alive in the background
+  // long enough for the flush to actually complete, without making the visitor wait on it.
+  waitUntil(Sentry.flush(2000));
 }
 
 // Below this elapsed time, the form could not have been read and filled by a person.
