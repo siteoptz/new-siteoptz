@@ -166,8 +166,13 @@ export default function PrivacyPage() {
               phone number, and stores them as leads.
               <br />
               <strong>Vercel</strong> - hosts this website.
+              <br />
+              <strong>Sentry</strong> - receives contact form submission details, including
+              name, email, phone, and company, but only when a submission fails to reach
+              GoHighLevel or is flagged as possible spam, for the purpose of recovering that
+              inquiry by hand.
             </p>
-            <p>We do not use a processor beyond the three listed here.</p>
+            <p>We do not use a processor beyond the four listed here.</p>
           </Prose>
         </Container>
       </Section>

@@ -1,6 +1,14 @@
 "use server";
 
 import { headers } from "next/headers";
+// Imported directly in this server-action module only, and initialized manually below rather
+// than through the Next.js instrumentation hooks (instrumentation.ts / instrumentation-client.ts)
+// Sentry's own setup docs point to - those auto-instrument the client and edge runtimes too,
+// and this project consolidated its nav into a single client island specifically to control
+// client bundle weight. A "use server" file is never bundled for the browser, so importing
+// Sentry only here makes server-only a property of the file structure, not a setting that could
+// drift. No sentry.client.config / instrumentation-client.ts exists anywhere in this project.
+import * as Sentry from "@sentry/nextjs";
 import {
   contactFormSchema,
   type ContactFormFieldErrors,
@@ -11,12 +19,68 @@ import {
 } from "@/lib/contact-schema";
 import { isRateLimited } from "@/lib/rate-limit";
 
+const SENTRY_DSN = process.env.SENTRY_DSN;
+
+if (SENTRY_DSN && !Sentry.getClient()) {
+  Sentry.init({
+    dsn: SENTRY_DSN,
+    environment: process.env.VERCEL_ENV ?? "development",
+    // Error capture only - no performance/session-replay instrumentation, and no sampling on
+    // either axis. A rare, high-value event must notify on its first occurrence, not get
+    // dropped by a sample rate tuned for high-volume noise.
+    tracesSampleRate: 0,
+    sampleRate: 1,
+  });
+}
+
+interface LeadInfo {
+  name?: string;
+  email?: string;
+  phone?: string;
+  company?: string;
+  goal?: string;
+}
+
+/**
+ * Enough to recover the lead by hand, attached to every captured event - an alert that only
+ * says "webhook post failed" tells you a lead was lost; the same alert with the contact's
+ * details lets you call them in the morning.
+ */
+function captureLeadEvent(
+  level: "error" | "warning",
+  message: string,
+  lead: LeadInfo,
+  options: { extra?: Record<string, unknown>; error?: unknown } = {}
+) {
+  if (!SENTRY_DSN) return;
+  Sentry.withScope((scope) => {
+    scope.setLevel(level);
+    scope.setContext("lead", {
+      name: lead.name ?? "",
+      email: lead.email ?? "",
+      phone: lead.phone ?? "",
+      company: lead.company ?? "",
+      goal: lead.goal ?? "",
+    });
+    for (const [key, value] of Object.entries(options.extra ?? {})) {
+      scope.setExtra(key, value);
+    }
+    if (options.error instanceof Error) {
+      Sentry.captureException(options.error);
+    } else {
+      Sentry.captureMessage(message);
+    }
+  });
+}
+
 // Below this elapsed time, the form could not have been read and filled by a person.
 const MIN_ELAPSED_MS = 2500;
-// Generous for a webhook POST and well inside what a person will wait on paid traffic, where a
-// stalled "Sending…" spinner after a paid click is the single most expensive place to lose a
-// lead in the funnel.
-const GHL_TIMEOUT_MS = 5000;
+// Every failure path below already returns success to the visitor - a longer timeout has no
+// visitor-facing cost, the spinner just runs a bit longer either way - while giving
+// GoHighLevel more chance to actually respond before the attempt is logged as failed and left
+// for manual recovery. Optimized for recovering more leads automatically, not for bounding
+// visitor wait time.
+const GHL_TIMEOUT_MS = 8000;
 
 async function getClientIp(): Promise<string> {
   const headerList = await headers();
@@ -74,11 +138,30 @@ export async function submitContactForm(
   if (!Number.isFinite(loadedAt) || elapsed < MIN_ELAPSED_MS) spamSignals.push("elapsed-too-fast");
 
   if (spamSignals.length > 0) {
+    const signalList = spamSignals.join(",");
     console.warn("[contact-spam-trap] flagged submission", {
-      signals: spamSignals.join(","),
+      signals: signalList,
       honeypotFilled: honeypot.length > 0,
       elapsedMs: Number.isFinite(elapsed) ? elapsed : null,
     });
+    // A separate, lower-severity event from the three webhook-failure captures below - this
+    // fires on the signal alone, independent of whether the submission goes on to deliver
+    // successfully, so it stays distinguishable in the inbox rather than folded into "a
+    // delivery failed." Raw formData here, not the Zod-parsed result: this must fire even if
+    // the submission is otherwise invalid, since spam-flagged-and-invalid is still a human
+    // worth a two-second look, not a reason to lose the alert.
+    captureLeadEvent(
+      "warning",
+      "Contact form submission flagged as possible spam",
+      {
+        name: clampField(formData.get("name")),
+        email: clampField(formData.get("email")),
+        phone: clampField(formData.get("phone")),
+        company: clampField(formData.get("company")),
+        goal: clampField(formData.get("goal")),
+      },
+      { extra: { signals: signalList } }
+    );
   }
 
   const ip = await getClientIp();
@@ -175,6 +258,7 @@ export async function submitContactForm(
   // typed everything should never be asked to solve a GoHighLevel outage.
   if (!webhookUrl) {
     logDroppedSubmission("GHL_WEBHOOK_URL is not configured", submission);
+    captureLeadEvent("error", "GHL_WEBHOOK_URL is not configured", result.data);
     return { status: "success", fieldErrors: {} };
   }
 
@@ -188,13 +272,18 @@ export async function submitContactForm(
 
     if (!response.ok) {
       logDroppedSubmission(`GHL responded with status ${response.status}`, submission);
+      captureLeadEvent(
+        "error",
+        `GHL responded with status ${response.status}`,
+        result.data,
+        { extra: { status: response.status } }
+      );
       return { status: "success", fieldErrors: {} };
     }
   } catch (error) {
-    logDroppedSubmission(
-      error instanceof Error ? error.message : "unknown fetch error",
-      submission
-    );
+    const reason = error instanceof Error ? error.message : "unknown fetch error";
+    logDroppedSubmission(reason, submission);
+    captureLeadEvent("error", reason, result.data, { error });
     return { status: "success", fieldErrors: {} };
   }
 

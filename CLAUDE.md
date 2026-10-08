@@ -299,3 +299,9 @@ Non-negotiable per page:
 - [ ] Lighthouse on the preview URL: Performance ≥90, Accessibility 100, SEO 100
 - [ ] Added to `sitemap.ts` and linked from at least one other page
 - [ ] Committed alone, with a message describing the one concern
+
+Any commit that adds a collected field, a third-party processor, or a
+tracking or storage mechanism must update /privacy in the SAME commit.
+Sections 2 (what we collect) and 5 (processors) are the ones that go
+stale. A commit that changes what data the site handles and leaves the
+policy unchanged is incomplete, not partially done.
