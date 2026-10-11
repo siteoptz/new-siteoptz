@@ -7,9 +7,11 @@ import { headers } from "next/headers";
 // and this project consolidated its nav into a single client island specifically to control
 // client bundle weight. A "use server" file is never bundled for the browser, so importing
 // Sentry only here makes server-only a property of the file structure, not a setting that could
-// drift. No sentry.client.config / instrumentation-client.ts exists anywhere in this project.
+// drift. No sentry.client.config exists anywhere in this project - instrumentation-client.ts
+// does exist, but it's BotID's init (see that file), unrelated to Sentry.
 import * as Sentry from "@sentry/nextjs";
 import { waitUntil } from "@vercel/functions";
+import { checkBotId } from "botid/server";
 import {
   contactFormSchema,
   type ContactFormFieldErrors,
@@ -143,6 +145,20 @@ export async function submitContactForm(
   const spamSignals: string[] = [];
   if (honeypot.length > 0) spamSignals.push("honeypot");
   if (!Number.isFinite(loadedAt) || elapsed < MIN_ELAPSED_MS) spamSignals.push("elapsed-too-fast");
+
+  // Third signal, same treatment: a result, never a veto. Fails open on any throw/timeout/
+  // unavailable SDK - a bot-detection dependency must never be able to drop a real inquiry,
+  // the same reasoning as the GoHighLevel timeout handling below. isBot is only ever read as
+  // true when the check actually ran and classified the request; every other outcome
+  // (including an error) is treated identically to "not flagged by this signal."
+  let botIdSignal = false;
+  try {
+    const verification = await checkBotId();
+    botIdSignal = verification.isBot === true;
+  } catch {
+    botIdSignal = false;
+  }
+  if (botIdSignal) spamSignals.push("botid");
 
   if (spamSignals.length > 0) {
     const signalList = spamSignals.join(",");

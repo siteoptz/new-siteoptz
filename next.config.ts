@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withBotId } from "botid/next/config";
 import { REDIRECTS } from "./lib/redirects";
 
 const nextConfig: NextConfig = {
@@ -15,4 +16,8 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// Adds BotID's proxy rewrites (its challenge script and verification calls route through our
+// own domain, same-origin, so an ad-blocker or third-party-script blocker can't see or strip
+// them). This exposes the proxy paths site-wide; it does not by itself load the challenge
+// script on every page - instrumentation-client.ts's own protect list decides that.
+export default withBotId(nextConfig);
