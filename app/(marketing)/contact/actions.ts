@@ -15,7 +15,7 @@ import {
   type ContactFormFieldErrors,
   type ContactFormState,
   LOCATION_BAND_LABELS,
-  SMS_CONSENT_TEXT_V2,
+  SMS_CONSENT_TEXT_V3,
   SPEND_BAND_LABELS,
 } from "@/lib/contact-schema";
 import { isRateLimited } from "@/lib/rate-limit";
@@ -231,7 +231,7 @@ export async function submitContactForm(
     // a field in its mapping UI if it's sometimes absent from the payload. Same reasoning
     // applies to the page/landing/ad-parameter fields below: never omitted, empty string or
     // "(unknown)" instead.
-    smsConsentText: SMS_CONSENT_TEXT_V2,
+    smsConsentText: SMS_CONSENT_TEXT_V3,
     smsConsentAt: submittedAt,
     smsConsentPage: consentPage || refererPage || "(unknown)",
     smsConsentLandingPage: landingPage || refererPage || "(unknown)",

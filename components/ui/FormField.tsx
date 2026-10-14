@@ -10,6 +10,7 @@ export interface FormFieldProps {
   error?: string;
   hint?: string;
   optional?: boolean;
+  required?: boolean;
   children: (renderProps: FormFieldRenderProps) => React.ReactNode;
 }
 
@@ -18,7 +19,15 @@ export interface FormFieldProps {
  * element the children render, via aria-describedby and aria-invalid — so no
  * field can end up with an error that isn't actually associated with it.
  */
-export default function FormField({ id, label, error, hint, optional, children }: FormFieldProps) {
+export default function FormField({
+  id,
+  label,
+  error,
+  hint,
+  optional,
+  required,
+  children,
+}: FormFieldProps) {
   const hintId = hint ? `${id}-hint` : undefined;
   const errorId = error ? `${id}-error` : undefined;
   const describedBy = [hintId, errorId].filter(Boolean).join(" ") || undefined;
@@ -28,6 +37,12 @@ export default function FormField({ id, label, error, hint, optional, children }
       <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-text">
         {label}
         {optional ? <span className="font-normal text-muted"> (optional)</span> : null}
+        {required ? (
+          <span className="text-accent" aria-hidden="true">
+            {" "}
+            *
+          </span>
+        ) : null}
       </label>
       {hint ? (
         <p id={hintId} className="mb-1.5 text-2xs text-muted">

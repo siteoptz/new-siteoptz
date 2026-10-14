@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useActionState, useEffect, useRef, useState } from "react";
 import { submitContactForm } from "@/app/(marketing)/contact/actions";
 import FormField from "@/components/ui/FormField";
@@ -12,7 +11,7 @@ import {
   initialContactFormState,
   LOCATION_BAND_LABELS,
   LOCATION_BANDS,
-  SMS_CONSENT_TEXT_V2,
+  SMS_CONSENT_TEXT_V3,
   SPEND_BAND_LABELS,
   SPEND_BANDS,
 } from "@/lib/contact-schema";
@@ -27,14 +26,14 @@ function inputClasses(hasError: boolean) {
   return `${INPUT_CLASSES} ${hasError ? "border-danger" : "border-field-border"}`;
 }
 
-// Splits on the two URL substrings so the rendered label turns them into links while the
-// concatenation of its text content stays byte-identical to SMS_CONSENT_TEXT_V2 - the
+// Splits on the two link phrases so the rendered label turns them into links while the
+// concatenation of its text content stays byte-identical to SMS_CONSENT_TEXT_V3 - the
 // payload sends that same constant, so the disclaimer the person saw and the one recorded
 // as consented-to can never drift apart.
-const SMS_CONSENT_LINK_PATTERN = /(https:\/\/siteoptz\.com\/(?:privacy|terms))/g;
+const SMS_CONSENT_LINK_PATTERN = /(our privacy policy|our Terms of Service)/g;
 const SMS_CONSENT_LINK_TARGETS: Record<string, string> = {
-  "https://siteoptz.com/privacy": "/privacy",
-  "https://siteoptz.com/terms": "/terms",
+  "our privacy policy": "/privacy",
+  "our Terms of Service": "/terms",
 };
 
 function renderSmsConsentLabel(text: string) {
@@ -139,9 +138,11 @@ export default function ContactForm() {
   if (state.status === "success") {
     return (
       <div>
-        <h2 ref={confirmationRef} tabIndex={-1}>
-          Your submission is in.
-        </h2>
+        <div className="border border-accent bg-accent/10 px-4 py-3">
+          <h2 ref={confirmationRef} tabIndex={-1} className="text-accent">
+            Your submission is in.
+          </h2>
+        </div>
         <ol className="mt-6 flex flex-col gap-5">
           <li>
             <p className="font-display text-md font-semibold">
@@ -223,17 +224,17 @@ export default function ContactForm() {
       </div>
 
       <div className="grid grid-cols-1 gap-5 min-[700px]:grid-cols-2">
-        <FormField id="name" label="Name" error={displayedErrors.name}>
+        <FormField id="name" label="Name" required error={displayedErrors.name}>
           {(props) => <input {...props} type="text" name="name" required className={inputClasses(!!displayedErrors.name)} />}
         </FormField>
 
-        <FormField id="email" label="Work email" error={displayedErrors.email}>
+        <FormField id="email" label="Work email" required error={displayedErrors.email}>
           {(props) => (
             <input {...props} type="email" name="email" required className={inputClasses(!!displayedErrors.email)} />
           )}
         </FormField>
 
-        <FormField id="phone" label="Phone" error={displayedErrors.phone}>
+        <FormField id="phone" label="Phone" required error={displayedErrors.phone}>
           {(props) => (
             <input
               {...props}
@@ -247,17 +248,17 @@ export default function ContactForm() {
           )}
         </FormField>
 
-        <FormField id="company" label="Company" error={displayedErrors.company}>
+        <FormField id="company" label="Company" required error={displayedErrors.company}>
           {(props) => (
             <input {...props} type="text" name="company" required className={inputClasses(!!displayedErrors.company)} />
           )}
         </FormField>
 
-        <FormField id="role" label="Role" error={displayedErrors.role}>
+        <FormField id="role" label="Role" required error={displayedErrors.role}>
           {(props) => <input {...props} type="text" name="role" required className={inputClasses(!!displayedErrors.role)} />}
         </FormField>
 
-        <FormField id="locations" label="Number of locations" error={displayedErrors.locations}>
+        <FormField id="locations" label="Number of locations" required error={displayedErrors.locations}>
           {(props) => (
             <select {...props} name="locations" required defaultValue="" className={inputClasses(!!displayedErrors.locations)}>
               <option value="" disabled>
@@ -272,7 +273,7 @@ export default function ContactForm() {
           )}
         </FormField>
 
-        <FormField id="spend" label="Monthly marketing spend" error={displayedErrors.spend}>
+        <FormField id="spend" label="Monthly marketing spend" required error={displayedErrors.spend}>
           {(props) => (
             <select {...props} name="spend" required defaultValue="" className={inputClasses(!!displayedErrors.spend)}>
               <option value="" disabled>
@@ -305,6 +306,7 @@ export default function ContactForm() {
           <FormField
             id="goal"
             label="What are you trying to measure?"
+            required
             error={displayedErrors.goal}
           >
             {(props) => (
@@ -329,7 +331,7 @@ export default function ContactForm() {
           className="consent-checkbox mt-0.5 shrink-0"
         />
         <label htmlFor="smsConsent" className="text-2xs text-muted">
-          {renderSmsConsentLabel(SMS_CONSENT_TEXT_V2)}
+          {renderSmsConsentLabel(SMS_CONSENT_TEXT_V3)}
         </label>
       </div>
 
@@ -341,13 +343,6 @@ export default function ContactForm() {
         >
           {isPending ? "Sending…" : "Send"}
         </button>
-        <p className="mt-3 text-2xs text-muted">
-          Submitting sends the details above to us. See our{" "}
-          <Link href="/privacy" className="underline">
-            privacy policy
-          </Link>{" "}
-          for how we handle it.
-        </p>
       </div>
     </form>
   );
