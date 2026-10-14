@@ -11,7 +11,7 @@ import {
   initialContactFormState,
   LOCATION_BAND_LABELS,
   LOCATION_BANDS,
-  SMS_CONSENT_TEXT_V3,
+  SMS_CONSENT_TEXT_V4,
   SPEND_BAND_LABELS,
   SPEND_BANDS,
 } from "@/lib/contact-schema";
@@ -27,13 +27,13 @@ function inputClasses(hasError: boolean) {
 }
 
 // Splits on the two link phrases so the rendered label turns them into links while the
-// concatenation of its text content stays byte-identical to SMS_CONSENT_TEXT_V3 - the
+// concatenation of its text content stays byte-identical to SMS_CONSENT_TEXT_V4 - the
 // payload sends that same constant, so the disclaimer the person saw and the one recorded
 // as consented-to can never drift apart.
-const SMS_CONSENT_LINK_PATTERN = /(our privacy policy|our Terms of Service)/g;
+const SMS_CONSENT_LINK_PATTERN = /(our Privacy Policy|Terms of Service)/g;
 const SMS_CONSENT_LINK_TARGETS: Record<string, string> = {
-  "our privacy policy": "/privacy",
-  "our Terms of Service": "/terms",
+  "our Privacy Policy": "/privacy",
+  "Terms of Service": "/terms",
 };
 
 function renderSmsConsentLabel(text: string) {
@@ -331,7 +331,7 @@ export default function ContactForm() {
           className="consent-checkbox mt-0.5 shrink-0"
         />
         <label htmlFor="smsConsent" className="text-2xs text-muted">
-          {renderSmsConsentLabel(SMS_CONSENT_TEXT_V3)}
+          {renderSmsConsentLabel(SMS_CONSENT_TEXT_V4)}
         </label>
       </div>
 

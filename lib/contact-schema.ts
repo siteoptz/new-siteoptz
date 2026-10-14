@@ -53,6 +53,15 @@ export const SMS_CONSENT_TEXT_V2 =
 export const SMS_CONSENT_TEXT_V3 =
   "By checking this box, you agree to receive text messages (i.e. conversational, marketing, promotional, customer care, etc.) from SiteOptz (Vortex Demand, LLC) related to our services at the phone number provided above. You must be 18 or older to consent. Message frequency varies. Message and data rates may apply. Reply STOP to opt out of SMS messages or HELP for help. Visit our privacy policy and our Terms of Service.";
 
+/**
+ * V4 - shortened: drops the message-category parenthetical, the message-frequency sentence,
+ * and the HELP option, and links "our Privacy Policy" / "Terms of Service" rather than
+ * restating "our" before both. The form and the payload reference this one from this commit
+ * forward; V1, V2, and V3 stay above, unedited.
+ */
+export const SMS_CONSENT_TEXT_V4 =
+  "By checking this box, you agree to receive text messages from SiteOptz (Vortex Demand, LLC) related to our services at the phone number provided above. You must be 18 or older to consent. Message and data rates may apply. Reply STOP to opt out of SMS messages. Visit our Privacy Policy, and Terms of Service.";
+
 export const contactFormSchema = z.object({
   name: z.string().trim().min(1, "Enter your name."),
   email: z
