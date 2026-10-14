@@ -141,6 +141,10 @@ export default function PrivacyPage() {
               shared with third parties for their own marketing. Opt-in data is not shared with
               third parties for marketing purposes.
             </p>
+            <p>
+              See <Link href="/terms">our terms of service</Link> for the full text messaging
+              program terms, including who to contact and how to stop.
+            </p>
           </Prose>
         </Container>
       </Section>
@@ -173,6 +177,25 @@ export default function PrivacyPage() {
               inquiry by hand.
             </p>
             <p>We do not use a processor beyond the four listed here.</p>
+          </Prose>
+        </Container>
+      </Section>
+
+      <Section surface="raised">
+        <Container>
+          <Prose>
+            <h2>Data security</h2>
+            <p>
+              Contact form submissions travel over HTTPS from your browser to our servers, and
+              from there to our CRM over an encrypted connection - there is no unencrypted path
+              for a submission. Access to submissions is limited to the people who work on
+              inquiries. This site does not collect payment card numbers, bank account details,
+              Social Security numbers, or government identification numbers, and the contact
+              form has no field for any of them. Where a submission fails to reach our CRM, its
+              details are recorded in our error monitoring so the inquiry can be recovered by
+              hand rather than lost silently, and those records carry the same retention period
+              as the submission itself.
+            </p>
           </Prose>
         </Container>
       </Section>

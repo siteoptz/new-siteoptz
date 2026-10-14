@@ -35,6 +35,16 @@ export const SPEND_BAND_LABELS: Record<(typeof SPEND_BANDS)[number], string> = {
 export const SMS_CONSENT_TEXT_V1 =
   "By checking this box, you agree to receive text messages (i.e. conversational, marketing, promotional, customer care, etc.) from SiteOptz related to our services at the phone number provided above. Message frequency varies. Message and data rates may apply. Reply STOP to opt out of SMS messages or HELP for help. Visit https://siteoptz.com/privacy for our privacy policy and https://siteoptz.com/terms for our Terms of Service.";
 
+/**
+ * V2 - the registered business name (as filed on the 10DLC brand registration, not just our
+ * own "doing business as" framing) added for 10DLC review, plus the 18+ line that was flagged
+ * against /terms but belongs at the point of consent too. The form and the payload reference
+ * this one from this commit forward; V1 stays above, unedited, since every consent collected
+ * before this change resolves to that exact string.
+ */
+export const SMS_CONSENT_TEXT_V2 =
+  "By checking this box, you agree to receive text messages (i.e. conversational, marketing, promotional, customer care, etc.) from SiteOptz (Vortex Demand, LLC) related to our services at the phone number provided above. You must be 18 or older to consent. Message frequency varies. Message and data rates may apply. Reply STOP to opt out of SMS messages or HELP for help. Visit https://siteoptz.com/privacy for our privacy policy and https://siteoptz.com/terms for our Terms of Service.";
+
 export const contactFormSchema = z.object({
   name: z.string().trim().min(1, "Enter your name."),
   email: z

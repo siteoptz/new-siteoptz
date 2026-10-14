@@ -12,7 +12,7 @@ import {
   initialContactFormState,
   LOCATION_BAND_LABELS,
   LOCATION_BANDS,
-  SMS_CONSENT_TEXT_V1,
+  SMS_CONSENT_TEXT_V2,
   SPEND_BAND_LABELS,
   SPEND_BANDS,
 } from "@/lib/contact-schema";
@@ -28,7 +28,7 @@ function inputClasses(hasError: boolean) {
 }
 
 // Splits on the two URL substrings so the rendered label turns them into links while the
-// concatenation of its text content stays byte-identical to SMS_CONSENT_TEXT_V1 - the
+// concatenation of its text content stays byte-identical to SMS_CONSENT_TEXT_V2 - the
 // payload sends that same constant, so the disclaimer the person saw and the one recorded
 // as consented-to can never drift apart.
 const SMS_CONSENT_LINK_PATTERN = /(https:\/\/siteoptz\.com\/(?:privacy|terms))/g;
@@ -329,7 +329,7 @@ export default function ContactForm() {
           className="consent-checkbox mt-0.5 shrink-0"
         />
         <label htmlFor="smsConsent" className="text-2xs text-muted">
-          {renderSmsConsentLabel(SMS_CONSENT_TEXT_V1)}
+          {renderSmsConsentLabel(SMS_CONSENT_TEXT_V2)}
         </label>
       </div>
 

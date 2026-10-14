@@ -73,7 +73,62 @@ export default function TermsPage() {
               search engine or a person browsing normally would do, or use anything on it to
               build a competing product or service without our written permission.
             </p>
+          </Prose>
+        </Container>
+      </Section>
 
+      <Section surface="raised">
+        <Container>
+          <Prose>
+            <h2>Text messaging</h2>
+            <p>
+              SiteOptz (Vortex Demand, LLC) operates a text messaging program for people who opt
+              in on our contact form.
+            </p>
+            <p>
+              <strong>What the program is.</strong> If you check the SMS consent box on our
+              contact form, you agree to receive text messages from us at the number you
+              provided. These are conversational messages about an inquiry you made, marketing
+              and promotional messages about our services, and customer care messages. Message
+              frequency varies and depends on the conversation.
+            </p>
+            <p>
+              <strong>Consent is optional.</strong> You are never required to agree to text
+              messages in order to contact us, to receive a reply, or to work with us. Leaving
+              the box unchecked changes nothing about how we handle your inquiry.
+            </p>
+            <p>
+              <strong>You must be 18 or older</strong> to consent to receive text messages from
+              us.
+            </p>
+            <p>
+              <strong>How to stop.</strong> Reply STOP to any message to opt out. You will
+              receive one confirmation message and nothing after that. Reply HELP to any message
+              for assistance, or email{" "}
+              <a href={`mailto:${DIRECT_EMAIL}`} className="text-accent underline">
+                {DIRECT_EMAIL}
+              </a>
+              .
+            </p>
+            <p>
+              <strong>Message and data rates may apply.</strong> Any such charges come from your
+              mobile carrier under your own plan and are your responsibility, not ours.
+            </p>
+            <p>
+              <strong>Carrier liability.</strong> Mobile carriers are not liable for delayed or
+              undelivered messages.
+            </p>
+            <p>
+              <strong>Supported carriers.</strong> This program is available on most major US
+              mobile carriers.
+            </p>
+          </Prose>
+        </Container>
+      </Section>
+
+      <Section surface="base">
+        <Container>
+          <Prose>
             <h2>Ownership</h2>
             <p>
               The text, frameworks, and visual design on this site are ours.{" "}
