@@ -72,6 +72,15 @@ export const SMS_CONSENT_TEXT_V4 =
 export const SMS_CONSENT_TEXT_V5 =
   "By checking this box, you agree to receive text messages (i.e. conversational, marketing, customer care, etc) from SiteOptz (Vortex Demand, LLC) related to our services at the phone number provided above. You must be 18 or older to consent. Message frequency varies. Message and data rates may apply. Reply STOP to opt out of SMS messages. Visit our Privacy Policy, and Terms of Service.";
 
+/**
+ * V6 - restores the HELP option that V4 dropped. The only change from V5 is the STOP
+ * clause, which becomes "Reply STOP to opt out of SMS messages or HELP for help." - every
+ * other word, including the link phrasing, is unchanged. The form and the payload reference
+ * this one from this commit forward; V1 through V5 stay above, unedited.
+ */
+export const SMS_CONSENT_TEXT_V6 =
+  "By checking this box, you agree to receive text messages (i.e. conversational, marketing, customer care, etc) from SiteOptz (Vortex Demand, LLC) related to our services at the phone number provided above. You must be 18 or older to consent. Message frequency varies. Message and data rates may apply. Reply STOP to opt out of SMS messages or HELP for help. Visit our Privacy Policy, and Terms of Service.";
+
 export const contactFormSchema = z.object({
   name: z.string().trim().min(1, "Enter your name."),
   email: z

@@ -11,7 +11,7 @@ import {
   initialContactFormState,
   LOCATION_BAND_LABELS,
   LOCATION_BANDS,
-  SMS_CONSENT_TEXT_V5,
+  SMS_CONSENT_TEXT_V6,
   SPEND_BAND_LABELS,
   SPEND_BANDS,
 } from "@/lib/contact-schema";
@@ -27,7 +27,7 @@ function inputClasses(hasError: boolean) {
 }
 
 // Splits on the two link phrases so the rendered label turns them into links while the
-// concatenation of its text content stays byte-identical to SMS_CONSENT_TEXT_V5 - the
+// concatenation of its text content stays byte-identical to SMS_CONSENT_TEXT_V6 - the
 // payload sends that same constant, so the disclaimer the person saw and the one recorded
 // as consented-to can never drift apart.
 const SMS_CONSENT_LINK_PATTERN = /(our Privacy Policy|Terms of Service)/g;
@@ -273,7 +273,7 @@ export default function ContactForm() {
               Text me about my inquiry
             </span>
             <span className="mt-1 block text-2xs text-muted">
-              {renderSmsConsentLabel(SMS_CONSENT_TEXT_V5)}
+              {renderSmsConsentLabel(SMS_CONSENT_TEXT_V6)}
             </span>
           </label>
         </div>
