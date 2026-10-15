@@ -234,19 +234,49 @@ export default function ContactForm() {
           )}
         </FormField>
 
-        <FormField id="phone" label="Phone" required error={displayedErrors.phone}>
-          {(props) => (
-            <input
-              {...props}
-              type="tel"
-              inputMode="tel"
-              autoComplete="tel"
-              name="phone"
-              required
-              className={inputClasses(!!displayedErrors.phone)}
-            />
-          )}
-        </FormField>
+        <div className="min-[700px]:col-span-2">
+          <FormField id="phone" label="Phone" required error={displayedErrors.phone}>
+            {(props) => (
+              <input
+                {...props}
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                name="phone"
+                required
+                className={inputClasses(!!displayedErrors.phone)}
+              />
+            )}
+          </FormField>
+        </div>
+
+        {/*
+          Placed immediately after Phone, not at the end of the form, because a 10DLC reviewer
+          checks for the disclosure next to the field that collects the number - proximity is
+          part of what makes a disclosure "clear and conspicuous," not a stylistic choice. Both
+          this block and Phone above are full-width so the pairing reads as one visual unit
+          with no leftover grid gap.
+        */}
+        <div className="min-[700px]:col-span-2 flex items-start gap-3">
+          <input
+            type="checkbox"
+            id="smsConsent"
+            name="smsConsent"
+            className="consent-checkbox mt-0.5 shrink-0"
+          />
+          {/* Lead-in and full disclosure both live inside this one <label>, not a separate
+              heading above it, so the complete text stays programmatically tied to the
+              checkbox via the for/id association - a screen reader announces all of it as
+              this control's label, not just the bold first line. */}
+          <label htmlFor="smsConsent" className="block">
+            <span className="block text-sm font-semibold text-text">
+              Text me about my inquiry
+            </span>
+            <span className="mt-1 block text-2xs text-muted">
+              {renderSmsConsentLabel(SMS_CONSENT_TEXT_V5)}
+            </span>
+          </label>
+        </div>
 
         <FormField id="company" label="Company" required error={displayedErrors.company}>
           {(props) => (
@@ -321,18 +351,6 @@ export default function ContactForm() {
             )}
           </FormField>
         </div>
-      </div>
-
-      <div className="flex items-start gap-3">
-        <input
-          type="checkbox"
-          id="smsConsent"
-          name="smsConsent"
-          className="consent-checkbox mt-0.5 shrink-0"
-        />
-        <label htmlFor="smsConsent" className="text-2xs text-muted">
-          {renderSmsConsentLabel(SMS_CONSENT_TEXT_V5)}
-        </label>
       </div>
 
       <div>
