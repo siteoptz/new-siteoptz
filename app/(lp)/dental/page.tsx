@@ -1,9 +1,9 @@
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
+import AttributionChain from "@/components/blocks/AttributionChain";
 import DefinitionList from "@/components/blocks/DefinitionList";
 import DentalLpForm from "@/components/blocks/DentalLpForm";
-import MetricTable from "@/components/blocks/MetricTable";
 import { industryServices } from "@/lib/nav";
 
 // Paid-traffic landing page for dental.siteoptz.com. Own route group, noindex,
@@ -68,23 +68,59 @@ const ENGAGEMENTS = [
   },
 ];
 
+const SPECIALTY_TAGS = "Implants · Crowns · Dentures · Oral surgery · Emergency · Cosmetic";
+
+const ENGAGEMENTS_SOURCE = "anonymized client media and practice-management reports, four accounts, 2019-2025";
+
+/**
+ * ad -> click -> call -> consultation -> treatment plan -> ACCEPTED CASE. The break sits
+ * after "Consultation" (index 3): everything up to and including it is what an ad
+ * platform's own reporting can see; everything after is where the money is actually
+ * decided, which is the whole argument this page makes.
+ */
+const CHAIN_STEPS = [
+  { name: "Ad", source: "Google Ads, Meta, LSA" },
+  { name: "Click", source: "Platform-reported, ungrounded in revenue" },
+  { name: "Call", source: "Call tracking, form capture" },
+  { name: "Consultation", source: "Booked and attended - the last event an ad platform can see" },
+  { name: "Treatment plan", source: "Proposed in-practice, lives in your PMS" },
+  { name: "Accepted case", source: "The event that actually funds the next quarter's spend" },
+];
+const CHAIN_BREAK_AFTER_INDEX = 3;
+
 export default function DentalLandingPage() {
   const capabilities = industryServices("dental-marketing");
 
   return (
     <div className="pb-24 min-[700px]:pb-0">
-      {/* Section 1 - Hero */}
+      {/* Section 1 - Hero. Restructured per instruction 24: the proof (the three figures)
+          now lives in the hero itself rather than in a section below the fold, and the
+          old standalone stat panel (formerly Section 2) is gone - its content moved up
+          here, its specialty tags moved down to sit with the engagements. */}
       <Section surface="base">
         <Container>
-          <h1 className="max-w-[20ch]">
+          <h1 className="max-w-[16ch] text-3xl min-[900px]:text-5xl">
             Dental marketing measured to accepted cases, not phone calls.
           </h1>
-          <p className="mt-4 max-w-[52ch] text-muted">
-            Most dental ad reporting stops at the lead. The number that actually decides whether
-            the spend was worth it is what happened after the consultation, not the call that
-            came in before it.
+          <div className="mt-10 flex flex-wrap gap-x-8 gap-y-6">
+            <div>
+              <p className="font-display text-4xl min-[900px]:text-5xl text-white">4</p>
+              <p className="mt-1 text-md text-muted">practices</p>
+            </div>
+            <div>
+              <p className="font-display text-4xl min-[900px]:text-5xl text-white">1,509</p>
+              <p className="mt-1 text-md text-muted">leads</p>
+            </div>
+            <div>
+              <p className="font-display text-4xl min-[900px]:text-5xl text-white">$33–$125</p>
+              <p className="mt-1 text-md text-muted">per lead</p>
+            </div>
+          </div>
+          <p className="mt-5 max-w-[40ch] text-md text-muted">
+            Most dental ad reporting stops at the lead - the number that decides whether the
+            spend worked is what happened after the consultation.
           </p>
-          <div className="mt-8">
+          <div className="mt-10">
             <Button variant="primary" href="#audit-form">
               Get a free audit of your current spend
             </Button>
@@ -92,53 +128,40 @@ export default function DentalLandingPage() {
         </Container>
       </Section>
 
-      {/* Section 2 - The proof panel, high */}
-      <Section surface="raised">
-        <Container>
-          <p className="text-sm text-accent">Dental, 2019–2025</p>
-          <div className="mt-4 grid grid-cols-1 gap-6 min-[560px]:grid-cols-3">
-            <div>
-              <p className="font-display text-2xl text-white">4</p>
-              <p className="text-muted">dental practices</p>
-            </div>
-            <div>
-              <p className="font-display text-2xl text-white">1,509</p>
-              <p className="text-muted">leads generated</p>
-            </div>
-            <div>
-              <p className="font-display text-2xl text-white">$33–$125</p>
-              <p className="text-muted">per lead, depending on channel and market</p>
-            </div>
-          </div>
-          <p className="mt-6 text-sm text-muted">
-            Implants · Crowns · Dentures · Oral surgery · Emergency · Cosmetic
-          </p>
-        </Container>
-      </Section>
-
       {/* Section 3 - What is in the audit */}
       <Section surface="base">
         <Container>
-          <h2>What&rsquo;s in the audit</h2>
+          <h2 className="text-xl min-[900px]:text-3xl">What&rsquo;s in the audit</h2>
           <div className="mt-6">
             <DefinitionList items={AUDIT_ITEMS} />
           </div>
-          <p className="mt-6 text-muted">
+          <p className="mt-6 text-md text-muted">
             The audit needs read-only access to your ad accounts, and it takes about a week.
           </p>
         </Container>
       </Section>
 
-      {/* Section 4 - Why cost per lead is the wrong headline */}
+      {/* Section 4 - Why cost per lead is the wrong headline. The argument is a sequence,
+          so it's a diagram (AttributionChain, reused with dental vocabulary) rather than a
+          paragraph - the gradient marks the one real break in the chain and appears
+          nowhere else on this page. */}
       <Section surface="raised">
         <Container>
-          <h2>Why cost per lead is the wrong headline</h2>
-          <p className="mt-4 max-w-[62ch] text-muted">
+          <h2 className="text-xl min-[900px]:text-3xl">Why cost per lead is the wrong headline</h2>
+          <div className="mt-6 max-w-[40rem]">
+            <AttributionChain
+              steps={CHAIN_STEPS}
+              breakAfterIndex={CHAIN_BREAK_AFTER_INDEX}
+              breakLabel=""
+              gradient
+              numbered
+            />
+          </div>
+          <p className="mt-6 max-w-[62ch] text-md text-muted">
             Cost per click in dental paid search more than doubled between 2019 and 2025 - we
-            watched it go from $3.86 to $6.64 across our own accounts. Cost per lead followed. A
-            number that moves with the ad auction rather than with your business cannot tell you
-            whether the spend worked. What can is cost per accepted case, and that lives in your
-            practice management software, not in the ad platform.
+            watched it go from $3.86 to $6.64 across our own accounts. A number that moves with
+            the ad auction rather than with your business cannot tell you whether the spend
+            worked.
           </p>
         </Container>
       </Section>
@@ -146,7 +169,7 @@ export default function DentalLandingPage() {
       {/* Section 5 - Capabilities */}
       <Section surface="base">
         <Container>
-          <h2>What an engagement includes</h2>
+          <h2 className="text-xl min-[900px]:text-3xl">What an engagement includes</h2>
           <div className="mt-6">
             <DefinitionList
               items={capabilities.map((route) => ({
@@ -158,22 +181,32 @@ export default function DentalLandingPage() {
         </Container>
       </Section>
 
-      {/* Section 6 - The engagements, chronological */}
+      {/* Section 6 - The engagements, chronological. The year is the structural element -
+          large, in the accent, set against the detail - rather than a table column, so the
+          eye reads 2019/2021/2021/2025 as a spine with the figures hanging off it. Hairline
+          rows, not four identical rounded cards: four engagements this different shouldn't
+          share one shape. The specialty tags land here, as a quiet line beneath. */}
       <Section surface="raised">
         <Container>
-          <h2>The engagements</h2>
+          <h2 className="text-xl min-[900px]:text-3xl">The engagements</h2>
           <div className="mt-6">
-            <MetricTable
-              caption="Dental engagements, 2019–2025"
-              columns={[
-                { key: "year", label: "Year" },
-                { key: "practice", label: "Practice" },
-                { key: "result", label: "Result" },
-              ]}
-              rows={ENGAGEMENTS}
-              source="anonymized client media and practice-management reports, four accounts, 2019-2025"
-            />
+            {ENGAGEMENTS.map((engagement) => (
+              <div
+                key={`${engagement.year}-${engagement.practice}`}
+                className="flex gap-6 border-b border-rule py-6 first:border-t"
+              >
+                <p className="w-[4ch] shrink-0 font-display text-3xl text-accent">
+                  {engagement.year}
+                </p>
+                <div>
+                  <p className="text-white">{engagement.practice}</p>
+                  <p className="mt-1 text-muted">{engagement.result}</p>
+                </div>
+              </div>
+            ))}
           </div>
+          <p className="mt-6 text-sm text-muted">{SPECIALTY_TAGS}</p>
+          <p className="mt-2 text-2xs text-muted">Source: {ENGAGEMENTS_SOURCE}</p>
         </Container>
       </Section>
 
@@ -184,8 +217,8 @@ export default function DentalLandingPage() {
       <Section surface="base">
         <Container>
           <div id="audit-form">
-            <h2>Get a free audit of your current spend</h2>
-            <p className="mt-4 max-w-[56ch] text-muted">
+            <h2 className="text-xl min-[900px]:text-3xl">Get a free audit of your current spend</h2>
+            <p className="mt-4 max-w-[56ch] text-md text-muted">
               The audit needs read-only access to your ad accounts - that&rsquo;s the only thing
               we need from you to start.
             </p>
