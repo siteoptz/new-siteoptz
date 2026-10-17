@@ -169,7 +169,9 @@ bands.
 
 - All-caps or tracked-out eyebrow labels above headings
 - Accenting a single word in a headline with color, italic, or weight
-- Numbered markers except on the four-stage process, which is a real sequence
+- Numbered markers except on the four-stage process and on AttributionChain's
+  `numbered` variant (components/blocks/AttributionChain.tsx) - both are a real sequence,
+  not a decorative list
 - Identical rounded cards with the same radius and shadow applied to everything
 - Gradient washes as decoration
 - Fade-and-slide-up entrance animations on scroll
