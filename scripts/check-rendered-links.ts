@@ -35,6 +35,16 @@ const NEXT_HTML_ROOT = path.join(process.cwd(), ".next", "server", "app");
 const MIN_INTERNAL_LINKS = 4;
 const BUTTON_CLASS_SIGNATURE = "inline-flex items-center justify-center rounded-default border";
 
+/**
+ * Routes exempt from the 4-link floor, by path, with a reason - never a global
+ * weakening of this gate. /dental is paid-traffic-only, noindex, and deliberately
+ * sends no traffic back to the main site (instruction 23/23a); a landing page
+ * engineered to have zero exits is not an under-linked page of the regular site.
+ */
+const EXEMPT_ROUTES: Record<string, string> = {
+  "/dental": "paid landing page, noindex - deliberately has no links back to the main site",
+};
+
 interface Violation {
   file: string;
   reason: string;
@@ -88,6 +98,7 @@ function countRenderedInternalLinks(html: string): number {
 function main(): void {
   const violations: Violation[] = [];
   const missingBuildOutput: string[] = [];
+  const exemptionNotices: string[] = [];
 
   for (const filePath of walkAppTsxFiles()) {
     const isPage = path.basename(filePath) === "page.tsx";
@@ -96,6 +107,13 @@ function main(): void {
 
     const relativePath = path.relative(process.cwd(), filePath);
     const routePath = routePathFor(filePath);
+
+    const exemptReason = EXEMPT_ROUTES[routePath];
+    if (exemptReason) {
+      exemptionNotices.push(`${routePath} — ${exemptReason}`);
+      continue;
+    }
+
     const htmlPath = htmlFileFor(routePath);
 
     if (!fs.existsSync(htmlPath)) {
@@ -119,6 +137,12 @@ function main(): void {
     console.error("This check reads .next/server/app and must run after `next build`.");
     process.exitCode = 1;
     return;
+  }
+
+  if (exemptionNotices.length > 0) {
+    console.log(`check-rendered-links: ${exemptionNotices.length} route exemption(s) recorded`);
+    for (const notice of exemptionNotices) console.log(`  ${notice}`);
+    console.log("");
   }
 
   if (violations.length === 0) {

@@ -750,6 +750,26 @@ as an opportunity signal.
 
 ---
 
+## 10. Build gate exemptions
+
+Documented per instruction 23's requirement that any route skipping a build gate records why,
+here, rather than the gate being weakened for every route.
+
+- **`/dental`** (`app/(lp)/dental/page.tsx`) is exempt from `scripts/check-rendered-links.ts`'s
+  4-contextual-link floor. It's a paid-traffic-only landing page, `noindex`, deliberately built
+  with no links back to the main site — see instruction 23/23a. The exemption is a named path in
+  that script (`EXEMPT_ROUTES`), not a change to the floor itself, which still applies to every
+  other `.tsx` route.
+- The word-count floor (`WORD_COUNT_FLOOR` in `scripts/content-check.ts`) and `npm run dup`
+  (`scripts/dup-check.ts`) were flagged in instruction 23 as needing an exemption too, but
+  neither one actually reaches a `.tsx` route: the word-count floor only runs inside
+  `checkServicePageDepth`, called for `content/services/*.mdx` only, and `dup-check` only scans
+  `content/{services,industries,point-of-view}/*.mdx` and isn't wired into the build at all. A
+  route with no MDX file behind it, like `/dental`, is structurally invisible to both — there was
+  nothing to exempt it from.
+
+---
+
 ## Outstanding asset and infrastructure gaps
 
 Tracked here so they do not surface at launch.
