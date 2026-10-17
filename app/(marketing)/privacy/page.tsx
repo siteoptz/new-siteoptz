@@ -82,6 +82,12 @@ export default function PrivacyPage() {
               logged with the same detail as a given one.
             </p>
             <p>
+              If you submit the audit-request form on our dental marketing landing page: your
+              name, work email, phone number, and practice name, plus a monthly ad spend band
+              and, optionally, your number of locations and anything else you told us. That form
+              carries the same SMS consent box, recorded the same way, described above.
+            </p>
+            <p>
               If you arrived from a paid ad, we also record the advertising campaign details
               carried in that arrival page&rsquo;s web address - the campaign, source, medium,
               content, and term values, and a click identifier supplied by the advertising
@@ -166,8 +172,11 @@ export default function PrivacyPage() {
               <strong>Google</strong> - analytics (GA4) and tag management (Google Tag Manager)
               for this site.
               <br />
-              <strong>GoHighLevel</strong> - receives contact form submissions, including the
-              phone number, and stores them as leads.
+              <strong>GoHighLevel</strong> - receives submissions from the forms on this site,
+              including the phone number, and stores them as leads. The same calendar you can
+              book a time on from our dental landing page&rsquo;s confirmation screen runs on
+              GoHighLevel&rsquo;s own booking product - it is not a separate processor, and we do
+              not embed it on this site; it only opens in its own tab if you choose to click it.
               <br />
               <strong>Vercel</strong> - hosts this website.
               <br />
