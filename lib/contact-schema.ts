@@ -81,22 +81,32 @@ export const SMS_CONSENT_TEXT_V5 =
 export const SMS_CONSENT_TEXT_V6 =
   "By checking this box, you agree to receive text messages (i.e. conversational, marketing, customer care, etc) from SiteOptz (Vortex Demand, LLC) related to our services at the phone number provided above. You must be 18 or older to consent. Message frequency varies. Message and data rates may apply. Reply STOP to opt out of SMS messages or HELP for help. Visit our Privacy Policy, and Terms of Service.";
 
+/**
+ * Shared across every lead form's schema - one definition each, so the main form and the
+ * dental landing page form can never validate name/email/phone differently. Every entry
+ * point still gets its own top-level z.object() with its own required fields; only these
+ * three field-level validators are common.
+ */
+const nameField = z.string().trim().min(1, "Enter your name.");
+const emailField = z
+  .string()
+  .trim()
+  .min(1, "Enter your work email.")
+  .email("Enter a valid email address.");
+const phoneField = z
+  .string()
+  .trim()
+  .min(1, "Phone number is required")
+  .transform((v) => v.replace(/\D/g, ""))
+  .refine((d) => d.length === 10 || (d.length === 11 && d.startsWith("1")), {
+    message: "Enter a 10-digit US phone number",
+  })
+  .transform((d) => `+1${d.slice(-10)}`);
+
 export const contactFormSchema = z.object({
-  name: z.string().trim().min(1, "Enter your name."),
-  email: z
-    .string()
-    .trim()
-    .min(1, "Enter your work email.")
-    .email("Enter a valid email address."),
-  phone: z
-    .string()
-    .trim()
-    .min(1, "Phone number is required")
-    .transform((v) => v.replace(/\D/g, ""))
-    .refine((d) => d.length === 10 || (d.length === 11 && d.startsWith("1")), {
-      message: "Enter a 10-digit US phone number",
-    })
-    .transform((d) => `+1${d.slice(-10)}`),
+  name: nameField,
+  email: emailField,
+  phone: phoneField,
   company: z.string().trim().min(1, "Enter your company name."),
   role: z.string().trim().min(1, "Enter your role."),
   locations: z.enum(LOCATION_BANDS, { message: "Select the number of locations." }),
@@ -141,6 +151,53 @@ export interface ContactFormState {
 }
 
 export const initialContactFormState: ContactFormState = {
+  status: "idle",
+  fieldErrors: {},
+};
+
+/**
+ * dental.siteoptz.com's own form - instruction 23a. Shorter than the main form: a free
+ * audit only needs enough to decide whether the audit is worth the analyst hours, so
+ * company/role/stack/goal don't exist here at all rather than being present-but-optional.
+ * practiceName and spend are this form's own required fields; locations and note are
+ * optional. smsConsent is the exact same field, same component, same V6 text as the main
+ * form - see components/blocks/SmsConsentField.tsx.
+ */
+export const dentalLpFormSchema = z.object({
+  name: nameField,
+  email: emailField,
+  phone: phoneField,
+  practiceName: z.string().trim().min(1, "Enter your practice name."),
+  spend: z.enum(SPEND_BANDS, { message: "Select a monthly ad spend band." }),
+  locations: z
+    .enum(LOCATION_BANDS, { message: "Select the number of locations." })
+    .optional()
+    .or(z.literal("")),
+  note: z.string().trim().max(1000, "Keep this under 1000 characters.").optional().or(z.literal("")),
+  smsConsent: z.boolean(),
+});
+
+export type DentalLpFormValues = z.infer<typeof dentalLpFormSchema>;
+export type DentalLpFormFieldErrors = Partial<Record<keyof DentalLpFormValues, string>>;
+
+export const DENTAL_LP_FIELD_ORDER: (keyof DentalLpFormValues)[] = [
+  "name",
+  "email",
+  "phone",
+  "practiceName",
+  "spend",
+  "locations",
+  "note",
+];
+
+export interface DentalLpFormState {
+  status: "idle" | "success" | "error";
+  fieldErrors: DentalLpFormFieldErrors;
+  formError?: string;
+  emailFallback?: boolean;
+}
+
+export const initialDentalLpFormState: DentalLpFormState = {
   status: "idle",
   fieldErrors: {},
 };

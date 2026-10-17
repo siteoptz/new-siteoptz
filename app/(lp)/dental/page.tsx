@@ -2,6 +2,7 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import Section from "@/components/ui/Section";
 import DefinitionList from "@/components/blocks/DefinitionList";
+import DentalLpForm from "@/components/blocks/DentalLpForm";
 import MetricTable from "@/components/blocks/MetricTable";
 import { industryServices } from "@/lib/nav";
 
@@ -176,9 +177,24 @@ export default function DentalLandingPage() {
         </Container>
       </Section>
 
-      {/* Section 7 lands here in a later commit - anchor target reserved now so the
-          hero and sticky CTAs above have somewhere real to scroll to. */}
-      <div id="audit-form" />
+      {/* Section 7 - Booking, now a form rather than an embedded calendar widget - see
+          instruction 23a. Consent is captured here, before the calendar is ever offered on
+          the success state, so a booking made from that link is covered by a consent record
+          the calendar itself cannot produce. */}
+      <Section surface="base">
+        <Container>
+          <div id="audit-form">
+            <h2>Get a free audit of your current spend</h2>
+            <p className="mt-4 max-w-[56ch] text-muted">
+              The audit needs read-only access to your ad accounts - that&rsquo;s the only thing
+              we need from you to start.
+            </p>
+            <div className="mt-8 max-w-[40rem]">
+              <DentalLpForm />
+            </div>
+          </div>
+        </Container>
+      </Section>
 
       {/* Section 8 - Sticky mobile CTA */}
       <div className="fixed inset-x-0 bottom-0 z-40 border-t border-[rgba(255,236,220,0.14)] bg-base p-3 min-[700px]:hidden">

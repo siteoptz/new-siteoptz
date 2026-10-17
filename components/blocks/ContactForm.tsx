@@ -2,6 +2,8 @@
 
 import { useActionState, useEffect, useRef, useState } from "react";
 import { submitContactForm } from "@/app/(marketing)/contact/actions";
+import LeadFormHiddenFields from "@/components/blocks/LeadFormHiddenFields";
+import SmsConsentField from "@/components/blocks/SmsConsentField";
 import FormField from "@/components/ui/FormField";
 import {
   CONTACT_FIELD_ORDER,
@@ -11,11 +13,9 @@ import {
   initialContactFormState,
   LOCATION_BAND_LABELS,
   LOCATION_BANDS,
-  SMS_CONSENT_TEXT_V6,
   SPEND_BAND_LABELS,
   SPEND_BANDS,
 } from "@/lib/contact-schema";
-import { SESSION_FIELD_NAMES, syncLandingSession } from "@/lib/landing-session";
 
 const INPUT_CLASSES =
   "block w-full rounded-default border bg-raised px-3 py-2 text-base text-text placeholder:text-muted";
@@ -26,69 +26,15 @@ function inputClasses(hasError: boolean) {
   return `${INPUT_CLASSES} ${hasError ? "border-danger" : "border-field-border"}`;
 }
 
-// Splits on the two link phrases so the rendered label turns them into links while the
-// concatenation of its text content stays byte-identical to SMS_CONSENT_TEXT_V6 - the
-// payload sends that same constant, so the disclaimer the person saw and the one recorded
-// as consented-to can never drift apart.
-const SMS_CONSENT_LINK_PATTERN = /(our Privacy Policy|Terms of Service)/g;
-const SMS_CONSENT_LINK_TARGETS: Record<string, string> = {
-  "our Privacy Policy": "/privacy",
-  "Terms of Service": "/terms",
-};
-
-function renderSmsConsentLabel(text: string) {
-  return text.split(SMS_CONSENT_LINK_PATTERN).map((part, index) => {
-    const href = SMS_CONSENT_LINK_TARGETS[part];
-    if (!href) return part;
-    return (
-      <a
-        key={index}
-        href={href}
-        target="_blank"
-        rel="noopener noreferrer"
-        onClick={(event) => event.stopPropagation()}
-        className="underline"
-      >
-        {part}
-      </a>
-    );
-  });
-}
-
 export default function ContactForm() {
   const [state, formAction, isPending] = useActionState(submitContactForm, initialContactFormState);
   const [clientErrors, setClientErrors] = useState<ContactFormFieldErrors>({});
   const [clientFormError, setClientFormError] = useState<string | null>(null);
-  const loadedAtInputRef = useRef<HTMLInputElement>(null);
-  const consentPageInputRef = useRef<HTMLInputElement>(null);
-  const sessionFieldsRef = useRef<HTMLDivElement>(null);
   const confirmationRef = useRef<HTMLHeadingElement>(null);
 
   const displayedErrors = Object.keys(clientErrors).length > 0 ? clientErrors : state.fieldErrors;
   const formErrorMessage = state.status === "error" ? state.formError : clientFormError;
   const showEmailFallback = state.status === "error" && state.emailFallback;
-
-  useEffect(() => {
-    // Set once on mount, client-only — a server-rendered timestamp would race the browser's
-    // own render and make the trap fire (or fail to) for reasons unrelated to submission speed.
-    if (loadedAtInputRef.current) {
-      loadedAtInputRef.current.value = String(Date.now());
-    }
-  }, []);
-
-  useEffect(() => {
-    if (consentPageInputRef.current) {
-      consentPageInputRef.current.value = `${window.location.pathname}${window.location.search}`;
-    }
-
-    const session = syncLandingSession();
-    const container = sessionFieldsRef.current;
-    if (!container) return;
-    for (const input of container.querySelectorAll<HTMLInputElement>("input[name]")) {
-      const value = session[input.name];
-      if (value !== undefined) input.value = value;
-    }
-  }, []);
 
   useEffect(() => {
     const firstInvalidField = CONTACT_FIELD_ORDER.find((field) => displayedErrors[field]);
@@ -200,28 +146,7 @@ export default function ContactForm() {
         ) : null}
       </div>
 
-      {/*
-        A bot that fills every field trips this. display:none (not off-screen positioning,
-        opacity, or a zero-size box) is what keeps autofill and password managers out of it -
-        those treat an off-screen-but-visible field as fair game, which is exactly what caused
-        a real visitor's password manager to fill the old version of this field and get their
-        submission silently flagged. The name is a meaningless token on purpose: autofill
-        matches on name/type, and a name describing any real field (email, company, website,
-        address, and so on) is a magnet for exactly the heuristic this is trying to avoid.
-        Still real type="text" input, not type="hidden", which autofill simply skips and would
-        defeat the point of having a trap at all.
-      */}
-      <div aria-hidden="true" className="hidden">
-        <label htmlFor="qzx92f">Leave blank</label>
-        <input type="text" id="qzx92f" name="qzx92f" tabIndex={-1} autoComplete="off" />
-      </div>
-      <input type="hidden" name="loaded_at" ref={loadedAtInputRef} defaultValue="" />
-      <input type="hidden" name="consentPage" ref={consentPageInputRef} defaultValue="" />
-      <div ref={sessionFieldsRef}>
-        {SESSION_FIELD_NAMES.map((name) => (
-          <input key={name} type="hidden" name={name} defaultValue="" />
-        ))}
-      </div>
+      <LeadFormHiddenFields />
 
       <div className="grid grid-cols-1 gap-5 min-[700px]:grid-cols-2">
         <FormField id="name" label="Name" required error={displayedErrors.name}>
@@ -257,26 +182,7 @@ export default function ContactForm() {
           this block and Phone above are full-width so the pairing reads as one visual unit
           with no leftover grid gap.
         */}
-        <div className="min-[700px]:col-span-2 flex items-start gap-3">
-          <input
-            type="checkbox"
-            id="smsConsent"
-            name="smsConsent"
-            className="consent-checkbox mt-0.5 shrink-0"
-          />
-          {/* Lead-in and full disclosure both live inside this one <label>, not a separate
-              heading above it, so the complete text stays programmatically tied to the
-              checkbox via the for/id association - a screen reader announces all of it as
-              this control's label, not just the bold first line. */}
-          <label htmlFor="smsConsent" className="block">
-            <span className="block text-sm font-semibold text-text">
-              Text me about my inquiry
-            </span>
-            <span className="mt-1 block text-2xs text-muted">
-              {renderSmsConsentLabel(SMS_CONSENT_TEXT_V6)}
-            </span>
-          </label>
-        </div>
+        <SmsConsentField />
 
         <FormField id="company" label="Company" required error={displayedErrors.company}>
           {(props) => (
