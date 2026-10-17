@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { SESSION_FIELD_NAMES, syncLandingSession } from "@/lib/landing-session";
+import { readSessionFields, SESSION_FIELD_NAMES } from "@/lib/landing-session";
 
 /**
  * The honeypot trap, the elapsed-time timestamp, and the ad-parameter/session hidden
@@ -9,6 +9,11 @@ import { SESSION_FIELD_NAMES, syncLandingSession } from "@/lib/landing-session";
  * exactly one honeypot and one elapsed-time field in the codebase rather than one per
  * form. Render this once, anywhere inside the <form>; FormData collection at submit time
  * reads every input inside the form tag regardless of which component rendered it.
+ *
+ * Reads session state via readSessionFields() - never syncLandingSession(). This component
+ * must not write to so_landing/so_ad_params: LandingSessionCapture, in the root layout, is
+ * the one writer for the whole site. Two writers racing each other is exactly what made
+ * adParamsSource misreport every first-touch ad click as "mid-session".
  */
 export default function LeadFormHiddenFields() {
   const loadedAtInputRef = useRef<HTMLInputElement>(null);
@@ -28,7 +33,7 @@ export default function LeadFormHiddenFields() {
       consentPageInputRef.current.value = `${window.location.pathname}${window.location.search}`;
     }
 
-    const session = syncLandingSession();
+    const session = readSessionFields();
     const container = sessionFieldsRef.current;
     if (!container) return;
     for (const input of container.querySelectorAll<HTMLInputElement>("input[name]")) {

@@ -67,11 +67,12 @@ function captureAdParams(hadLandingAlready: boolean): void {
 }
 
 /**
- * Call once per page load. Idempotent: safe to call from every page (so the real landing page
- * and any ad click are captured no matter which page a visitor happens to land on first) and
- * safe to call again later on /contact (so a direct visit to /contact, with no earlier page
- * this session, still captures correctly). Returns the full current session state so the
- * caller can populate hidden form fields directly from it.
+ * The ONLY writer. Called once per page load, by LandingSessionCapture in the root layout,
+ * and nowhere else - a second caller racing this one is exactly what made adParamsSource
+ * misreport first-touch as "mid-session" every time (whichever of the two ran second always
+ * saw so_landing already set by the first, regardless of which page load this actually was).
+ * Every other reader of this session state calls readSessionFields() below instead, which
+ * never writes anything.
  */
 export function syncLandingSession(): Record<string, string> {
   let hadLandingAlready = false;
@@ -86,6 +87,30 @@ export function syncLandingSession(): Record<string, string> {
 
   const result = emptySessionFields();
   result.landingPage = landingPage;
+  try {
+    const stored = window.sessionStorage.getItem(AD_PARAMS_KEY);
+    if (stored) Object.assign(result, JSON.parse(stored));
+  } catch {
+    // Leave the ad-param fields empty.
+  }
+  return result;
+}
+
+/**
+ * Read-only - every lead form's hidden fields call this, never syncLandingSession. By the
+ * time a form's own effects run, LandingSessionCapture's effect has already written whatever
+ * this page load is going to write (it renders before {children} in the root layout, and
+ * React fires a sibling's effects before a later sibling's subtree's effects), so this only
+ * ever needs to read back what is already there.
+ */
+export function readSessionFields(): Record<string, string> {
+  const result = emptySessionFields();
+  try {
+    const landing = window.sessionStorage.getItem(LANDING_KEY);
+    if (landing !== null) result.landingPage = landing;
+  } catch {
+    // Leave landingPage empty - the server-side Referer fallback takes over.
+  }
   try {
     const stored = window.sessionStorage.getItem(AD_PARAMS_KEY);
     if (stored) Object.assign(result, JSON.parse(stored));
